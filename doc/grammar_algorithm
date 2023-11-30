@@ -1,0 +1,5 @@
+<input>        ::= <command> <string> <pipe> <redirections>
+<command>      ::= <raw command><options> | grep | ls -l| cat| ...
+<string>       ::= 
+<pipe>         ::= | 
+<redirections> ::= < | > | << | >>
