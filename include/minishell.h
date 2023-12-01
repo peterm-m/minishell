@@ -13,4 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "lexer.h"
+# include "syntax.h"
+# include "executer.h"
+# include "subsystem.h"
+
 #endif

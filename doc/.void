@@ -1,4 +1,6 @@
-void
-
-
-hola 
+1-Lexer
+    1-1-Tokenization
+    1-2-Syntax analysis
+    1-3-Generate syntax Tree
+        1-3-1- Write grammar technique
+2-Parsing

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   subsystem.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
+/*   Updated: 2023/11/21 17:26:47 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SUBSYSTEM_H
+# define SUBSYSTEM_H
 
-int	main(int argc, char const **argv, char const **envp)
-{
-	(void) argc;
-	(void) argv;
-	(void) envp;
+void    subsystem(void);
 
-	return (0);
-}
+#endif

@@ -10,7 +10,7 @@ SRCS := $(SRCS:%=$(SRC_DIR)/%)
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC := gcc
-CFLAG := -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAG := -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 INCLUDE := -I../include
 
