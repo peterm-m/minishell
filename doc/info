@@ -164,3 +164,71 @@ IO_NUMBER
 ' QUOTE
 \ BSLASH
 '$' DOLLAR
+
+
+
+
+Mirar tambien:
+   man 5 dir
+   man opendir
+
+#include <dirent.h>
+
+     /*** Excerpt from <sys/dirent.h> ***/
+     /*
+      * The dirent structure defines the format of directory entries.
+      *
+      * A directory entry has a struct dirent at the front of it, containing its
+      * inode number, the length of the entry, and the length of the name
+      * contained in the entry.  These are followed by the name padded to a 4
+      * byte boundary with null bytes.  All names are guaranteed null terminated.
+      * The maximum length of a name in a directory is 255.
+      */
+
+     struct dirent { /* when _DARWIN_FEATURE_64_BIT_INODE is NOT defined */
+             ino_t      d_ino;                /* file number of entry */
+             __uint16_t d_reclen;             /* length of this record */
+             __uint8_t  d_type;               /* file type, see below */
+             __uint8_t  d_namlen;             /* length of string in d_name */
+             char    d_name[255 + 1];   /* name must be no longer than this */
+     };
+
+    /* structure describing an open directory. */
+    typedef struct _dirdesc {
+            int     __dd_fd;      /* file descriptor associated with directory */
+            long    __dd_loc;     /* offset in current buffer */
+            long    __dd_size;    /* amount of data returned by getdirentries */
+            char    *__dd_buf;    /* data buffer */
+            int     __dd_len;     /* size of data buffer */
+            long    __dd_seek;    /* magic cookie returned by getdirentries */
+            long    __dd_rewind;  /* magic cookie for rewinding */
+            int     __dd_flags;   /* flags for readdir */
+            pthread_mutex_t __dd_lock; /* for thread locking */
+            struct _telldir *__dd_td; /* telldir position recording */
+    } DIR;
+
+opendir:
+    DIR    *opendir(const char *filename);
+
+     The opendir() function opens the directory named by filename, associates a directory stream with it and returns a pointer to be used to identify the directory stream in subsequent operations.
+
+     The pointer NULL is returned if filename cannot be accessed
+
+readdir:
+    struct dirent *readdir(DIR *dirp);
+
+    The readdir() function returns a pointer to the next directory entry.  The directory entry remains valid until the next call to readdir() or closedir() on the same directory stream.
+    The function returns NULL upon reaching the end of the directory or on error
+
+    The function returns NULL upon reaching the end of the directory or on error
+
+    closedir:
+    int closedir(DIR *dirp);
+
+    he closedir() function closes the named directory stream and frees the structure associated with the dirp pointer
+
+    returning 0 on success.  On failure, -1
+
+
+access:
+   int   access(const char *path, int mode);

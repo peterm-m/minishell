@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 16:28:33 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/02 16:29:22 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:14:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,7 @@ pid_t	ft_waitpid(pid_t pid, int *iptr, int options)
 		unix_error("Waitpid error");
 	return (retpid);
 }
+
+/*
+	waitpidx
+*/

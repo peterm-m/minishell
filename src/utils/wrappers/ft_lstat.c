@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fstat.c                                         :+:      :+:    :+:   */
+/*   ft_lstat.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 16:25:13 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/03 20:14:38 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/03 19:27:17 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/03 20:14:32 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrappers.h"
+#include "ft_wrappers.h"
 
-void	ft_fstat(int fd, struct stat *buf)
+void	ft_lstat(const char *filename, struct stat *buf)
 {
-	if (fstat(fd, buf) < 0)
-		unix_error("Fstat error");
+	if (lstat(filename, buf) < 0)
+		unix_error("Stat error");
 }
 
 /*
 	The fstat() obtains the same information about
+	except in the case where the named file is a symbolic link;
+	lstat() returns information about the link
+ 	while stat() returns information about the file the link references
 	an open file known by the file descriptor fildes.
 	SEE: stat()
 */

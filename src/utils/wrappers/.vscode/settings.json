@@ -1,6 +1,0 @@
-{
-	"files.associations": {
-		"wrappers.h": "c",
-		"errno.h": "c"
-	}
-}

@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/02 17:20:40 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/03 19:28:31 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ ssize_t		ft_read(int fd, void *buf, size_t count);
 ssize_t		ft_write(int fd, const void *buf, size_t count);
 void		ft_close(int fd);
 void		ft_stat(const char *filename, struct stat *buf);
+void		ft_lstat(const char *filename, struct stat *buf);
 void		ft_execve(const char *filename, char *const argv[],
 				char *const envp[]);
 void		ft_fstat(int fd, struct stat *buf);
