@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_open.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:18:01 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:19:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+int	ft_open(const char *pathname, int flags, mode_t mode)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	int	rc;
 
-	return (0);
+	rc = open(pathname, flags, mode);
+	if (rc < 0)
+		unix_error("Open error");
+	return (rc);
 }

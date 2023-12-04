@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_dlstiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2022/04/08 18:30:50 by pedro             #+#    #+#             */
+/*   Updated: 2023/08/13 20:13:44 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_dlst.h"
 
-int	main(int argc, char const **argv, char const **envp)
+void	ft_dlstiter(t_dlst *dlst, void (*f)(void *))
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
-
-	return (0);
+	while (dlst != NULL)
+	{
+		f(dlst->data);
+		dlst = dlst->next;
+	}
 }

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 15:31:30 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:44:07 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+void	unix_error(char *msg)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
-
-	return (0);
+	fprintf(stderr, "%s: %s\n", msg, strerror(errno));
+	exit(0);
 }

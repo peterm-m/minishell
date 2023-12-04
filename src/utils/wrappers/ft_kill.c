@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_kill.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:29:40 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:30:43 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+void	ft_kill(pid_t pid, int signum)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	int	rc;
 
-	return (0);
+	rc = kill(pid, signum);
+	if (rc < 0)
+		unix_error("Kill error");
 }

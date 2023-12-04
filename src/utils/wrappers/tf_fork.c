@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   tf_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:30:59 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/03 18:39:04 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+pid_t	ft_fork(void)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	pid_t	pid;
 
-	return (0);
+	pid = fork();
+	if (pid < 0)
+		unix_error("Fork error");
+	return (pid);
 }

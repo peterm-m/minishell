@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_sigemptyset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:33:46 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:52:05 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+void	ft_sigemptyset(sigset_t *set)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
-
-	return (0);
+	if (sigemptyset(set) < 0)
+		unix_error("Sigemptyset error");
+	return ;
 }

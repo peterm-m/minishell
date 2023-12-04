@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,7 @@
 
 #include "minishell.h"
 
-int	main(int argc, char const **argv, char const **envp)
+void    syntax(void)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
-
-	return (0);
+	return ;
 }

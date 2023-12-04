@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_dlstlast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2022/04/07 21:53:25 by pedro             #+#    #+#             */
+/*   Updated: 2023/08/13 20:13:31 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_dlst.h"
 
-int	main(int argc, char const **argv, char const **envp)
+t_dlst	*ft_dlstlast(t_dlst *dlst)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
-
-	return (0);
+	if (dlst == NULL)
+		return (NULL);
+	while (dlst->next != NULL)
+		dlst = dlst->next;
+	return (dlst);
 }

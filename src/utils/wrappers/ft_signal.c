@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:32:13 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:52:10 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+t_handler	*ft_signal(int signum, t_handler *handler)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	struct sigaction	action;
+	struct sigaction	old_action;
 
-	return (0);
+	action.sa_handler = handler;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = SA_RESTART;
+	if (sigaction(signum, &action, &old_action) < 0)
+		unix_error("Signal error");
+	return (old_action.sa_handler);
 }

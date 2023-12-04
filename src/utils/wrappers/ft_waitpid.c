@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_waitpid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:28:33 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/03 20:14:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+pid_t	ft_waitpid(pid_t pid, int *iptr, int options)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	pid_t	retpid;
 
-	return (0);
+	retpid = waitpid(pid, iptr, options);
+	if (retpid < 0)
+		unix_error("Waitpid error");
+	return (retpid);
 }
+
+/*
+	waitpidx
+*/

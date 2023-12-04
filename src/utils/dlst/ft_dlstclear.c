@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_dlstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2022/04/08 17:59:09 by pedro             #+#    #+#             */
+/*   Updated: 2023/08/13 13:12:52 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_dlst.h"
 
-int	main(int argc, char const **argv, char const **envp)
+void	ft_dlstclear(t_dlst **dlst, void (*del)(void*))
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	t_dlst	*aux;
 
-	return (0);
+	aux = *dlst;
+	while (aux != NULL)
+	{
+		*dlst = aux->next;
+		del(aux->data);
+		free(aux);
+		aux = *dlst;
+	}
 }

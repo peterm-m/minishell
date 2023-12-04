@@ -164,3 +164,170 @@ IO_NUMBER
 ' QUOTE
 \ BSLASH
 '$' DOLLAR
+
+
+
+
+Mirar tambien:
+   man 5 dir
+   man opendir
+
+#include <dirent.h>
+
+     /*** Excerpt from <sys/dirent.h> ***/
+     /*
+      * The dirent structure defines the format of directory entries.
+      *
+      * A directory entry has a struct dirent at the front of it, containing its
+      * inode number, the length of the entry, and the length of the name
+      * contained in the entry.  These are followed by the name padded to a 4
+      * byte boundary with null bytes.  All names are guaranteed null terminated.
+      * The maximum length of a name in a directory is 255.
+      */
+
+     struct dirent { /* when _DARWIN_FEATURE_64_BIT_INODE is NOT defined */
+             ino_t      d_ino;                /* file number of entry */
+             __uint16_t d_reclen;             /* length of this record */
+             __uint8_t  d_type;               /* file type, see below */
+             __uint8_t  d_namlen;             /* length of string in d_name */
+             char    d_name[255 + 1];   /* name must be no longer than this */
+     };
+
+    /* structure describing an open directory. */
+    typedef struct _dirdesc {
+            int     __dd_fd;      /* file descriptor associated with directory */
+            long    __dd_loc;     /* offset in current buffer */
+            long    __dd_size;    /* amount of data returned by getdirentries */
+            char    *__dd_buf;    /* data buffer */
+            int     __dd_len;     /* size of data buffer */
+            long    __dd_seek;    /* magic cookie returned by getdirentries */
+            long    __dd_rewind;  /* magic cookie for rewinding */
+            int     __dd_flags;   /* flags for readdir */
+            pthread_mutex_t __dd_lock; /* for thread locking */
+            struct _telldir *__dd_td; /* telldir position recording */
+    } DIR;
+
+opendir:
+    DIR    *opendir(const char *filename);
+
+     The opendir() function opens the directory named by filename, associates a directory stream with it and returns a pointer to be used to identify the directory stream in subsequent operations.
+
+     The pointer NULL is returned if filename cannot be accessed
+
+readdir:
+    struct dirent *readdir(DIR *dirp);
+
+    The readdir() function returns a pointer to the next directory entry.  The directory entry remains valid until the next call to readdir() or closedir() on the same directory stream.
+    The function returns NULL upon reaching the end of the directory or on error
+
+    The function returns NULL upon reaching the end of the directory or on error
+
+    closedir:
+    int closedir(DIR *dirp);
+
+    he closedir() function closes the named directory stream and frees the structure associated with the dirp pointer
+
+    returning 0 on success.  On failure, -1
+
+
+access:
+   int   access(const char *path, int mode);
+
+   The access() system call checks the accessibility of the file named by the path argument for the access permissions indicated by the mode argument.
+
+   return successful completion, the value 0 is returned; otherwise the value -1
+
+getcwd:
+   char *getcwd(char *buf, size_t size);
+
+   The getcwd() function copies the absolute pathname of the current working directory into the memory referenced by buf and returns a pointer to buf.
+   
+   The size argument is the size, in bytes, of the array referenced by buf.
+   
+   If buf is NULL, space is allocated as necessary to store the pathname and size is ignored.
+
+   return:
+      Upon successful completion, a pointer to the pathname is returned.  Otherwise a NULL pointer is returned
+
+unlink:
+      int unlink(const char *path);
+
+      The unlink() function removes the link named by path from its directory and decrements the link count of the file which was referenced by the link.  If that decrement reduces the link count of the file to zero, and no process has the file open, then all resources associated with the file are reclaimed.  If one or more
+      process have the file open when the last link is removed, the link is removed, but the removal of the file is delayed until all references to it have been closed.
+
+      Upon successful completion, a value of 0 is returned.
+
+
+
+Mirar tambien:
+   man 5 ttys
+  
+isatty:
+      int isatty(int fd);
+
+      The isatty() function determines if the file descriptor fd refers to a valid terminal type device.
+
+      return isatty() function returns 1 if fd refers to a terminal type device; otherwise, it returns 0 and may set errno to indicate the error.
+
+ttyname:
+      char * ttyname(int fd);
+
+      The ttyname() function gets the related device name of a file descriptor for which isatty() is true.
+
+      The ttyname() function returns the null terminated name if the device is found and isatty() is true; otherwise a NULL pointer is returned.
+
+ttyslot:
+   ---------------------
+
+ioctl:
+   #include <sys/ioctl.h>
+   int ioctl(int fildes, unsigned long request, ...);
+
+   The ioctl() function manipulates the underlying device parameters of special files.
+
+getenv:
+   char *  getenv(const char *name);
+
+   The getenv() function obtains the current value of the environment variable, name.
+
+   The getenv() function returns the value of the environment variable as a NUL-terminated string.  If the variable name is not in the current environment, NULL is returned.
+
+
+Mirar tambien:
+   man 5 termios
+
+tcsetattr:
+   int tcsetattr(int fildes, int optional_actions, const struct termios *termios_p);
+
+tcgetattr:
+   int tcgetattr(int fildes, struct termios *termios_p);
+
+
+
+
+Mirar tambien:
+   man 5 terminfo
+
+#include <curses.h>
+#include <term.h>
+
+These routines are included as a conversion aid for programs that use the termcap library.
+Their parameters are the same and the routines are emulated using the terminfo database.
+Thus, they can only be used to query the capabilities of entries for which a terminfo entry has been compiled.
+
+tgetent:
+   int tgetent(char *bp, const char *name);
+
+   The tgetent routine loads the entry for name. 
+   It returns 1 on success, 0 if there is no such entry, and -1 if the terminfo database could not be found.  The emulation ignores the buffer pointer bp.
+
+tgetflag:
+   int tgetflag(char *id);
+tgetnum:
+   int tgetnum(char *id);
+ *tgetstr:
+   char *tgetstr(char *id, char **area);
+ *tgoto:
+   char *tgoto(const char *cap, int col, int row);
+tputs:
+   int tputs(const char *str, int affcnt, int (*putc)(int));

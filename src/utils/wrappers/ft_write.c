@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:19:30 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 17:38:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+ssize_t	ft_write(int fd, const void *buf, size_t count)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	ssize_t	rc;
 
-	return (0);
+	rc = write(fd, buf, count);
+	if (rc < 0)
+		unix_error("Write error");
+	return (rc);
 }

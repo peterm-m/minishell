@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_dup2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:22:17 by pedromar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:23:22 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	main(int argc, char const **argv, char const **envp)
+int	ft_dup2(int fd1, int fd2)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	int	rc;
 
-	return (0);
+	rc = dup2(fd1, fd2);
+	if (rc < 0)
+		unix_error("Dup2 error");
+	return (rc);
 }
