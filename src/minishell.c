@@ -14,9 +14,14 @@
 
 int	main(int argc, char const **argv, char const **envp)
 {
+	char	*read_line;
+
 	(void) argc;
 	(void) argv;
 	(void) envp;
-
+	while (1)
+	{
+		read_line = readline(">");
+	}
 	return (0);
 }
