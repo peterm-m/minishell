@@ -1,6 +1,6 @@
 NAME := minishell
 
-SRC_DIR	 := ./
+SRC_DIR	 := ./src
 OBJ_DIR	 := .build
 
 SRCS := \
@@ -12,7 +12,7 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC := gcc
 CFLAG := -Wall -Wextra -Werror #-g3 -fsanitize=address
 
-INCLUDE := -I../include
+INCLUDE := -I../include/minishell.h
 
 RM := rm -f
 MAKEFLAG += --no-print-directory

@@ -13,6 +13,6 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-void    lexer(void);
+int   lexer(char *read_line);
 
 #endif
