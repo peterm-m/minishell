@@ -10,16 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+//#include "minishell.h" 
+// Link Makefile bien y borrar
+#include <stdio.h>
+#define BHBLK "\e[1;90m"
+#define BHRED "\e[1;91m"
+#define BHGRN "\e[1;92m"
+#define BHYEL "\e[1;93m"
+#define BHBLU "\e[1;94m"
+#define BHMAG "\e[1;95m"
+#define BHCYN "\e[1;96m"
+#define BHWHT "\e[1;97m"
 
+//Reset
+
+#define END "\e[0m"
+//							   ^^
+// Link Makefile bien y borrar ||
 char *abc = " |'\"<>&";
 
 int	states(int i, int j)
-{	  // \s,  |,  ',  <,  ",  >,  &,
+{	  // \s,  |,  ',  <,  ",  >,  &,  *?, $?,  (?,  )?
 	static const int states[15][8]= \
 	{ 
 		{ 0, 11,  2, 11,  1, 11, 11, 14}, // 0 Empty input
-		{ 1,  1,  1,  1,  1, 12,  1,  1}, // 1 Double quotes -> "
+		{ 1,  1,  1,  1, 12,  1,  1,  1}, // 1 Double quotes -> "
 		{ 2,  2, 12,  2,  2,  2,  2,  2}, // 2 Single quotes -> '
 		{13, 11,  2, 11, 11,  1, 11, 14}, // 3 OR        	 -> ||
 		{13,  3,  2,  7,  1, 11, 11, 14}, // 4 Pipe      	 -> |
@@ -33,6 +48,7 @@ int	states(int i, int j)
 		{12,  4,  2,  7,  1,  9,  5, 14}, // 12 String
 		{13,  1,  2,  1,  1,  1,  1, 14}, // 13 Spaces without words
 		{12,  4,  2,  7,  1,  9,  5, 14}, // 14 Not operators
+	  //{13, 11,  2, 11,  1, 11, 11, 15, 14}, // 15 Wildcard     -> *
 	};
 	return (states[i][j]);
 }
@@ -69,10 +85,10 @@ int evaluate_state(char *str)
 	{
 		state = states(state, in_abc(str[i]));
 	}
-	if (state == 11)
-		printf(BHRED"Invalid Input\n"END);
 	if (state == 14 || state == 12)
 		printf(BHGRN"Valid Input\n"END);
+	else
+		printf(BHRED"Invalid Input\n"END);
 	return (state);
 }
 
@@ -83,3 +99,8 @@ int	lexer(char *read_line)
 	printf ("estado: %i\n", s);
 	return (1);
 }
+
+/* int main()
+{
+	lexer("echo \"'hola ****||||1<<<>>>>'\"; cat *; ls | ls -la > outfile.txt");
+} */

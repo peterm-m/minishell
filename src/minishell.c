@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+// #include <readline/readline.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
 int	main(int argc, char const **argv, char const **envp)
 {
@@ -21,7 +24,11 @@ int	main(int argc, char const **argv, char const **envp)
 	(void) envp;
 	while (1)
 	{
-		read_line = readline(">");
+		read_line = readline(BHMAG"> "END);
+		if (!strcmp(read_line, "exit"))
+			break ;
+		// if (lexer(read_line))
+		// 	printf(BHGRN"Lexer ok\n"END);
 	}
 	return (0);
 }
