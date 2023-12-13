@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/13 01:30:17 by pedro            ###   ########.fr       */
+/*   Updated: 2023/12/13 20:24:19 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int argc, char const **argv, char const **envp)
 {
-//	char	*read_line;
+	char	*read_line;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	while (1)
 	{
-//		read_line = readline(">");
+		read_line = readline(">");
 	}
 	return (0);
 }

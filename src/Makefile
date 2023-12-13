@@ -2,24 +2,37 @@ NAME        := minishell
 
 SRC_DIR     := .
 OBJ_DIR     := .build
+
 SRCS        := \
-    minishell.c \
-    executer/executer.c \
-    parser/lexer/lexer.c \
-    parser/syntax/syntax.c \
-    subsystem/subsystem.c
+	minishell.c \
+	executer/executer.c \
+	parser/lexer/lexer.c \
+	parser/syntax/syntax.c \
+	subsystem/subsystem.c
+
+TEST      := test
+
+SRCS_TEST := \
+	.test/test.c \
+	executer/executer.c \
+	parser/lexer/lexer.c \
+	parser/syntax/syntax.c \
+	subsystem/subsystem.c
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+SRCS_TEST   := $(SRCS_TEST:%=$(SRC_DIR)/%)
+OBJS_TEST   := $(SRCS_TEST:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 CC          := gcc
 CFLAGS      := -Wall -Wextra -Werror
 
-RM          := rm -f
+RM          := rm -rf
 MAKEFLAGS   += --no-print-directory
 DIR_DUP     = mkdir -p $(@D)
 
-EXTERN_LIB := -l readline
+EXTERN_LIB := -lreadline
 
 INTERN_LIB_DIR := ./utils
 
@@ -43,33 +56,46 @@ LIBS = $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP)
 
 all: $(NAME)
 
+test: $(TEST)
+
 $(NAME): $(RULE_DLIST) $(RULE_WRAP) $(OBJS)
-	$(CC) $(LFLAGS) $(LIBS) $(INCLUDES)  $(OBJS) -o $(NAME)
-	$(info CREATED $(NAME))
+	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES)  $(OBJS) -o $(NAME)
+	@$(info CREATED $(NAME))
+
+$(TEST): $(RULE_DLIST) $(RULE_WRAP) $(OBJS_TEST)
+	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES)  $(OBJS_TEST) -o $(TEST)
+	@$(info CREATED $(TEST))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(DIR_DUP)
-	$(CC) $(CFLAGS) $(LFLAGS) $(LIBS) $(INCLUDES) -c -o $@ $<
-	$(info CREATED $@)
+	@$(DIR_DUP)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+	@$(info CREATED $@)
 
 $(RULE_WRAP):
-	$(MAKE) -C $(WRAP)
+	@$(MAKE) -C $(WRAP)
 
 $(RULE_DLIST):
-	$(MAKE) -C $(DLIST)
+	@$(MAKE) -C $(DLIST)
+
+run: $(TEST)
+	./$(TEST)
+
+mem_test: $(TEST)
+	valgrind valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(TEST)
 
 clean:
-	$(MAKE) -C $(DLIST) clean
-	$(MAKE) -C $(WRAP) clean
-	$(RM) $(OBJS)
+	@$(MAKE) -C $(DLIST) clean
+	@$(MAKE) -C $(WRAP) clean
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C $(DLIST) fclean
-	$(MAKE) -C $(WRAP) fclean
-	$(RM) $(NAME)
+	@$(MAKE) -C $(DLIST) fclean
+	@$(MAKE) -C $(WRAP) fclean
+	@$(RM) $(TEST)
+	@$(RM) $(NAME)
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY: clean fclean re
