@@ -6,11 +6,14 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/13 20:24:19 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:35:10 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+// #include <readline/readline.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
 int	main(int argc, char const **argv, char const **envp)
 {
@@ -21,7 +24,11 @@ int	main(int argc, char const **argv, char const **envp)
 	(void) envp;
 	while (1)
 	{
-		read_line = readline(">");
+		read_line = readline(BHMAG"> "END);
+		if (!strcmp(read_line, "exit"))
+			break ;
+		// if (lexer(read_line))
+		// 	printf(BHGRN"Lexer ok\n"END);
 	}
 	return (0);
 }
