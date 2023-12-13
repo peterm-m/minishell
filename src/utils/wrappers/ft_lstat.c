@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstat.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 19:27:17 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/03 20:14:32 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/12 23:23:47 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_wrappers.h"
+#include "wrappers.h"
 
 void	ft_lstat(const char *filename, struct stat *buf)
 {
