@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subsystem.h                                           :+:      :+:    :+:   */
+/*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:26:47 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:05:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SUBSYSTEM_H
 # define SUBSYSTEM_H
 
-void    subsystem(void);
+void	subsystem(void);
 
 #endif
