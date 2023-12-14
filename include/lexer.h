@@ -13,13 +13,9 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-<<<<<<< HEAD
 // lexer.c
 
 int    lexer(char *read_line);
-=======
-int	lexer(char *read_line);
->>>>>>> 6766b907b9d77a199826d4821e1a2884437f300c
 
 // tokenize_utils.c
 
