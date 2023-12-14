@@ -2,7 +2,7 @@ NAME := minishell
 
 SRC_DIR	 := ./
 OBJ_DIR	 := .build
-PARSE_DIR = parseR/
+PARSE_DIR = parser/
 
 SRCS := \
 	minishell.c

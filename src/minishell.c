@@ -27,8 +27,8 @@ int	main(int argc, char const **argv, char const **envp)
 		read_line = readline(BHMAG"> "END);
 		if (!strcmp(read_line, "exit"))
 			break ;
-		// if (lexer(read_line))
-		// 	printf(BHGRN"Lexer ok\n"END);
+		if (lexer(read_line))
+		 	printf(BHGRN"Lexer ok\n"END);
 	}
 	return (0);
 }

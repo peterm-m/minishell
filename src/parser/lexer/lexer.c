@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minishell.h" 
+#include "minishell.h" 
 // Link Makefile bien y borrar
 #include <stdio.h>
 #define BHBLK "\e[1;90m"
@@ -21,9 +21,6 @@
 #define BHMAG "\e[1;95m"
 #define BHCYN "\e[1;96m"
 #define BHWHT "\e[1;97m"
-
-//Reset
-
 #define END "\e[0m"
 //							   ^^
 // Link Makefile bien y borrar ||
@@ -82,9 +79,7 @@ int evaluate_state(char *str)
 	i = -1;
 	state = 0;
 	while (++i < ft_strlen(str))
-	{
 		state = states(state, in_abc(str[i]));
-	}
 	if (state == 14 || state == 12)
 		printf(BHGRN"Valid Input\n"END);
 	else
