@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:24:32 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int in_abc(char c)
 			return (i);
 	return (i);
 }
+
 int ft_strlen(char *s)
 {
 	int i;
@@ -71,6 +72,7 @@ int ft_strlen(char *s)
 		i++;
 	return (i);
 }
+
 int evaluate_state(char *str)
 {
 	int state;
