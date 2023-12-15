@@ -10,10 +10,6 @@ int	compare_token(t_dlst *d, int type, int expand, char *str)
 	if (!d)
 		return (0);
 	t = (t_token *)d->data;
-	printf("\n");
-	printf("1 %d %d\n",t->type, type);
-	printf("2 %d %d\n",t->expand ,expand);
-	printf("3 %s %s\n",t->str, str);
 	if (t->type != type || t->expand != expand || strcmp(t->str, str) != 0)
 			return (0);
 	aux = d->next;
@@ -21,7 +17,6 @@ int	compare_token(t_dlst *d, int type, int expand, char *str)
 	d = aux;
 	return (1);
 }
-
 
 void	test_new0(void)
 {
