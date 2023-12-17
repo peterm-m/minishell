@@ -75,7 +75,7 @@ t_token *get_next_token(char *input, int i, t_data *data)
         token = get_ionumber();
     return (token);
 }
-t_dlst *tokenize(char *input, t_data *data)
+t_dlst *tokenize(char *input)
 {
     int             i;
     t_dlst          **head;

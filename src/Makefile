@@ -36,11 +36,11 @@ EXTERN_LIB := -lreadline
 
 INTERN_LIB_DIR := ./utils
 
-FT := $(INTERN_LIB_DIR)/libft
-RULE_FT := $(FT)/libft.a
-I_FT := -I$(FT)
-L_FT := -L$(FT)
-LIB_FT := -llibft
+#FT := $(INTERN_LIB_DIR)/libft
+#RULE_FT := $(FT)/libft.a
+#I_FT := -I$(FT)
+#L_FT := -L$(FT)
+#LIB_FT := -llibft
 
 DLIST := $(INTERN_LIB_DIR)/dlst
 RULE_DLIST := $(DLIST)/libdlst.a
@@ -54,17 +54,18 @@ I_WRAP := -I$(WRAP)
 L_WRAP := -L$(WRAP)
 LIB_WRAP := -lwrappers
 
-INCLUDES    := -I../include $(I_DLIST) $(I_WRAP)  $(I_FT)
+INCLUDES    := -I../include $(I_DLIST) $(I_WRAP)  #$(I_FT)
 
-LFLAGS    := $(L_DLIST)  $(L_WRAP) $(L_FT)
+LFLAGS    := $(L_DLIST)  $(L_WRAP) #$(L_FT)
 
-LIBS = $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP) $(LIB_FT)
+LIBS = $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP) #$(LIB_FT)
 
 all: $(NAME)
 
 test: $(TEST)
 
-$(NAME): $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS)
+# $(NAME): $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS)
+$(NAME): $(RULE_DLIST) $(RULE_WRAP) $(OBJS)
 	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES)  $(OBJS) -o $(NAME)
 	@$(info CREATED $(NAME))
 
@@ -93,13 +94,13 @@ mem_test: $(TEST)
 	valgrind valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(TEST)
 
 clean:
-	@$(MAKE) -C $(FT) clean
+#	@$(MAKE) -C $(FT) clean
 	@$(MAKE) -C $(DLIST) clean
 	@$(MAKE) -C $(WRAP) clean
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	@$(MAKE) -C $(FT) fclean
+#	@$(MAKE) -C $(FT) fclean
 	@$(MAKE) -C $(DLIST) fclean
 	@$(MAKE) -C $(WRAP) fclean
 	@$(RM) $(TEST)
