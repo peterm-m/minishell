@@ -6,18 +6,14 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/14 20:23:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:10:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "lexer.h"
-# include "syntax.h"
-# include "executer.h"
-# include "subsystem.h"
-# include "ft_dlst.h"
+// Standar header
 # include <sys/types.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -25,9 +21,20 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+// Extern header
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "ft_dlst.h"
+# include "wrappers.h"
 
+// Intern header
+# include "lexer.h"
+# include "syntax.h"
+# include "executer.h"
+# include "subsystem.h"
+
+// Color
 # define BHBLK "\e[1;90m"
 # define BHRED "\e[1;91m"
 # define BHGRN "\e[1;92m"
@@ -37,6 +44,7 @@
 # define BHCYN "\e[1;96m"
 # define BHWHT "\e[1;97m"
 # define END "\e[0m"
+
 
 typedef struct s_token 
 {

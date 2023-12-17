@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/17 16:35:38 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/17 18:28:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char const **argv, char const **envp)
 
 		t_dlst	*lex;
 		lex = lexer(read_line); // lexer: pasa la string  a una lista de tokens.
-		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens valido.
+		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
 			printf("LEXICAL ERROR!");
 
 		tree = syntax(lex); // parte sintactica

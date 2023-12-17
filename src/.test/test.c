@@ -2,7 +2,22 @@
 #include <stdlib.h>
 #include "common.h"
 
-int	compare_token(t_dlst *d, int type, int expand, char *str)
+# define GET_TOKS(str) tokenize(str)
+
+#define AND_IF 0
+#define PIPE 0
+#define AND_OR 0
+#define DLESS 0
+#define DGREAT 0
+#define GREAT 0
+#define LESS 0
+#define LBRACE 0
+#define RBRACE 0
+#define LBRAKET 0
+#define RBRAKET 0
+#define TOKEN 0
+
+t_test_out	compare_token(t_dlst *d, int type, int expand, char *str)
 {
 	t_token *t;
 	t_dlst	*aux;
@@ -11,30 +26,71 @@ int	compare_token(t_dlst *d, int type, int expand, char *str)
 		return (0);
 	t = (t_token *)d->data;
 	if (t->type != type || t->expand != expand || strcmp(t->str, str) != 0)
-			return (0);
+			return (FAIL);
 	aux = d->next;
 	ft_dlstdelone(d, free);
 	d = aux;
-	return (1);
+	return (PASS);
 }
 
-void	test_new0(void)
+void	test_eof(void)
 {
-	t_token *t = (t_token *) malloc(sizeof(t_token));
-	t->type = 0; t->expand = 0; t->str = strdup("hola");
-	t_dlst *d = ft_dlstnew(t);
-	TEST_ASSERT(compare_token(d, 0, 0, "hola") == 1);
+	// EOF, Ctrl + D
+	t_dlst *d= GET_TOKS((char *)NULL);
+	TEST_CHECK(compare_token(d, 0, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
 }
 
-void	test_new1(void)
+void	test_basic_tokens_operator(void)
 {
-	t_token *t = (t_token *) malloc(sizeof(t_token));
-	t->type = 0; t->expand = 0; t->str = strdup("hola");
-	TEST_ASSERT(compare_token(ft_dlstnew(t), 1, 0, "hola") == 1);
+	t_dlst *d = GET_TOKS("&&");
+	TEST_CHECK(compare_token(d, AND_IF, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("|");
+	TEST_CHECK(compare_token(d, PIPE, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("||");
+	TEST_CHECK(compare_token(d, AND_OR, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("<<");
+	TEST_CHECK(compare_token(d, DLESS, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS(">>");
+	TEST_CHECK(compare_token(d, DGREAT, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS(">");
+	TEST_CHECK(compare_token(d, GREAT, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("<");
+	TEST_CHECK(compare_token(d, LESS, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("{");
+	TEST_CHECK(compare_token(d, LBRACE, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("}");
+	TEST_CHECK(compare_token(d, RBRACE, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("(");
+	TEST_CHECK(compare_token(d, LBRAKET, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS(")");
+	TEST_CHECK(compare_token(d, RBRAKET, 0, (char *)NULL) == PASS);
+	ft_dlstclear(&d, free);
+	d = GET_TOKS("tok");
+	TEST_CHECK(compare_token(d, TOKEN, 0, "tok") == PASS);
+	ft_dlstclear(&d, free);
+}
+
+void	test_single_quotes(void)
+{
+}
+
+void	test_double_quotes(void)
+{
 }
 
 TEST_LIST = {
-        { "test 0", test_new0  },
-        { "test 1", test_new1 },
-        { NULL, NULL }
+	{ "test EOF", test_eof},
+	{ "test identify tokens operator", test_basic_tokens_operator},
+	{ NULL, NULL }
 };
