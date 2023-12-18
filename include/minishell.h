@@ -38,6 +38,16 @@
 # define BHWHT "\e[1;97m"
 # define END "\e[0m"
 
+# define QUOTED 0
+# define WORD 1
+# define IO_NUMBER 2
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
+
 typedef struct s_token 
 {
     int     type;

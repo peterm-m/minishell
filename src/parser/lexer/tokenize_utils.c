@@ -1,20 +1,47 @@
 #include "minishell.h" 
 
-int is_token(int c)
+t_token *add_token(char *str, int i, int j, int type)
 {
-    if (c == '|' || c == '<' || c == '>' ||
-        c == '(' || c == ')' || c == ';'
-        || c == '&')
-        return (1);
-    return (0);
+	t_token *token;
+
+    token = NULL;
+	if (!(token = init_token()))
+        return (0); // ? volver a sacar linea
+    if (!(token->str = ft_substr(str, i, j)))
+        return (NULL);
+    token->type = type;
+    token->expand = FALSE;
+    return (token);
 }
 
-int	is_blankspace(char c)
+t_token	*init_token(void)
 {
-	return (c == ' ' || (c > 8 && c < 14));
+	t_token *token;
+    
+	if (!(token = (t_token *)ft_memalloc(sizeof(t_token))))
+		return (NULL);
+	return (token);
 }
 
-int is_quotes(char c)
+t_dlst	*init_list(t_dlst *list)
 {
-    return (c == '\'' || c == '"');
+	list = ft_calloc(sizeof(t_dlst), 1);
+	if (!list)
+		return (NULL);
+	return (list);
 }
+/* void	free_list(t_dlst *list)
+{
+	t_elem	*tmp;
+
+	tmp = list->head;
+	while (tmp)
+	{
+		free(tmp->content);
+		free(tmp);
+		tmp = tmp->next;
+	}
+	free(list);
+} */
+
+

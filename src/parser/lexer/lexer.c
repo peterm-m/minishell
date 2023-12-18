@@ -51,20 +51,10 @@ int in_abc(char c)
 	return (i);
 }
 
-int ft_strlen(char *s)
-{
-	int i;
-
-	i = 0;
-	while(s[i])
-		i++;
-	return (i);
-}
-
 int evaluate_state(char *str)
 {
 	int state;
-	int i;
+	size_t i;
 
 	i = -1;
 	state = 0;
@@ -77,11 +67,31 @@ int evaluate_state(char *str)
 	return (state);
 }
 
+void tok_p(void *t)
+{
+	printf("aaa\n");
+	if (((t_token *)t) != NULL)
+		printf("token: %s type: %d\n", ((t_token *)t)->str, ((t_token *)t)->type);
+}
+
 int	lexer(char *read_line)
 {
+	//t_dlst *prueba;
 	int s;
+	size_t i;
+    t_dlst          *head;
+
+	head = NULL;
+
+	i = ft_strlen(read_line);
+	read_line[i] = '\0';
 	s = evaluate_state(read_line);
 	printf ("estado: %i\n", s);
+	head = tokenize(read_line, head);
+	//printf("aaaaaaaaaaaaaaaaaaaaaaaaa\n");
+	ft_dlstiter(head, tok_p);
+	/* if (!prueba)
+		return (0); */
 	return (1);
 }
 

@@ -1,97 +1,126 @@
 #include "minishell.h" 
-/*
 
-
-input = "dasflakhsdfasdfkljasdf dal fd fddd"
-
-input[0] */
-
-t_token *get_string(char *str, int i, t_token *token) // Pasar como argumento la lista de tokens
+int get_string(char *str, int i, t_dlst *head) // Pasar como argumento la lista de tokens
 {
-    if (is_quotes(str[i]))
+    int j;
+    t_dlst  *new_token;
+    t_token *token;
+ 
+    j = 0;
+    if (is_quotes(str[i + j]))
     {
-        i++;
-        while (!is_quotes(str[i]))
-            i++;
-        i++;
+        j++;
+        while (!is_quotes(str[i + j]))
+            j++;
+        j++;
     }
-    if (is_blankspace(str[i]))
-        if (!(token = ft_substr(str, 0, i)))
-            return (NULL);
+    if (is_blankspace(str[i + j]))
+    {
+        if (!(token = add_token(str, i, j, QUOTED)))
+            return (0);
+    }
     else
-        if (!(token = ft_substr(str, 0, i + 1)))
-            return (NULL);
-    return (token);
-}
-
-t_token *get_token(char *str, int i, t_token *token) // Pasar como argumento la lista de tokens
-{
-
-}
-
-/* int tokenize(char   *read_line)// esta no
-{
-    int i;
-    int success;
-
-    i = 0;
-    while (read_line[i] != '\0')
     {
-        if (is_blankspace(read_line[i]))
-            i++;
-        else if (is_token(read_line[i]))
-            success = get_token(read_line[i]);
-        else
-            success = get_string(read_line[i]);
-        if (success < 0)
-            return (-1);
-        i = i + success;
+        if (!(token = add_token(str, i + 1, j, QUOTED)))
+            return (0);
     }
-} */
-
-t_token	*init_token(void)
-{
-	t_token *token;
-	if (!(token = (t_token *)ft_memalloc(sizeof(t_token))))
-		return (NULL);
-	return (token);
+    new_token = ft_dlstnew(token);
+    ft_dlstaddb(&head, new_token);
+    i += j;
+    printf("get_string i: %i\n", i);
+    printf("get_string str: %s\n", token->str);
+    return (i);
 }
-t_token *get_next_token(char *input, int i, t_data *data)
+
+int get_token(char *str, int i, t_dlst *head) // Pasar como argumento la lista de tokens
 {
+    int j;
+    t_dlst  *new_token;
     t_token *token;
 
     token = NULL;
+    j = 0;
+    if (is_token(str[i + j]))
+    {
+        j++;
+        if (is_token(str[i + j]))
+            j++;
+        if (!(token = add_token(str, i, j, WORD)))
+            return (0);
+    }
+    new_token = ft_dlstnew(token);
+    ft_dlstaddb(&head, new_token);
+    i += j;
+    printf("get_token i: %i\n", i);
+    printf("get_token str: %s\n", token->str);
+    return (0);
+}
+
+int get_word(char *str, int i, t_dlst *head)
+{
+    int j;
+    t_dlst  *new_token;
+    t_token *token;
+
+    j = 0;
+    while(!in_word(str[i + j]))
+        j++;
+    if (!(token = add_token(str, i, j, WORD)))
+        return (0);
+/*     if (!(token = init_token()))
+        return (0); // ? volver a sacar linea */
+    new_token = ft_dlstnew(token);
+    ft_dlstaddb(&head, new_token);
+    i += j;
+    t_dlst *tem;
+    tem = ft_dlstlast(head);
+    printf("get_word i: %i\n", i);
+    //printf("%d get_word str: %s\n", __LINE__,((t_token *)tem->data)->str);
+    ft_dlstiter(head, tok_p);
+    return (i);
+}
+
+int get_next_token(char *input, int i, t_dlst *head)
+{
     while (is_blankspace(input[i]))
         i++;
     if (!input[i])
-        return (token);
-    if (!(token = init_token()))
-        return (token); // ? volver a sacar linea
-    if (is_token(input[i]))
-        token = get_token(input, &i, token);
+        return (0);
+/*     if (!(token = init_token()))
+        return (0); // ? volver a sacar linea */
+    if (!in_word(input[i]))
+        return(get_word(input, i, head));
+    else if (is_token(input[i]))
+        return(get_token(input, i, head));
     else if (is_quotes(input[i]))
-        token = get_string(input, &i, token);
+        return (get_string(input, i, head));
     else if (ft_isdigit(input[i]))
-        token = get_ionumber();
-    return (token);
+        printf("io_number");
+        //token = get_ionumber();
+    return (i);
 }
-t_dlst *tokenize(char *input, t_data *data)
+t_dlst *tokenize(char *input, t_dlst *head) //        new_token = ft_dlstnew(next_token);
 {
     int             i;
-    t_dlst          **head;
-    t_token         *next_token;
-    t_token         *new_token;
+    //head = ft_dlstnew(head);
     i = 0;
-    head = NULL;
     while(input[i] != '\0')
     {
-        if(!(next_token = get_next_token(input, &i, &head)))
+        i = get_next_token(input, i, head);
+        if(i == 0)
         {
             // eliminar token y liberar lista, volver a pedir nueva linea.
+            //free_list(&head->data);
+            //free(next_token);
+	        //next_token = NULL;
+            return (NULL);
         }
-        new_token = ft_lstnew(next_token);
-        if (!new_token)
-            return (-1);
-        ft_lstadd_back(&head, new_token);
+       /*  if (!new_token)
+        {
+            //ft_dlstclear(&head, free);
+            return (NULL);
+        } */
+        i++;
     }
+    return (head);
 }

@@ -18,6 +18,7 @@
 int	main(int argc, char const **argv, char const **envp)
 {
 	char	*read_line;
+	//t_data *data;
 
 	(void) argc;
 	(void) argv;
@@ -25,7 +26,8 @@ int	main(int argc, char const **argv, char const **envp)
 	while (1)
 	{
 		read_line = readline(BHMAG"> "END);
-		if (!strcmp(read_line, "exit"))
+		//printf("%s", read_line);
+		if (!ft_strncmp(read_line, "exit", 5))
 			break ;
 		if (lexer(read_line))
 		 	printf(BHGRN"Lexer ok\n"END);

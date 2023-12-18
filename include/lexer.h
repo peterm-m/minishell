@@ -13,6 +13,9 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+typedef struct s_token t_token;
+typedef struct s_dlst t_dlst;
+
 // lexer.c
 
 int    lexer(char *read_line);
@@ -25,8 +28,8 @@ int is_quotes(char c);
 
 // tokenize.c
 
-int tokenize(char *read_line);
-int get_string(char *str);
-int get_token(char *str);
+t_dlst *tokenize(char *input);
+t_token *get_string(char *str, int *i, t_token *token);
+t_token *get_next_token(char *input, int *i);
 
 #endif
