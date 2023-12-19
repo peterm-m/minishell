@@ -37,6 +37,7 @@ void	*ft_memalloc(size_t size);
 // tokenize.c
 
 t_dlst *tokenize(char *input, t_dlst **head);
+int get_ionumber(char *str, int i, t_dlst **head);
 ///int get_string(char *str, int i, t_token *token);
 //int get_token(char *str, int i, t_token *token);
 
