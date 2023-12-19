@@ -69,7 +69,6 @@ int evaluate_state(char *str)
 
 void tok_p(void *t)
 {
-	printf("aaa\n");
 	if (((t_token *)t) != NULL)
 		printf("token: %s type: %d\n", ((t_token *)t)->str, ((t_token *)t)->type);
 }

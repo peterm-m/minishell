@@ -6,13 +6,14 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:29:43 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/17 13:55:24 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    syntax(void)
+void	syntax(t_dlst *lex)
 {
+	(void) lex;
 	return ;
 }

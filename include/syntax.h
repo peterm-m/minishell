@@ -6,13 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2023/11/21 17:26:47 by pedromar         ###   ########.fr       */
+/*   Updated: 2023/12/17 13:57:08 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SYNTAX_H
 # define SYNTAX_H
 
-void    syntax(void);
+void	syntax(t_dlst *lex);
 
 #endif

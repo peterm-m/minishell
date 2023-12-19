@@ -4,6 +4,7 @@ NAME = libdlst.a
 SRC_DIR := .
 
 SRCS = \
+	ft_dlstclear.c\
 	ft_dlstnew.c \
 	ft_dlstadd.c \
 	ft_dlstlast.c \

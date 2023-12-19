@@ -21,14 +21,14 @@ int get_string(char *str, int i, t_dlst *head) // Pasar como argumento la lista 
     }
     else
     {
-        if (!(token = add_token(str, i + 1, j, QUOTED)))
+        if (!(token = add_token(str, i, j, QUOTED)))
             return (0);
     }
     new_token = ft_dlstnew(token);
     ft_dlstaddb(&head, new_token);
     i += j;
     printf("get_string i: %i\n", i);
-    printf("get_string str: %s\n", token->str);
+    printf("get_string str: |%s|\n", token->str);
     return (i);
 }
 
@@ -53,7 +53,7 @@ int get_token(char *str, int i, t_dlst *head) // Pasar como argumento la lista d
     i += j;
     printf("get_token i: %i\n", i);
     printf("get_token str: %s\n", token->str);
-    return (0);
+    return (i);
 }
 
 int get_word(char *str, int i, t_dlst *head)
@@ -67,15 +67,13 @@ int get_word(char *str, int i, t_dlst *head)
         j++;
     if (!(token = add_token(str, i, j, WORD)))
         return (0);
-/*     if (!(token = init_token()))
-        return (0); // ? volver a sacar linea */
     new_token = ft_dlstnew(token);
     ft_dlstaddb(&head, new_token);
     i += j;
     t_dlst *tem;
     tem = ft_dlstlast(head);
     printf("get_word i: %i\n", i);
-    //printf("%d get_word str: %s\n", __LINE__,((t_token *)tem->data)->str);
+    printf("%d get_word str: %s\n", __LINE__,((t_token *)tem->data)->str);
     ft_dlstiter(head, tok_p);
     return (i);
 }
@@ -86,8 +84,6 @@ int get_next_token(char *input, int i, t_dlst *head)
         i++;
     if (!input[i])
         return (0);
-/*     if (!(token = init_token()))
-        return (0); // ? volver a sacar linea */
     if (!in_word(input[i]))
         return(get_word(input, i, head));
     else if (is_token(input[i]))
@@ -96,10 +92,10 @@ int get_next_token(char *input, int i, t_dlst *head)
         return (get_string(input, i, head));
     else if (ft_isdigit(input[i]))
         printf("io_number");
-        //token = get_ionumber();
+        //token = get_ionumber(input, i, head);
     return (i);
 }
-t_dlst *tokenize(char *input, t_dlst *head) //        new_token = ft_dlstnew(next_token);
+t_dlst *tokenize(char *input, t_dlst *head)
 {
     int             i;
     //head = ft_dlstnew(head);
@@ -110,17 +106,10 @@ t_dlst *tokenize(char *input, t_dlst *head) //        new_token = ft_dlstnew(nex
         if(i == 0)
         {
             // eliminar token y liberar lista, volver a pedir nueva linea.
-            //free_list(&head->data);
-            //free(next_token);
-	        //next_token = NULL;
             return (NULL);
         }
-       /*  if (!new_token)
-        {
-            //ft_dlstclear(&head, free);
-            return (NULL);
-        } */
         i++;
+        printf("i: %i", i);
     }
     return (head);
 }
