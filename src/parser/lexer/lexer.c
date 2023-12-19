@@ -86,8 +86,7 @@ int	lexer(char *read_line)
 	read_line[i] = '\0';
 	s = evaluate_state(read_line);
 	printf ("estado: %i\n", s);
-	head = tokenize(read_line, head);
-	//printf("aaaaaaaaaaaaaaaaaaaaaaaaa\n");
+	head = tokenize(read_line, &head);
 	ft_dlstiter(head, tok_p);
 	/* if (!prueba)
 		return (0); */
