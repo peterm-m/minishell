@@ -24,31 +24,52 @@ int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista
 
 int get_token(char *str, int i, t_dlst **head) // Pasar como argumento la lista de tokens
 {
-    int j;
     t_dlst  *new_token;
     t_token *token;
 
     token = NULL;
-    j = 0;
-    if (str[i] == '|' && str[i + 1] == '|')
-        token = add_token(str, i, i + 2, OR);
-    else if (str[i] == '|' && str[i + 1] == ' ')
-        token = add_token(str, i, i + 2, PIPE);
-    else if (str[i] == '&' && str[i + 1] == '&')
-        token = add_token(str, i, i + 2, AND);    
-    else if (str[i] == '&' && str[i + 1] == ' ')
-        token = add_token(str, i, i + 2, PIPE);
-    if (is_token(str[i + j]))
-    {
-        j++;
-        if (is_token(str[i + j]))
-            j++;
-        if (!(token = add_token(str, i, j, WORD)))
-            return (0);
-    }
-    new_token = ft_dlstnew(token);
+    if (str[i] == '|' && str[i + 1] != '|')
+        token = add_token(str, i, 1, PIPE);
+    else if (str[i] == '<' && str[i + 1] != '<')
+        token = add_token(str, i, 1, LESS);
+    else if (str[i] == '>' && str[i + 1] != '>')
+        token = add_token(str, i, 1, REDIR);
+    else if (str[i] == '(')
+        token = add_token(str, i, 1, L_BRAKET);
+    else if (str[i] == '{')
+        token = add_token(str, i, 1, L_BRACE);
+    else
+        return(get_token2(str, i, head));
+    new_token = ft_dlstnew(token);    
     ft_dlstaddb(head, new_token);
-    i += j;
+    i++;
+    return (i);
+}
+
+int get_token2(char *str, int i, t_dlst **head)
+{
+    t_dlst  *new_token;
+    t_token *token;
+
+    token = NULL;
+    if (str[i] == '|' && str[i + 1] == '|')
+        token = add_token(str, i, 2, OR);
+    else if (str[i] == '>' && str[i + 1] == '>')
+        token = add_token(str, i, 2, APPEND);
+    else if (str[i] == '&' && str[i + 1] == '&')
+        token = add_token(str, i, 2, AND);   
+    else if (str[i] == '<' && str[i + 1] == '<')
+        token = add_token(str, i, 2, HEREDOC);
+    else if (str[i] == ')')
+        token = add_token(str, i, 1, R_BRAKET);
+    else if (str[i] == '}')
+        token = add_token(str, i, 1, R_BRACE);
+    printf("TOKEN ES: %s", token->str);
+    new_token = ft_dlstnew(token);    
+    ft_dlstaddb(head, new_token);
+    if (str[i] == ')' || str[i] == '}')
+        i += 1;
+    i += 2;
     return (i);
 }
 

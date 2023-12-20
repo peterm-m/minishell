@@ -44,7 +44,7 @@ int get_ionumber(char *str, int i, t_dlst **head)
 	if (str[i + j] == '>' || str[i + j] == '<')
 	{
 		j++;
-        if (!(token = add_token(str, i, j + 5, IO_NUMBER)))
+        if (!(token = add_token(str, i, j, IO_NUMBER)))
             return (0);		
 	}
     new_token = ft_dlstnew(token);
