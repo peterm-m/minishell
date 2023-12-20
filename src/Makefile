@@ -8,6 +8,7 @@ SRCS        := \
 	executer/executer.c \
 	parser/lexer/lexer.c \
 	parser/lexer/tokenize.c \
+	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
 	parser/syntax/syntax.c \
@@ -20,6 +21,7 @@ SRCS_TEST := \
 	executer/executer.c \
 	parser/lexer/lexer.c \
 	parser/lexer/tokenize.c \
+	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
 	parser/syntax/syntax.c \

@@ -20,11 +20,6 @@ typedef struct s_dlst t_dlst;
 
 int    lexer(char *read_line);
 
-// tokenize_utils.c
-
-t_token *add_token(char *str, int i, int j, int type);
-t_token	*init_token(void);
-t_dlst	*init_list(t_dlst *list);
 
 // lexer_utils.c
 
@@ -34,14 +29,24 @@ int is_quotes(char c);
 int	in_word(char c);
 void	*ft_memalloc(size_t size);
 
+// tokenize_utils.c
+
+t_token *add_token(char *str, int i, int j, int type);
+t_token	*init_token(void);
+t_dlst	*init_list(t_dlst *list);
+
+// get_tokens.c
+
+int get_word(char *str, int i, t_dlst **head);
+int get_string(char *str, int i, t_dlst **head);
+int get_ionumber(char *str, int i, t_dlst **head);
+int get_dolar(char *str, int i, t_dlst **head);
+
 // tokenize.c
 
 t_dlst *tokenize(char *input, t_dlst **head);
-int get_ionumber(char *str, int i, t_dlst **head);
+int get_token(char *str, int i, t_dlst **head);
 int get_token2(char *str, int i, t_dlst **head);
-///int get_string(char *str, int i, t_token *token);
-//int get_token(char *str, int i, t_token *token);
-
-void tok_p(void *t);
+int get_next_token(char *input, int i, t_dlst **head);
 
 #endif

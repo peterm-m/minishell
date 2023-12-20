@@ -1,27 +1,5 @@
 #include "minishell.h" 
 
-int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista de tokens
-{
-    int j;
-    t_dlst  *new_token;
-    t_token *token;
- 
-    j = 0;
-    if (is_quotes(str[i + j]))
-    {
-        j++;
-        while (!is_quotes(str[i + j]))
-            j++;
-        j++;
-    }
-    if (!(token = add_token(str, i, j, WORD)))
-        return (0);
-    new_token = ft_dlstnew(token);
-    ft_dlstaddb(head, new_token);
-    i += j;
-    return (i);
-}
-
 int get_token(char *str, int i, t_dlst **head) // Pasar como argumento la lista de tokens
 {
     t_dlst  *new_token;
@@ -64,30 +42,11 @@ int get_token2(char *str, int i, t_dlst **head)
         token = add_token(str, i, 1, R_BRAKET);
     else if (str[i] == '}')
         token = add_token(str, i, 1, R_BRACE);
-    printf("TOKEN ES: %s", token->str);
     new_token = ft_dlstnew(token);    
     ft_dlstaddb(head, new_token);
     if (str[i] == ')' || str[i] == '}')
         i += 1;
     i += 2;
-    return (i);
-}
-
-int get_word(char *str, int i, t_dlst **head)
-{
-    int j;
-    t_dlst  *new_token;
-    t_token *token;
-
-    j = 0;
-
-    while(!in_word(str[i + j]))
-        j++;
-    if (!(token = add_token(str, i, j, WORD)))
-        return (0);
-    new_token = ft_dlstnew(token);
-    ft_dlstaddb(head, new_token);
-    i += j;
     return (i);
 }
 
@@ -105,8 +64,11 @@ int get_next_token(char *input, int i, t_dlst **head)
         return (get_string(input, i, head));
     else if (ft_isdigit(input[i]))
         return (get_ionumber(input, i, head));
+    else if (input[i] == '$')
+        return(get_dolar(input, i, head));
     return (i);
 }
+
 t_dlst *tokenize(char *input, t_dlst **head)
 {
     int             i;

@@ -72,7 +72,7 @@ int evaluate_state(char *str)
 void tok_p(void *t)
 {
 	if (((t_token *)t) != NULL)
-		printf("token: %s type: %d\n", ((t_token *)t)->str, ((t_token *)t)->type);
+		printf("TOKEN: %s\nTYPE:\n%d\nEXPAND(TRUE/FALSE): %d\n", ((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
 }
 
 int	lexer(char *read_line)
@@ -90,12 +90,6 @@ int	lexer(char *read_line)
 	printf ("estado: %i\n", s);
 	head = tokenize(read_line, &head);
 	ft_dlstiter(head, tok_p);
-	/* if (!prueba)
-		return (0); */
+
 	return (1);
 }
-
-/* int main()
-{
-	lexer("echo \"'hola ****||||1<<<>>>>'\"; cat *; ls | ls -la > outfile.txt");
-} */

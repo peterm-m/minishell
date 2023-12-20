@@ -57,11 +57,20 @@ typedef enum identifier
     HEREDOC,
     REDIR,
     APPEND,
+    DOLAR,
     L_BRAKET,
     R_BRAKET,
     L_BRACE,
     R_BRACE, 
 }type;
+
+typedef enum expand
+{
+    NONE,
+    PARAM_E,
+    COMMD_SUB,
+    ARITH_E
+}expand;
 
 typedef enum e_bool
 {

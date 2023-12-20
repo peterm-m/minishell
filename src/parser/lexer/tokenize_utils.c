@@ -31,39 +31,4 @@ t_dlst	*init_list(t_dlst *list)
 	return (list);
 }
 
-int get_ionumber(char *str, int i, t_dlst **head)
-{
-    int j;
-    t_dlst  *new_token;
-    t_token *token;
-
-	j = 0;
-    token = NULL;
-	while (ft_isdigit(str[i + j]))
-		j++;
-	if (str[i + j] == '>' || str[i + j] == '<')
-	{
-		j++;
-        if (!(token = add_token(str, i, j, IO_NUMBER)))
-            return (0);		
-	}
-    new_token = ft_dlstnew(token);
-    ft_dlstaddb(head, new_token);
-    i += j;
-	return (i);
-}
-/* void	free_list(t_dlst *list)
-{
-	t_elem	*tmp;
-
-	tmp = list->head;
-	while (tmp)
-	{
-		free(tmp->content);
-		free(tmp);
-		tmp = tmp->next;
-	}
-	free(list);
-} */
-
 
