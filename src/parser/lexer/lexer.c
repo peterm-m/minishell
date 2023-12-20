@@ -23,7 +23,7 @@ int	states(int i, int j)
 		{ 2,  2, 12,  2,  2,  2,  2,  2}, // 2 Single quotes -> '
 		{13, 11,  2, 11, 11,  1, 11, 14}, // 3 OR        	 -> ||
 		{13,  3,  2,  7,  1, 11, 11, 14}, // 4 Pipe      	 -> |
-		{13, 11,  2, 11,  1, 11,  6, 14}, // 5 Ampersand 	 -> &
+		{13, 11,  2, 11,  1, 11,  6, 11}, // 5 Ampersand 	 -> &
 		{13, 11,  2, 11,  1, 11, 11, 14}, // 6 AND 			 -> &&
 		{13, 11,  2,  8,  1, 11, 11, 14}, // 7 Less			 -> <
 		{13, 11,  2, 11,  1, 11, 11, 14}, // 8 Heredoc		 ->	<<
@@ -54,12 +54,14 @@ int in_abc(char c)
 int evaluate_state(char *str)
 {
 	int state;
+	size_t len;
 	size_t i;
 
-	i = -1;
+	i = 0;
 	state = 0;
-	while (++i < ft_strlen(str))
-		state = states(state, in_abc(str[i]));
+	len = ft_strlen(str);
+	while (i < len)
+		state = states(state, in_abc(str[i++]));
 	if (state == 14 || state == 12)
 		printf(BHGRN"Valid Input\n"END);
 	else

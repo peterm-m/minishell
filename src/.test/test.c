@@ -4,19 +4,6 @@
 
 # define GET_TOKS(str) tokenize(str)
 
-#define AND_IF 0
-#define PIPE 0
-#define AND_OR 0
-#define DLESS 0
-#define DGREAT 0
-#define GREAT 0
-#define LESS 0
-#define LBRACE 0
-#define RBRACE 0
-#define LBRAKET 0
-#define RBRAKET 0
-#define TOKEN 0
-
 t_test_out	compare_token(t_dlst *d, int type, int expand, char *str)
 {
 	t_token *t;

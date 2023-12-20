@@ -46,9 +46,22 @@
 # define BHWHT "\e[1;97m"
 # define END   "\e[0m"
 
-# define QUOTED 0
-# define WORD 1
-# define IO_NUMBER 2
+typedef enum identifier
+{
+    IO_NUMBER,
+    WORD,
+    PIPE,
+    OR,
+    AND,
+    LESS,
+    HEREDOC,
+    REDIR,
+    APPEND,
+    L_BRAKET,
+    R_BRAKET,
+    L_BRACE,
+    R_BRACE, 
+}type;
 
 typedef enum e_bool
 {

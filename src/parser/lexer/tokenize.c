@@ -14,7 +14,7 @@ int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista
             j++;
         j++;
     }
-    if (!(token = add_token(str, i, j, QUOTED)))
+    if (!(token = add_token(str, i, j, WORD)))
         return (0);
     new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
@@ -30,6 +30,14 @@ int get_token(char *str, int i, t_dlst **head) // Pasar como argumento la lista 
 
     token = NULL;
     j = 0;
+    if (str[i] == '|' && str[i + 1] == '|')
+        token = add_token(str, i, i + 2, OR);
+    else if (str[i] == '|' && str[i + 1] == ' ')
+        token = add_token(str, i, i + 2, PIPE);
+    else if (str[i] == '&' && str[i + 1] == '&')
+        token = add_token(str, i, i + 2, AND);    
+    else if (str[i] == '&' && str[i + 1] == ' ')
+        token = add_token(str, i, i + 2, PIPE);
     if (is_token(str[i + j]))
     {
         j++;
@@ -51,6 +59,7 @@ int get_word(char *str, int i, t_dlst **head)
     t_token *token;
 
     j = 0;
+
     while(!in_word(str[i + j]))
         j++;
     if (!(token = add_token(str, i, j, WORD)))
@@ -90,7 +99,6 @@ t_dlst *tokenize(char *input, t_dlst **head)
             return (NULL);
         }
         i++;
-        printf("i: %i\n", i);
     }
     return (*head);
 }
