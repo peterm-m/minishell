@@ -11,6 +11,7 @@ SRCS        := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
+	parser/syntax/tree.c \
 	parser/syntax/syntax.c \
 	subsystem/subsystem.c
 
@@ -24,8 +25,9 @@ SRCS_TEST := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
+	parser/syntax/tree.c \
 	parser/syntax/syntax.c \
-	subsystem/subsystem.
+	subsystem/subsystem.c
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
