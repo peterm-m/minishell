@@ -31,7 +31,7 @@
 
 // Intern header
 # include "lexer.h"
-# include "syntax.h"
+//# include "syntax.h"
 # include "executer.h"
 # include "subsystem.h"
 
@@ -67,9 +67,8 @@ typedef enum identifier
 typedef enum expand
 {
     NONE,
-    PARAM_E,
-    COMMD_SUB,
-    ARITH_E
+    PARAM_E, //${}, $word
+    COMMD_SUB, //$()
 }expand;
 
 typedef enum e_bool

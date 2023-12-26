@@ -11,7 +11,6 @@ SRCS        := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
-	parser/syntax/tree.c \
 	parser/syntax/syntax.c \
 	subsystem/subsystem.c
 

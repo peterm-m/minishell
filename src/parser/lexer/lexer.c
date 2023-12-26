@@ -72,7 +72,7 @@ int evaluate_state(char *str)
 void tok_p(void *t)
 {
 	if (((t_token *)t) != NULL)
-		printf("TOKEN: %s\nTYPE:\n%d\nEXPAND(TRUE/FALSE): %d\n", ((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
+		printf("TOKEN: %s\nTYPE:\n%d\nEXPAND(TRUE/FALSE): %d\n\n", ((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
 }
 
 int	lexer(char *read_line)
