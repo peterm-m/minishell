@@ -13,39 +13,17 @@
 
 
 
-%token  AND_IF    OR_IF    DSEMI
-/*      '&&'      '||'     ';;'??    */
+%token  AND_IF    OR_IF 
+/*      '&&'      '||'   */
 
 
-%token  DLESS  DGREAT  LESSAND  GREATAND  LESSGREAT  DLESSDASH
-/*      '<<'   '>>'    '<&'??     '>&'??      '<>'??       '<<-'??   */
+%token  DLESS  DGREAT 
+/*      '<<'   '>>'      */
 
 
-%token  CLOBBER
-/*      '>|'   */
 
-?????????????????????????????????????????????????
-/* The following are the reserved words. */
-
-
-%token  If    Then    Else    Elif    Fi    Do    Done
-/*      'if'  'then'  'else'  'elif'  'fi'  'do'  'done'   */
-
-
-%token  Case    Esac    While    Until    For
-/*      'case'  'esac'  'while'  'until'  'for'   */
-
-
-/* These are reserved words, not operator tokens, and are
-   recognized when reserved words are recognized. */
-
-?????????????????????????????????????????????????
-%token  Lbrace    Rbrace    Bang
-/*      '{'       '}'       '!' ??   */
-
-
-%token  In
-/*      'in'??   */
+%token  Lbrace    Rbrace 
+/*      '{'       '}'    */
 
 
 /* -------------------------------------------------------
@@ -103,7 +81,7 @@ for_clause       : For name                                      do_group
                  ;
 name             : NAME                     /* Apply rule 5 */
                  ;
-in               : In                       /* Apply rule 6 */
+in               : In                       /* Apply rule 6 ************/
                  ;
 wordlist         : wordlist WORD
                  |          WORD
@@ -130,17 +108,6 @@ case_item        :     pattern ')' linebreak     DSEMI linebreak
                  ;
 pattern          :             WORD         /* Apply rule 4 */
                  | pattern '|' WORD         /* Do not apply rule 4 */
-                 ;
-if_clause        : If compound_list Then compound_list else_part Fi
-                 | If compound_list Then compound_list           Fi
-                 ;
-else_part        : Elif compound_list Then compound_list
-                 | Elif compound_list Then compound_list else_part
-                 | Else compound_list
-                 ;
-while_clause     : While compound_list do_group
-                 ;
-until_clause     : Until compound_list do_group
                  ;
 function_definition : fname '(' ')' linebreak function_body
                  ;

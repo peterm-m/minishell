@@ -15,17 +15,24 @@
 // #include <stdio.h>
 // #include <stdlib.h>
 
+void tok_p(void *t)
+{
+	if (((t_token *)t) != NULL)
+		printf("TOKEN: %s\nTYPE:\n%d\nEXPAND(TRUE/FALSE): %d\n\n", ((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
+}
+
 int	main(int argc, char const **argv, char const **envp)
 {
 	char	*read_line;
-	//t_data *data;
+	t_data data;
 
+	data.list = NULL;
 	(void) argc;
 	(void) argv;
-	(void) envp;
+	data.env = envp;
 	while (1)
 	{
-		read_line = readline(BHMAG"> "END);
+		read_line = readline(BHMAG"minishell42-> "END);
 		//printf("%s", read_line);
 		if (ft_strncmp(read_line, "exit", 5) == 0)
 			break ;
@@ -41,8 +48,12 @@ int	main(int argc, char const **argv, char const **envp)
 			printf("LEXICAL ERROR!");
 
 		*/
-		if (lexer(read_line))
-			printf(BHGRN"Lexer ok\n"END);
+		//if (lexer(read_line))
+		ft_dlstnew(data.list);
+		data.list = lexer(read_line, &data.list);
+		ft_dlstiter(data.list, tok_p);
 	}
+	ft_dlstclear(&data.list, free_list);
 	return (0);
 }
+

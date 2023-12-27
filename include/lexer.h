@@ -18,8 +18,7 @@ typedef struct s_dlst t_dlst;
 
 // lexer.c
 
-int    lexer(char *read_line);
-
+t_dlst	*lexer(char *read_line, t_dlst **head);
 
 // lexer_utils.c
 
@@ -33,7 +32,7 @@ void	*ft_memalloc(size_t size);
 
 t_token *add_token(char *str, int i, int j, int type);
 t_token	*init_token(void);
-t_dlst	*init_list(t_dlst *list);
+void free_list(void *head);
 
 // get_tokens.c
 

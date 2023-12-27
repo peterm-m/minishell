@@ -31,7 +31,7 @@
 
 // Intern header
 # include "lexer.h"
-//# include "syntax.h"
+# include "syntax.h"
 # include "executer.h"
 # include "subsystem.h"
 
@@ -86,7 +86,8 @@ typedef struct s_token
 
 typedef struct s_data
 {
-    t_dlst   **list;
+    t_dlst  *list;
+    const char    **env;
 }   t_data;
 
 #endif

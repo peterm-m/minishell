@@ -23,12 +23,8 @@ t_token	*init_token(void)
 	return (token);
 }
 
-t_dlst	*init_list(t_dlst *list)
+void free_list(void *head)
 {
-	list = ft_calloc(sizeof(t_dlst), 1);
-	if (!list)
-		return (NULL);
-	return (list);
+	free((t_token *)head);
 }
-
 

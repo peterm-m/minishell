@@ -63,33 +63,25 @@ int evaluate_state(char *str)
 	while (i < len)
 		state = states(state, in_abc(str[i++]));
 	if (state == 14 || state == 12)
+	{
 		printf(BHGRN"Valid Input\n"END);
+	}
 	else
 		printf(BHRED"Invalid Input\n"END);
 	return (state);
 }
 
-void tok_p(void *t)
+t_dlst	*lexer(char *read_line, t_dlst **head)
 {
-	if (((t_token *)t) != NULL)
-		printf("TOKEN: %s\nTYPE:\n%d\nEXPAND(TRUE/FALSE): %d\n\n", ((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
-}
+	int state;
+    //t_dlst          *head;
 
-int	lexer(char *read_line)
-{
-	//t_dlst *prueba;
-	int s;
-	size_t i;
-    t_dlst          *head;
-
-	head = NULL;
-
-	i = ft_strlen(read_line);
-	read_line[i] = '\0';
-	s = evaluate_state(read_line);
-	printf ("estado: %i\n", s);
-	head = tokenize(read_line, &head);
-	ft_dlstiter(head, tok_p);
-
-	return (1);
+	//head = NULL;
+	state = evaluate_state(read_line);
+	printf ("estado: %i\n", state);
+	if (state != 14 || state == 12)
+	{
+		printf(BHGRN"Valid Input\n"END);
+	}
+	return (tokenize(read_line, head));
 }

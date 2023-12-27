@@ -18,8 +18,7 @@ int get_ionumber(char *str, int i, t_dlst **head)
 	}
     new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
-    i += j;
-	return (i);
+	return (i + j);
 }
 
 int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista de tokens
@@ -31,12 +30,10 @@ int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista
  
     j = 0;
     expand = 0;
-    if (is_quotes(str[i + j]))
+    if (is_quotes(str[i + j++]))
     {
-        j++;
-        while (!is_quotes(str[i + j]))
+        while (!is_quotes(str[i + j++]))
         {
-            j++;
             if (str[i + j] == '$')
                 expand = 1;
         }
@@ -46,7 +43,7 @@ int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista
         return (0);
     new_token = ft_dlstnew(token);
     if (expand == 1)
-        token ->expand = TRUE;
+        token->expand = TRUE;
     ft_dlstaddb(head, new_token);
     return (i + j);
 }

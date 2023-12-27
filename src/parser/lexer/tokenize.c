@@ -46,7 +46,8 @@ int get_token2(char *str, int i, t_dlst **head)
     ft_dlstaddb(head, new_token);
     if (str[i] == ')' || str[i] == '}')
         i += 1;
-    i += 2;
+    else
+        i += 2;
     return (i);
 }
 
@@ -56,10 +57,10 @@ int get_next_token(char *input, int i, t_dlst **head)
         i++;
     if (!input[i])
         return (0);
-    if (!in_word(input[i]) && !ft_isdigit(input[i]))
-        return(get_word(input, i, head));
-    else if (is_token(input[i]))
+    if (is_token(input[i]))
         return(get_token(input, i, head));
+    else if (!in_word(input[i]) && !ft_isdigit(input[i]))
+        return(get_word(input, i, head));
     else if (is_quotes(input[i]))
         return (get_string(input, i, head));
     else if (ft_isdigit(input[i]))
@@ -76,12 +77,11 @@ t_dlst *tokenize(char *input, t_dlst **head)
     while(input[i] != '\0')
     {
         i = get_next_token(input, i, head);
-        if(i == 0)
+        if(!i)
         {
-            // eliminar token y liberar lista, volver a pedir nueva linea.
+            ft_dlstclear(head, free_list);
             return (NULL);
         }
-        i++;
     }
     return (*head);
 }
