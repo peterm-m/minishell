@@ -62,12 +62,6 @@ int evaluate_state(char *str)
 	len = ft_strlen(str);
 	while (i < len)
 		state = states(state, in_abc(str[i++]));
-	if (state == 14 || state == 12)
-	{
-		printf(BHGRN"Valid Input\n"END);
-	}
-	else
-		printf(BHRED"Invalid Input\n"END);
 	return (state);
 }
 
@@ -79,9 +73,11 @@ t_dlst	*lexer(char *read_line, t_dlst **head)
 	//head = NULL;
 	state = evaluate_state(read_line);
 	printf ("estado: %i\n", state);
-	if (state != 14 || state == 12)
+	if (state != 14 && state != 12)
 	{
-		printf(BHGRN"Valid Input\n"END);
+		printf(BHRED"Invalid Input\n"END);
+		return (NULL);
 	}
+	printf(BHGRN"Valid Input\n"END);
 	return (tokenize(read_line, head));
 }

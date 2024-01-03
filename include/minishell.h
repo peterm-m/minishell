@@ -86,8 +86,9 @@ typedef struct s_token
 
 typedef struct s_data
 {
-    t_dlst  *list;
-    const char    **env;
+    t_dlst      *lexlist;
+    t_tree      *sytxtree; //tree de syntax, creo que habría que meterlo al igual que la lista de lexer
+    const char  **env;
 }   t_data;
 
 #endif

@@ -1,49 +1,51 @@
 #include "minishell.h" 
 
-int get_ionumber(char *str, int i, t_dlst **head)
+int get_dolar_type(char *str, int i)
 {
     int j;
-    t_dlst  *new_token;
-    t_token *token;
+    int type;
 
-	j = 0;
-    token = NULL;
-	while (ft_isdigit(str[i + j]))
-		j++;
-	if (str[i + j] == '>' || str[i + j] == '<')
-	{
-		j++;
-        if (!(token = add_token(str, i, j, IO_NUMBER)))
-            return (0);		
-	}
-    new_token = ft_dlstnew(token);
-    ft_dlstaddb(head, new_token);
-	return (i + j);
+    j = 1;
+    type = 0;
+    while (!is_quotes(str[i + j]))
+    {
+        if (str[i + j] == '$')
+            break;
+        j++;
+    }
+    if (str[i + j] == '$' && str[i + j+ 1] == '(') 
+        type = COMMD_SUB;    
+    else if (str[i + j] == '$' && str[i + j + 1] == '{')
+        type = PARAM_E;
+    else if (str[i + j] == '$')
+        type = PARAM_E;
+    return (type);
 }
 
 int get_string(char *str, int i, t_dlst **head) // Pasar como argumento la lista de tokens
 {
     int j;
     int expand;
+    int type;
     t_dlst  *new_token;
     t_token *token;
  
-    j = 0;
+    j = 1;
     expand = 0;
-    if (is_quotes(str[i + j++]))
+    while (!is_quotes(str[i + j]))
     {
-        while (!is_quotes(str[i + j++]))
-        {
-            if (str[i + j] == '$')
-                expand = 1;
-        }
+        if (str[i + j] == '$')
+            expand = 1;
         j++;
     }
-    if (!(token = add_token(str, i, j, WORD)))
-        return (0);
-    new_token = ft_dlstnew(token);
+    j++;
+    token = add_token(str, i, j, WORD);
     if (expand == 1)
-        token->expand = TRUE;
+    {
+        type = get_dolar_type(str, i);
+        token->expand=type;
+    }
+    new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
     return (i + j);
 }
@@ -58,15 +60,11 @@ int get_word(char *str, int i, t_dlst **head)
     while(!in_word(str[i + j]))
         j++;
     if (!(token = add_token(str, i, j, WORD)))
-        return (0);
+        return (-1);
     new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
     i += j;
     return (i);
-}
-int expansion_type()
-{
-    return (1);
 }
 
 int get_dolar2(char *str, int i, t_dlst **head, int type)
@@ -88,11 +86,12 @@ int get_dolar2(char *str, int i, t_dlst **head, int type)
         while (str[i + j] != '}')
             j++;
     }
-    token = add_token(str, i, j + 1, type);
-    token->expand = TRUE;
+    if (!(token = add_token(str, i, j + 1, WORD)))
+        return (-1);
+    token->expand = type;
     new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
-    return (i + j);
+    return (i + j + 1);
 }
 int get_dolar(char *str, int i, t_dlst **head)
 {
@@ -114,9 +113,11 @@ int get_dolar(char *str, int i, t_dlst **head)
         while (!is_blankspace(str[i + j]))
             j++;
     }
-    token = add_token(str, i, j, PARAM_E);
-    token->expand = TRUE;
+    if (!(token = add_token(str, i, j, WORD)))
+        return (-1);
+    token->expand = PARAM_E;
     new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
     return (i + j);
 }
+//"$hola" "g{$hh}" "$(ggg)" $fff $(hhh) ${jjj} 

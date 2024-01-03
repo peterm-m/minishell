@@ -38,8 +38,9 @@ void free_list(void *head);
 
 int get_word(char *str, int i, t_dlst **head);
 int get_string(char *str, int i, t_dlst **head);
-int get_ionumber(char *str, int i, t_dlst **head);
+int get_dolar_type(char *str, int i);
 int get_dolar(char *str, int i, t_dlst **head);
+int get_dolar2(char *str, int i, t_dlst **head, int type);
 
 // tokenize.c
 
@@ -47,5 +48,6 @@ t_dlst *tokenize(char *input, t_dlst **head);
 int get_token(char *str, int i, t_dlst **head);
 int get_token2(char *str, int i, t_dlst **head);
 int get_next_token(char *input, int i, t_dlst **head);
+int get_ionumber(char *str, int i, t_dlst **head);
 
 #endif

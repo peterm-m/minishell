@@ -18,7 +18,10 @@
 void tok_p(void *t)
 {
 	if (((t_token *)t) != NULL)
-		printf("TOKEN: %s\nTYPE:\n%d\nEXPAND(TRUE/FALSE): %d\n\n", ((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
+		printf(BHYEL"\nToken: "BHBLU"%s\n"
+		BHYEL"Token type:         "BHWHT"%d\n"
+		BHYEL"Expand(True/False): "BHRED"%d\n\n"END, 
+		((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
 }
 
 int	main(int argc, char const **argv, char const **envp)
@@ -26,7 +29,7 @@ int	main(int argc, char const **argv, char const **envp)
 	char	*read_line;
 	t_data data;
 
-	data.list = NULL;
+	data.lexlist = NULL;
 	(void) argc;
 	(void) argv;
 	data.env = envp;
@@ -38,22 +41,18 @@ int	main(int argc, char const **argv, char const **envp)
 			break ;
 		/* ##########  PROPUESTA ##########
 
-		t_dlst	*lex;
-		lex = lexer(read_line); // lexer: pasa la string  a una lista de tokens.
 		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
 			printf("LEXICAL ERROR!");
 
 		tree = syntax(lex); // parte sintactica
 		if (sintax_cheker(lex))
 			printf("LEXICAL ERROR!");
-
 		*/
-		//if (lexer(read_line))
-		ft_dlstnew(data.list);
-		data.list = lexer(read_line, &data.list);
-		ft_dlstiter(data.list, tok_p);
+		ft_dlstnew(data.lexlist);
+		data.lexlist = lexer(read_line, &data.lexlist);
+		ft_dlstiter(data.lexlist, tok_p);
 	}
-	ft_dlstclear(&data.list, free_list);
+	ft_dlstclear(&data.lexlist, free_list);
 	return (0);
 }
 
