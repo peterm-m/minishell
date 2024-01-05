@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/04 23:57:00 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/05 20:10:58 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define NUM_TOKEN 15
 
 // non terminals in grammar 
-# define NUM_NTERMINALS 12
+# define NUM_NTERMINALS 13
 
 // states in grammar
 # define NUM_STATES 55
@@ -87,6 +87,26 @@ typedef enum e_non_terminal
 	nt_cmd_suffix,
 	nt_io_redirect
 }	t_non_terminal;
+
+void	rules_accept(t_dlst **lex, t_state **state, int rule);
+void	rules_program(t_dlst **lex, t_state **state, int rule);
+void	rules_and_or(t_dlst **lex, t_state **state, int rule);
+void	rules_pipeline(t_dlst **lex, t_state **state, int rule);
+void	rules_command(t_dlst **lex, t_state **state, int rule);
+void	rules_commpound(t_dlst **lex, t_state **state, int rule);
+void	rules_group(t_dlst **lex, t_state **state, int rule);
+void	rules_subshell(t_dlst **lex, t_state **state, int rule);
+void	rules_simple_cmd(t_dlst **lex, t_state **state, int rule);
+void	rules_cmd_prefix(t_dlst **lex, t_state **state, int rule);
+void	rules_cmd_suffix(t_dlst **lex, t_state **state, int rule);
+void	rules_redirect_list(t_dlst **lex, t_state **state, int rule);
+void	rules_io_redirect(t_dlst **lex, t_state **state, int rule);
+
+int		table_action(int state, int token);
+int		table_goto(int state, int n_terminal);
+void	(*table_reduce(int rule))(t_dlst **, t_state **, int);
+
+void	pop_elements(t_dlst **lex, t_dlst **state, int n);
 
 void	syntax(t_dlst *lex);
 

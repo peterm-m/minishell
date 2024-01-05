@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/04 22:00:45 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/05 14:02:26 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	append_redir(t_redirect *redir1, t_redirect *redir2)
 }
 
 
-void	make_redirection(t_dlst *lex, t_state *state, int rule)
+t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest, int flag)
 {
-	return ;
+	t_redirect	*redirect;
+
+	redirect = (t_redirect *)ft_malloc(sizeof(t_redirect));
+	return (redirect);
 }

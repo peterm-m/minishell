@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/05 00:00:03 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/05 15:07:48 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,20 @@ typedef struct s_subshell_cmd
   	t_command	*command;
 } t_subshell_cmd;
 
-t_connection	*make_conection(t_command *cmd1, t_command *cmd2, int type);
-t_command	*make_group(t_command *cmd);
-void	make_simple_command(t_dlst *lex, t_state *state, int rule);
-void	set_redirection(t_dlst *lex, t_state *state, int rule);
-t_command	*make_subshell(t_command *cmd);
-void	make_element(t_dlst *lex, t_state	*state, int rule);
-void	append_element(t_dlst *lex, t_state *state, int rule);
-void	append_redir(t_redirect *redir1, t_redirect *redir2);
-void	make_redirection(t_dlst *lex, t_state	*state, int rule);
-void	join_redirection(t_dlst *lex, t_state	*state, int rule);
+
+
+t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,int flag);
+
+t_command		*make_conection(t_command *cmd1, t_command *cmd2, int type);
+t_command		*make_group(t_command *cmd);
+t_command		*make_subshell(t_command *cmd);
+t_command		*make_simple_command(t_command *cmd, t_element *element);
+
+t_element		*make_element(t_dlst *lex, t_state	*state, int rule);
+
+void			set_redirection(t_dlst *lex, t_state *state, int rule);
+void			append_element(t_dlst *lex, t_state *state, int rule);
+void			append_redir(t_redirect *redir1, t_redirect *redir2);
+void			join_redirection(t_dlst *lex, t_state	*state, int rule);
 
 #endif

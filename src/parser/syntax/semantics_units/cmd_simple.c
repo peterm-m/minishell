@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/04 19:23:55 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/05 14:07:18 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_command	*clean_command(t_command *cmd)
 	return (NULL);
 }
 
-void	make_simple_command(t_dlst *lex, t_state	*state, int rule)
+t_command	*make_simple_command(t_command *cmd, t_element *element)
 {
-	return ;
+	return (cmd);
 }

@@ -11,6 +11,9 @@ SRCS        := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
+	parser/syntax/rules.c \
+	parser/syntax/tables.c \
+	parser/syntax/utils.c \
 	parser/syntax/syntax.c \
 	subsystem/subsystem.c
 
@@ -24,9 +27,12 @@ SRCS_TEST := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
-	parser/syntax/tree.c \
+	parser/syntax/rules.c \
+	parser/syntax/tables.c \
+	parser/syntax/utils.c \
 	parser/syntax/syntax.c \
 	subsystem/subsystem.c
+
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -63,22 +69,22 @@ I_WRAP := -I$(WRAP)
 L_WRAP := -L$(WRAP)
 LIB_WRAP := -lwrappers
 
-INCLUDES    := -I../include $(I_DLIST) $(I_WRAP)  $(I_FT)
+INCLUDES    := -I../include $(I_DLIST) $(I_WRAP) $(I_FT)
 
-LFLAGS    := $(L_DLIST)  $(L_WRAP) $(L_FT)
+LFLAGS    := $(L_DLIST) $(L_WRAP) $(L_FT)
 
-LIBS = $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP) $(LIB_FT)
+LIBS := $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP) $(LIB_FT)
 
 all: $(NAME)
 
 test: $(TEST)
 
 $(NAME): $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS)
-	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES)  $(OBJS) -o $(NAME)
+	@$(CC)  $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
 	@$(info CREATED $(NAME))
 
 $(TEST): $(RULE_DLIST) $(RULE_WRAP) $(OBJS_TEST)
-	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES)  $(OBJS_TEST) -o $(TEST)
+	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES) $(OBJS_TEST) -o $(TEST)
 	@$(info CREATED $(TEST))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -119,3 +125,4 @@ re:
 	@$(MAKE) all
 
 .PHONY: clean fclean re
+

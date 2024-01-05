@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/17 14:10:54 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:58:09 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 // Intern header
 # include "lexer.h"
 # include "syntax.h"
+# include "semantics_units.h"
 # include "executer.h"
 # include "subsystem.h"
 
@@ -62,7 +63,7 @@ typedef enum identifier
     R_BRAKET,
     L_BRACE,
     R_BRACE, 
-}type;
+}   type;
 
 typedef enum expand
 {
@@ -87,7 +88,7 @@ typedef struct s_token
 typedef struct s_data
 {
     t_dlst      *lexlist;
-    t_tree      *sytxtree; //tree de syntax, creo que habría que meterlo al igual que la lista de lexer
+    t_dlst      *sytxtree; //tree de syntax, creo que habría que meterlo al igual que la lista de lexer
     const char  **env;
 }   t_data;
 

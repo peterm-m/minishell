@@ -6,13 +6,13 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:50:53 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/04 19:24:11 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/05 14:09:27 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	make_subshell(t_dlst *lex, t_state	*state, int rule)
+t_command	*make_subshell(t_command *cmd)
 {
-	return ;
+	return (cmd);
 }

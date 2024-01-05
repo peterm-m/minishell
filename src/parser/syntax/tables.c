@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/04 17:20:08 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/05 20:21:36 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,28 @@ int	table_goto(int state, int n_terminal)
 	"~~~~~~~~~~~~~" "~~~~~~~~~~~~~" "~~~~~~~~~~~~~"\
 	"~~~~~~~~~~~~~";
 
-	if ((n_terminal >= 0 && n_terminal <= 12) && (state >= 0 && state <= 54))
-		return (go_to[NUM_TOKEN * state + n_terminal] - CHR_STATE0);
+	if ((n_terminal >= nt_accept && n_terminal <= nt_io_redirect) &&
+		(state >= SHIFT0 && state <= SHIFT54))
+		return (go_to[NUM_NTERMINALS * state + n_terminal] - CHR_STATE0);
 	return (-1);
+}
+
+void (*table_reduce(int rule_id))(t_dlst **, t_state **, int)
+{
+	static const void (*rules[NUM_RULES])(t_dlst **, t_state **, int) = \
+	{rules_accept, rules_program, rules_program,
+	rules_and_or, rules_and_or, rules_and_or,
+	rules_pipeline, rules_pipeline, rules_command,
+	rules_command, rules_command, rules_commpound,
+	rules_commpound,rules_group, rules_subshell,
+	rules_simple_cmd, rules_simple_cmd, rules_simple_cmd,
+	rules_simple_cmd, rules_simple_cmd, rules_cmd_prefix,
+	rules_cmd_prefix, rules_cmd_prefix, rules_cmd_prefix,
+	rules_cmd_suffix, rules_cmd_suffix, rules_cmd_suffix,
+	rules_cmd_suffix, rules_redirect_list, rules_redirect_list,
+	rules_io_redirect, rules_io_redirect, rules_io_redirect,
+	rules_io_redirect, rules_io_redirect, rules_io_redirect,
+	rules_io_redirect, rules_io_redirect};
+
+	return (rules[rule_id]);
 }
