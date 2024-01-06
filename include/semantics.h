@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   semantics_units.h                                  :+:      :+:    :+:   */
+/*   semantics.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/05 15:07:48 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/06 13:15:38 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SEMANTICS_UNITS_H
-# define SEMANTICS_UNITS_H
+#ifndef SEMANTICS_H
+# define SEMANTICS_H
 
 # include "minishell.h"
 
-/* Instructions describing what kind of thing to do for a redirection. */
-typedef enum e_rinstructis
-{
-	r_output_direction,
-	r_input_direction,
-	r_appending_to,
-	r_reading_until
-}	t_roption;
+/*
+	UTILS
+*/
 
 typedef struct s_word_desc
 {
@@ -36,46 +31,46 @@ typedef struct s_word_list
 	struct s_word_list	*next;
 } t_word_list;
 
+/*
+	REDIRECTIONS
+*/
+
+/* Type of redirection */
+typedef enum e_redir_option
+{
+	r_output_direction,
+	r_input_direction,
+	r_appending_to,
+	r_reading_until
+}	t_redir_option;
+
+/* filename or file descriptor */
 typedef union u_unit_io
 {
 	int			dest;
 	t_word_desc	*filename;
 } t_unit_io;
 
-/*
- Structure describing a redirection.
- 	Descriptor or varname to be redirected.
- 	Flags for this redirection
- 	Flag vaxlue for open.
- 	What to do with the information.
- 	File descriptor or filename
- 	The word that appeared in <<foo.
- 	Next element, or NULL.
-*/
-
+/* Structure describing a redirection. */
 typedef struct s_redirect
 {
 	t_unit_io			redirector;
+	t_unit_io			redirectee;
 	int					rflags;
 	int					flags;
-	t_roption			instructis_on;
-	t_unit_io			redirectee;
+	t_redir_option		option;
 	char				*here_doc_eof;
 	struct s_redirect	*next;
 } t_redirect;
 
-/*
-  An element used in parsing. 
-  A single word or a single redirection.
-  This is an ephemeral construct.
-*/
+/* Auxiliar */
 typedef struct s_element
 {
 	t_word_list	*word;
 	t_redirect	*redirect;
 } t_element;
 
-/* Command Types */
+/* Command Types ID*/
 typedef enum e_command_type
 {
 	cmd_simple,
@@ -84,7 +79,7 @@ typedef enum e_command_type
 	cmd_subshell
 }  t_command_type;
 
-/* Nodes Types */
+/* Command Types */
 typedef union u_node
 {
 	struct s_connection		*connection;
@@ -93,12 +88,7 @@ typedef union u_node
 	struct s_subshell_cmd	*subshell;
 }	t_node;
 
-/*
-  Command looks like.
-	Command type
-	Flags controlling execution environment
-	Special redirects
-*/
+/* Command */
 typedef struct s_command
 {
 	t_command_type	type;
@@ -107,14 +97,7 @@ typedef struct s_command
 	t_redirect		*redirects;
 } t_command;
 
-/*
-Connection.
-	What separates this command from other
-
-	Auxiliar
-	Pointer to the first command. 
-	Pointer to the second command. 
-*/
+/* Connection */
 typedef struct s_connection
 {
 	int			ignore;
@@ -123,14 +106,7 @@ typedef struct s_connection
 	int			connector;
 } t_connection;
 
-/*
-Simple command.
-	Collection of words and redirects.
-
-	Flags.
-	Name, Arguments, Variable assignments, etc.
-	Redirections to perform.
-*/
+/* Simple command */
 typedef struct s_simple_cmd
 {
 	int			flags;
@@ -138,35 +114,34 @@ typedef struct s_simple_cmd
 	t_redirect	*redirects;
 } t_simple_cmd;
 
-/*
-Group:
-	Allows pipes and redirections to affect all commands in the group.
-*/
+/* Group */
 typedef struct s_group_cmd
 {
 	int ignore;
 	t_command *command;
 } t_group_cmd;
 
-/*
-Subshell:
-	Cmd in subshell
-*/
+/* Subshell */
 typedef struct s_subshell_cmd
 {
 	int			flags;
-	int			line;
   	t_command	*command;
 } t_subshell_cmd;
-
 
 
 t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,int flag);
 
 t_command		*make_conection(t_command *cmd1, t_command *cmd2, int type);
+void			clean_connection(t_connection *connection);
+
 t_command		*make_group(t_command *cmd);
+void			clean_group(t_group_cmd *group);
+
 t_command		*make_subshell(t_command *cmd);
+void			clean_subshell(t_subshell_cmd *subshell);
+
 t_command		*make_simple_command(t_command *cmd, t_element *element);
+void			clean_simple_command(t_simple_cmd *cmd);
 
 t_element		*make_element(t_dlst *lex, t_state	*state, int rule);
 

@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_conection.c                                    :+:      :+:    :+:   */
+/*   cmd_group.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 00:38:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/05 15:08:54 by pedro            ###   ########.fr       */
+/*   Created: 2024/01/03 00:52:26 by pedro             #+#    #+#             */
+/*   Updated: 2024/01/06 12:53:04 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*make_conection(t_command *cmd1, t_command *cmd2, int type)
+void	clean_group(t_group_cmd *group)
 {
-	t_command	*connection;
-	
-	connection = (t_command *)ft_malloc(sizeof(t_command));
-	return (connection);
+	if (group == NULL)
+		return ;
+	if (group->command != NULL)
+		clena_command(group->command);
+	free(group);
+}
+
+t_command *make_group(t_command *command)
+{
+	t_group_cmd	*group;
+
+	group = (t_group_cmd *)ft_malloc(sizeof(t_group_cmd));
+	group->ignore = 0;
+	group->command = command;
+	return (make_command(cmd_group, (t_simple_cmd *)group));
 }
