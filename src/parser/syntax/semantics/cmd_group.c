@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:52:26 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/06 12:53:04 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/06 19:19:24 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	clean_group(t_group_cmd *group)
 	if (group == NULL)
 		return ;
 	if (group->command != NULL)
-		clena_command(group->command);
+		clean_command(group->command);
 	free(group);
 }
 

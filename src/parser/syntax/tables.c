@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/05 20:21:36 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/06 18:12:54 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,26 @@ int	table_goto(int state, int n_terminal)
 		(state >= SHIFT0 && state <= SHIFT54))
 		return (go_to[NUM_NTERMINALS * state + n_terminal] - CHR_STATE0);
 	return (-1);
+}
+
+int	table_nt_generate(int rule_id)
+{
+	static const int nt_generate[NUM_RULES] = \
+	{nt_accept, nt_program, nt_program,
+	nt_and_or, nt_and_or, nt_and_or,
+	nt_pipeline, nt_pipeline, nt_command,
+	nt_command, nt_command, nt_compound_command,
+	nt_compound_command ,nt_brace_group, nt_subshell,
+	nt_simple_command, nt_simple_command, nt_simple_command,
+	nt_simple_command, nt_simple_command, nt_cmd_prefix,
+	nt_cmd_prefix, nt_cmd_prefix, nt_cmd_prefix,
+	nt_cmd_suffix, nt_cmd_suffix, nt_cmd_suffix,
+	nt_cmd_suffix, nt_redirect_list, nt_redirect_list,
+	nt_io_redirect, nt_io_redirect, nt_io_redirect,
+	nt_io_redirect, nt_io_redirect, nt_io_redirect,
+	nt_io_redirect, nt_io_redirect};
+
+	return (nt_generate[rule_id]);
 }
 
 void (*table_reduce(int rule_id))(t_dlst **, t_state **, int)

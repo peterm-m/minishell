@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/06 12:56:22 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/06 17:13:23 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	*clena_command(t_command *cmd)
 {
-	t_node	value;
+	t_cmd	value;
 
 	value = cmd->value;
 	free(cmd);
 	if (cmd->type == cmd_simple)
-		clean_simple(value);
+		clean_simple(value.simple);
 	else if (cmd->type == cmd_connection)
-		clean_connection(value);
+		clean_connection(value.connection);
 	else if (cmd->type == cmd_subshell)
-		clean_subshell(value);
+		clean_subshell(value.subshell);
 	else if (cmd->type == cmd_group)
-		clean_group(value);
+		clean_group(value.group);
 	else
 		return ;
 }
 
-t_command	*make_command(t_command_type type, t_node *value)
+t_command	*make_command(t_command_type type, t_cmd *value)
 {
 	t_command	*tmp;
 

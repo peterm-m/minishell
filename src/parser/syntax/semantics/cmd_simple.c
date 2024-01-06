@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/06 13:13:05 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/06 19:40:58 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,39 @@ void	clean_simple_command(t_simple_cmd *cmd)
 		clean_words(cmd->words);
 }
 
-t_command	*make_simple_command(t_command *cmd, t_element *element)
+t_command	*make_simple_empty(void)
 {
-	return (cmd);
+	t_command 	*command;
+	t_simple_cmd *temp;
+
+	command = (t_command *)ft_malloc(sizeof(t_command));
+	temp = (t_simple_cmd *)ft_malloc(sizeof(t_simple_cmd));
+	command->value.simple = temp;
+	temp->flags = 0;
+	temp->words = (t_word *)NULL;
+	temp->redirects = (t_redirect *)NULL;
+	command->type = cmd_simple;
+	command->redirects = (t_redirect *)NULL;
+	command->flags = 0;
+	return (command);
 }
 
-//COMMAND *
-//make_bare_simple_command ()
-//{
-//  COMMAND *command;
-//  SIMPLE_COM *temp;
-//
-//  command = (COMMAND *)xmalloc (sizeof (COMMAND));
-//  command->value.Simple = temp = (SIMPLE_COM *)xmalloc (sizeof (SIMPLE_COM));
-//
-//  temp->flags = 0;
-//  temp->line = line_number;
-//  temp->words = (WORD_LIST *)NULL;
-//  temp->redirects = (REDIRECT *)NULL;
-//
-//  command->type = cm_simple;
-//  command->redirects = (REDIRECT *)NULL;
-//  command->flags = 0;
-//
-//  return (command);
-//}
 
+t_command	*make_simple_command(t_command *cmd, t_element *element)
+{
+	t_redirect *redirection;
 
-//t_command	*make_simple_command(t_command *cmd, t_element *element)
-//{
-//	if (cmd == NULL)
-//	{
-//	  cmd = make_bare_simple_command ();
-//	  //parser_state& |= PST_REDIRLIST;
-//	}
-//  if (element.word)
-//    {
-//      command->value.Simple->words = make_word_list (element.word, command->value.Simple->words);
-//      parser_state &= ~PST_REDIRLIST;
-//    }
-//  else if (element.redirect)
-//    {
-//      REDIRECT *r = element.redirect;
-//      while (r->next)
-//	r = r->next;
-//      r->next = command->value.Simple->redirects;
-//      command->value.Simple->redirects = element.redirect;
-//    }
-//
-//  return (command);
-//}
+	if (cmd == NULL)
+		cmd = make_simple_empty();
+	if (element->word)
+		(cmd->value).simple->words = make_word_list(element->word, cmd->value.simple->words);
+	else if (element->redirect)
+	{
+		redirection = element->redirect;
+		while (redirection->next)
+			redirection = redirection->next;
+		redirection->next = cmd->value.simple->redirects;
+		cmd->value.simple->redirects = element->redirect;
+	}
+	return (cmd);
+}

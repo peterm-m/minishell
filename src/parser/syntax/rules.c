@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:51:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/06 00:05:25 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/06 19:58:32 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	rules_accept(t_dlst **lex, t_state **state, int rule)
 	(void)lex;
 	if (rule == 0)
 		(void) 0;
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_accept);
-	printf("applay rules_accept %d\n", nt_accept);
+	printf("applay rules_accept %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -37,8 +36,7 @@ void	rules_program(t_dlst **lex, t_state **state, int rule)
 		(void) 0;
 	else if (rule == 2)
 		(void) 0;
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_program);
-	printf("applay rules_program %d\n", nt_program);
+	printf("applay rules_program %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -53,14 +51,19 @@ void	rules_and_or(t_dlst **lex, t_state **state, int rule)
 		(void) 0;
 	else if (rule == 4)
 	{
+		//(*lex)->data = make_conection((*lex)->prev->prev->data,
+		//	(*lex)->data,
+		//	tt_and_if);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 5)
 	{
+		//(*lex)->data = make_conection((*lex)->prev->prev->data,
+		//	(*lex)->data,
+		//	tt_or_if);
 		pop_elements(lex, state, 2);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_and_or);
-	printf("applay rules_and_or %d\n", nt_and_or);
+	printf("applay rules_and_or %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -74,10 +77,12 @@ void	rules_pipeline(t_dlst **lex, t_state **state, int rule)
 		(void) 0;
 	else if (rule == 7)
 	{
+		//(*lex)->data = make_conection((*lex)->prev->prev->data,
+		//	(*lex)->data,
+		//	tt_pipe);
 		pop_elements(lex, state, 2);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_pipeline);
-	printf("applay rules_pipeline %d\n", nt_pipeline);
+	printf("applay rules_pipeline %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -96,8 +101,7 @@ void	rules_command(t_dlst **lex, t_state **state, int rule)
 	{
 		pop_elements(lex, state, 1);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_command);
-	printf("applay rules_command %d\n", nt_command);
+	printf("applay rules_command %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -112,8 +116,7 @@ void	rules_commpound(t_dlst **lex, t_state **state, int rule)
 		(void) 0;
 	else if (rule == 12)
 		(void) 0;
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_simple_command);
-	printf("applay rules_commpound %d\n", nt_simple_command);
+	printf("applay rules_commpound %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -124,10 +127,10 @@ void	rules_group(t_dlst **lex, t_state **state, int rule)
 {
 	if (rule == 13)
 	{
+		//(*lex)->data = make_group((*lex)->prev->data);
 		pop_elements(lex, state, 2);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_compound_command);
-	printf("applay rules_group %d\n", nt_compound_command);
+	printf("applay rules_group %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -138,10 +141,10 @@ void	rules_subshell(t_dlst **lex, t_state **state, int rule)
 {
 	if (rule == 14)
 	{
+		//(*lex)->data = make_subshell((*lex)->prev->data);
 		pop_elements(lex, state, 2);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_redirect_list);
-	printf("applay rules_subshell %d\n", nt_redirect_list);
+	printf("applay rules_subshell %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -170,8 +173,7 @@ void	rules_simple_cmd(t_dlst **lex, t_state **state, int rule)
 	}
 	else if (rule == 19)
 		(void) 0;
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_brace_group);
-	printf("applay rules_simple_cmd %d\n", nt_brace_group);
+	printf("applay rules_simple_cmd %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -195,8 +197,7 @@ void	rules_cmd_prefix(t_dlst **lex, t_state **state, int rule)
 	{
 		pop_elements(lex, state, 1);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_subshell);
-	printf("applay rules_cmd_prefix %d\n", nt_subshell);
+	printf("applay rules_cmd_prefix %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -220,8 +221,7 @@ void	rules_cmd_suffix(t_dlst **lex, t_state **state, int rule)
 	{
 		pop_elements(lex, state, 1);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_cmd_prefix);
-	printf("applay rules_cmd_suffix %d\n", nt_cmd_prefix);
+	printf("applay rules_cmd_suffix %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -237,8 +237,7 @@ void	rules_redirect_list(t_dlst **lex, t_state **state, int rule)
 	{
 		pop_elements(lex, state, 1);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_cmd_suffix);
-	printf("applay rules_redirect_list %d\n", nt_cmd_suffix);
+	printf("applay rules_redirect_list %d and go to %d \n", rule, *((int *)(*state)->data));
 }
 
 /*
@@ -256,36 +255,44 @@ void	rules_io_redirect(t_dlst **lex, t_state **state, int rule)
 {
 	if (rule == 30)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 31)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 32)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 33)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 34)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 35)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 36)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 37)
 	{
+		//make_redirection(&source, type, &dest, flag);
 		pop_elements(lex, state, 2);
 	}
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), nt_io_redirect);
-	printf("applay rules_io_redirect %d\n", nt_io_redirect);
+	
+	printf("applay rules_io_redirect %d and go to %d \n", rule, *((int *)(*state)->data));
 }
