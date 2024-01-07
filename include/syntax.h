@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/05 20:10:58 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/07 18:57:40 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	rules_program(t_dlst **lex, t_state **state, int rule);
 void	rules_and_or(t_dlst **lex, t_state **state, int rule);
 void	rules_pipeline(t_dlst **lex, t_state **state, int rule);
 void	rules_command(t_dlst **lex, t_state **state, int rule);
-void	rules_commpound(t_dlst **lex, t_state **state, int rule);
+void	rules_compound(t_dlst **lex, t_state **state, int rule);
 void	rules_group(t_dlst **lex, t_state **state, int rule);
 void	rules_subshell(t_dlst **lex, t_state **state, int rule);
 void	rules_simple_cmd(t_dlst **lex, t_state **state, int rule);
@@ -105,6 +105,7 @@ void	rules_io_redirect(t_dlst **lex, t_state **state, int rule);
 int		table_action(int state, int token);
 int		table_goto(int state, int n_terminal);
 void	(*table_reduce(int rule))(t_dlst **, t_state **, int);
+int		table_nt_generate(int rule_id);
 
 void	pop_elements(t_dlst **lex, t_dlst **state, int n);
 

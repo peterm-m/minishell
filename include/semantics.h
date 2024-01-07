@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   semantics.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/06 13:15:38 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:55:08 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 	UTILS
 */
 
-typedef struct s_word_desc
+typedef struct s_word
 {
 	char	*word;
 	int		flags;
-}	t_word_desc;
+}	t_word;
 
 typedef struct s_word_list
 {
-	t_word_desc			*word;
+	t_word			*word;
 	struct s_word_list	*next;
 } t_word_list;
 
@@ -48,8 +48,8 @@ typedef enum e_redir_option
 typedef union u_unit_io
 {
 	int			dest;
-	t_word_desc	*filename;
-} t_unit_io;
+	t_word		*filename;
+}	t_unit_io;
 
 /* Structure describing a redirection. */
 typedef struct s_redirect
@@ -128,10 +128,13 @@ typedef struct s_subshell_cmd
   	t_command	*command;
 } t_subshell_cmd;
 
+t_command		*make_command(t_command_type type, t_node value);
+void			clean_command(t_command *cmd);
 
 t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,int flag);
+void			clean_redirection(t_redirect *redirection);
 
-t_command		*make_conection(t_command *cmd1, t_command *cmd2, int type);
+t_command		*make_connection(t_command *cmd1, t_command *cmd2, int type);
 void			clean_connection(t_connection *connection);
 
 t_command		*make_group(t_command *cmd);
@@ -140,14 +143,12 @@ void			clean_group(t_group_cmd *group);
 t_command		*make_subshell(t_command *cmd);
 void			clean_subshell(t_subshell_cmd *subshell);
 
-t_command		*make_simple_command(t_command *cmd, t_element *element);
-void			clean_simple_command(t_simple_cmd *cmd);
+t_command		*make_simple(t_command *cmd, t_element *element);
+void			clean_simple(t_simple_cmd *cmd);
 
 t_element		*make_element(t_dlst *lex, t_state	*state, int rule);
 
 void			set_redirection(t_dlst *lex, t_state *state, int rule);
-void			append_element(t_dlst *lex, t_state *state, int rule);
-void			append_redir(t_redirect *redir1, t_redirect *redir2);
-void			join_redirection(t_dlst *lex, t_state	*state, int rule);
+void			append_redir(t_redirect **redir1, t_redirect *redir2);
 
 #endif

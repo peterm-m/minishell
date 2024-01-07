@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:38:02 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/06 19:05:28 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:00:38 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	pop_elements(t_dlst **lex, t_dlst **state, int n)
 {
 	t_dlst	*tmp;
-	
+
 	while (n)
 	{
 		tmp = (*state)->next;

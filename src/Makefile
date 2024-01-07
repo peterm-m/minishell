@@ -11,10 +11,22 @@ SRCS        := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
-	parser/syntax/rules.c \
-	parser/syntax/tables.c \
+	\
 	parser/syntax/utils.c \
 	parser/syntax/syntax.c \
+	parser/syntax/rules1.c \
+	parser/syntax/rules2.c \
+	parser/syntax/rules3.c \
+	parser/syntax/tables.c \
+	\
+	parser/syntax/semantics/command.c \
+	parser/syntax/semantics/cmd_group.c \
+	parser/syntax/semantics/cmd_simple.c \
+	parser/syntax/semantics/cmd_subshell.c \
+	parser/syntax/semantics/element.c \
+	parser/syntax/semantics/redirections.c \
+	parser/syntax/semantics/cmd_conection.c \
+	\
 	subsystem/subsystem.c
 
 TEST      := test
@@ -27,12 +39,23 @@ SRCS_TEST := \
 	parser/lexer/get_tokens.c \
 	parser/lexer/tokenize_utils.c \
 	parser/lexer/lexer_utils.c \
-	parser/syntax/rules.c \
-	parser/syntax/tables.c \
+	\
 	parser/syntax/utils.c \
 	parser/syntax/syntax.c \
+	parser/syntax/rules1.c \
+	parser/syntax/rules2.c \
+	parser/syntax/rules3.c \
+	parser/syntax/tables.c \
+	\
+	parser/syntax/semantics/command.c \
+	parser/syntax/semantics/cmd_group.c \
+	parser/syntax/semantics/cmd_simple.c \
+	parser/syntax/semantics/cmd_subshell.c \
+	parser/syntax/semantics/element.c \
+	parser/syntax/semantics/redirections.c \
+	parser/syntax/semantics/cmd_conection.c \
+	\
 	subsystem/subsystem.c
-
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

@@ -46,19 +46,19 @@ CCFLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	$(info CREATED $(NAME))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(DIR_DUP)
-	$(CC) $(CCFLAGS) -c $< -o $@
+	@$(DIR_DUP)
+	@$(CC) $(CCFLAGS) -c $< -o $@
 	$(info CREATED $@)
 
 clean:
-	$(CLEANER) $(BUILD_DIR)
+	@$(CLEANER) $(BUILD_DIR)
 
 fclean: clean 
-	$(CLEANER) $(NAME)
+	@$(CLEANER) $(NAME)
 
 re:
 	$(MAKE) fclean

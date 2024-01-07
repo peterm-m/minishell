@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/06 20:01:15 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:36:27 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_dlstprint(void *data)
-{
-	printf("%d ", ((t_token *)data)->type);
-}
-
+//void	print_log(t_dlst **lex, t_state **state);
 
 static void	shift(t_dlst **lex, t_state **state, int action)
 {
@@ -27,11 +23,7 @@ static void	shift(t_dlst **lex, t_state **state, int action)
 	ft_dlstaddf(state, new);
 	*lex = (*lex)->next;
 	printf("shift to %d\n", action);
-	// printf("lex\t");
-	// ft_dlstiter(*lex, ft_dlstprint);
-	// printf("\nstate\t");
-	// ft_dlstiter(*state, ft_dlstprint);
-	// printf("\n");
+//	print_log(lex, state);
 	return ;
 }
 
@@ -41,29 +33,26 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 
 	id_rule = action - REDUCE0;
 	table_reduce(action - REDUCE0)(lex, state, id_rule);
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data), table_nt_generate(id_rule));
+	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data),
+			table_nt_generate(id_rule));
 	printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
-	// printf("lex\t");
-	// ft_dlstiter(*lex, ft_dlstprint);
-	// printf("\nstate\t");
-	// ft_dlstiter(*state, ft_dlstprint);
-	// printf("\n");
+//	print_log(lex, state);
 	return ;
 }
+
+// En caso de error implementar la limpieza
+// En caso de error implementar diagnostico
 
 static void	end_parser(t_dlst **lex, t_state **state, int action)
 {
 	(void )lex;
 	(void )state;
-
-	// En caso de error implementar la limpieza
-	// En caso de error implementar diagnostico
 	if (action == ACCEPT)
 		printf("END PARSER\n");
 	else
 		printf("Syntax Error.\n");
 	return ;
-};
+}
 
 void	syntax(t_dlst *lex)
 {
@@ -72,27 +61,38 @@ void	syntax(t_dlst *lex)
 
 	state = ft_dlstnew(malloc(sizeof(int)));
 	*((int *)state->data) = 0;
-	// printf("lex\t");
-	// ft_dlstiter(lex, ft_dlstprint);
-	// printf("\nstate\t");
-	// ft_dlstiter(state, ft_dlstprint);
-	// printf("\n");
+//	print_log(&lex, &state);
 	while (1)
 	{
-		action = table_action(*((int *)state->data), ((t_token *)(lex->data))->type);
-		if (action >= SHIFT0  && action <= SHIFT54)
+		action = table_action(*((int *)state->data),
+				((t_token *)(lex->data))->type);
+		if (action >= SHIFT0 && action <= SHIFT54)
 			shift(&lex, &state, action);
 		else if (action >= REDUCE0 && action <= REDUCE37)
 			reduce(&lex, &state, action);
-		else if (action == GRAMMAR_ERROR || action == UNDEFINED || action == ACCEPT)
+		else if (action == GRAMMAR_ERROR || action == UNDEFINED
+			|| action == ACCEPT)
 		{
 			end_parser(&lex, &state, action);
 			break ;
 		}
 	}
-	return ;
 }
 
+//void	ft_dlstprint(void *data)
+//{
+//	printf("%d ", ((t_token *)data)->type);
+//}
+//
+//void print_log(t_dlst **lex, t_state **state)
+//{
+//	printf("lex\t");
+//	ft_dlstiter(*lex, ft_dlstprint);
+//	printf("\nstate\t");
+//	ft_dlstiter(*state, ft_dlstprint);
+//	printf("\n");
+//}
+//
 //t_token	*gen_tok(t_terminals type)
 //{	
 //	t_token	*tok;
@@ -114,7 +114,6 @@ void	syntax(t_dlst *lex)
 //	syntax(lex);
 //	return (0);
 //}
-
 
 /*
 void	syntax(t_dlst *lex):
