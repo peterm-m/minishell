@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:51:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/07 19:55:28 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:36:32 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	rules_accept(t_dlst **lex, t_state **state, int rule)
 
 /*
 program          : and_or    (rule 1)
-                 | /empty/   (rule 2)      
+                 | /empty/   (rule 2)
 */
 
 void	rules_program(t_dlst **lex, t_state **state, int rule)

@@ -11,7 +11,7 @@ all: $(NAME)
 test: $(TEST)
 	@$(MAKE) -C $(SOURCE) test
 
-$(NAME):
+$(NAME): $(SOURCE)
 	@$(MAKE) -C $(SOURCE)
 	ln -s $(SOURCE)/$(NAME) $(NAME)
 
@@ -31,3 +31,4 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
+.PHONY: all

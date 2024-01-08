@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/07 19:54:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:37:25 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 //	return (NULL);
 //}
 //
-void	append_redir(t_redirect **redir1, t_redirect *redir2)
+void	join_redir(t_redirect **redir1, t_redirect *redir2)
 {
 	t_redirect	*tmp;
 

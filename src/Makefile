@@ -147,5 +147,4 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-.PHONY: clean fclean re
-
+.PHONY: all clean fclean re

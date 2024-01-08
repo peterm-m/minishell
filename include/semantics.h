@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/07 19:55:08 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:29:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ t_command		*make_command(t_command_type type, t_node value);
 void			clean_command(t_command *cmd);
 
 t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,int flag);
+void			join_redir(t_redirect **redir1, t_redirect *redir2);
 void			clean_redirection(t_redirect *redirection);
 
 t_command		*make_connection(t_command *cmd1, t_command *cmd2, int type);
@@ -149,6 +150,5 @@ void			clean_simple(t_simple_cmd *cmd);
 t_element		*make_element(t_dlst *lex, t_state	*state, int rule);
 
 void			set_redirection(t_dlst *lex, t_state *state, int rule);
-void			append_redir(t_redirect **redir1, t_redirect *redir2);
 
 #endif

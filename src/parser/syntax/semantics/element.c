@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:05:58 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/07 19:53:21 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:43:34 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@
 //}
 
 
-//WORD_LIST *
-//make_word_list (word, wlink)
-//     WORD_DESC *word;
-//     WORD_LIST *wlink;
-//{
-//  WORD_LIST *temp;
-//
-//  ocache_alloc (wlcache, WORD_LIST, temp);
-//
-//  temp->word = word;
-//  temp->next = wlink;
-//  return (temp);
-//}
-//
+t_word_list	*make_word_list(t_word	*word, t_word_list *w_list)
+{
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/05 15:01:57 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/08 20:01:44 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,23 @@ void tok_p(void *t)
 int	main(int argc, char const **argv, char const **envp)
 {
 	char	*read_line;
-	t_data data;
-
-	data.lexlist = NULL;
+	t_data	data;
+	
 	(void) argc;
 	(void) argv;
 	data.env = envp;
+	
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
 		//printf("%s", read_line);
 		if (ft_strncmp(read_line, "exit", 5) == 0)
 			break ;
+		if (read_line[0] == '\\')
+		{
+			char *buffer = readline("quote >$");
+			printf("buffer = %s\n", buffer);
+		}
 		/* ##########  PROPUESTA ##########
 
 		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
@@ -55,4 +60,3 @@ int	main(int argc, char const **argv, char const **envp)
 	ft_dlstclear(&data.lexlist, free_list);
 	return (0);
 }
-

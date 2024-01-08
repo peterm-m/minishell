@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/07 18:47:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:35:49 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ int	table_nt_generate(int rule_id)
 	return (nt_generate[rule_id]);
 }
 
-void	(*table_reduce(int rule_id))
-	(t_dlst **, t_state **, int )
+void	(*table_reduce(int rule_id))(t_dlst **, t_state **, int )
 {
 	static void	(*rules[NUM_RULES])(t_dlst **, t_state **, int) = {\
 		rules_accept, rules_program, rules_program,
