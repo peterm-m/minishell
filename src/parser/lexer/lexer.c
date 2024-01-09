@@ -12,10 +12,12 @@
 
 #include "minishell.h" 
 
-char *abc = " |'\"<>&";
-
+/*
+States table 
+	     \s,  |,  ',  <,  ",  >,  &,  *?, $?,  (?,  )?
+*/
 int	states(int i, int j)
-{	  // \s,  |,  ',  <,  ",  >,  &,  *?, $?,  (?,  )?
+{
 	static const int states[15][8]= \
 	{ 
 		{ 0, 11,  2, 11,  1, 11, 11, 14}, // 0 Empty input
@@ -38,6 +40,21 @@ int	states(int i, int j)
 	return (states[i][j]);
 }
 
+/**
+ * The function "in_abc" returns the index of a character 
+ * in a given string if it is found, otherwise it returns 
+ * the length of the string.
+ * 
+ * @param c The parameter "c" is a character that is being 
+ * checked against the characters in the string " |'<\">&". 
+ * The function "in_abc" returns the index of the character 
+ * in the string if it is found, or the length of the string 
+ * if it is not found.
+ * 
+ * @return the index of the character 'c' in the string " |'<\">&". 
+ * If the character is not found in the string, it will 
+ * return the length of the string.
+ */
 int in_abc(char c)
 {
 	int	i;
@@ -51,6 +68,15 @@ int in_abc(char c)
 	return (i);
 }
 
+/**
+ * The function evaluates the state of a given string 
+ * based on states table conditions.
+ * 
+ * @param str The parameter `str` is a pointer to a character 
+ * array (string) that represents the input state.
+ * 
+ * @return the value of the variable "state".
+ */
 int evaluate_state(char *str)
 {
 	int state;
@@ -65,6 +91,16 @@ int evaluate_state(char *str)
 	return (state);
 }
 
+/**
+ * The function "lexer" takes a string as input, evaluates its state, 
+ * and returns a tokenized doubly linked list if the input is valid.
+ * 
+ * @param read_line The input line to be tokenized.
+ * @param head The "head" parameter is a pointer to a doubly linked list (t_dlst). It is used to keep
+ * track of the head of the list, which is updated by the "tokenize" function.
+ * 
+ * @return The function `lexer` is returning a pointer to a `t_dlst` structure.
+ */
 t_dlst	*lexer(char *read_line, t_dlst **head)
 {
 	int state;

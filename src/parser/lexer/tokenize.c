@@ -1,4 +1,15 @@
 #include "minishell.h" 
+/**
+ * The function extracts an IO number from a string and adds 
+ * it as a token to a doubly linked list.
+ * 
+ * @param str A pointer to a character array (string) that contains the input.
+ * @param i The parameter `i` represents the current index in the string `str`. It is used to keep
+ * track of the position while parsing the string.
+ * @param head A double linked list pointer, which is a pointer to the head of the list.
+ * 
+ * @return the index position of the next character after the IO number in the string.
+ */
 int get_ionumber(char *str, int i, t_dlst **head)
 {
     int j;
@@ -20,6 +31,17 @@ int get_ionumber(char *str, int i, t_dlst **head)
 	return (i + j);
 }
 
+/**
+ * The function adds tokens to a doubly linked list based on 
+ * specific characters in a string.
+ * 
+ * @param str A pointer to a character array (string) that contains the input.
+ * @param i An integer that represents the current index position in the string
+ * `str`. It is used to iterate through the characters of the string.
+ * @param head A pointer to a pointer to a doubly linked list (t_dlst).
+ * 
+ * @return the updated value of the variable 'i'.
+ */
 int get_token(char *str, int i, t_dlst **head) // Pasar como argumento la lista de tokens
 {
     t_dlst  *new_token;
@@ -46,6 +68,17 @@ int get_token(char *str, int i, t_dlst **head) // Pasar como argumento la lista 
     return (i);
 }
 
+/**
+ * The function adds tokens to a doubly linked list based on specific characters in a
+ * string.
+ * 
+ * @param str A pointer to a character array (string) that contains the input.
+ * @param i An integer that represents the current index position in the string
+ * `str`. It is used to determine the position of the token in the string.
+ * @param head A pointer to a pointer to a doubly linked list (t_dlst).
+ * 
+ * @return the updated value of the variable 'i'.
+ */
 int get_token2(char *str, int i, t_dlst **head)
 {
     t_dlst  *new_token;
@@ -73,6 +106,18 @@ int get_token2(char *str, int i, t_dlst **head)
     return (i);
 }
 
+/**
+ * The function takes an input string, an index, and a doubly linked list head
+ * pointer, and returns the index of the next token in the input string.
+ * 
+ * @param input A pointer to a character array representing the input string.
+ * @param i The parameter `i` is an integer that represents the current 
+ * index position in the `input` string. It is used to keep track of 
+ * the progress while parsing the input string.
+ * @param head The `head` parameter is a pointer to a doubly linked list (`t_dlst`).
+ * 
+ * @return The function `get_next_token` returns an integer value.
+ */
 int get_next_token(char *input, int i, t_dlst **head)
 {
     while (is_blankspace(input[i]))
@@ -92,6 +137,16 @@ int get_next_token(char *input, int i, t_dlst **head)
     return (i);
 }
 
+/**
+ * The function takes an input string and creates a doubly linked list of tokens.
+ * 
+ * @param input A pointer to a character array representing the input string.
+ * @param head The "head" parameter is a pointer to a pointer to a doubly 
+ * linked list (t_dlst). It is used to keep track of the head of the list, 
+ * which is updated as new tokens are added to the list.
+ * 
+ * @return the pointer to the head of the doubly linked list.
+ */
 t_dlst *tokenize(char *input, t_dlst **head)
 {
     int             i;
