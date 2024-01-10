@@ -65,7 +65,7 @@ int get_string(char *str, int i, t_dlst **head)
         j++;
     }
     j++;
-    token = add_token(str, i, j, WORD);
+    token = add_token(str, i, j, tt_word);
     if (expand == 1)
     {
         type = get_dolar_type(str, i);
@@ -97,7 +97,7 @@ int get_word(char *str, int i, t_dlst **head)
     j = 0;
     while(!in_word(str[i + j]))
         j++;
-    if (!(token = add_token(str, i, j, WORD)))
+    if (!(token = add_token(str, i, j, tt_word)))
         return (-1);
     new_token = ft_dlstnew(token);
     ft_dlstaddb(head, new_token);
@@ -136,7 +136,7 @@ int get_dolar2(char *str, int i, t_dlst **head, int type)
         while (str[i + j] != '}')
             j++;
     }
-    if (!(token = add_token(str, i, j + 1, WORD)))
+    if (!(token = add_token(str, i, j + 1, tt_word)))
         return (-1);
     token->expand = type;
     new_token = ft_dlstnew(token);
@@ -177,7 +177,7 @@ int get_dolar(char *str, int i, t_dlst **head)
         while (!is_blankspace(str[i + j]))
             j++;
     }
-    if (!(token = add_token(str, i, j, WORD)))
+    if (!(token = add_token(str, i, j, tt_word)))
         return (-1);
     token->expand = PARAM_E;
     new_token = ft_dlstnew(token);

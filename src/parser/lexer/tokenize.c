@@ -23,7 +23,7 @@ int get_ionumber(char *str, int i, t_dlst **head)
 	if (str[i + j] == '>' || str[i + j] == '<')
 	{
 		j++;
-        if (!(token = add_token(str, i, j, IO_NUMBER)))
+        if (!(token = add_token(str, i, j, tt_io_number)))
             return (-1);		
 	}
     new_token = ft_dlstnew(token);
@@ -49,15 +49,15 @@ int get_token(char *str, int i, t_dlst **head) // Pasar como argumento la lista 
 
     token = NULL;
     if (str[i] == '|' && str[i + 1] != '|')
-        token = add_token(str, i, 1, PIPE);
+        token = add_token(str, i, 1, tt_pipe);
     else if (str[i] == '<' && str[i + 1] != '<')
-        token = add_token(str, i, 1, LESS);
+        token = add_token(str, i, 1, tt_less);
     else if (str[i] == '>' && str[i + 1] != '>')
-        token = add_token(str, i, 1, REDIR);
+        token = add_token(str, i, 1, tt_great);
     else if (str[i] == '(')
-        token = add_token(str, i, 1, L_BRAKET);
+        token = add_token(str, i, 1, tt_lbraket);
     else if (str[i] == '{')
-        token = add_token(str, i, 1, L_BRACE);
+        token = add_token(str, i, 1, tt_lbrace);
     else
         return(get_token2(str, i, head));
     if (token == NULL)
@@ -86,17 +86,17 @@ int get_token2(char *str, int i, t_dlst **head)
 
     token = NULL;
     if (str[i] == '|' && str[i + 1] == '|')
-        token = add_token(str, i, 2, OR);
+        token = add_token(str, i, 2, tt_or_if);
     else if (str[i] == '>' && str[i + 1] == '>')
-        token = add_token(str, i, 2, APPEND);
+        token = add_token(str, i, 2, tt_dgreat);
     else if (str[i] == '&' && str[i + 1] == '&')
-        token = add_token(str, i, 2, AND);   
+        token = add_token(str, i, 2,tt_and_if);   
     else if (str[i] == '<' && str[i + 1] == '<')
-        token = add_token(str, i, 2, HEREDOC);
+        token = add_token(str, i, 2, tt_dless);
     else if (str[i] == ')')
-        token = add_token(str, i, 1, R_BRAKET);
+        token = add_token(str, i, 1, tt_rbraket);
     else if (str[i] == '}')
-        token = add_token(str, i, 1, R_BRACE);
+        token = add_token(str, i, 1, tt_rbrace);
     new_token = ft_dlstnew(token);    
     ft_dlstaddb(head, new_token);
     if (str[i] == ')' || str[i] == '}')
@@ -150,6 +150,9 @@ int get_next_token(char *input, int i, t_dlst **head)
 t_dlst *tokenize(char *input, t_dlst **head)
 {
     int             i;
+    t_dlst  *last_token;
+    t_token *end;
+
     i = 0;
     while(input[i] != '\0')
     {
@@ -160,5 +163,8 @@ t_dlst *tokenize(char *input, t_dlst **head)
             return (NULL);
         }
     }
+    end = add_token("$", 0, 1, tt_end);
+    last_token = ft_dlstnew(end);    
+    ft_dlstaddb(head, last_token);
     return (*head);
 }

@@ -23,6 +23,13 @@ t_token	*init_token(void)
 	return (token);
 }
 
+void free_token(t_token *tok)
+{
+    if (tok->str)
+        free(tok->str);
+    free((void *)tok);
+}
+
 void free_list(void *head)
 {
 	free((t_token *)head);
