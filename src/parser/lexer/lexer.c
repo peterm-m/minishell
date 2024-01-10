@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/06 12:24:32 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/09 21:31:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,3 +117,18 @@ t_dlst	*lexer(char *read_line, t_dlst **head)
 	printf(BHGRN"Valid Input\n"END);
 	return (tokenize(read_line, head));
 }
+
+
+/*
+
+Cambiar numeracion de tokens por "typedef enum e_terminals"
+
+Añadir token $end
+
+flag wildcard y ? 
+
+funciones eliminar token
+
+
+
+*/
