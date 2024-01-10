@@ -3,6 +3,8 @@
 #include "common.h"
 
 # define GET_TOKS(str) tokenize(str)
+//t_dlst	*lexer(char *read_line, t_dlst **head)
+//void syntax(t_dlst *lex)
 
 t_test_out	compare_token(t_dlst *d, int type, int expand, char *str)
 {

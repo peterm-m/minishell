@@ -47,43 +47,11 @@
 # define BHWHT "\e[1;97m"
 # define END   "\e[0m"
 
-typedef enum identifier
-{
-    IO_NUMBER,
-    WORD,
-    PIPE,
-    OR,
-    AND,
-    LESS,
-    HEREDOC,
-    REDIR,
-    APPEND,
-    DOLAR,
-    L_BRAKET,
-    R_BRAKET,
-    L_BRACE,
-    R_BRACE, 
-}   type;
-
-typedef enum expand
-{
-    NONE,
-    PARAM_E, //${}, $word
-    COMMD_SUB, //$()
-}expand;
-
 typedef enum e_bool
 {
 	FALSE,
 	TRUE
 }	t_bool;
-
-typedef struct s_token 
-{
-    int     type;
-    int    expand;
-    char    *str;
-}   t_token;
 
 typedef struct s_data
 {

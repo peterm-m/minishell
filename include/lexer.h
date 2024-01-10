@@ -13,8 +13,27 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-typedef struct s_token t_token;
 typedef struct s_dlst t_dlst;
+
+#include "minishell.h"
+typedef struct s_token 
+{
+    char    *str;
+    int     type;
+    int     wildcard;
+    int     quest;
+    int     expand;
+}   t_token;
+
+typedef enum expand
+{
+    NONE,
+    PARAM_E, //${}, $word
+    COMMD_SUB, //$()
+    WILDCARD, // *
+    QUEST, // ?
+}   expand;
+
 
 // lexer.c
 
@@ -32,7 +51,9 @@ void	*ft_memalloc(size_t size);
 
 t_token *add_token(char *str, int i, int j, int type);
 t_token	*init_token(void);
+void free_token(t_token *tok);
 void free_list(void *head);
+void search_w_q(void *t);
 
 // get_tokens.c
 

@@ -141,9 +141,8 @@ int get_next_token(char *input, int i, t_dlst **head)
  * The function takes an input string and creates a doubly linked list of tokens.
  * 
  * @param input A pointer to a character array representing the input string.
- * @param head The "head" parameter is a pointer to a pointer to a doubly 
- * linked list (t_dlst). It is used to keep track of the head of the list, 
- * which is updated as new tokens are added to the list.
+ * @param head The first node of a doubly linked list. It is used to keep 
+ * track of the head of the list, which is updated as new tokens are added to the list.
  * 
  * @return the pointer to the head of the doubly linked list.
  */
@@ -166,5 +165,6 @@ t_dlst *tokenize(char *input, t_dlst **head)
     end = add_token("$", 0, 1, tt_end);
     last_token = ft_dlstnew(end);    
     ft_dlstaddb(head, last_token);
+    ft_dlstiter(*head, search_w_q);
     return (*head);
 }

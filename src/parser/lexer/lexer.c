@@ -114,21 +114,19 @@ t_dlst	*lexer(char *read_line, t_dlst **head)
 		printf(BHRED"Invalid Input\n"END);
 		return (NULL);
 	}
-	printf(BHGRN"Valid Input\n"END);
+	printf(BHGRN"Valid Input: Go to tokenizer:\n"END);
 	return (tokenize(read_line, head));
 }
 
 
 /*
 
-Cambiar numeracion de tokens por "typedef enum e_terminals"
+Cambiar numeracion de tokens por "typedef enum e_terminals" <>
 
-Añadir token $end
+Añadir token $end <>
 
 flag wildcard y ? 
 
-funciones eliminar token
-
-
+funciones eliminar token <>
 
 */
