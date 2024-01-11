@@ -47,7 +47,7 @@
 # define BHWHT "\e[1;97m"
 # define END   "\e[0m"
 
-typedef enum identifier
+/* typedef enum identifier
 {
     IO_NUMBER,
     WORD,
@@ -64,7 +64,7 @@ typedef enum identifier
     L_BRACE,
     R_BRACE, 
 }   type;
-
+ */
 typedef enum expand
 {
     NONE,

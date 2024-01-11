@@ -13,6 +13,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+# include "minishell.h"
+
 typedef struct s_token t_token;
 typedef struct s_dlst t_dlst;
 
