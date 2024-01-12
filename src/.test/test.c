@@ -78,8 +78,10 @@ void	test_double_quotes(void)
 {
 }
 
+
 TEST_LIST = {
 	{ "test EOF", test_eof},
 	{ "test identify tokens operator", test_basic_tokens_operator},
+	{ "test syntax", test_syntax},
 	{ NULL, NULL }
 };

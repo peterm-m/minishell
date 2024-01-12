@@ -11,4 +11,6 @@ typedef enum e_test_out
 	FAIL
 }	t_test_out;
 
+void	test_syntax(void);
+
 #define calc_time(cur_time) (((double)(clock() - cur_time))/CLOCKS_PER_SEC)

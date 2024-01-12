@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/17 13:57:16 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:25:28 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef struct s_dlst t_dlst;
 
 #include "minishell.h"
+
 typedef struct s_token 
 {
     char    *str;
