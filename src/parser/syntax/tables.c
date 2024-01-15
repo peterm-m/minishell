@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/08 19:35:49 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:41:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 	n >= 0  && n < 55 : shift to state n
 	n >= 55 && n < 93 : reduce state with rule n
 	n == 93           : accept
-	n == 94           : grammar error
+	n == 94           : grammar error (vacio)
 	n < 0             : error
 */
+
 
 int	table_action(int state, int token)
 {

@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:38:02 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/07 19:00:38 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:39:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	pop_elements(t_dlst **lex, t_dlst **state, int n)
 		tmp = (*lex)->prev;
 		tmp->prev->next = (*lex);
 		(*lex)->prev = tmp->prev;
+		free_token(tmp->data);
 		ft_dlstdelone(tmp, free);
 		n--;
 	}
