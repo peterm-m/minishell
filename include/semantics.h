@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/12 20:19:14 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:41:13 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ typedef struct s_word
 	int		flags;
 }	t_word;
 
+// TODO: word es tipo palabra temporalmente tippo char *
 typedef struct s_word_list
 {
-	t_word			*word;
+	char				*word;
 	struct s_word_list	*next;
 } t_word_list;
 
@@ -45,10 +46,11 @@ typedef enum e_redir_option
 }	t_redir_option;
 
 /* filename or file descriptor */
+// TODO: filename debe ser t_word; dest un int
 typedef union u_unit_io
 {
-	int			dest;
-	t_word		*filename;
+	char		*dest;
+	char		*filename;
 }	t_unit_io;
 
 /* Structure describing a redirection. */
@@ -125,7 +127,7 @@ typedef struct s_group_cmd
 typedef struct s_subshell_cmd
 {
 	int			flags;
-  	t_command	*command;
+	t_command	*command;
 } t_subshell_cmd;
 
 t_command		*make_command(t_command_type type, t_node value);
@@ -147,10 +149,12 @@ void			clean_subshell(t_subshell_cmd *subshell);
 t_command		*make_simple(t_command *cmd, t_element *element);
 void			clean_simple(t_simple_cmd *cmd);
 
-t_element		*make_element(t_dlst *lex, t_state	*state, int rule);
+t_element		*make_element(t_dlst *lex, t_state *state, int rule);
 
 void			set_redirection(t_dlst *lex, t_state *state, int rule);
 
-t_word_list	*make_word_list(t_word	*word, t_word_list *w_list);
+//t_word_list	*make_word_list(t_word	*word, t_word_list *w_list);
+t_word_list		*make_word(char *word);
+void			join_word(t_word_list **list, char *word);
 
 #endif
