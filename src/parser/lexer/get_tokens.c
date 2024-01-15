@@ -96,7 +96,10 @@ int get_word(char *str, int i, t_dlst **head)
 
     j = 0;
     while(!in_word(str[i + j]))
+    {
+        if (str[i + j])
         j++;
+    }
     if (!(token = add_token(str, i, j, tt_word)))
         return (-1);
     new_token = ft_dlstnew(token);
@@ -106,11 +109,11 @@ int get_word(char *str, int i, t_dlst **head)
 }
 
 /**
- * The function `get_dolar2` parses a string and adds a token to a doubly linked list based on the type
+ * The function parses a string and adds a token to a doubly linked list based on the type
  * of expansion specified by the characters following a '$' symbol.
  * 
  * @param str A pointer to a character array (string) that contains the input.
- * @param i The parameter `i` is the index of the current character in the string `str`.
+ * @param i The index of the current character in the string `str`.
  * @param head A pointer to a pointer to a doubly linked list (t_dlst).
  * @param type The "type" parameter is an integer that represents the type of expansion being
  * performed. It can have one of the following values:

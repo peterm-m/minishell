@@ -19,9 +19,11 @@ void tok_p(void *t)
 {
 	if (((t_token *)t) != NULL)
 		printf(BHYEL"\nToken: "BHBLU"%s\n"
-		BHYEL"Token type:         "BHWHT"%d\n"
-		BHYEL"Expand(True/False): "BHRED"%d\n\n"END, 
-		((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->expand);
+		BHYEL"Token type:    "BHWHT"%d\n"
+		BHYEL"wildcard(0/3): "BHCYN"%d\n"
+		BHYEL"quest (0/4):   "BHMAG"%d\n"
+		BHYEL"Expand(0/1/2): "BHRED"%d\n\n"END, 
+		((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->wildcard, ((t_token *)t)->quest, ((t_token *)t)->expand);
 }
 
 int	main(int argc, char const **argv, char const **envp)
@@ -44,18 +46,19 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
+		ft_dlstnew(data.lexlist);
+		data.lexlist = lexer(read_line, &data.lexlist);
+		ft_dlstiter(data.lexlist, tok_p);
+		
 		/* ##########  PROPUESTA ##########
-
 		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
 			printf("LEXICAL ERROR!");
 
 		tree = syntax(lex); // parte sintactica
 		if (sintax_cheker(lex))
 			printf("LEXICAL ERROR!");
+			echo "hola?" | cat minish* && echo "$(COMMD_SUB)" || echo "${PARAM_E}"
 		*/
-		ft_dlstnew(data.lexlist);
-		data.lexlist = lexer(read_line, &data.lexlist);
-		ft_dlstiter(data.lexlist, tok_p);
 	}
 	ft_dlstclear(&data.lexlist, free_list);
 	return (0);

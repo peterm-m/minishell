@@ -35,3 +35,20 @@ void free_list(void *head)
 	free((t_token *)head);
 }
 
+void search_w_q(void *t)
+{
+    if (((t_token *)t) != NULL)
+    {
+        printf("str: %s\n", ((t_token *)t)->str);
+        if (ft_strchr(((t_token *)t)->str, '*') != 0)
+            ((t_token *)t)->wildcard = WILDCARD;
+        else if (ft_strchr(((t_token *)t)->str, '?') != 0)
+            ((t_token *)t)->quest = QUEST;
+        else
+        {
+            ((t_token *)t)->wildcard = NONE;
+            ((t_token *)t)->quest = NONE;
+        }
+    }
+}
+

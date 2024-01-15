@@ -26,6 +26,6 @@
 //}
 
 
-t_word_list	*make_word_list(t_word	*word, t_word_list *w_list)
+/* t_word_list	*make_word_list(t_word	*word, t_word_list *w_list)
 {
-}
+} */

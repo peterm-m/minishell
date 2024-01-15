@@ -93,27 +93,28 @@ void	syntax(t_dlst *lex)
 //	printf("\n");
 //}
 //
-//t_token	*gen_tok(t_terminals type)
-//{	
-//	t_token	*tok;
-//	tok = (t_token *)malloc(sizeof(t_token));
-//	tok->type = type;
-//	return (tok);	
-//}
+/* t_token	*gen_tok(t_terminals type)
+{	
+	t_token	*tok;
+	tok = (t_token *)malloc(sizeof(t_token));
+	tok->type = type;
+	return (tok);	
+} */
 //
 //
 //
-//int main()
-//{
-//	t_dlst	*lex;
-//
-//	lex = ft_dlstnew(gen_tok(tt_word));
-//	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_pipe)));
-//	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_word)));
-//	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_end)));
-//	syntax(lex);
-//	return (0);
-//}
+/* int main()
+{
+	t_dlst	*lex;
+
+	lex = ft_dlstnew(gen_tok(tt_word));
+	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_pipe)));
+	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_word)));
+	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_end)));
+	syntax(lex);
+	printf("lex: %p", lex->data);
+	return (0);
+} */
 
 /*
 void	syntax(t_dlst *lex):
