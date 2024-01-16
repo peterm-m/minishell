@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/08 20:39:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:02:57 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 void	clean_command(t_command *cmd)
 {
-	t_node	value;
+	t_command_type	type;
+	t_node			value;
 
 	value = cmd->value;
+	type = cmd->type;
 	free(cmd);
-	if (cmd->type == cmd_simple)
+	if (type == cmd_simple)
 		clean_simple(value.simple);
-	else if (cmd->type == cmd_connection)
+	else if (type == cmd_connection)
 		clean_connection(value.connection);
-	else if (cmd->type == cmd_subshell)
+	else if (type == cmd_subshell)
 		clean_subshell(value.subshell);
-	else if (cmd->type == cmd_group)
+	else if (type == cmd_group)
 		clean_group(value.group);
 	else
 		return ;

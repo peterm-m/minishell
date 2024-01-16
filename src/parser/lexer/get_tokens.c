@@ -42,21 +42,17 @@ int get_dolar_type(char *str, int i)
  * 
  * @return The index position of the next character after this quoted token.
  */
-int	get_string(char *str, int i, t_dlst **head)
+int	get_string(char *str, int i, t_token *token)
 {
 	int		j;
-	int		expand;
-	t_token	*token;
 
 	j = 1;
-	expand = tt_word;
+	token->flag = tt_word;
 	while (!is_quotes(str[i + j]))
 	{
 		if (str[i + j++] == '$')
-			expand |= get_dolar_type(str, i);
+			token->flag |= get_dolar_type(str, i);
 	}
-	token = add_token(str, i, ++j, expand);
-	ft_dlstaddb(head, ft_dlstnew(token));
 	return (i + j);
 }
 
@@ -72,17 +68,16 @@ int	get_string(char *str, int i, t_dlst **head)
  * 
  * @return The index position of the next character after this token.
  */
-int get_word(char *str, int i, t_dlst **head)
+int get_word(char *str, int i, t_token *token)
 {
 	int		j;
-	t_token *token;
 
 	j = 0;
 	while(!in_word(str[i + j]) && str[i + j])
 		j++;
-	if (!(token = add_token(str, i, j, tt_word)))
-		return (-1);
-	ft_dlstaddb(head, ft_dlstnew(token));
+	set_token(str, i, j, tt_word, token);
+	if (token->flag == LEX_ERROR)
+		return (LEX_ERROR);
 	return (i + j);
 }
 
@@ -98,29 +93,27 @@ int get_word(char *str, int i, t_dlst **head)
  * 
  * @return The index position of the next character after the token.`.
  */
-int get_dolar2(char *str, int i, t_dlst **head)
+int get_dolar2(char *str, int i, t_token *token)
 {
 	int		j;
-	int		type;
-	t_token *token;
 
 	j = 2;
-	type = 0;
+	token->flag = tt_word;
 	if (str[i] == '$' && str[i + 1] == '(')
 	{
-		type = COMMD_SUB;
+		token->flag |= COMMD_SUB;
 		while (str[i + j] != ')')
 			j++;
 	}
 	else if (str[i] == '$' && str[i + 1] == '{')
 	{
-		type = PARAM_E;
+		token->flag |= PARAM_E;
 		while (str[i + j] != '}')
 			j++;
 	}
-	if (!(token = add_token(str, i, j + 1, type|tt_word)))
-		return (-1);
-	ft_dlstaddb(head, ft_dlstnew(token));
+	set_token(str, i, j + 1, token->flag, token);
+	if (token->flag == LEX_ERROR)
+		return (LEX_ERROR);
 	return (i + j + 1);
 }
 
@@ -137,22 +130,21 @@ int get_dolar2(char *str, int i, t_dlst **head)
  * 
  * @return the index position of the next character in the string after processing it.
  */
-int get_dolar(char *str, int i, t_dlst **head)
+int get_dolar(char *str, int i, t_token *token)
 {
 	int j;
-	t_token *token;
 
 	j = 1;
 	if (str[i + j] == '(' || str[i + j] == '{')
-		return(get_dolar2(str, i, head));
+		return(get_dolar2(str, i, token));
 	else
 	{
 		while (!is_blankspace(str[i + j]) && str[i + j])
 			j++;
 	}
-	if (!(token = add_token(str, i, j, PARAM_E|tt_word)))
-		return (-1);
-	ft_dlstaddb(head, ft_dlstnew(token));
+	set_token(str, i, j, PARAM_E|tt_word, token);
+	if (token->flag == LEX_ERROR)
+		return (LEX_ERROR);
 	return (i + j + 1);
 }
 //"$hola" "g{$hh}" "$(ggg)" $fff $(hhh) ${jjj} 

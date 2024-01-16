@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/16 21:27:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:55:28 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	syntax(t_dlst *lex)
 	while (1)
 	{
 		action = table_action(*((int *)state->data),
-				((t_token *)(lex->data))->type);
+				((t_token *)(lex->data))->flag & TOK_TYPE);
 		if (action >= SHIFT0 && action <= SHIFT54)
 			shift(&lex, &state, action);
 		else if (action >= REDUCE0 && action <= REDUCE37)
@@ -81,7 +81,7 @@ void	syntax(t_dlst *lex)
 
 //void	ft_dlstprint(void *data)
 //{
-//	printf("%d ", ((t_token *)data)->type);
+//	printf("%d ", ((t_token *)data)->flag & TOK_TYPE);
 //}
 //
 //void print_log(t_dlst **lex, t_state **state)
