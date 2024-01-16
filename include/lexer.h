@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/16 21:26:18 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:53:55 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef enum e_terminals
 	tt_end
 }	t_terminals;
 
+# define TOK_TYPE 15
+
+# define LEX_ERROR -1
 # define PARAM_E 16
 # define COMMD_SUB 32
 # define WILDCARD 64
@@ -64,32 +67,32 @@ t_dlst	*lexer(char *read_line, t_dlst **head);
 
 // lexer_utils.c
 
-int is_token(int c);
+int is_operator(int c);
 int	is_blankspace(char c);
 int is_quotes(char c);
 int	in_word(char c);
 
 // tokenize_utils.c
-
-t_token *add_token(char *str, int i, int j, int type);
+t_token *new_token(void);
+void	set_token(char *str, int i, int j, int type, t_token *token);
 t_token	*init_token(void);
-void free_token(t_token *tok);
+void free_token(t_token *token);
 void search_w_q(void *t);
 
 // get_tokens.c
 
-int get_word(char *str, int i, t_dlst **head);
-int get_string(char *str, int i, t_dlst **head);
+int get_word(char *str, int i, t_token *token);
+int	get_string(char *str, int i, t_token *token);
 int get_dolar_type(char *str, int i);
-int get_dolar(char *str, int i, t_dlst **head);
-int get_dolar2(char *str, int i, t_dlst **head);
+int get_dolar(char *str, int i, t_token *token);
+int get_dolar2(char *str, int i, t_token *token);
 
 // tokenize.c
 
 t_dlst *tokenize(char *input, t_dlst **head);
-int get_token(char *str, int i, t_dlst **head);
-int get_token2(char *str, int i, t_dlst **head);
-int get_next_token(char *input, int i, t_dlst **head);
-int get_ionumber(char *str, int i, t_dlst **head);
+int get_token(char *str, int i, t_token *token);
+int get_token2(char *str, int i, t_token *token);
+int get_next_token(char *input, int i, t_token *token);
+int get_ionumber(char *str, int i, t_token *token);
 
 #endif
