@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/08 20:01:44 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:22:55 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ void tok_p(void *t)
 {
 	if (((t_token *)t) != NULL)
 		printf(BHYEL"\nToken: "BHBLU"%s\n"
-		BHYEL"Token type:    "BHWHT"%d\n"
-		BHYEL"wildcard(0/3): "BHCYN"%d\n"
-		BHYEL"quest (0/4):   "BHMAG"%d\n"
-		BHYEL"Expand(0/1/2): "BHRED"%d\n\n"END, 
-		((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->wildcard, ((t_token *)t)->quest, ((t_token *)t)->expand);
+		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+		((t_token *)t)->str, ((t_token *)t)->flag);
 }
 
 int	main(int argc, char const **argv, char const **envp)
@@ -60,6 +57,6 @@ int	main(int argc, char const **argv, char const **envp)
 			echo "hola?" | cat minish* && echo "$(COMMD_SUB)" || echo "${PARAM_E}"
 		*/
 	}
-	ft_dlstclear(&data.lexlist, free_list);
+	ft_dlstclear(&data.lexlist, ft_free);
 	return (0);
 }
