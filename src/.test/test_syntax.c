@@ -880,4 +880,108 @@ void	test_syntax(void)
 	TEST_CHECK(table_action(52, tt_end) + 32 == 121);
 	TEST_CHECK(table_action(53, tt_end) + 32 == 122);
 	TEST_CHECK(table_action(54, tt_end) + 32 == 124);
+
+// GO_TO table
+
+	//ok
+
+	TEST_CHECK(table_goto(0, nt_accept) == 1);
+
+	//program
+
+	TEST_CHECK(table_goto(0, nt_program) == 2);
+
+	//and_or
+
+	TEST_CHECK(table_goto(0, nt_and_or) == 3);
+	TEST_CHECK(table_goto(14, nt_and_or) == 32);
+	TEST_CHECK(table_goto(15, nt_and_or) == 33);
+
+	//pipeline
+
+	TEST_CHECK(table_goto(0, nt_pipeline) == 4);
+	TEST_CHECK(table_goto(14, nt_pipeline) == 4);
+	TEST_CHECK(table_goto(15, nt_pipeline) == 4);
+	TEST_CHECK(table_goto(21, nt_pipeline) == 42);
+	TEST_CHECK(table_goto(22, nt_pipeline) == 43);
+
+	//command
+
+	TEST_CHECK(table_goto(0, nt_command) == 5);
+	TEST_CHECK(table_goto(14, nt_command) == 5);
+	TEST_CHECK(table_goto(15, nt_command) == 5);
+	TEST_CHECK(table_goto(21, nt_command) == 5);
+	TEST_CHECK(table_goto(22, nt_command) == 5);
+	TEST_CHECK(table_goto(23, nt_command) == 44);
+
+	//simple_command
+
+	TEST_CHECK(table_goto(0, nt_simple_command) == 6);
+	TEST_CHECK(table_goto(14, nt_simple_command) == 6);
+	TEST_CHECK(table_goto(15, nt_simple_command) == 6);
+	TEST_CHECK(table_goto(21, nt_simple_command) == 6);
+	TEST_CHECK(table_goto(22, nt_simple_command) == 6);
+	TEST_CHECK(table_goto(23, nt_simple_command) == 6);
+
+	//compound_command
+
+	TEST_CHECK(table_goto(0, nt_compound_command) == 7);
+	TEST_CHECK(table_goto(14, nt_compound_command) == 7);
+	TEST_CHECK(table_goto(15, nt_compound_command) == 7);
+	TEST_CHECK(table_goto(21, nt_compound_command) == 7);
+	TEST_CHECK(table_goto(22, nt_compound_command) == 7);
+	TEST_CHECK(table_goto(23, nt_compound_command) == 7);
+
+	//redirect_list
+
+	TEST_CHECK(table_goto(7, nt_redirect_list) == 24);
+
+	//brace_group
+
+	TEST_CHECK(table_goto(0, nt_brace_group) == 10);
+	TEST_CHECK(table_goto(14, nt_brace_group) == 10);
+	TEST_CHECK(table_goto(15, nt_brace_group) == 10);
+	TEST_CHECK(table_goto(21, nt_brace_group) == 10);
+	TEST_CHECK(table_goto(22, nt_brace_group) == 10);
+	TEST_CHECK(table_goto(23, nt_brace_group) == 10);
+
+	//subshell
+
+	TEST_CHECK(table_goto(0, nt_subshell) == 11);
+	TEST_CHECK(table_goto(14, nt_subshell) == 11);
+	TEST_CHECK(table_goto(15, nt_subshell) == 11);
+	TEST_CHECK(table_goto(21, nt_subshell) == 11);
+	TEST_CHECK(table_goto(22, nt_subshell) == 11);
+	TEST_CHECK(table_goto(23, nt_subshell) == 11);
+
+	//cmd_prefix
+
+	TEST_CHECK(table_goto(0, nt_cmd_prefix) == 8);
+	TEST_CHECK(table_goto(14, nt_cmd_prefix) == 8);
+	TEST_CHECK(table_goto(15, nt_cmd_prefix) == 8);
+	TEST_CHECK(table_goto(21, nt_cmd_prefix) == 8);
+	TEST_CHECK(table_goto(22, nt_cmd_prefix) == 8);
+	TEST_CHECK(table_goto(23, nt_cmd_prefix) == 8);
+
+	//cmd_sufix
+
+	TEST_CHECK(table_goto(9, nt_cmd_suffix) == 29);
+	TEST_CHECK(table_goto(26, nt_cmd_suffix) == 46);
+
+	//io_redirect
+
+	TEST_CHECK(table_goto(0, nt_io_redirect) == 12);
+	TEST_CHECK(table_goto(7, nt_io_redirect) == 25);
+	TEST_CHECK(table_goto(8, nt_io_redirect) == 27);
+	TEST_CHECK(table_goto(9, nt_io_redirect) == 30);
+	TEST_CHECK(table_goto(14, nt_io_redirect) == 12);
+	TEST_CHECK(table_goto(15, nt_io_redirect) == 12);
+	TEST_CHECK(table_goto(21, nt_io_redirect) == 12);
+	TEST_CHECK(table_goto(22, nt_io_redirect) == 12);
+	TEST_CHECK(table_goto(23, nt_io_redirect) == 12);
+	TEST_CHECK(table_goto(24, nt_io_redirect) == 45);	
+	TEST_CHECK(table_goto(26, nt_io_redirect) == 30);
+	TEST_CHECK(table_goto(29, nt_io_redirect) == 47);
+	TEST_CHECK(table_goto(46, nt_io_redirect) == 47);
+
 } 
