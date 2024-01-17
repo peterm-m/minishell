@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/09 21:31:03 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:04:14 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,7 @@ int evaluate_state(char *str)
 t_dlst	*lexer(char *read_line, t_dlst **head)
 {
 	int state;
-    //t_dlst          *head;
 
-	//head = NULL;
 	state = evaluate_state(read_line);
 	printf ("estado: %i\n", state);
 	if (state != 14 && state != 12)

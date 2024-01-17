@@ -1,53 +1,42 @@
 #include "minishell.h" 
 
-t_token *add_token(char *str, int i, int j, int type)
+t_token *new_token(void)
 {
 	t_token *token;
 
-    token = NULL;
-	if (!(token = init_token()))
-        return (0); // ? volver a sacar linea
-    if (!(token->str = ft_substr(str, i, j)))
-        return (NULL);
-    token->type = type;
-    token->expand = FALSE;
-    return (token);
+	token = ft_malloc(sizeof(t_token));
+	token->str = NULL;
+	token->flag = 0;
+	return (token);
 }
 
-t_token	*init_token(void)
+void	set_token(char *str, int i, int j, int type, t_token *token)
 {
-	t_token *token;
-    
-	if (!(token = (t_token *)ft_memalloc(sizeof(t_token))))
-		return (NULL);
-	return (token);
+	if (!(token->str = ft_substr(str, i, j)))
+		token->flag = LEX_ERROR;
+	else
+		token->flag = type;
 }
 
 void free_token(t_token *tok)
 {
-    if (tok->str)
-        free(tok->str);
-    free((void *)tok);
-}
-
-void free_list(void *head)
-{
-	free((t_token *)head);
+	if (tok->str)
+		free(tok->str);
+	free((void *)tok);
 }
 
 void search_w_q(void *t)
 {
-    if (((t_token *)t) != NULL)
-    {
-        if (ft_strchr(((t_token *)t)->str, '*') != 0)
-            ((t_token *)t)->wildcard = WILDCARD;
-        else if (ft_strchr(((t_token *)t)->str, '?') != 0)
-            ((t_token *)t)->quest = QUEST;
-        else
-        {
-            ((t_token *)t)->wildcard = NONE;
-            ((t_token *)t)->quest = NONE;
-        }
-    }
+	t_token	*token;
+
+	token = (t_token *) t;
+	if (token != NULL)
+	{
+		printf("str: %s\n", token->str);
+		if (ft_strchr(token->str, '*') != 0)
+			token->flag |= WILDCARD;
+		else if (ft_strchr(token->str, '?') != 0)
+			token->flag |= QUEST;
+	}
 }
 

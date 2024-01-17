@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/07 18:57:40 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:38:25 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,6 @@
 
 // Parser state
 typedef t_dlst	t_state;
-
-// Terminals /////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TO DO: tt_end AÑADIR AL FINAL DE LEX
-
-typedef enum e_terminals
-{
-	tt_and_if,
-	tt_or_if,
-	tt_pipe,
-	tt_lbrace,
-	tt_rbrace,
-	tt_lbraket,
-	tt_rbraket,
-	tt_word,
-	tt_assignment_word,
-	tt_less,
-	tt_great,
-	tt_dgreat,
-	tt_io_number,
-	tt_dless,
-	tt_end
-}	t_terminals;
 
 // Non terminals
 typedef enum e_non_terminal
