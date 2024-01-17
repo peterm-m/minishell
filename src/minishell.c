@@ -22,7 +22,7 @@ void tok_p(void *t)
 		BHYEL"Token type:    "BHWHT"%d\n"
 		BHYEL"wildcard(0/3): "BHCYN"%d\n"
 		BHYEL"quest (0/4):   "BHMAG"%d\n"
-		BHYEL"Expand(0/1/2): "BHRED"%d\n\n"END, 
+		BHYEL"Expand(0/1/2): "BHRED"%d\n\n"END,
 		((t_token *)t)->str, ((t_token *)t)->type, ((t_token *)t)->wildcard, ((t_token *)t)->quest, ((t_token *)t)->expand);
 }
 
@@ -49,7 +49,7 @@ int	main(int argc, char const **argv, char const **envp)
 		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
 		ft_dlstiter(data.lexlist, tok_p);
-		
+		expander(&data, read_line);
 		/* ##########  PROPUESTA ##########
 		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
 			printf("LEXICAL ERROR!");

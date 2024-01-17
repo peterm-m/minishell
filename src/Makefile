@@ -6,6 +6,7 @@ OBJ_DIR     := .build
 SRCS        := \
 	minishell.c \
 	executer/executer.c \
+	executer/expander.c \
 	parser/lexer/lexer.c \
 	parser/lexer/tokenize.c \
 	parser/lexer/get_tokens.c \
@@ -34,6 +35,7 @@ TEST      := test
 SRCS_TEST := \
 	.test/test.c \
 	executer/executer.c \
+	executer/expander.c \
 	parser/lexer/lexer.c \
 	parser/lexer/tokenize.c \
 	parser/lexer/get_tokens.c \

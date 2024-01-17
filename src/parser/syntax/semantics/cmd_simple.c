@@ -51,8 +51,8 @@ t_command	*make_simple(t_command *cmd, t_element *element)
 
 	if (cmd == NULL)
 		cmd = make_simple_empty();
-	if (element->word)
-		(cmd->value).simple->words = make_word_list(element->word, cmd->value.simple->words);
+	//if (element->word)
+		//(cmd->value).simple->words = make_word_list(element->word, cmd->value.simple->words);
 	else if (element->redirect)
 	{
 		redirection = element->redirect;
