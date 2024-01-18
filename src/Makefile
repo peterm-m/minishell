@@ -3,8 +3,18 @@ NAME        := minishell
 SRC_DIR     := .
 OBJ_DIR     := .build
 
+SRC_MAIN := minishell.c \
+
+SRC_MAIN := $(SRC_MAIN:%=$(SRC_DIR)/%)
+OBJS_MAIN := $(SRC_MAIN:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+SRC_TEST := .test/test.c \
+	.test/test_syntax.c \
+
+SRC_TEST := $(SRC_TEST:%=$(SRC_DIR)/%)
+OBJS_TEST := $(SRC_TEST:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 SRCS        := \
-	minishell.c \
 	executer/executer.c \
 	executer/expander.c \
 	parser/lexer/lexer.c \
@@ -32,38 +42,8 @@ SRCS        := \
 
 TEST      := test
 
-SRCS_TEST := \
-	.test/test.c \
-	executer/executer.c \
-	executer/expander.c \
-	parser/lexer/lexer.c \
-	parser/lexer/tokenize.c \
-	parser/lexer/get_tokens.c \
-	parser/lexer/tokenize_utils.c \
-	parser/lexer/lexer_utils.c \
-	\
-	parser/syntax/utils.c \
-	parser/syntax/syntax.c \
-	parser/syntax/rules1.c \
-	parser/syntax/rules2.c \
-	parser/syntax/rules3.c \
-	parser/syntax/tables.c \
-	\
-	parser/syntax/semantics/command.c \
-	parser/syntax/semantics/cmd_group.c \
-	parser/syntax/semantics/cmd_simple.c \
-	parser/syntax/semantics/cmd_subshell.c \
-	parser/syntax/semantics/element.c \
-	parser/syntax/semantics/redirections.c \
-	parser/syntax/semantics/cmd_conection.c \
-	\
-	subsystem/subsystem.c
-
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
-SRCS_TEST   := $(SRCS_TEST:%=$(SRC_DIR)/%)
-OBJS_TEST   := $(SRCS_TEST:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC          := gcc
 CFLAGS      := -Wall -Wextra -Werror -g 
@@ -75,6 +55,12 @@ DIR_DUP     = mkdir -p $(@D)
 EXTERN_LIB := -lreadline
 
 INTERN_LIB_DIR := ./utils
+
+DBG := $(INTERN_LIB_DIR)/debug
+RULE_DBG := $(DBG)/libdbg.a
+I_DBG := -I$(DBG)
+L_DBG := -L$(DBG)
+LIB_DBG := -ldbg
 
 FT := $(INTERN_LIB_DIR)/libft
 RULE_FT := $(FT)/libft.a
@@ -100,21 +86,32 @@ LFLAGS    := $(L_DLIST) $(L_WRAP) $(L_FT)
 
 LIBS := $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP) $(LIB_FT)
 
+all: $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_MAIN)
+all: OBJS+=$(OBJS_MAIN)
 all: $(NAME)
 
-test: $(TEST)
+test: fclean
+test: $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_TEST)
+test: OBJS+=$(OBJS_TEST)
+test: $(NAME)
 
-$(NAME): $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS)
+debug: fclean
+debug: CFLAGS+=-DDEBUG
+debug: INCLUDES+=$(I_DBG)
+debug: LFLAGS+=$(L_DBG)
+debug: LIBS+=$(LIB_DBG)
+debug: $(RULE_DBG) $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_MAIN)
+debug: OBJS+=$(OBJS_MAIN)
+debug: $(NAME)
+
+
+$(NAME):
 	@$(CC)  $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
 	@$(info CREATED $(NAME))
 
-$(TEST): $(RULE_DLIST) $(RULE_WRAP) $(OBJS_TEST)
-	@$(CC) $(LFLAGS) $(LIBS) $(INCLUDES) $(OBJS_TEST) -o $(TEST)
-	@$(info CREATED $(TEST))
-
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 	@$(info CREATED $@)
 
 $(RULE_WRAP):
@@ -126,27 +123,32 @@ $(RULE_DLIST):
 $(RULE_FT):
 	@$(MAKE) -C $(FT)
 
-run: $(TEST)
-	./$(TEST)
+$(RULE_DBG):
+	@$(MAKE) -C $(DBG)
 
-mem_test: $(TEST)
-	valgrind valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./$(TEST)
+run: test
+	./test
+
+mem_test: test
+	valgrind valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./test
 
 clean:
 	@$(MAKE) -C $(FT) clean
 	@$(MAKE) -C $(DLIST) clean
 	@$(MAKE) -C $(WRAP) clean
+	@$(MAKE) -C $(DBG) clean
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@$(MAKE) -C $(FT) fclean
 	@$(MAKE) -C $(DLIST) fclean
 	@$(MAKE) -C $(WRAP) fclean
-	@$(RM) $(TEST)
+	@$(MAKE) -C $(DBG) fclean
+	@$(RM) test
 	@$(RM) $(NAME)
 
 re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-.PHONY: all clean fclean re mem_test run test
+.PHONY: all clean fclean re mem_test run test debug

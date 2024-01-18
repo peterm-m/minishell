@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/16 21:22:55 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:41:41 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 // #include <stdio.h>
 // #include <stdlib.h>
 
-void tok_p(void *t)
-{
-	if (((t_token *)t) != NULL)
-		printf(BHYEL"\nToken: "BHBLU"%s\n"
-		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
-		((t_token *)t)->str, ((t_token *)t)->flag);
-}
+// void tok_p(void *t)
+// {
+// 	if (((t_token *)t) != NULL)
+// 		printf(BHYEL"\nToken: "BHBLU"%s\n"
+// 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+// 		((t_token *)t)->str, ((t_token *)t)->flag);
+// }
 
 int	main(int argc, char const **argv, char const **envp)
 {
@@ -31,7 +31,6 @@ int	main(int argc, char const **argv, char const **envp)
 	(void) argc;
 	(void) argv;
 	data.env = envp;
-	
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
@@ -45,7 +44,7 @@ int	main(int argc, char const **argv, char const **envp)
 		}
 		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
-		ft_dlstiter(data.lexlist, tok_p);
+		//ft_dlstiter(data.lexlist, tok_p);
 		expander(&data, read_line);
 		/* ##########  PROPUESTA ##########
 		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.

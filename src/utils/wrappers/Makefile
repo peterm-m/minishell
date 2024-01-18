@@ -41,9 +41,12 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra 
+CCFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
+
+debug: CCFLAGS += -DDEBUG
+debug: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
