@@ -1,4 +1,5 @@
 NAME        := minishell
+NAME_DBG    := minishell_dbg
 
 SRC_DIR     := .
 OBJ_DIR     := .build
@@ -56,12 +57,6 @@ EXTERN_LIB := -lreadline
 
 INTERN_LIB_DIR := ./utils
 
-#DBG := $(INTERN_LIB_DIR)/debug
-#RULE_DBG := $(DBG)/libdbg.a
-#I_DBG := -I$(DBG)
-#L_DBG := -L$(DBG)
-#LIB_DBG := -ldbg
-
 FT := $(INTERN_LIB_DIR)/libft
 RULE_FT := $(FT)/libft.a
 I_FT := -I$(FT)
@@ -76,45 +71,56 @@ LIB_DLIST := -ldlst
 
 WRAP := $(INTERN_LIB_DIR)/wrappers
 RULE_WRAP := $(WRAP)/libwrappers.a
+RULE_WRAP_DBG := $(WRAP)/libwrappers_dbg.a
 I_WRAP := -I$(WRAP)
 L_WRAP := -L$(WRAP)
-LIB_WRAP := -lwrappers
 
 INCLUDES    := -I../include $(I_DLIST) $(I_WRAP) $(I_FT)
 
 LFLAGS    := $(L_DLIST) $(L_WRAP) $(L_FT)
 
-LIBS := $(EXTERN_LIB) $(LIB_DLIST) $(LIB_WRAP) $(LIB_FT)
+LIBS := $(EXTERN_LIB) $(LIB_DLIST) $(LIB_FT)
 
-all: $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_MAIN)
+all: LIBS+=-lwrappers
+all: $(RULE_WRAP) $(RULE_DLIST) $(RULE_FT) $(OBJS) $(OBJS_MAIN)
 all: OBJS+=$(OBJS_MAIN)
 all: $(NAME)
 
 test: fclean
-test: $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_TEST)
+test: $(RULE_WRAP) $(RULE_DLIST) $(RULE_FT) $(OBJS) $(OBJS_TEST)
 test: OBJS+=$(OBJS_TEST)
 test: $(NAME)
 
+debug: CFLAGS+=-DDEBUG
+debug: LIBS+=-lwrappers_dbg
+debug: $(RULE_WRAP_DBG) $(RULE_DLIST) $(RULE_FT) $(OBJS) $(OBJS_MAIN)
+debug: OBJS+=$(OBJS_MAIN)
+debug: $(NAME_DBG)
+
 $(NAME):
-	@$(CC)  $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
+	@$(CC) $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
 	@$(info CREATED $(NAME))
+
+$(NAME_DBG):
+	@$(CC)  $(OBJS) -o $(NAME_DBG) $(LFLAGS) $(INCLUDES) $(LIBS)
+	@$(info CREATED $(NAME_DBG))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 	@$(info CREATED $@)
 
-$(RULE_WRAP):
+$(RULE_WRAP): 
 	@$(MAKE) -C $(WRAP)
+
+$(RULE_WRAP_DBG): 
+	$(MAKE) -C $(WRAP) debug
 
 $(RULE_DLIST):
 	@$(MAKE) -C $(DLIST)
 
 $(RULE_FT):
 	@$(MAKE) -C $(FT)
-
-#$(RULE_DBG):
-#	@$(MAKE) -C $(DBG)
 
 run: test
 	./test
@@ -126,15 +132,14 @@ clean:
 	@$(MAKE) -C $(FT) clean
 	@$(MAKE) -C $(DLIST) clean
 	@$(MAKE) -C $(WRAP) clean
-	#@$(MAKE) -C $(DBG) clean
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@$(MAKE) -C $(FT) fclean
 	@$(MAKE) -C $(DLIST) fclean
 	@$(MAKE) -C $(WRAP) fclean
-	#@$(MAKE) -C $(DBG) fclean
 	@$(RM) test
+	@$(RM) $(NAME_DBG)
 	@$(RM) $(NAME)
 
 re:
