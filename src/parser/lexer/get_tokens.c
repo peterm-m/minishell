@@ -46,13 +46,16 @@ int	get_string(char *str, int i, t_token *token)
 {
 	int		j;
 
-	j = 1;
-	token->flag = tt_word;
-	while (!is_quotes(str[i + j]))
+	j = 1; 
+	printf("%d \n", __LINE__);
+
+	while (!is_quotes(str[i + j++]))
 	{
-		if (str[i + j++] == '$')
+		if (str[i] == '$')
 			token->flag |= get_dolar_type(str, i);
 	}
+	set_token(str, i, j, tt_word, token);
+	//token->flag = tt_word;
 	return (i + j);
 }
 
@@ -114,7 +117,7 @@ int get_dolar2(char *str, int i, t_token *token)
 	set_token(str, i, j + 1, token->flag, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-	return (i + j + 1);
+	return (i + j + 2);
 }
 
 /**
@@ -147,4 +150,4 @@ int get_dolar(char *str, int i, t_token *token)
 		return (LEX_ERROR);
 	return (i + j + 1);
 }
-//"$hola" "g{$hh}" "$(ggg)" $fff $(hhh) ${jjj} 
+//"$hola" "g{$hh}" "$(ggg)" $fff $(hhh) ${jjj} {lll} (kkk) {(jkk)}

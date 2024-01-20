@@ -46,20 +46,22 @@ typedef struct s_reserve
 	const char	*func;
 }	t_reserve;
 
-#  define dbg(fmt, ...) \
-			do { if (DEBUG) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
-			__LINE__, __func__, __VA_ARGS__); } while (0)
-
 void	*ft_malloc(t_reserve reserve);
 void	ft_free(void *ptr);
 void	ft_leaks(void);
 
+#  define dbg(fmt, ...) \
+			do { if (DEBUG) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
+			__LINE__, __func__, __VA_ARGS__); } while (0)
+
 # else
- 
+
 void		*ft_malloc(size_t size);
 void		ft_free(void *ptr);
 
 # endif
+
+
 
 typedef void	t_handler(int);
 
