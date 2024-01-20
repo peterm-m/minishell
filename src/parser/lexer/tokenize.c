@@ -146,7 +146,6 @@ t_dlst *tokenize(char *input, t_dlst **head)
 		}
 		ft_dlstaddb(head, ft_dlstnew(token));
 	}
-
 	ft_dlstiter(*head, search_w_q);
 	return (*head);
 }

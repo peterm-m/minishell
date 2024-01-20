@@ -56,11 +56,11 @@ EXTERN_LIB := -lreadline
 
 INTERN_LIB_DIR := ./utils
 
-DBG := $(INTERN_LIB_DIR)/debug
-RULE_DBG := $(DBG)/libdbg.a
-I_DBG := -I$(DBG)
-L_DBG := -L$(DBG)
-LIB_DBG := -ldbg
+#DBG := $(INTERN_LIB_DIR)/debug
+#RULE_DBG := $(DBG)/libdbg.a
+#I_DBG := -I$(DBG)
+#L_DBG := -L$(DBG)
+#LIB_DBG := -ldbg
 
 FT := $(INTERN_LIB_DIR)/libft
 RULE_FT := $(FT)/libft.a
@@ -95,16 +95,6 @@ test: $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_TEST)
 test: OBJS+=$(OBJS_TEST)
 test: $(NAME)
 
-debug: fclean
-debug: CFLAGS+=-DDEBUG
-debug: INCLUDES+=$(I_DBG)
-debug: LFLAGS+=$(L_DBG)
-debug: LIBS+=$(LIB_DBG)
-debug: $(RULE_DBG) $(RULE_DLIST) $(RULE_WRAP) $(RULE_FT) $(OBJS) $(OBJS_MAIN)
-debug: OBJS+=$(OBJS_MAIN)
-debug: $(NAME)
-
-
 $(NAME):
 	@$(CC)  $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
 	@$(info CREATED $(NAME))
@@ -123,8 +113,8 @@ $(RULE_DLIST):
 $(RULE_FT):
 	@$(MAKE) -C $(FT)
 
-$(RULE_DBG):
-	@$(MAKE) -C $(DBG)
+#$(RULE_DBG):
+#	@$(MAKE) -C $(DBG)
 
 run: test
 	./test
@@ -136,14 +126,14 @@ clean:
 	@$(MAKE) -C $(FT) clean
 	@$(MAKE) -C $(DLIST) clean
 	@$(MAKE) -C $(WRAP) clean
-	@$(MAKE) -C $(DBG) clean
+	#@$(MAKE) -C $(DBG) clean
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@$(MAKE) -C $(FT) fclean
 	@$(MAKE) -C $(DLIST) fclean
 	@$(MAKE) -C $(WRAP) fclean
-	@$(MAKE) -C $(DBG) fclean
+	#@$(MAKE) -C $(DBG) fclean
 	@$(RM) test
 	@$(RM) $(NAME)
 

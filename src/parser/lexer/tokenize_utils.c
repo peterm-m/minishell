@@ -32,7 +32,6 @@ void search_w_q(void *t)
 	token = (t_token *) t;
 	if (token != NULL)
 	{
-		printf("str: %s\n", token->str);
 		if (ft_strchr(token->str, '*') != 0)
 			token->flag |= WILDCARD;
 		else if (ft_strchr(token->str, '?') != 0)
