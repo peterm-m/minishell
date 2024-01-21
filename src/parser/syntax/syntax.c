@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/16 22:55:28 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/21 21:25:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //void	print_log(t_dlst **lex, t_state **state);
+
+// TODO testeo general
+//		rebla por regla
+//		tablas
+//		semantica
+// TODO end_parser
 
 static void	shift(t_dlst **lex, t_state **state, int action)
 {

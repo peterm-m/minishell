@@ -28,6 +28,7 @@ SRCS        := \
 	parser/syntax/rules1.c \
 	parser/syntax/rules2.c \
 	parser/syntax/rules3.c \
+	parser/syntax/rules4.c \
 	parser/syntax/tables.c \
 	\
 	parser/syntax/semantics/command.c \
@@ -35,6 +36,7 @@ SRCS        := \
 	parser/syntax/semantics/cmd_simple.c \
 	parser/syntax/semantics/cmd_subshell.c \
 	parser/syntax/semantics/element.c \
+	parser/syntax/semantics/word.c \
 	parser/syntax/semantics/redirections.c \
 	parser/syntax/semantics/cmd_conection.c \
 	\
@@ -111,7 +113,7 @@ $(NAME):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 	@$(info CREATED $@)
 
 $(RULE_WRAP):

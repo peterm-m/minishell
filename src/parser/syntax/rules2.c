@@ -6,11 +6,31 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:50:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/15 19:36:20 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:22:51 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+command          : simple_command                 (rule 8)
+                 | compound_command               (rule 9)
+                 | compound_command redirect_list (rule 10)
+*/
+
+void	rules_command(t_dlst **lex, t_state **state, int rule)
+{
+	t_redirect	*redir;
+	t_command	*cmd;
+
+	redir = (*lex)->data;
+	cmd = (*lex)->prev->data;
+	if (rule == 10)
+	{
+		(*lex)->data = join_command_redir(cmd, redir);
+		pop_elements(lex, state, 1);
+	}
+}
 
 /*
 compound_command : brace_group (rule 11)
@@ -21,10 +41,7 @@ void	rules_compound(t_dlst **lex, t_state **state, int rule)
 {
 	(void)lex;
 	(void)state;
-	if (rule == 11)
-		(void) 0;
-	else if (rule == 12)
-		(void) 0;
+	(void)rule;
 }
 
 /*
@@ -35,7 +52,7 @@ void	rules_group(t_dlst **lex, t_state **state, int rule)
 {
 	if (rule == 13)
 	{
-		//(*lex)->data = make_group((*lex)->prev->data);
+		(*lex)->data = make_group((*lex)->prev->data);
 		pop_elements(lex, state, 2);
 	}
 }
@@ -48,35 +65,7 @@ void	rules_subshell(t_dlst **lex, t_state **state, int rule)
 {
 	if (rule == 14)
 	{
-		//(*lex)->data = make_subshell((*lex)->prev->data);
+		(*lex)->data = make_subshell((*lex)->prev->data);
 		pop_elements(lex, state, 2);
 	}
-}
-
-/*
-simple_command   : cmd_prefix WORD cmd_suffix (rule 15)
-                 | cmd_prefix WORD            (rule 16)
-                 | cmd_prefix                 (rule 17)
-                 | WORD cmd_suffix            (rule 18)
-                 | WORD                       (rule 19)
-*/
-
-void	rules_simple_cmd(t_dlst **lex, t_state **state, int rule)
-{
-	if (rule == 15)
-	{
-		pop_elements(lex, state, 2);
-	}
-	else if (rule == 16)
-	{
-		pop_elements(lex, state, 1);
-	}
-	else if (rule == 17)
-		(void) 0;
-	else if (rule == 18)
-	{
-		pop_elements(lex, state, 1);
-	}
-	else if (rule == 19)
-		(void) 0;
 }

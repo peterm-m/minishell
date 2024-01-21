@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:50:53 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/08 20:36:04 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:07:59 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ t_command	*make_subshell(t_command *cmd)
 	subshell = (t_subshell_cmd *)ft_malloc(sizeof(t_subshell_cmd));
 	subshell->command = cmd;
 	subshell->flags = cmd_subshell;
-	return (make_command(cmd_subshell, (t_node )subshell));
+	return (make_command(cmd_subshell, (t_node)subshell));
 }
