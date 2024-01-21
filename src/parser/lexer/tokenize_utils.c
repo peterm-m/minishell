@@ -13,7 +13,10 @@ t_token *new_token(void)
 void	set_token(char *str, int i, int j, int type, t_token *token)
 {
 	if (!(token->str = ft_substr(str, i, j)))
+	{
 		token->flag = LEX_ERROR;
+		printf("%d \n", __LINE__);
+	}
 	else
 		token->flag = type;
 }
@@ -30,9 +33,8 @@ void search_w_q(void *t)
 	t_token	*token;
 
 	token = (t_token *) t;
-	if (token != NULL)
+	if (token != NULL && token->str != NULL)
 	{
-		printf("str: %s\n", token->str);
 		if (ft_strchr(token->str, '*') != 0)
 			token->flag |= WILDCARD;
 		else if (ft_strchr(token->str, '?') != 0)

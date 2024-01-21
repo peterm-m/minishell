@@ -30,8 +30,7 @@ void get_expansion(t_data *data, char *str, int i)
         env_var = get_env_var(data, str, i);
         printf("env: %c\n", str[i]);
         getchar();       
-    }
-    
+    }   
 }
 
 void	expander(t_data *data, char *input)

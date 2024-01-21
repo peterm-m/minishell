@@ -1,13 +1,12 @@
 
-NAME = libwrappers.a
-
+NAME := libwrappers.a
+NAME_DBG := libwrappers_dbg.a
 SRC_DIR := .
 
 SRCS = \
 	ft_close.c\
 	ft_dup2.c\
 	ft_error.c\
-	ft_free.c\
 	ft_fstat.c\
 	ft_kill.c\
 	ft_malloc.c\
@@ -45,6 +44,8 @@ CCFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
+debug: fclean
+debug: NAME = $(NAME_DBG)
 debug: CCFLAGS += -DDEBUG
 debug: $(NAME)
 
@@ -60,7 +61,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 clean:
 	@$(CLEANER) $(BUILD_DIR)
 
-fclean: clean 
+fclean: clean
+	@$(CLEANER) $(NAME_DBG)
 	@$(CLEANER) $(NAME)
 
 re:

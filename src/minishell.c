@@ -11,17 +11,22 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-// #include <readline/readline.h>
-// #include <stdio.h>
-// #include <stdlib.h>
 
-// void tok_p(void *t)
-// {
-// 	if (((t_token *)t) != NULL)
-// 		printf(BHYEL"\nToken: "BHBLU"%s\n"
-// 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
-// 		((t_token *)t)->str, ((t_token *)t)->flag);
-// }
+void tok_p(void *t)
+{
+ 	if (((t_token *)t)->str == NULL)
+	{
+		printf(BHYEL"\nToken: "BHBLU" void\n"
+ 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+		((t_token *)t)->flag);
+	}
+	else
+	{
+ 		printf(BHYEL"\nToken: "BHBLU"%s\n"
+ 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+		((t_token *)t)->str, ((t_token *)t)->flag);
+	}
+}
 
 int	main(int argc, char const **argv, char const **envp)
 {
@@ -31,10 +36,10 @@ int	main(int argc, char const **argv, char const **envp)
 	(void) argc;
 	(void) argv;
 	data.env = envp;
+	// Subsystems
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
-		//printf("%s", read_line);
 		if (ft_strncmp(read_line, "exit", 5) == 0)
 			break ;
 		if (read_line[0] == '\\')
@@ -42,10 +47,11 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
-		ft_dlstnew(data.lexlist);
+ 		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
-		//ft_dlstiter(data.lexlist, tok_p);
-		expander(&data, read_line);
+		ft_dlstiter(data.lexlist, tok_p);
+		ft_dlstclear(&data.lexlist, ft_free);
+		//expander(&data, read_line);
 		/* ##########  PROPUESTA ##########
 		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
 			printf("LEXICAL ERROR!");

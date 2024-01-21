@@ -14,7 +14,7 @@
 
 /*
 States table 
-	     \s,  |,  ',  <,  ",  >,  &,  *?, $?,  (?,  )?
+	     \s,  |,  ',  <,  ",  >,  &,  (, ),  (?,  )?
 */
 int	states(int i, int j)
 {
@@ -25,7 +25,7 @@ int	states(int i, int j)
 		{ 2,  2, 12,  2,  2,  2,  2,  2}, // 2 Single quotes -> '
 		{13, 11,  2, 11, 11,  1, 11, 14}, // 3 OR        	 -> ||
 		{13,  3,  2,  7,  1, 11, 11, 14}, // 4 Pipe      	 -> |
-		{13, 11,  2, 11,  1, 11,  6, 11}, // 5 Ampersand 	 -> &
+		{11, 11,  2, 11,  1, 11,  6, 11}, // 5 Ampersand 	 -> &
 		{13, 11,  2, 11,  1, 11, 11, 14}, // 6 AND 			 -> &&
 		{13, 11,  2,  8,  1, 11, 11, 14}, // 7 Less			 -> <
 		{13, 11,  2, 11,  1, 11, 11, 14}, // 8 Heredoc		 ->	<<
@@ -115,16 +115,3 @@ t_dlst	*lexer(char *read_line, t_dlst **head)
 	printf(BHGRN"Valid Input: Go to tokenizer:\n"END);
 	return (tokenize(read_line, head));
 }
-
-
-/*
-
-Cambiar numeracion de tokens por "typedef enum e_terminals" <>
-
-Añadir token $end <>
-
-flag wildcard y ? 
-
-funciones eliminar token <>
-
-*/

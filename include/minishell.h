@@ -6,19 +6,12 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/18 22:42:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:43:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-// conditional
-# ifdef DEBUG
-    # define dbg(fmt, ...) \
-			do { if (DEBUG) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
-			__LINE__, __func__, __VA_ARGS__); } while (0)
-#endif
 
 // Standar header
 # include <sys/types.h>
@@ -54,12 +47,10 @@
 # define BHWHT "\e[1;97m"
 # define END   "\e[0m"
 
-//typedef enum e_bool
-//{
-//	FALSE,
-//	TRUE
-//}	t_bool;
-//
+# ifdef DEBUG
+#  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})
+# endif
+
 typedef struct s_data
 {
     t_dlst      *lexlist;
