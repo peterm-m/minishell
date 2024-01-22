@@ -85,20 +85,20 @@ void	syntax(t_dlst *lex)
 	}
 }
 
-//void	ft_dlstprint(void *data)
-//{
-//	printf("%d ", ((t_token *)data)->flag & TOK_TYPE);
-//}
-//
-//void print_log(t_dlst **lex, t_state **state)
-//{
-//	printf("lex\t");
-//	ft_dlstiter(*lex, ft_dlstprint);
-//	printf("\nstate\t");
-//	ft_dlstiter(*state, ft_dlstprint);
-//	printf("\n");
-//}
-//
+/* void	ft_dlstprint(void *data)
+{
+	printf("%d ", ((t_token *)data)->flag & TOK_TYPE);
+} */
+
+/* void print_log(t_dlst **lex, t_state **state)
+{
+	printf("lex\t");
+	ft_dlstiter(*lex, ft_dlstprint);
+	printf("\nstate\t");
+	ft_dlstiter(*state, ft_dlstprint);
+	printf("\n");
+} */
+
 /* t_token	*gen_tok(t_terminals type)
 {	
 	t_token	*tok;

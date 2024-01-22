@@ -16,12 +16,12 @@
 # include "minishell.h"
 
 // Terminals Tokens
-typedef struct s_state
+/* typedef struct s_state
 {
 	int	len;
 	int	state_braket;
 	int	state_brace;
-}	t_state;
+}	t_state; */
 typedef enum e_terminals
 {
 	tt_and_if,

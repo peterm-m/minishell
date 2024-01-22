@@ -52,15 +52,6 @@ int	main(int argc, char const **argv, char const **envp)
 		ft_dlstiter(data.lexlist, tok_p);
 		ft_dlstclear(&data.lexlist, ft_free);
 		//expander(&data, read_line);
-		/* ##########  PROPUESTA ##########
-		if (lexical_cheker(lex)) // lexical_check: comprueba si es un conjunto de tokens es valido.
-			printf("LEXICAL ERROR!");
-
-		tree = syntax(lex); // parte sintactica
-		if (sintax_cheker(lex))
-			printf("LEXICAL ERROR!");
-			echo "hola?" | cat minish* && echo "$(COMMD_SUB)" || echo "${PARAM_E}"
-		*/
 	}
 	ft_dlstclear(&data.lexlist, ft_free);
 	return (0);

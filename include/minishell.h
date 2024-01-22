@@ -54,7 +54,6 @@
 typedef struct s_data
 {
     t_dlst      *lexlist;
-    t_dlst      *sytxtree; //tree de syntax, creo que habría que meterlo al igual que la lista de lexer
     const char  **env;
 }   t_data;
 

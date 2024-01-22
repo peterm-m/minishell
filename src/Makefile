@@ -16,30 +16,32 @@ SRC_TEST := $(SRC_TEST:%=$(SRC_DIR)/%)
 OBJS_TEST := $(SRC_TEST:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRCS        := \
+	lexer/lexer.c \
+	lexer/tokenize.c \
+	lexer/get_tokens.c \
+	lexer/tokenize_utils.c \
+	lexer/lexer_utils.c \
+	\
+	grammar/utils.c \
+	grammar/syntax.c \
+	grammar/rules1.c \
+	grammar/rules2.c \
+	grammar/rules3.c \
+	grammar/rules4.c \
+	grammar/tables.c \
+	\
+	grammar/semantics/command.c \
+	grammar/semantics/cmd_group.c \
+	grammar/semantics/cmd_simple.c \
+	grammar/semantics/cmd_subshell.c \
+	grammar/semantics/element.c \
+	grammar/semantics/word.c \
+	grammar/semantics/redirections.c \
+	grammar/semantics/cmd_conection.c \
+	\
 	executer/executer.c \
-	executer/expander.c \
-	parser/lexer/lexer.c \
-	parser/lexer/tokenize.c \
-	parser/lexer/get_tokens.c \
-	parser/lexer/tokenize_utils.c \
-	parser/lexer/lexer_utils.c \
 	\
-	parser/syntax/utils.c \
-	parser/syntax/syntax.c \
-	parser/syntax/rules1.c \
-	parser/syntax/rules2.c \
-	parser/syntax/rules3.c \
-	parser/syntax/rules4.c \
-	parser/syntax/tables.c \
-	\
-	parser/syntax/semantics/command.c \
-	parser/syntax/semantics/cmd_group.c \
-	parser/syntax/semantics/cmd_simple.c \
-	parser/syntax/semantics/cmd_subshell.c \
-	parser/syntax/semantics/element.c \
-	parser/syntax/semantics/word.c \
-	parser/syntax/semantics/redirections.c \
-	parser/syntax/semantics/cmd_conection.c \
+	expansion/expander.c \
 	\
 	subsystem/subsystem.c
 
