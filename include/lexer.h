@@ -16,12 +16,12 @@
 # include "minishell.h"
 
 // Terminals Tokens
-/* typedef struct s_state
+typedef struct s_braket_count
 {
 	int	len;
 	int	state_braket;
 	int	state_brace;
-}	t_state; */
+}	t_braket_count;
 typedef enum e_terminals
 {
 	tt_and_if,
@@ -75,6 +75,7 @@ int is_operator(int c);
 int	is_blankspace(char c);
 int is_quotes(char c);
 int	in_word(char c);
+t_braket_count check_braces(int state, t_braket_count b_count);
 
 // tokenize_utils.c
 t_token *new_token(void);

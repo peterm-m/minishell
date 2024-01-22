@@ -55,3 +55,16 @@ int	in_word(char c)
 	return (is_quotes(c) || is_operator(c) || c == '$' || 
 		is_blankspace(c) || c == '\0');
 }
+
+t_braket_count check_braces(int state, t_braket_count b_count)
+{
+	if (state == 15)
+		b_count.state_braket++;
+	else if (state == 16)
+		b_count.state_braket--;
+	else if (state == 17)
+		b_count.state_brace++;
+	else if (state == 18)
+		b_count.state_brace--;
+	return (b_count);
+}
