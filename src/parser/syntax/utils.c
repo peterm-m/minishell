@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:38:02 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/15 19:35:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:25:22 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 	Delete n element of lex and state
 */
+
+// TODO: revisar la limpieza de cada elementos
 
 void	pop_elements(t_dlst **lex, t_dlst **state, int n)
 {

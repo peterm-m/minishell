@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:51:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/15 19:32:40 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:21:50 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 accept       : program $end (rule 0)
 */
+
+// TODO: dejar solo un nodeo en la lista que sea lo que hay que ejecutar
 
 void	rules_accept(t_dlst **lex, t_state **state, int rule)
 {
@@ -28,6 +30,8 @@ void	rules_accept(t_dlst **lex, t_state **state, int rule)
 program          : and_or    (rule 1)
                  | /empty/   (rule 2)
 */
+
+// TODO: comprobar los empty
 
 void	rules_program(t_dlst **lex, t_state **state, int rule)
 {
@@ -47,18 +51,16 @@ and_or           :               pipeline (rule 3)
 
 void	rules_and_or(t_dlst **lex, t_state **state, int rule)
 {
-	if (rule == 3)
-		(void) 0;
-	else if (rule == 4)
+	if (rule == 4)
 	{
 		(*lex)->data = make_connection((*lex)->prev->prev->data,
-			(*lex)->data, tt_and_if);
+				(*lex)->data, tt_and_if);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 5)
 	{
 		(*lex)->data = make_connection((*lex)->prev->prev->data,
-			(*lex)->data, tt_or_if);
+				(*lex)->data, tt_or_if);
 		pop_elements(lex, state, 2);
 	}
 }
@@ -75,25 +77,7 @@ void	rules_pipeline(t_dlst **lex, t_state **state, int rule)
 	else if (rule == 7)
 	{
 		(*lex)->data = make_connection((*lex)->prev->prev->data,
-			(*lex)->data, tt_pipe);
+				(*lex)->data, tt_pipe);
 		pop_elements(lex, state, 2);
-	}
-}
-
-/*
-command          : simple_command                 (rule 8)
-                 | compound_command               (rule 9)
-                 | compound_command redirect_list (rule 10)
-*/
-
-void	rules_command(t_dlst **lex, t_state **state, int rule)
-{
-	if (rule == 8)
-		(void) 0;
-	else if (rule == 9)
-		(void) 0;
-	else if (rule == 10)
-	{
-		pop_elements(lex, state, 1);
 	}
 }

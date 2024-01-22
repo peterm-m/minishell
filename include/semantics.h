@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/18 22:43:03 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:02:35 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ typedef struct s_word
 	int		flags;
 }	t_word;
 
-// TODO: word es tipo palabra temporalmente tippo char *
 typedef struct s_word_list
 {
-	char				*word;
+	t_token				*word;
 	struct s_word_list	*next;
 } t_word_list;
 
@@ -46,11 +45,10 @@ typedef enum e_redir_option
 }	t_redir_option;
 
 /* filename or file descriptor */
-// TODO: filename debe ser t_word; dest un int
 typedef union u_unit_io
 {
-	char		*dest;
-	char		*filename;
+	int			dest;
+	t_token		*filename;
 }	t_unit_io;
 
 /* Structure describing a redirection. */
@@ -132,10 +130,15 @@ typedef struct s_subshell_cmd
 
 t_command		*make_command(t_command_type type, t_node value);
 void			clean_command(t_command *cmd);
+t_command		*join_command_redir(t_command *cmd, t_redirect *redir);
 
 t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,int flag);
-void			join_redir(t_redirect **redir1, t_redirect *redir2);
 void			clean_redirection(t_redirect *redirection);
+t_redirect		*join_redir(t_redirect *redir1, t_redirect *redir2);
+
+t_word_list		*make_word(t_token *word);
+void			clean_word(t_word_list *word);
+t_word_list		*join_word(t_word_list *list, t_word_list *word);
 
 t_command		*make_connection(t_command *cmd1, t_command *cmd2, int type);
 void			clean_connection(t_connection *connection);
@@ -146,15 +149,10 @@ void			clean_group(t_group_cmd *group);
 t_command		*make_subshell(t_command *cmd);
 void			clean_subshell(t_subshell_cmd *subshell);
 
-t_command		*make_simple(t_command *cmd, t_element *element);
+t_command		*make_simple(t_element *element1, t_token *word, t_element *element2);
 void			clean_simple(t_simple_cmd *cmd);
 
-t_element		*make_element(t_dlst *lex, t_state *state, int rule);
-
-void			set_redirection(t_dlst *lex, t_state *state, int rule);
-
-//t_word_list	*make_word_list(t_word	*word, t_word_list *w_list);
-t_word_list		*make_word(char *word);
-void			join_word(t_word_list **list, char *word);
+t_element		*make_element(t_token *word, t_redirect *redir);
+void			clean_element(t_element	*element);
 
 #endif

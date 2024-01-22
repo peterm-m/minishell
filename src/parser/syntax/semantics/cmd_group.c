@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:52:26 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/08 20:36:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:08:13 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_command	*make_group(t_command *command)
 {
 	t_group_cmd	*group;
 
-	group = (t_group_cmd *)ft_malloc(sizeof(t_group_cmd));
+	group = (t_group_cmd *) ft_malloc(sizeof(t_group_cmd));
 	group->ignore = 0;
 	group->command = command;
-	return (make_command(cmd_group, (t_node )group));
+	return (make_command(cmd_group, (t_node)group));
 }

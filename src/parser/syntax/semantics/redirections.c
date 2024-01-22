@@ -6,47 +6,11 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/20 16:40:12 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:29:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//void	join_redirection(t_dlst *lex, t_state	*state, int rule)
-//{
-//	return ;
-//}
-//
-//void	*push_heredoc(t_redirect *r)
-//{
-//	(void *) r;
-//	return (NULL);
-//}
-//
-void	join_redir(t_redirect **redir1, t_redirect *redir2)
-{
-	t_redirect	*tmp;
-
-	if (redir1 == NULL)
-		*redir1 = redir2;
-	else
-	{
-		tmp = *redir1;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = redir2;
-	}
-}
-
-// clean list of redirections
-void	clean_redirection(t_redirect *redirection)
-{
-	if (redirection)
-	{
-		clean_redirection(redirection->next);
-		free(redirection);
-	}
-}
 
 t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	int flag)
@@ -72,4 +36,26 @@ t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	else
 		printf("Error pipeline \n");
 	return (redirect);
+}
+
+void	clean_redirection(t_redirect *redirection)
+{
+	if (redirection)
+	{
+		clean_redirection(redirection->next);
+		free(redirection);
+	}
+}
+
+t_redirect	*join_redir(t_redirect *redir1, t_redirect *redir2)
+{
+	t_redirect	*tmp;
+
+	if (redir1 == NULL)
+		return (redir2);
+	tmp = redir1;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = redir2;
+	return (redir2);
 }

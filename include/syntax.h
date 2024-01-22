@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/16 19:38:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:04:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,14 @@ void	rules_command(t_dlst **lex, t_state **state, int rule);
 void	rules_compound(t_dlst **lex, t_state **state, int rule);
 void	rules_group(t_dlst **lex, t_state **state, int rule);
 void	rules_subshell(t_dlst **lex, t_state **state, int rule);
-void	rules_simple_cmd(t_dlst **lex, t_state **state, int rule);
+void	rules_simple_cmd1(t_dlst **lex, t_state **state, int rule);
+void	rules_simple_cmd2(t_dlst **lex, t_state **state, int rule);
 void	rules_cmd_prefix(t_dlst **lex, t_state **state, int rule);
 void	rules_cmd_suffix(t_dlst **lex, t_state **state, int rule);
 void	rules_redirect_list(t_dlst **lex, t_state **state, int rule);
-void	rules_io_redirect(t_dlst **lex, t_state **state, int rule);
+void	rules_io_redirect1(t_dlst **lex, t_state **state, int rule);
+void	rules_io_redirect2(t_dlst **lex, t_state **state, int rule);
+void	rules_io_redirect3(t_dlst **lex, t_state **state, int rule);
 
 int		table_action(int state, int token);
 int		table_goto(int state, int n_terminal);
