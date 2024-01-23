@@ -50,6 +50,7 @@ int	main(int argc, char const **argv, char const **envp)
  		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
 		ft_dlstiter(data.lexlist, tok_p);
+		syntax(data.lexlist);
 		ft_dlstclear(&data.lexlist, ft_free);
 		//expander(&data, read_line);
 	}

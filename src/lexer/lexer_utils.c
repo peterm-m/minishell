@@ -12,8 +12,7 @@
 int is_operator(int c)
 {
 	return (c == '|' || c == '<' || c == '>' ||
-		c == '(' || c == ')' || c == ';' || c == '{'
-		|| c == '}' || c == '&');
+		c == '&');
 }
 
 /**
@@ -52,8 +51,7 @@ int is_quotes(char c)
  */
 int	in_word(char c)
 {
-	return (is_quotes(c) || is_operator(c) || c == '$' || 
-		is_blankspace(c) || c == '\0');
+	return (is_operator(c) || is_blankspace(c) || c == '\0');
 }
 
 t_braket_count check_braces(int state, t_braket_count b_count)

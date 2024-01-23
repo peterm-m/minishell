@@ -18,7 +18,7 @@ void	set_token(char *str, int i, int j, int type, t_token *token)
 		printf("%d \n", __LINE__);
 	}
 	else
-		token->flag = type;
+		token->flag |= type;
 }
 
 void free_token(t_token *tok)

@@ -15,15 +15,8 @@
  */
 int get_dolar_type(char *str, int i)
 {
-	int j;
-
-	j = 1;
-	while (!is_quotes(str[i + j]))
-	{
-		if (str[i + j++] == '$')
-			break;
-	}
-	if (str[i + j] == '$' && str[i + j+ 1] == '(')
+	printf("str[i]: %c", str[i]);
+	if (str[i] == '$' && str[i + 1] == '(')
 		return (COMMD_SUB);
 	else
 		return (PARAM_E);
@@ -47,15 +40,20 @@ int	get_string(char *str, int i, t_token *token)
 	int		j;
 
 	j = 1; 
-	printf("%d \n", __LINE__);
-
 	while (!is_quotes(str[i + j++]))
 	{
 		if (str[i] == '$')
 			token->flag |= get_dolar_type(str, i);
 	}
+	if (!in_word(str[i + j]) && !ft_isdigit(str[i + j]))
+	{
+		while(!in_word(str[i + j++]) && str[i + j])
+		{
+			if (str[i + j] == '$')
+				token->flag |= get_dolar_type(str, i + j);
+		}
+	}
 	set_token(str, i, j, tt_word, token);
-	//token->flag = tt_word;
 	return (i + j);
 }
 
@@ -77,7 +75,11 @@ int get_word(char *str, int i, t_token *token)
 
 	j = 0;
 	while(!in_word(str[i + j]) && str[i + j])
+	{
+		if (str[i + j] == '$')
+			token->flag |= get_dolar_type(str, i + j);
 		j++;
+	}
 	set_token(str, i, j, tt_word, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);

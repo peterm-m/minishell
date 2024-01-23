@@ -18,7 +18,8 @@ OBJS_TEST := $(SRC_TEST:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 SRCS        := \
 	lexer/lexer.c \
 	lexer/tokenize.c \
-	lexer/get_tokens.c \
+	lexer/get_tokens1.c \
+	lexer/get_tokens2.c \
 	lexer/tokenize_utils.c \
 	lexer/lexer_utils.c \
 	\

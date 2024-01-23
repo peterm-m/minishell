@@ -21,8 +21,8 @@ int	states(int i, int j)
 	static const int states[19][12]= \
 	{
 		{ 0, 11,  2, 11,  1, 11, 11, 15,  16,  17,  18,  14}, // 0 Empty input
-		{ 1,  1,  1,  1, 12,  1,  1,  1,  1,   17,  18,  14}, // 1 Double quotes   -> "
-		{ 2,  2, 12,  2,  2,  2,  2,  2,  2,   17,  18,  14}, // 2 Single quotes   -> '
+		{ 1,  1,  1,  1, 12,  1,  1,  1,  1,    1,   1,   1}, // 1 Double quotes   -> "
+		{ 2,  2, 12,  2,  2,  2,  2,  2,  2,    2,   2,   2}, // 2 Single quotes   -> '
 		{13, 11,  2, 11, 11,  1, 11, 15,  16,  17,  18,  14}, // 3 OR        	   -> ||
 		{13,  3,  2,  7,  1, 11, 11, 15,  16,  17,  18,  14}, // 4 Pipe      	   -> |
 		{11, 11,  2, 11,  1, 11,  6, 15,  16,  17,  18,  14}, // 5 Ampersand 	   -> &
@@ -121,7 +121,7 @@ t_dlst	*lexer(char *read_line, t_dlst **head)
 
 	state = evaluate_state(read_line);
 	printf ("estado: %i\n", state);
-	if (state != 14 && state != 12 && state != 16 && state != 18)
+	if (state != 12 && state != 14 && state != 16 && state != 18)
 	{
 		printf(BHRED"Invalid Input\n"END);
 		return (NULL);

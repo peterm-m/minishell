@@ -84,7 +84,7 @@ t_token	*init_token(void);
 void free_token(t_token *token);
 void search_w_q(void *t);
 
-// get_tokens.c
+// get_tokens1.c
 
 int get_word(char *str, int i, t_token *token);
 int	get_string(char *str, int i, t_token *token);
@@ -92,12 +92,18 @@ int get_dolar_type(char *str, int i);
 int get_dolar(char *str, int i, t_token *token);
 int get_dolar2(char *str, int i, t_token *token);
 
+// get_tokens2.c
+
+int get_token(char *str, int i, t_token *token);
+int get_token2(char *str, int i, t_token *token);
+int get_ionumber(char *str, int i, t_token *token);
+int get_braket_token(char *str, int i, t_token *token);
+int get_brace_token(char *str, int i, t_token *token);
+
+
 // tokenize.c
 
 t_dlst *tokenize(char *input, t_dlst **head);
-int get_token(char *str, int i, t_token *token);
-int get_token2(char *str, int i, t_token *token);
 int get_next_token(char *input, int i, t_token *token);
-int get_ionumber(char *str, int i, t_token *token);
 
 #endif
