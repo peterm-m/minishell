@@ -40,22 +40,25 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra
+CCFLAGS = -Wall -Werror -Wextra -g
 
 all: $(NAME)
 
 debug: fclean
-debug: NAME = $(NAME_DBG)
-debug: CCFLAGS += -DDEBUG
-debug: $(NAME)
+debug: CCFLAGS+=-DDEBUG
+debug: $(NAME_DBG)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	$(info CREATED $(NAME))
 
+$(NAME_DBG): $(OBJS)
+	@$(AR) $(ARFLAGS) $(NAME_DBG) $(OBJS)
+	$(info CREATED $(NAME_DBG))
+
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CCFLAGS) -c $< -o $@
+	$(CC) $(CCFLAGS) -c $< -o $@
 	$(info CREATED $@)
 
 clean:
