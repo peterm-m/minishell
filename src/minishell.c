@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/21 18:24:06 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:06:31 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
- 		ft_dlstnew(data.lexlist);
+		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
 		ft_dlstiter(data.lexlist, tok_p);
 		syntax(data.lexlist);
