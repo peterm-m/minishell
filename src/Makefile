@@ -85,7 +85,7 @@ debug: CFLAGS+=-DDEBUG
 debug: $(NAME)
 
 test:
-	@$(MAKE) -C .test
+	@$(MAKE) -C .test run
 
 $(NAME):
 	@$(CC) $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
@@ -123,4 +123,4 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test 

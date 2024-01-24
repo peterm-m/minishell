@@ -28,7 +28,7 @@ static void	shift(t_dlst **lex, t_state **state, int action)
 	*((int *)new->data) = action;
 	ft_dlstaddf(state, new);
 	*lex = (*lex)->next;
-	printf("shift to %d\n", action);
+	//printf("shift to %d\n", action);
 //	print_log(lex, state);
 	return ;
 }
@@ -41,7 +41,7 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 	table_reduce(action - REDUCE0)(lex, state, id_rule);
 	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data),
 			table_nt_generate(id_rule));
-	printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
+	//printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
 //	print_log(lex, state);
 	return ;
 }

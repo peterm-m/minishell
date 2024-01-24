@@ -7,7 +7,8 @@ SRCS        := \
 	.test/test.c \
 	lexer/lexer.c \
 	lexer/tokenize.c \
-	lexer/get_tokens.c \
+	lexer/get_tokens1.c \
+	lexer/get_tokens2.c \
 	lexer/tokenize_utils.c \
 	lexer/lexer_utils.c \
 	\
@@ -72,9 +73,9 @@ LFLAGS    := $(L_DLIST) $(L_WRAP) $(L_FT)
 
 LIBS := $(EXTERN_LIB) $(LIB_DLIST) $(LIB_FT) $(LIB_WRAP)
 
-all: $(RULE_WRAP) $(RULE_DLIST) $(RULE_FT) $(OBJS) $(NAME) run
+all: $(NAME)
 
-$(NAME):
+$(NAME): $(RULE_WRAP) $(RULE_DLIST) $(RULE_FT) $(OBJS) $(NAME)
 	@$(CC) $(OBJS) -o $(NAME) $(LFLAGS) $(INCLUDES) $(LIBS)
 	@$(info CREATED $(NAME))
 
@@ -92,7 +93,7 @@ $(RULE_DLIST):
 $(RULE_FT):
 	@$(MAKE) -C $(FT)
 
-run: test
+run: all
 	./test
 
 mem_test: test
@@ -115,4 +116,4 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-.PHONY: all clean fclean re mem_test run test debug
+.PHONY: all clean fclean re mem_test run test
