@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dlstadd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:19:26 by pedro             #+#    #+#             */
-/*   Updated: 2023/08/13 20:12:59 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:06:35 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	ft_dlstaddf(t_dlst **dlst, t_dlst *node)
 {
-	node->next = *dlst;
-	node->prev = NULL;
+	if (node != NULL)
+	{
+		node->next = *dlst;
+		node->prev = NULL;
+	}
 	if (*dlst != NULL)
 		(*dlst)->prev = node;
 	*dlst = node;

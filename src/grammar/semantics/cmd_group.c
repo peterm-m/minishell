@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_group.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:52:26 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/21 17:08:13 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:25:17 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	clean_group(t_group_cmd *group)
 {
+	dbg("%s\n","");
 	if (group == NULL)
 		return ;
 	if (group->command != NULL)
@@ -23,6 +24,7 @@ void	clean_group(t_group_cmd *group)
 
 t_command	*make_group(t_command *command)
 {
+	dbg("%s\n","");
 	t_group_cmd	*group;
 
 	group = (t_group_cmd *) ft_malloc(sizeof(t_group_cmd));

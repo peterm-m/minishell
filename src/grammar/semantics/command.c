@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/21 21:20:03 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:12:39 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	clean_command(t_command *cmd)
 {
+	dbg("%s\n","");
 	if (cmd == NULL)
 		return ;
 	if (cmd->type == cmd_simple)
@@ -30,19 +31,21 @@ void	clean_command(t_command *cmd)
 
 t_command	*join_command_redir(t_command *cmd, t_redirect *redir)
 {
+	dbg("%s\n","");
 	cmd->redirects = join_redir(cmd->redirects, redir);
 	return (cmd);
 }
 
 t_command	*make_command(t_command_type type, t_node value)
 {
+	dbg("%s\n","");
 	t_command	*tmp;
 
 	tmp = (t_command *) ft_malloc(sizeof(t_command));
 	tmp->type = type;
 	tmp->value = value;
 	tmp->value.simple->flags = 0;
-	tmp->flags = 0;
+	tmp->flag = 0;
 	tmp->redirects = (t_redirect *) NULL;
 	return (tmp);
 }

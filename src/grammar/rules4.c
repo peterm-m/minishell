@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 17:05:12 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/21 21:17:50 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:17:07 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ redirect_list    :               io_redirect (rule 28)
 
 void	rules_redirect_list(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_redirect	*redir1;
 	t_redirect	*redir2;
 
@@ -47,6 +48,7 @@ io_redirect      :           '<'    WORD (rule 30) // CAMBIAR POR INT
 
 void	rules_io_redirect1(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_unit_io	source;
 	t_unit_io	dest;
 
@@ -75,6 +77,7 @@ void	rules_io_redirect1(t_dlst **lex, t_state **state, int rule)
 
 void	rules_io_redirect2(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_unit_io	source;
 	t_unit_io	dest;
 
@@ -103,6 +106,7 @@ void	rules_io_redirect2(t_dlst **lex, t_state **state, int rule)
 
 void	rules_io_redirect3(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_unit_io	source;
 	t_unit_io	dest;
 

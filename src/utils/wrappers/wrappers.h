@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/21 21:28:09 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:01:43 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ void	*ft_malloc(t_reserve reserve);
 void	ft_free(void *ptr);
 void	ft_leaks(void);
 
-#  define dbg(fmt, ...) \
-			do { if (DEBUG) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
-			__LINE__, __func__, __VA_ARGS__); } while (0)
-
 # else
 
 void		*ft_malloc(size_t size);
@@ -61,7 +57,11 @@ void		ft_free(void *ptr);
 
 # endif
 
-
+# ifdef LOGS
+#  define dbg(fmt, ...) \
+			do { if (LOGS) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
+			__LINE__, __func__, __VA_ARGS__); } while (0)
+# endif
 
 typedef void	t_handler(int);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/21 19:53:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:40:31 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	clean_word(t_word_list *word)
 {
+	dbg("%s\n","");
 	if (word)
 	{
 		clean_word(word->next);
@@ -23,18 +24,19 @@ void	clean_word(t_word_list *word)
 
 t_word_list	*make_word(t_token *word)
 {
+	dbg("%s\n", "");
 	t_word_list	*new;
 
-	if (word == NULL)
-		return (NULL);
 	new = (t_word_list *)ft_malloc(sizeof(t_word_list));
 	new->word = word;
 	new->next = NULL;
+	dbg("%s\n", "");
 	return (new);
 }
 
 t_word_list	*join_word(t_word_list *word1, t_word_list *word2)
 {
+	dbg("%s\n", "");
 	t_word_list	*tmp;
 
 	if (word1 == NULL)

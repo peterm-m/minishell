@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:50:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/21 21:22:51 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:17:27 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ command          : simple_command                 (rule 8)
 
 void	rules_command(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_redirect	*redir;
 	t_command	*cmd;
 
@@ -39,6 +40,7 @@ compound_command : brace_group (rule 11)
 
 void	rules_compound(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	(void)lex;
 	(void)state;
 	(void)rule;
@@ -50,6 +52,7 @@ brace_group      : '{' and_or '}' (rule 13)
 
 void	rules_group(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	if (rule == 13)
 	{
 		(*lex)->data = make_group((*lex)->prev->data);
@@ -63,6 +66,7 @@ subshell         : '(' and_or ')' (rule 14)
 
 void	rules_subshell(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	if (rule == 14)
 	{
 		(*lex)->data = make_subshell((*lex)->prev->data);

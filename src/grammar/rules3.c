@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:51:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/21 21:23:19 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:23:10 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ simple_command   : cmd_prefix WORD cmd_suffix (rule 15)
 
 void	rules_simple_cmd1(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_element	*elem1;
 	t_element	*elem2;
 
@@ -47,6 +48,7 @@ void	rules_simple_cmd1(t_dlst **lex, t_state **state, int rule)
 
 void	rules_simple_cmd2(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_element	*elem2;
 
 	if (rule == 18)
@@ -68,6 +70,7 @@ cmd_prefix       :            io_redirect     (rule 20)
 
 void	rules_cmd_prefix(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_element	elem1;
 	t_element	elem2;
 
@@ -99,6 +102,7 @@ cmd_suffix       :            io_redirect (rule 24)
 
 void	rules_cmd_suffix(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	t_element	elem1;
 	t_element	elem2;
 

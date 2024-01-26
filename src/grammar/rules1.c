@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:51:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/21 21:21:50 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:19:20 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ accept       : program $end (rule 0)
 
 void	rules_accept(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	(void)lex;
 	(void)state;
 	if (rule == 0)
@@ -35,6 +36,7 @@ program          : and_or    (rule 1)
 
 void	rules_program(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	(void)lex;
 	(void)state;
 	if (rule == 1)
@@ -51,6 +53,7 @@ and_or           :               pipeline (rule 3)
 
 void	rules_and_or(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	if (rule == 4)
 	{
 		(*lex)->data = make_connection((*lex)->prev->prev->data,
@@ -72,6 +75,7 @@ pipeline         : command              (rule 6)
 
 void	rules_pipeline(t_dlst **lex, t_state **state, int rule)
 {
+	dbg("rule %d\n", rule);
 	if (rule == 6)
 		(void) 0;
 	else if (rule == 7)
