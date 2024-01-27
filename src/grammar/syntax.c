@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/26 17:37:03 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/21 21:25:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 	table_reduce(action - REDUCE0)(lex, state, id_rule);
 	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data),
 			table_nt_generate(id_rule));
-	dbg("%s\n","");
 	//printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
 //	print_log(lex, state);
 	return ;
@@ -86,43 +85,42 @@ void	syntax(t_dlst *lex)
 	}
 }
 
-void	ft_dlstprint(void *data)
+/* void	ft_dlstprint(void *data)
 {
 	printf("%d ", ((t_token *)data)->flag & TOK_TYPE);
-}
+} */
 
- void print_log(t_dlst **lex, t_state **state)
+/* void print_log(t_dlst **lex, t_state **state)
 {
 	printf("lex\t");
 	ft_dlstiter(*lex, ft_dlstprint);
 	printf("\nstate\t");
 	ft_dlstiter(*state, ft_dlstprint);
 	printf("\n");
-}
+} */
 
-t_token	*gen_tok(int flag, char *str)
+/* t_token	*gen_tok(t_terminals type)
 {	
 	t_token	*tok;
 	tok = (t_token *)malloc(sizeof(t_token));
-	tok->flag = flag;
-	tok->str = str;
+	tok->type = type;
 	return (tok);	
-}
-
-
-
- int main()
+} */
+//
+//
+//
+/* int main()
 {
 	t_dlst	*lex;
 
-	//lex = ft_dlstnew(gen_tok(tt_word, "adios"));
-	//ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_pipe, NULL)));
-	//ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_word, "hola")));
-	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_end, NULL)));
+	lex = ft_dlstnew(gen_tok(tt_word));
+	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_pipe)));
+	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_word)));
+	ft_dlstaddb(&lex, ft_dlstnew(gen_tok(tt_end)));
 	syntax(lex);
 	printf("lex: %p", lex->data);
 	return (0);
-} 
+} */
 
 /*
 void	syntax(t_dlst *lex):
