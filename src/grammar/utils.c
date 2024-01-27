@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:38:02 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/24 23:54:57 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/27 13:42:23 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 	Delete n element of lex and state
 */
 
-void free_token(t_token *tok)
-{
-	dbg("%s\n","");
-	if (tok != NULL)
-		return ;
-	if (tok->str != NULL)
-		ft_free(tok->str);
-}
+//void free_token(t_token *tok)
+//{
+//	dbg("%s\n","");
+//	if (tok != NULL)
+//		return ;
+//	if (tok->str != NULL)
+//		ft_free(tok->str);
+//}
 
 
 // TODO: revisar la limpieza de cada elementos
