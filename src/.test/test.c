@@ -890,7 +890,7 @@ void	test_action_table(void)
 	TEST_CHECK(table_action(16, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(17, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(18, tt_end) + 32 == 126);
-	TEST_CHECK(table_action(19, tt_end) + 32 == 69); // FAIL 
+	TEST_CHECK(table_action(19, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(20, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(21, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(22, tt_end) + 32 == 126);
@@ -1038,6 +1038,68 @@ void	test_goto_table(void)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //
+//                 SEMANTICS TEST
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////// WORD.C
+/* t_token	*gen_tok(t_terminals type)
+{	
+	t_token	*tok;
+	t_token	*tok;
+	tok = (t_token *)malloc(sizeof(t_token));
+	tok->type = type;
+	return (tok);	
+} */
+
+void word_c_test(void)
+{	
+	// Se crea token 1
+	t_token *token_word1; 
+	token_word1 = (t_token *)malloc(sizeof(t_token));
+	token_word1->flag = tt_word;
+
+	// Se crea token 2
+	t_token *token_word2; 
+	token_word2 = (t_token *)malloc(sizeof(t_token));
+	token_word2->flag = tt_word;
+
+	// Se crea word_list 1
+	t_word_list *token_word_list1;
+	token_word_list1 = (t_word_list *)malloc(sizeof(t_word_list));
+	token_word_list1->next = NULL;
+	token_word_list1->word = token_word1;
+	
+	// Se crea word_list 2
+	t_word_list *token_word_list2;
+	token_word_list2 = (t_word_list *)malloc(sizeof(t_word_list));
+	token_word_list2->next = NULL;
+	token_word_list2->word = token_word2;
+
+///////////////////////// make_word()
+
+	TEST_CHECK(make_word(token_word1)->word == token_word_list1->word);
+	TEST_CHECK(make_word(token_word1)->word->str == token_word_list1->word->str);
+	TEST_CHECK(make_word(token_word1)->word->flag == token_word_list1->word->flag);	
+	TEST_CHECK(make_word(NULL) == NULL);
+
+///////////////////////// join_word()
+
+	TEST_CHECK(join_word(token_word_list1, token_word_list2)->word == token_word_list2->word);
+	TEST_CHECK(join_word(token_word_list2, token_word_list1)->word == token_word_list1->word);
+	TEST_CHECK(join_word(NULL, token_word_list1)->word == token_word_list1->word);
+	TEST_CHECK(join_word(NULL, token_word_list2)->word == token_word_list2->word);
+	free(token_word_list1);
+	free(token_word_list2);
+	free_token(token_word1);
+	free_token(token_word2);
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 //                 RUN TEST
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1046,5 +1108,6 @@ TEST_LIST = {
 	{ "test EOF", test_eof},
 	{ "test table action", test_action_table},
 	{ "test table go to", test_goto_table},
+	{"test word.c", word_c_test},
 	{ NULL, NULL }
 };

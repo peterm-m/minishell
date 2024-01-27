@@ -62,10 +62,10 @@ L_DLIST := -L$(DLIST)
 LIB_DLIST := -ldlst
 
 WRAP := ../$(INTERN_LIB_DIR)/wrappers
-RULE_WRAP := $(WRAP)/libwrappers_dbg.a
+RULE_WRAP := $(WRAP)/libwrappers.a
 I_WRAP := -I$(WRAP)
 L_WRAP := -L$(WRAP)
-LIB_WRAP := -lwrappers_dbg
+LIB_WRAP := -lwrappers
 
 INCLUDES    := -I../../include $(I_DLIST) $(I_WRAP) $(I_FT)
 
@@ -85,8 +85,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(info CREATED $@)
 
 $(RULE_WRAP): 
-	@$(MAKE) -C $(WRAP) debug
-
+	@$(MAKE) -C $(WRAP) 
+#debug
 $(RULE_DLIST):
 	@$(MAKE) -C $(DLIST)
 

@@ -28,16 +28,18 @@ void tok_p(void *t)
 	}
 }
 // Función que gestiona la entrada para heredoc, añade un token al final de la lista con todo el contenido de heredoc
-void heredoc(t_dlst **lex, char *delimiter)
+/* void heredoc(t_dlst **lex, char *delimiter)
 {
 	char *line;
 	char *full_history;
 	int		size;
 	t_token	*token;
 
-	line = "a";
+	line = NULL;
 	full_history = NULL;
 	size = ft_strlen(delimiter);
+	full_history = ft_strjoin(full_history, delimiter);
+	full_history = ft_strjoin(full_history, "\n");
 	while (ft_strncmp(line, delimiter, size) != 0)
 	{
 		line = readline("heredoc >");
@@ -49,7 +51,7 @@ void heredoc(t_dlst **lex, char *delimiter)
 	token = new_token();
 	set_token(full_history, 0, ft_strlen(full_history), tt_dgreat, token);
 	ft_dlstaddb(lex, ft_dlstnew(token));
-}
+} */
 
 int	main(int argc, char const **argv, char const **envp)
 {
@@ -72,9 +74,9 @@ int	main(int argc, char const **argv, char const **envp)
 		}
 		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
-		heredoc(&data.lexlist, "hola");
+		//heredoc(&data.lexlist, "hola");
 		ft_dlstiter(data.lexlist, tok_p);
-		//syntax(data.lexlist);
+		syntax(data.lexlist);
 		ft_dlstclear(&data.lexlist, ft_free);
 		//expander(&data, read_line);
 	}
