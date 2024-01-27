@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/25 19:12:39 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/27 13:41:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_command	*make_command(t_command_type type, t_node value)
 	tmp->type = type;
 	tmp->value = value;
 	tmp->value.simple->flags = 0;
-	tmp->flag = 0;
+	tmp->flags = 0;
 	tmp->redirects = (t_redirect *) NULL;
 	return (tmp);
 }

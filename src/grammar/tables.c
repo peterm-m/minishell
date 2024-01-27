@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/23 21:17:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:15:30 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,13 @@ int	table_nt_generate(int rule_id)
 	return (nt_generate[rule_id]);
 }
 
+void	void_rule(t_dlst **lst, t_state **state, int a)
+{
+	(void )lst;
+	(void)state;
+	(void)a;
+}
+
 void	(*table_reduce(int rule_id))
 	(t_dlst **, t_state **, int )
 {
@@ -122,6 +129,20 @@ void	(*table_reduce(int rule_id))
 		rules_io_redirect1, rules_io_redirect1, rules_io_redirect1,
 		rules_io_redirect2, rules_io_redirect2, rules_io_redirect2,
 		rules_io_redirect3, rules_io_redirect3};
-
+	dbg("rule_id %d \n", rule_id );
 	return (rules[rule_id]);
 }
+
+		// rules_accept, rules_program, rules_program,
+		// rules_and_or, rules_and_or, rules_and_or,
+		// rules_pipeline, rules_pipeline, rules_command,
+		// rules_command, rules_command, rules_compound,
+		// rules_compound, rules_group, rules_subshell,
+		// rules_simple_cmd1, rules_simple_cmd1, rules_simple_cmd1,
+		// rules_simple_cmd2, rules_simple_cmd2, rules_cmd_prefix,
+		// rules_cmd_prefix, rules_cmd_prefix, rules_cmd_prefix,
+		// rules_cmd_suffix, rules_cmd_suffix, rules_cmd_suffix,
+		// rules_cmd_suffix, rules_redirect_list, rules_redirect_list,
+		// rules_io_redirect1, rules_io_redirect1, rules_io_redirect1,
+		// rules_io_redirect2, rules_io_redirect2, rules_io_redirect2,
+		// rules_io_redirect3, rules_io_redirect3};
