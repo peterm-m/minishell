@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/29 19:35:46 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:31:56 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_braket_count
 	int	state_braket;
 	int	state_brace;
 }	t_braket_count;
+
 typedef enum e_terminals
 {
 	tt_and_if,
