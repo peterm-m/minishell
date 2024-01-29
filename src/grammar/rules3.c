@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:51:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/24 23:23:10 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/29 20:02:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ void	rules_simple_cmd1(t_dlst **lex, t_state **state, int rule)
 
 	if (rule == 15)
 	{
-		elem1 = (*lex)->prev->prev->data;
-		elem2 = (*lex)->data;
-		(*lex)->data = make_simple(elem1, ((*lex)->prev->data), elem2);
+		//elem1 = (*lex)->prev->prev->data;
+		//elem2 = (*lex)->data;
+		//(*lex)->data = make_simple(elem1, ((*lex)->prev->data), elem2);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 16)
 	{
-		elem1 = (*lex)->prev->data;
-		(*lex)->data = make_simple(elem1, ((*lex)->data), NULL);
+		//elem1 = (*lex)->prev->data;
+		//(*lex)->data = make_simple(elem1, ((*lex)->data), NULL);
 		pop_elements(lex, state, 1);
 	}
-	else if (rule == 17)
-	{
-		elem1 = (*lex)->data;
-		(*lex)->data = make_simple(elem1, NULL, NULL);
-	}
+	//else if (rule == 17)
+	//{
+	//	elem1 = (*lex)->data;
+	//	(*lex)->data = make_simple(elem1, NULL, NULL);
+	//}
 }
 
 void	rules_simple_cmd2(t_dlst **lex, t_state **state, int rule)
@@ -53,8 +53,8 @@ void	rules_simple_cmd2(t_dlst **lex, t_state **state, int rule)
 
 	if (rule == 18)
 	{
-		elem2 = (*lex)->data;
-		(*lex)->data = make_simple(NULL, ((*lex)->prev->data), elem2);
+		//elem2 = (*lex)->data;
+		//(*lex)->data = make_simple(NULL, ((*lex)->prev->data), elem2);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 19)
@@ -75,21 +75,21 @@ void	rules_cmd_prefix(t_dlst **lex, t_state **state, int rule)
 	t_element	elem2;
 
 	if (rule == 20)
-		(*lex)->data = make_element(NULL, (*lex)->data);
+		(void) 0;// (*lex)->data = make_element(NULL, (*lex)->data);
 	else if (rule == 21)
 	{
-		elem1.redirect = (*lex)->prev->data;
-		elem2.redirect = (*lex)->data;
-		(*lex)->data = join_redir(elem1.redirect, elem2.redirect);
+		//elem1.redirect = (*lex)->prev->data;
+		//elem2.redirect = (*lex)->data;
+		//(*lex)->data = join_redir(elem1.redirect, elem2.redirect);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 22)
-		(*lex)->data = make_element((*lex)->data, NULL);
+		(void) 0;//(*lex)->data = make_element((*lex)->data, NULL);
 	else if (rule == 23)
 	{
-		elem1.word = (*lex)->prev->data;
-		elem2.word = make_word((*lex)->data);
-		(*lex)->data = join_word(elem1.word, elem2.word);
+		//elem1.word = (*lex)->prev->data;
+		//elem2.word = make_word((*lex)->data);
+		//(*lex)->data = join_word(elem1.word, elem2.word);
 		pop_elements(lex, state, 1);
 	}
 }
@@ -107,21 +107,21 @@ void	rules_cmd_suffix(t_dlst **lex, t_state **state, int rule)
 	t_element	elem2;
 
 	if (rule == 24)
-		(*lex)->data = make_element(NULL, (*lex)->data);
+		(void)0; //(*lex)->data = make_element(NULL, (*lex)->data);
 	else if (rule == 25)
 	{
-		elem1.redirect = (*lex)->prev->data;
-		elem2.redirect = (*lex)->data;
-		(*lex)->data = join_redir(elem1.redirect, elem2.redirect);
+		//elem1.redirect = (*lex)->prev->data;
+		//elem2.redirect = (*lex)->data;
+		//(*lex)->data = join_redir(elem1.redirect, elem2.redirect);
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 26)
-		(*lex)->data = make_element((*lex)->data, NULL);
+		(void)0;//(*lex)->data = make_element((*lex)->data, NULL);
 	else if (rule == 27)
 	{
-		elem1.word = (*lex)->prev->data;
-		elem2.word = make_word((*lex)->data);
-		(*lex)->data = join_word(elem1.word, elem2.word);
+		//elem1.word = (*lex)->prev->data;
+		//elem2.word = make_word((*lex)->data);
+		//(*lex)->data = join_word(elem1.word, elem2.word);
 		pop_elements(lex, state, 1);
 	}
 }

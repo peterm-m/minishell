@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:51:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/25 19:19:20 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/29 20:24:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	rules_and_or(t_dlst **lex, t_state **state, int rule)
 	}
 	else if (rule == 5)
 	{
-		(*lex)->data = make_connection((*lex)->prev->prev->data,
-				(*lex)->data, tt_or_if);
+		//(*lex)->data = make_connection((*lex)->prev->prev->data,
+		//		(*lex)->data, tt_or_if);
 		pop_elements(lex, state, 2);
 	}
 }
@@ -80,8 +80,8 @@ void	rules_pipeline(t_dlst **lex, t_state **state, int rule)
 		(void) 0;
 	else if (rule == 7)
 	{
-		(*lex)->data = make_connection((*lex)->prev->prev->data,
-				(*lex)->data, tt_pipe);
+		//(*lex)->data = make_connection((*lex)->prev->prev->data,
+		//		(*lex)->data, tt_pipe);
 		pop_elements(lex, state, 2);
 	}
 }

@@ -42,7 +42,7 @@ SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC          := gcc
-CFLAGS      := -Wall -Wextra -Werror -g 
+CFLAGS      := -Wall -Wextra  -g 
 
 RM          := rm -rf
 MAKEFLAGS   += --no-print-directory

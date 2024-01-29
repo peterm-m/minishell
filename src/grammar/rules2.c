@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:50:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/24 21:17:27 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/29 20:00:19 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	rules_command(t_dlst **lex, t_state **state, int rule)
 	cmd = (*lex)->prev->data;
 	if (rule == 10)
 	{
-		(*lex)->data = join_command_redir(cmd, redir);
+		//(*lex)->data = join_command_redir(cmd, redir);
 		pop_elements(lex, state, 1);
 	}
 }
@@ -55,7 +55,7 @@ void	rules_group(t_dlst **lex, t_state **state, int rule)
 	dbg("rule %d\n", rule);
 	if (rule == 13)
 	{
-		(*lex)->data = make_group((*lex)->prev->data);
+		//(*lex)->data = make_group((*lex)->prev->data);
 		pop_elements(lex, state, 2);
 	}
 }
@@ -69,7 +69,7 @@ void	rules_subshell(t_dlst **lex, t_state **state, int rule)
 	dbg("rule %d\n", rule);
 	if (rule == 14)
 	{
-		(*lex)->data = make_subshell((*lex)->prev->data);
+		//(*lex)->data = make_subshell((*lex)->prev->data);
 		pop_elements(lex, state, 2);
 	}
 }

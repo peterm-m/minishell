@@ -6,12 +6,14 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/20 15:43:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:17:22 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+#define LOGS 1
 
 // Standar header
 # include <sys/types.h>
@@ -56,5 +58,6 @@ typedef struct s_data
     t_dlst      *lexlist;
     const char  **env;
 }   t_data;
+
 
 #endif
