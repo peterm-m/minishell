@@ -878,4 +878,8 @@ void	test_syntax(void)
 	TEST_CHECK(table_action(52, tt_end) + 32 == 121);
 	TEST_CHECK(table_action(53, tt_end) + 32 == 122);
 	TEST_CHECK(table_action(54, tt_end) + 32 == 124);
+
+	//GO TO
+
+	TEST_CHECK(table_goto(0, tt_end) + 32 == 124);
 }
