@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/27 13:42:14 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:20:48 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ static void	shift(t_dlst **lex, t_state **state, int action)
 {
 	t_state	*new;
 
-	new = ft_dlstnew(malloc(sizeof(int)));
+	new = ft_dlstnew(ft_malloc(sizeof(int)));
 	*((int *)new->data) = action;
 	ft_dlstaddf(state, new);
 	*lex = (*lex)->next;
-	//printf("shift to %d\n", action);
-//	print_log(lex, state);
 	return ;
 }
 
@@ -41,9 +39,7 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 	table_reduce(action - REDUCE0)(lex, state, id_rule);
 	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data),
 			table_nt_generate(id_rule));
-	dbg("%s\n","");
-	//printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
-//	print_log(lex, state);
+	dbg("GO TO %d\n",*((int *)(*state)->data));
 	return ;
 }
 
@@ -58,6 +54,9 @@ static void	end_parser(t_dlst **lex, t_state **state, int action)
 		printf("END PARSER\n");
 	else
 		printf("Syntax Error.\n");
+	ft_dlstclear(&((*lex)->prev), free_token);
+	ft_dlstclear(state, ft_free);
+	exit(EXIT_SUCCESS);
 	return ;
 }
 
@@ -66,17 +65,22 @@ void	syntax(t_dlst *lex)
 	int			action;
 	t_state		*state;
 
-	state = ft_dlstnew(malloc(sizeof(int)));
+	state = ft_dlstnew(ft_malloc(sizeof(int)));
 	*((int *)state->data) = 0;
-//	print_log(&lex, &state);
 	while (1)
 	{
 		action = table_action(*((int *)state->data),
 				((t_token *)(lex->data))->flag & TOK_TYPE);
 		if (action >= SHIFT0 && action <= SHIFT54)
+		{
+			dbg("SHIFT to %d\n", action);
 			shift(&lex, &state, action);
+		}
 		else if (action >= REDUCE0 && action <= REDUCE37)
+		{
+			dbg("REDUCE to %d\n", action - REDUCE0);
 			reduce(&lex, &state, action);
+		}
 		else if (action == GRAMMAR_ERROR || action == UNDEFINED
 			|| action == ACCEPT)
 		{

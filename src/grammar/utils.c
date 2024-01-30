@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:38:02 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/27 13:42:23 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:15:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,18 @@
 
 void	pop_elements(t_dlst **lex, t_dlst **state, int n)
 {
-	dbg("%s\n","");
 	t_dlst	*tmp;
 
+	dbg("%s\n", (*lex)->data);
 	while (n)
 	{
 		tmp = (*state)->next;
-		ft_dlstdelone(*state, free);
+		ft_dlstdelone(*state, ft_free);
 		*state = tmp;
 		tmp = (*lex)->prev;
 		tmp->prev->next = (*lex);
 		(*lex)->prev = tmp->prev;
-		free_token(tmp->data);
 		ft_dlstdelone(tmp, ft_free);
 		n--;
 	}
-	dbg("%s\n", (*lex)->data);
 }

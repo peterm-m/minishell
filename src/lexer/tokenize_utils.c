@@ -1,6 +1,6 @@
 #include "minishell.h" 
 
-t_token *new_token(void)
+t_token	*new_token(void)
 {
 	t_token *token;
 
@@ -21,14 +21,17 @@ void	set_token(char *str, int i, int j, int type, t_token *token)
 		token->flag |= type;
 }
 
-void free_token(t_token *tok)
+void	free_token(void *tok)
 {
-	if (tok->str)
-		free(tok->str);
-	free((void *)tok);
+	t_token	*t;
+
+	t = (t_token *) tok;
+	if (t->str)
+		ft_free(t->str);
+	ft_free((void *)t);
 }
 
-void search_w_q(void *t)
+void	search_w_q(void *t)
 {
 	t_token	*token;
 

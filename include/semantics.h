@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/21 21:02:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:40:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_subshell_cmd
 {
 	int			flags;
 	t_command	*command;
-} t_subshell_cmd;
+}	t_subshell_cmd;
 
 t_command		*make_command(t_command_type type, t_node value);
 void			clean_command(t_command *cmd);

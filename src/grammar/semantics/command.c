@@ -6,11 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/27 13:41:29 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:36:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#undef LOGS 
+#define LOGS 0
 
 void	clean_command(t_command *cmd)
 {
@@ -26,7 +28,7 @@ void	clean_command(t_command *cmd)
 	else if (cmd->type == cmd_group)
 		clean_group(cmd->value.group);
 	clean_redirection(cmd->redirects);
-	free(cmd);
+ft_free(cmd);
 }
 
 t_command	*join_command_redir(t_command *cmd, t_redirect *redir)
@@ -49,3 +51,5 @@ t_command	*make_command(t_command_type type, t_node value)
 	tmp->redirects = (t_redirect *) NULL;
 	return (tmp);
 }
+#undef LOGS
+#define LOGS 1

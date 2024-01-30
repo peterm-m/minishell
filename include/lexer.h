@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/29 20:31:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:25:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_braket_count check_braces(int state, t_braket_count b_count);
 t_token *new_token(void);
 void	set_token(char *str, int i, int j, int type, t_token *token);
 t_token	*init_token(void);
-void free_token(t_token *token);
+void free_token(void *tok);
 void search_w_q(void *t);
 
 // get_tokens1.c

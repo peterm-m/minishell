@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:51:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/29 20:02:12 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:37:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	rules_simple_cmd2(t_dlst **lex, t_state **state, int rule)
 		pop_elements(lex, state, 1);
 	}
 	else if (rule == 19)
-		(*lex)->data = make_simple(NULL, ((*lex)->data), NULL);
+		(void)0;
+		//(*lex)->data = make_simple(NULL, ((*lex)->data), NULL);
 }
 
 /*

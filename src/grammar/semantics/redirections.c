@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/24 21:24:16 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/30 20:36:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#undef LOGS
+#define LOGS 0
 
 t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	int flag)
@@ -45,7 +48,7 @@ void	clean_redirection(t_redirect *redirection)
 	if (redirection)
 	{
 		clean_redirection(redirection->next);
-		free(redirection);
+	ft_free(redirection);
 	}
 }
 
@@ -62,3 +65,5 @@ t_redirect	*join_redir(t_redirect *redir1, t_redirect *redir2)
 	tmp->next = redir2;
 	return (redir2);
 }
+#undef LOGS
+#define LOGS 1

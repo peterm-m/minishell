@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/24 21:40:31 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/30 20:36:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#undef LOGS
+#define LOGS 0
 
 void	clean_word(t_word_list *word)
 {
@@ -18,7 +20,7 @@ void	clean_word(t_word_list *word)
 	if (word)
 	{
 		clean_word(word->next);
-		free(word);
+	ft_free(word);
 	}
 }
 
@@ -47,3 +49,5 @@ t_word_list	*join_word(t_word_list *word1, t_word_list *word2)
 	tmp->next = word2;
 	return (word2);
 }
+#undef LOGS
+#define LOGS 1

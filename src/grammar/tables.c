@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/29 20:41:54 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:03:02 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ int	table_action(int state, int token)
 	"rrr~r~rr~rrrrrr" "ddd~d~d~~dddddd" "eee~e~e~~eeeeee"\
 	"xxx~x~xxxxxxxxx" "yyy~y~yyyyyyyyy" "zzz~z~zzzzzzzzz"\
 	"|||~|~|||||||||";
-	if (action[NUM_TOKEN * state + token] - CHR_STATE0 >= 0 && action[NUM_TOKEN * state + token] - CHR_STATE0 < 55)
-		dbg("shift %d\n", action[NUM_TOKEN * state + token] - CHR_STATE0);
-	else
-		dbg("reduce %d\n", action[NUM_TOKEN * state + token] - CHR_STATE0 - NUM_STATES);
+
+//	dbg("reduce %d\n", action[NUM_TOKEN * state + token] - CHR_STATE0);
 	if ((token >= 0 && token <= 14) && (state >= 0 && state <= 54))
 		return (action[NUM_TOKEN * state + token] - CHR_STATE0);
 	return (-1);
@@ -81,7 +79,7 @@ int	table_goto(int state, int n_terminal)
 	"~~~~~~~~~~~~~" "~~~~~~~~~~~~~" "~~~~~~~~~~~~~"\
 	"~~~~~~~~~~~~~" "~~~~~~~~~~~~~" "~~~~~~~~~~~~~"\
 	"~~~~~~~~~~~~~";
-	dbg("go to %d \n", go_to[NUM_NTERMINALS * state + n_terminal] - CHR_STATE0);
+
 	if ((n_terminal >= nt_accept && n_terminal <= nt_io_redirect)
 		&& (state >= SHIFT0 && state <= SHIFT54))
 		return (go_to[NUM_NTERMINALS * state + n_terminal] - CHR_STATE0);
@@ -104,7 +102,7 @@ int	table_nt_generate(int rule_id)
 		nt_io_redirect, nt_io_redirect, nt_io_redirect,
 		nt_io_redirect, nt_io_redirect, nt_io_redirect,
 		nt_io_redirect, nt_io_redirect};
-	dbg("nt generate %d \n", nt_generate[rule_id]);
+
 	return (nt_generate[rule_id]);
 }
 
@@ -131,7 +129,7 @@ void	(*table_reduce(int rule_id))(t_dlst **, t_state **, int)
 		rules_io_redirect1, rules_io_redirect1, rules_io_redirect1,
 		rules_io_redirect2, rules_io_redirect2, rules_io_redirect2,
 		rules_io_redirect3, rules_io_redirect3};
-	//dbg("rule_id %d \n", rule_id);
+
 	return (rules[rule_id]);
 }
 

@@ -6,11 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:50:53 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/21 17:07:59 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:36:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#undef LOGS 
+#define LOGS 0
 
 void	clean_subshell(t_subshell_cmd *subshell)
 {
@@ -18,7 +20,7 @@ void	clean_subshell(t_subshell_cmd *subshell)
 		return ;
 	if (subshell->command != NULL)
 		clean_command(subshell->command);
-	free(subshell);
+ft_free(subshell);
 }
 
 t_command	*make_subshell(t_command *cmd)
@@ -30,3 +32,5 @@ t_command	*make_subshell(t_command *cmd)
 	subshell->flags = cmd_subshell;
 	return (make_command(cmd_subshell, (t_node)subshell));
 }
+#undef LOGS
+#define LOGS 1

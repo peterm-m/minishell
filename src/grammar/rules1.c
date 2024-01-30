@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:51:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/29 20:24:15 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:38:31 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	rules_and_or(t_dlst **lex, t_state **state, int rule)
 	dbg("rule %d\n", rule);
 	if (rule == 4)
 	{
-		(*lex)->data = make_connection((*lex)->prev->prev->data,
-				(*lex)->data, tt_and_if);
+		//(*lex)->data = make_connection((*lex)->prev->prev->data,
+		//		(*lex)->data, tt_and_if);
 		pop_elements(lex, state, 2);
 	}
 	else if (rule == 5)

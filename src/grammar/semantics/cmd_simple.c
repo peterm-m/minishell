@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_simple.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/24 23:22:24 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/30 20:36:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#undef LOGS 
+#define LOGS 0
 
 void	clean_simple(t_simple_cmd *cmd)
 {
@@ -19,7 +21,7 @@ void	clean_simple(t_simple_cmd *cmd)
 		return ;
 	clean_word(cmd->words);
 	clean_redirection(cmd->redirects);
-	free(cmd);
+ft_free(cmd);
 }
 
 t_command	*make_simple(t_element *element1, t_token *word,
@@ -35,7 +37,7 @@ t_command	*make_simple(t_element *element1, t_token *word,
 		simple->words = join_word(simple->words, element1->word);
 	}
 	if (word != NULL)
-	{dbg("%d\n",word->flag);
+	{dbg("%s\n","");
 		simple->words = join_word(simple->words, make_word(word));
 	}
 	if (element2 != NULL)
@@ -45,3 +47,5 @@ t_command	*make_simple(t_element *element1, t_token *word,
 	}
 	return (make_command(cmd_simple, (t_node)simple));
 }
+#undef LOGS
+#define LOGS 1
