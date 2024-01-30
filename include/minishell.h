@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/06 13:16:06 by pedro            ###   ########.fr       */
+/*   Updated: 2024/01/20 15:43:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,13 @@
 # define BHWHT "\e[1;97m"
 # define END   "\e[0m"
 
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
+# ifdef DEBUG
+#  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})
+# endif
 
 typedef struct s_data
 {
     t_dlst      *lexlist;
-    t_dlst      *sytxtree; //tree de syntax, creo que habría que meterlo al igual que la lista de lexer
     const char  **env;
 }   t_data;
 

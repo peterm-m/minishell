@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   element.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 15:34:25 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/02 16:17:42 by pedromar         ###   ########.fr       */
+/*   Created: 2024/01/03 01:05:58 by pedro             #+#    #+#             */
+/*   Updated: 2024/01/21 21:18:23 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrappers.h"
+#include "minishell.h"
 
-void	t_free(void *ptr)
+t_element	*make_element(t_token *word, t_redirect *redir)
 {
-	free(ptr);
+	t_element	*element;
+
+	element = (t_element *)ft_malloc(sizeof(t_element));
+	if (word != NULL)
+		element->word = make_word(word);
+	if (redir != NULL)
+		element->redirect = redir;
+	return (element);
+}
+
+void	clean_element(t_element *element)
+{
+	clean_word(element->word);
+	clean_redirection(element->redirect);
+	free(element);
 }

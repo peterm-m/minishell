@@ -12,6 +12,19 @@
 
 #include "libft.h"
 
+/**
+ * The function `ft_strncmp` compares two strings up to a specified number of characters and returns
+ * the difference between the first differing characters.
+ * 
+ * @param s1 A pointer to the first string to be compared.
+ * @param s2 The parameter `s2` is a pointer to a character array (string) that we want to compare with
+ * `s1`.
+ * @param n The parameter `n` represents the maximum number of characters to compare between the two
+ * strings `s1` and `s2`.
+ * 
+ * @return the difference between the first differing characters in the two strings, casted to an
+ * unsigned char.
+ */
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
 	size_t	i;

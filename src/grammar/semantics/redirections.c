@@ -6,47 +6,35 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/15 20:32:13 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:29:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//void	join_redirection(t_dlst *lex, t_state	*state, int rule)
-//{
-//	return ;
-//}
-//
-//void	*push_heredoc(t_redirect *r)
-//{
-//	(void *) r;
-//	return (NULL);
-//}
-//
-void	join_redir(t_redirect **redir1, t_redirect *redir2)
+/* void heredoc(t_dlst **lex, char *delimiter)
 {
-	t_redirect	*tmp;
+	char *line;
+	char *full_history;
+	int		size;
+	t_token	*token;
 
-	if (redir1 == NULL)
-		*redir1 = redir2;
-	else
+	line = NULL;
+	full_history = NULL;
+	size = ft_strlen(delimiter);
+	full_history = ft_strjoin(full_history, delimiter);
+	full_history = ft_strjoin(full_history, "\n");
+	while (ft_strncmp(line, delimiter, size) != 0)
 	{
-		tmp = *redir1;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = redir2;
+		line = readline("heredoc >");
+		full_history = ft_strjoin(full_history, line);
+		full_history = ft_strjoin(full_history, "\n");
+		//free(line);
 	}
-}
-
-// clean list of redirections
-void	clean_redirection(t_redirect *redirection)
-{
-	if (redirection)
-	{
-		clean_redirection(redirection->next);
-		free(redirection);
-	}
-}
+	//full_history = ft_strjoin(full_history, delimiter);
+	token = new_token();
+	set_token(full_history, 0, ft_strlen(full_history), tt_dgreat, token);
+	ft_dlstaddb(lex, ft_dlstnew(token));
+} */
 
 t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	int flag)
@@ -72,4 +60,26 @@ t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	else
 		printf("Error pipeline \n");
 	return (redirect);
+}
+
+void	clean_redirection(t_redirect *redirection)
+{
+	if (redirection)
+	{
+		clean_redirection(redirection->next);
+		free(redirection);
+	}
+}
+
+t_redirect	*join_redir(t_redirect *redir1, t_redirect *redir2)
+{
+	t_redirect	*tmp;
+
+	if (redir1 == NULL)
+		return (redir2);
+	tmp = redir1;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = redir2;
+	return (redir2);
 }

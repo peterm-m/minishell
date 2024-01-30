@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/12 20:41:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:17:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 	n == 94           : grammar error (vacio)
 	n < 0             : error
 */
-
 
 int	table_action(int state, int token)
 {
@@ -106,7 +105,8 @@ int	table_nt_generate(int rule_id)
 	return (nt_generate[rule_id]);
 }
 
-void	(*table_reduce(int rule_id))(t_dlst **, t_state **, int )
+void	(*table_reduce(int rule_id))
+	(t_dlst **, t_state **, int )
 {
 	static void	(*rules[NUM_RULES])(t_dlst **, t_state **, int) = {\
 		rules_accept, rules_program, rules_program,
@@ -114,14 +114,14 @@ void	(*table_reduce(int rule_id))(t_dlst **, t_state **, int )
 		rules_pipeline, rules_pipeline, rules_command,
 		rules_command, rules_command, rules_compound,
 		rules_compound, rules_group, rules_subshell,
-		rules_simple_cmd, rules_simple_cmd, rules_simple_cmd,
-		rules_simple_cmd, rules_simple_cmd, rules_cmd_prefix,
+		rules_simple_cmd1, rules_simple_cmd1, rules_simple_cmd1,
+		rules_simple_cmd2, rules_simple_cmd2, rules_cmd_prefix,
 		rules_cmd_prefix, rules_cmd_prefix, rules_cmd_prefix,
 		rules_cmd_suffix, rules_cmd_suffix, rules_cmd_suffix,
 		rules_cmd_suffix, rules_redirect_list, rules_redirect_list,
-		rules_io_redirect, rules_io_redirect, rules_io_redirect,
-		rules_io_redirect, rules_io_redirect, rules_io_redirect,
-		rules_io_redirect, rules_io_redirect};
+		rules_io_redirect1, rules_io_redirect1, rules_io_redirect1,
+		rules_io_redirect2, rules_io_redirect2, rules_io_redirect2,
+		rules_io_redirect3, rules_io_redirect3};
 
 	return (rules[rule_id]);
 }

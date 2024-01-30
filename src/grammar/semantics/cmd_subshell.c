@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_group.c                                        :+:      :+:    :+:   */
+/*   cmd_subshell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 00:52:26 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/08 20:36:56 by pedromar         ###   ########.fr       */
+/*   Created: 2024/01/03 00:50:53 by pedro             #+#    #+#             */
+/*   Updated: 2024/01/21 17:07:59 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_group(t_group_cmd *group)
+void	clean_subshell(t_subshell_cmd *subshell)
 {
-	if (group == NULL)
+	if (subshell == NULL)
 		return ;
-	if (group->command != NULL)
-		clean_command(group->command);
-	free(group);
+	if (subshell->command != NULL)
+		clean_command(subshell->command);
+	free(subshell);
 }
 
-t_command	*make_group(t_command *command)
+t_command	*make_subshell(t_command *cmd)
 {
-	t_group_cmd	*group;
+	t_subshell_cmd	*subshell;
 
-	group = (t_group_cmd *)ft_malloc(sizeof(t_group_cmd));
-	group->ignore = 0;
-	group->command = command;
-	return (make_command(cmd_group, (t_node )group));
+	subshell = (t_subshell_cmd *)ft_malloc(sizeof(t_subshell_cmd));
+	subshell->command = cmd;
+	subshell->flags = cmd_subshell;
+	return (make_command(cmd_subshell, (t_node)subshell));
 }

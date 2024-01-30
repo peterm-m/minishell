@@ -6,17 +6,13 @@
  * 
  * @param c The parameter `c` is an integer representing a character.
  * 
- * @return The function is_token is returning 1 if the input 
+ * @return The function is_operator is returning 1 if the input 
  * character c is a token Otherwise, it is returning 0.
  */
-int is_token(int c)
+int is_operator(int c)
 {
-    if (c == '|' || c == '<' || c == '>' ||
-        c == '(' || c == ')' || c == ';'
-        || c == '&')
-        return (1);
-    else
-        return (0);
+	return (c == '|' || c == '<' || c == '>' ||
+		c == '&');
 }
 
 /**
@@ -41,7 +37,7 @@ int	is_blankspace(char c)
  */
 int is_quotes(char c)
 {
-    return (c == '\'' || c == '"');
+	return (c == '\'' || c == '"');
 }
 
 /**
@@ -55,23 +51,18 @@ int is_quotes(char c)
  */
 int	in_word(char c)
 {
-	return (is_quotes(c) || is_token(c) || c == '$' || 
-        is_blankspace(c) || c == '\0');
+	return (is_operator(c) || is_blankspace(c) || c == '\0');
 }
 
-/**
- * The function allocates memory of a given size and initializes it to zero.
- * 
- * @param size The size parameter is the number of bytes to allocate in memory.
- * 
- * @return a pointer to the allocated memory block.
- */
-void	*ft_memalloc(size_t size)
+t_braket_count check_braces(int state, t_braket_count b_count)
 {
-	void *result;
-
-	if (!(result = malloc(size)))
-		return (NULL);
-	ft_memset(result, 0, size);
-	return (result);
+	if (state == 15)
+		b_count.state_braket++;
+	else if (state == 16)
+		b_count.state_braket--;
+	else if (state == 17)
+		b_count.state_brace++;
+	else if (state == 18)
+		b_count.state_brace--;
+	return (b_count);
 }

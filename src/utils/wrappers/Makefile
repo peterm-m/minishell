@@ -1,13 +1,12 @@
 
-NAME = libwrappers.a
-
+NAME := libwrappers.a
+NAME_DBG := libwrappers_dbg.a
 SRC_DIR := .
 
 SRCS = \
 	ft_close.c\
 	ft_dup2.c\
 	ft_error.c\
-	ft_free.c\
 	ft_fstat.c\
 	ft_kill.c\
 	ft_malloc.c\
@@ -23,7 +22,7 @@ SRCS = \
 	ft_waitpid.c\
 	ft_write.c\
 	ft_execve.c\
-	tf_fork.c\
+	ft_fork.c\
 	ft_lstat.c\
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
@@ -41,23 +40,32 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra 
+CCFLAGS = -Wall -Werror -Wextra -g
 
 all: $(NAME)
+
+debug: fclean
+debug: CCFLAGS+=-DDEBUG
+debug: $(NAME_DBG)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	$(info CREATED $(NAME))
 
+$(NAME_DBG): $(OBJS)
+	@$(AR) $(ARFLAGS) $(NAME_DBG) $(OBJS)
+	$(info CREATED $(NAME_DBG))
+
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	@$(CC) $(CCFLAGS) -c $< -o $@
+	$(CC) $(CCFLAGS) -c $< -o $@
 	$(info CREATED $@)
 
 clean:
 	@$(CLEANER) $(BUILD_DIR)
 
-fclean: clean 
+fclean: clean
+	@$(CLEANER) $(NAME_DBG)
 	@$(CLEANER) $(NAME)
 
 re:

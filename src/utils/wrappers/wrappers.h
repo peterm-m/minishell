@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/03 19:28:31 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:28:09 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,48 @@
 # include <signal.h>
 # include <errno.h>
 
+// conditional
+# ifdef DEBUG
+
+typedef struct s_mem_info
+{
+	void*				ptr;
+	const char*			fileName;
+	const char*			functionName;
+	size_t				bytes;
+	int					line;
+	struct s_mem_info*	next;
+	struct s_mem_info*	prev;
+}	t_mem_info;
+
+typedef struct s_reserve
+{
+	size_t		bytes;
+	int			line;
+	char		*file;
+	const char	*func;
+}	t_reserve;
+
+void	*ft_malloc(t_reserve reserve);
+void	ft_free(void *ptr);
+void	ft_leaks(void);
+
+#  define dbg(fmt, ...) \
+			do { if (DEBUG) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
+			__LINE__, __func__, __VA_ARGS__); } while (0)
+
+# else
+
+void		*ft_malloc(size_t size);
+void		ft_free(void *ptr);
+
+# endif
+
+
+
 typedef void	t_handler(int);
 
 void		unix_error(char *msg);
-void		*ft_malloc(size_t size);
-void		ft_free(void *ptr);
 int			ft_open(const char *pathname, int flags, mode_t mode);
 ssize_t		ft_read(int fd, void *buf, size_t count);
 ssize_t		ft_write(int fd, const void *buf, size_t count);

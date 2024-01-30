@@ -6,13 +6,19 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/08 20:02:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:25:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //void	print_log(t_dlst **lex, t_state **state);
+
+// TODO testeo general
+//		rebla por regla
+//		tablas
+//		semantica
+// TODO end_parser
 
 static void	shift(t_dlst **lex, t_state **state, int action)
 {
@@ -22,7 +28,7 @@ static void	shift(t_dlst **lex, t_state **state, int action)
 	*((int *)new->data) = action;
 	ft_dlstaddf(state, new);
 	*lex = (*lex)->next;
-	printf("shift to %d\n", action);
+	//printf("shift to %d\n", action);
 //	print_log(lex, state);
 	return ;
 }
@@ -35,7 +41,7 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 	table_reduce(action - REDUCE0)(lex, state, id_rule);
 	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data),
 			table_nt_generate(id_rule));
-	printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
+	//printf("reduce %d and go to %d\n", id_rule, *((int *)(*state)->data));
 //	print_log(lex, state);
 	return ;
 }
@@ -65,7 +71,7 @@ void	syntax(t_dlst *lex)
 	while (1)
 	{
 		action = table_action(*((int *)state->data),
-				((t_token *)(lex->data))->type);
+				((t_token *)(lex->data))->flag & TOK_TYPE);
 		if (action >= SHIFT0 && action <= SHIFT54)
 			shift(&lex, &state, action);
 		else if (action >= REDUCE0 && action <= REDUCE37)
@@ -79,20 +85,20 @@ void	syntax(t_dlst *lex)
 	}
 }
 
-//void	ft_dlstprint(void *data)
-//{
-//	printf("%d ", ((t_token *)data)->type);
-//}
-//
-//void print_log(t_dlst **lex, t_state **state)
-//{
-//	printf("lex\t");
-//	ft_dlstiter(*lex, ft_dlstprint);
-//	printf("\nstate\t");
-//	ft_dlstiter(*state, ft_dlstprint);
-//	printf("\n");
-//}
-//
+/* void	ft_dlstprint(void *data)
+{
+	printf("%d ", ((t_token *)data)->flag & TOK_TYPE);
+} */
+
+/* void print_log(t_dlst **lex, t_state **state)
+{
+	printf("lex\t");
+	ft_dlstiter(*lex, ft_dlstprint);
+	printf("\nstate\t");
+	ft_dlstiter(*state, ft_dlstprint);
+	printf("\n");
+} */
+
 /* t_token	*gen_tok(t_terminals type)
 {	
 	t_token	*tok;
