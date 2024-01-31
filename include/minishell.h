@@ -12,7 +12,7 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
+# define LOGS 1
 // Standar header
 # include <sys/types.h>
 # include <stdio.h>
@@ -46,6 +46,11 @@
 # define BHCYN "\e[1;96m"
 # define BHWHT "\e[1;97m"
 # define END   "\e[0m"
+
+// Bool
+# define TRUE 1
+# define FALSE 0
+
 
 # ifdef DEBUG
 #  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})
