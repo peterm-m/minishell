@@ -15,22 +15,19 @@
 
 void	subsystem(void);
 
-typedef struct s_env_lst
+typedef struct s_env
 {
 	char			*key;
     char            *value;
-	struct s_env_lst	*next;
-	struct s_env_lst	*prev;
-} t_env_lst;
 
-t_env_lst   *get_enviroment(const char **env, t_env_lst **head);
+} t_env;
+
+//get_env.c
+t_dlst   *get_enviroment(const char **env, t_dlst **head);
+void    set_env(char *key, char *value, t_env *tok);
+
 // env_list_utils.c
-
-t_env_lst	*ft_envlstnew(void *key, void *value);
-void	    ft_envlstaddb(t_env_lst **head, t_env_lst *node);
-void	    ft_envlstadd(t_env_lst *prev, t_env_lst *node);
-t_env_lst	*ft_envlstlast(t_env_lst *envlst);
-void	    ft_envlstiter(t_env_lst *envlst, void (*f)(void *));
-void	    ft_envlstclear(t_env_lst **envlst, void (*del)(void*));
+t_env *new_t_env(void);
+void free_t_env(t_env *tok);
 
 #endif

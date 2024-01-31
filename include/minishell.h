@@ -59,8 +59,7 @@
 typedef struct s_data
 {
     t_dlst      *lexlist;
-    const char  **env;
-    t_env_lst   *envlist;
+    t_dlst      *envlist;
 }   t_data;
 
 #endif

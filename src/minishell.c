@@ -52,6 +52,10 @@ void tok_p(void *t)
 	set_token(full_history, 0, ft_strlen(full_history), tt_dgreat, token);
 	ft_dlstaddb(lex, ft_dlstnew(token));
 } */
+void p_lst(void *e)
+{
+    printf(BHBLK"%s=%s\n"END, ((t_env *)e)->key, ((t_env *)e)->value);
+}
 
 int	main(int argc, char const **argv, char const **envp)
 {
@@ -60,8 +64,11 @@ int	main(int argc, char const **argv, char const **envp)
 	
 	(void) argc;
 	(void) argv;
-	data.env = envp;
-	// Subsystems
+	// Gestion de ENV
+	printf(BHRED"Variables de entorno al inicio del programa: \n"END);
+	ft_dlstnew(data.envlist);
+	data.envlist = get_enviroment(envp,  &data.envlist);
+	ft_dlstiter(data.envlist, p_lst);
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
@@ -72,14 +79,15 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
-		ft_dlstnew(data.lexlist);
+/* 		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
 		//heredoc(&data.lexlist, "hola");
 		ft_dlstiter(data.lexlist, tok_p);
 		syntax(data.lexlist);
 		ft_dlstclear(&data.lexlist, ft_free);
-		//expander(&data, read_line);
+		//expander(&data, read_line); */
 	}
 	ft_dlstclear(&data.lexlist, ft_free);
+	ft_dlstclear(&data.envlist, ft_free);
 	return (0);
 }
