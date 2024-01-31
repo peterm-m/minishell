@@ -36,7 +36,9 @@ SRCS        := \
 	\
 	expansion/expander.c \
 	\
-	subsystem/subsystem.c
+	subsystem/subsystem.c \
+	subsystem/get_env.c \
+	subsystem/env_list_utils.c
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
