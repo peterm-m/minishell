@@ -30,27 +30,36 @@ t_dlst   *get_enviroment(const char **env, t_dlst **head)
     return (*head);
 }
 
-/* char    **make_char(t_dlst *head)
+char    **make_char(t_dlst *head)
 {
     int     i;
-    size_t  s_key;
-    size_t  s_value;
+    int     j;
+    size_t  s_key = 0;
+    char    *value;
     char    **env;
 
-    env = ft_malloc(ft_dlstsize + 1);
+    env = ft_malloc((size_t)ft_dlstsize + 1);
     i = 0;
     while (head != NULL)
 	{
 		s_key = (ft_strlen(((t_env *)head->data)->key));
-        s_value = (ft_strlen(((t_env *)head->data)->value));
-        env[i] = ft_strjoin(((t_env *)head->data)->key, ((t_env *)head->data)->value);
+        j = 0;
+        while (((t_env *)head->data)->value[j])
+        {
+            value = ft_strjoin(value, ((t_env *)head->data)->value[j]);
+            if (((t_env *)head->data)->value[i + 1])
+            value = ft_strjoin(value, ":");
+            j++;
+        }
+        env[i] = ft_strjoin(((t_env *)head->data)->key, "=");
+        env[i] = ft_strjoin(((t_env *)head->data)->key, value);
 		head = head->next;
         i++;
         printf("%s\n", env[i]);
 	}
     env[i] = NULL;
     return (env);
-} */
+}
 
 /* void p_lst(void *e)
 {

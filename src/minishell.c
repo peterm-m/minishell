@@ -73,15 +73,21 @@ int	main(int argc, char const **argv, char const **envp)
 {
 	char	*read_line;
 	t_data	data;
+	int j = 0; // para probar la funcionn make_char
 	
 	(void) argc;
 	(void) argv;
-	// Gestion de ENV
+	// Prueba Gestion de ENV
 	printf(BHRED"Variables de entorno al inicio del programa: \n"END);
 	ft_dlstnew(data.envlist);
 	data.envlist = get_enviroment(envp,  &data.envlist);
 	ft_dlstiter(data.envlist, p_lst);
-	//char **nueva = make_
+	char **nueva = make_char(data.envlist); //malloc error
+	while (nueva[j])
+	{
+		printf("%s", nueva[j]);
+		j++;
+	}
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
