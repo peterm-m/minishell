@@ -54,7 +54,19 @@ void tok_p(void *t)
 } */
 void p_lst(void *e)
 {
-    printf(BHBLK"%s=%s\n"END, ((t_env *)e)->key, ((t_env *)e)->value);
+	int i = 0;
+    printf(BHBLK"%s="END, ((t_env *)e)->key);
+	while (((t_env *)e)->value[i])
+	{
+		printf(BHBLK"%s"END, ((t_env *)e)->value[i]);
+		if (((t_env *)e)->value[i + 1])
+		{
+			printf(":");
+		}
+		i++;
+	}
+	printf("\n");
+
 }
 
 int	main(int argc, char const **argv, char const **envp)
@@ -69,6 +81,7 @@ int	main(int argc, char const **argv, char const **envp)
 	ft_dlstnew(data.envlist);
 	data.envlist = get_enviroment(envp,  &data.envlist);
 	ft_dlstiter(data.envlist, p_lst);
+	//char **nueva = make_
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);

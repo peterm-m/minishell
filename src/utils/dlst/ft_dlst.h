@@ -31,5 +31,6 @@ t_dlst	*ft_dlstlast(t_dlst *dlst);
 void	ft_dlstclear(t_dlst **dlst, void (*del)(void*));
 void	ft_dlstiter(t_dlst *dlst, void (*f)(void *));
 void	ft_dlstdelone(t_dlst *dlst, void (*del)(void*));
+int	ft_dlstsize(t_dlst *dlst);
 
 #endif

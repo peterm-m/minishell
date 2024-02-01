@@ -18,13 +18,14 @@ void	subsystem(void);
 typedef struct s_env
 {
 	char			*key;
-    char            *value;
+    char            **value;
 
 } t_env;
 
 //get_env.c
 t_dlst   *get_enviroment(const char **env, t_dlst **head);
 void    set_env(char *key, char *value, t_env *tok);
+char    **make_char(t_dlst *head);
 
 // env_list_utils.c
 t_env *new_t_env(void);

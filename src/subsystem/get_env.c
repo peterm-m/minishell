@@ -1,8 +1,9 @@
 #include "minishell.h"
+
 void    set_env(char *key, char *value, t_env *tok)
 {
     tok->key = key;
-    tok->value = value;
+    tok->value = ft_split(value, ':');
 }
 
 t_dlst   *get_enviroment(const char **env, t_dlst **head)
@@ -28,6 +29,28 @@ t_dlst   *get_enviroment(const char **env, t_dlst **head)
     }
     return (*head);
 }
+
+/* char    **make_char(t_dlst *head)
+{
+    int     i;
+    size_t  s_key;
+    size_t  s_value;
+    char    **env;
+
+    env = ft_malloc(ft_dlstsize + 1);
+    i = 0;
+    while (head != NULL)
+	{
+		s_key = (ft_strlen(((t_env *)head->data)->key));
+        s_value = (ft_strlen(((t_env *)head->data)->value));
+        env[i] = ft_strjoin(((t_env *)head->data)->key, ((t_env *)head->data)->value);
+		head = head->next;
+        i++;
+        printf("%s\n", env[i]);
+	}
+    env[i] = NULL;
+    return (env);
+} */
 
 /* void p_lst(void *e)
 {

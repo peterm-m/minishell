@@ -9,7 +9,8 @@ SRCS = \
 	ft_dlstadd.c \
 	ft_dlstlast.c \
 	ft_dlstiter.c\
-	ft_dlstdelone.c
+	ft_dlstdelone.c \
+	ft_dlstsize.c
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 

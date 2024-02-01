@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char *get_env_var(t_data *data, char *str, int i)
+/* char *get_env_var(t_data *data, char *str, int i)
 {
     char    *env_var;
     size_t  var_size;
@@ -43,4 +43,4 @@ void	expander(t_data *data, char *input)
         if (input[i] == '$')
             get_expansion(data, input, i);
     }
-}
+} */
