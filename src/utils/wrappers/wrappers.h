@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/24 21:01:43 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/06 02:02:33 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/stat.h>
 # include <signal.h>
 # include <errno.h>
+
+#define DEBUG 1
 
 // conditional
 # ifdef DEBUG
@@ -58,8 +60,8 @@ void		ft_free(void *ptr);
 # endif
 
 # ifdef LOGS
-#  define dbg(fmt, ...) \
-			do { if (LOGS) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
+#  define dbg(fmt,...) \
+			do { if (LOGS) fprintf(stderr,  "%-60s:%-3d:%-30s" fmt, __FILE__,\
 			__LINE__, __func__, __VA_ARGS__); } while (0)
 # endif
 

@@ -3,20 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_group.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:52:26 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/30 20:36:53 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/08 01:13:59 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
-#define LOGS 0
+#define LOGS 1
 
-void	clean_group(t_group_cmd *group)
+void	print_group(t_group *group)
 {
-	dbg("%s\n","");
+	fprintf(stderr,"group:\n");
+	print_command(group->command);
+}
+
+void	clean_group(t_group *group)
+{
+	dbg("│\t│\t├─%s\n","");
 	if (group == NULL)
 		return ;
 	if (group->command != NULL)
@@ -26,13 +32,11 @@ ft_free(group);
 
 t_command	*make_group(t_command *command)
 {
-	dbg("%s\n","");
-	t_group_cmd	*group;
+	dbg("│\t│\t├─%s\n","");
+	t_group	*group;
 
-	group = (t_group_cmd *) ft_malloc(sizeof(t_group_cmd));
+	group = (t_group *) ft_malloc(sizeof(t_group));
 	group->ignore = 0;
 	group->command = command;
 	return (make_command(cmd_group, (t_node)group));
 }
-#undef LOGS
-#define LOGS 1

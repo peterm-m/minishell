@@ -17,11 +17,13 @@ SRCS        := \
 	\
 	grammar/utils.c \
 	grammar/syntax.c \
-	grammar/rules1.c \
-	grammar/rules2.c \
-	grammar/rules3.c \
-	grammar/rules4.c \
 	grammar/tables.c \
+	grammar/rules_grammar1.c \
+	grammar/rules_grammar2.c \
+	grammar/rules_grammar3.c \
+	grammar/rules_grammar4.c \
+	grammar/rules_grammar5.c \
+	grammar/rules_grammar6.c \
 	\
 	grammar/semantics/command.c \
 	grammar/semantics/cmd_group.c \
@@ -30,7 +32,7 @@ SRCS        := \
 	grammar/semantics/element.c \
 	grammar/semantics/word.c \
 	grammar/semantics/redirections.c \
-	grammar/semantics/cmd_conection.c \
+	grammar/semantics/cmd_connection.c \
 	\
 	executer/executer.c \
 	\
