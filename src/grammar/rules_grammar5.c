@@ -31,14 +31,13 @@ void	rule_redir_list(t_dlst **lex, t_state **state)
 }
 
 // TODO push_heredoc
-// TODO IO_NUMBERS
-// TODO : LEAK provenientes de t_unit_io, no se les hace free
+// TODO : LEAK de redirecciones que no tiene io_number
 
-// io_redirect :           '<'    WORD (rule 30) // CAMBIAR POR INT LEAK
+// io_redirect :           '<'    WORD (rule 30) LEAK
 
 void	rule_redir1(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir1 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_unit_io	source;
 	t_unit_io	dest;
@@ -46,33 +45,33 @@ void	rule_redir1(t_dlst **lex, t_state **state)
 	word = (*lex)->prev->data;
 	out = &(*lex)->prev->data;
 	source.dest = 1;
-	dest.filename = word;
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source,r_input_direction, &dest, 0);
-		pop_elements(lex, state, 1);
+	pop_elements(lex, state, 1);
 }
 
-// io_redirect :           '>'    WORD (rule 31) // CAMBIAR POR INT  LEAKS
+// io_redirect :           '>'    WORD (rule 31) LEAK
 
 void	rule_redir2(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir2 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_unit_io	source;
 	t_unit_io	dest;
 
-	word = (*lex)->prev->data;
 	out = &(*lex)->prev->data;
+	word = (*lex)->prev->data;
 	source.dest = 1;
-	dest.filename = word;
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_output_direction, &dest, 0);
 	pop_elements(lex, state, 1);
 }
 
-// io_redirect :           DGREAT WORD (rule 32) // CAMBIAR POR INT LEAK
+// io_redirect :           DGREAT WORD (rule 32) LEAK
 
 void	rule_redir3(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir3 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_unit_io	source;
 	t_unit_io	dest;
@@ -80,16 +79,16 @@ void	rule_redir3(t_dlst **lex, t_state **state)
 	word = (*lex)->prev->data;
 	out = &(*lex)->prev->data;
 	source.dest = 0;
-	dest.filename = word;
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_appending_to, &dest, 0);
 	pop_elements(lex, state, 1);
 }
 
-// io_redirect : IO_NUMBER '<'    WORD (rule 33) // CAMBIAR POR INT LEAK
+// io_redirect : IO_NUMBER '<'    WORD (rule 33) OK
 
 void	rule_redir4(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir4 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_token		*io_number;
 	t_unit_io	source;
@@ -98,9 +97,8 @@ void	rule_redir4(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.filename = io_number; //TODO tokens con ints
-	dest.filename = word;
+	source.dest = make_number(io_number);
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_input_direction, &dest, 0);
 	pop_elements(lex, state, 2);
 }
-

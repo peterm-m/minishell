@@ -47,7 +47,7 @@ void	rule_subshell(t_dlst **lex, t_state **state)
 // simple_command : cmd_prefix WORD cmd_suffix (rule 15)
 
 void	rule_simple1(t_dlst **lex, t_state **state)
-{dbg("rule_simple1 %s\n", "");
+{dbg("│\t├─rule_simple1 %s\n", "");
 	void	**out;
 	void	*cmd_prefix;
 	void	*cmd_suffix;
@@ -64,7 +64,7 @@ void	rule_simple1(t_dlst **lex, t_state **state)
 // simple_command : cmd_prefix WORD            (rule 16)
 
 void	rule_simple2(t_dlst **lex, t_state **state)
-{dbg("rule_simple2 %s\n", "");
+{dbg("│\t├─rule_simple2 %s\n", "");
 	void	**out;
 	void	*cmd_prefix;
 	void	*word;
@@ -79,7 +79,7 @@ void	rule_simple2(t_dlst **lex, t_state **state)
 // simple_command : cmd_prefix                 (rule 17) OK
 
 void	rule_simple3(t_dlst **lex, t_state **state)
-{dbg("rule_simple3 %s\n", "");
+{dbg("│\t├─rule_simple3 %s\n", "");
 	void	**out;
 	void	*cmd_prefix;
 

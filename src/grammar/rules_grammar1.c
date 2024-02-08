@@ -36,7 +36,7 @@ void	rule_nothing(t_dlst **lst, t_state **state)
 
 void	rule_and_or1(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_and_or1%s\n", "");
-	void	**out;
+	void		**out;
 	t_command	*pipeline;
 	t_command	*and_or;
 
@@ -51,7 +51,7 @@ void	rule_and_or1(t_dlst **lex, t_state **state)
 
 void	rule_and_or2(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_and_or2%s\n", "");
-	void	**out;
+	void		**out;
 	t_command	*pipeline;
 	t_command	*and_or;
 
@@ -69,7 +69,7 @@ void	rule_and_or2(t_dlst **lex, t_state **state)
 
 void	rule_pipeline(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_pipeline%s\n", "");
-	void	**out;
+	void		**out;
 	t_command	*command;
 	t_command	*pipeline;
 
@@ -90,7 +90,7 @@ void	rule_pipeline(t_dlst **lex, t_state **state)
 
 void	rule_command(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_command%s\n", "");
-	void	**out;
+	void		**out;
 	t_redirect	*redirect_list;
 	t_command	*compound_command;
 

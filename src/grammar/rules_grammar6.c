@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-// io_redirect : IO_NUMBER '>' WORD (rule 34) // CAMBIAR POR INT LEAK
+// io_redirect : IO_NUMBER '>' WORD (rule 34) OK
 
 void	rule_redir5(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir5 %s\n", "");
@@ -25,13 +25,13 @@ void	rule_redir5(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.filename = io_number; //TODO tokens con ints
-	dest.filename = word;
+	source.dest = make_number(io_number);
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_output_direction, &dest, 0);
 	pop_elements(lex, state, 2);
 }
 
-// io_redirect : IO_NUMBER DGREAT WORD (rule 35) // CAMBIAR POR INT LEAK
+// io_redirect : IO_NUMBER DGREAT WORD (rule 35) OK
 
 void	rule_redir6(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir6 %s\n", "");
@@ -44,13 +44,13 @@ void	rule_redir6(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.filename = io_number; //TODO tokens con ints
-	dest.filename = word; 
+	source.dest = make_number(io_number);
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_appending_to, &dest, 0);
 	pop_elements(lex, state, 2);
 }
 
-// io_redirect :           DLESS  WORD (rule 36) // CAMBIAR POR INT LEAK
+// io_redirect :           DLESS  WORD (rule 36) // TODO: push_heredoc, LEAK
 
 void	rule_redir7(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir7 %s\n", "");
@@ -62,13 +62,13 @@ void	rule_redir7(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	source.dest = 0;
-	dest.filename = word;
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	// push_heredoc
 	pop_elements(lex, state, 1);
 }
 
-// io_redirect : IO_NUMBER DLESS  WORD (rule 37) // CAMBIAR POR INT LEAK
+// io_redirect : IO_NUMBER DLESS WORD (rule 37) TODO:push_heredoc OK
 
 void	rule_redir8(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir8 %s\n", "");
@@ -81,8 +81,8 @@ void	rule_redir8(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.filename = io_number; //TODO tokens con ints
-	dest.filename = word; 
+	source.dest = make_number(io_number);
+	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	// push_heredoc
 	pop_elements(lex, state, 2);

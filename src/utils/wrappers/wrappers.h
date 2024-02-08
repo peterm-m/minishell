@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/06 02:02:33 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/08 18:55:04 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,14 @@ void		ft_sigaddset(sigset_t *set, int signum);
 
 /**
  * TODO: funciones que aun no tienen wrap
+ * 
  *	ioctl
- *	getenv
+ *
+ *	TODO implementar getenv
+ *	TODO implementar setenv
+ *	TODO implementar putenv
+ *	TODO implementar unsetenv
+ *
  *	tcsetattr
  *	tcgetattr
  *	tgetent
@@ -99,20 +105,24 @@ void		ft_sigaddset(sigset_t *set, int signum);
  *	tgetstr
  *	tgoto
  *	tputs
+ *
  *	wait3
  *	wait4
  *	exit
  *	dup
  *	printf
- *	access
- *	getcwd
- *	chdir
- *	 lstat
- *	unlink,
  *	pipe
+ *
+ *
+ *	access
+ *	chdir
+ *	lstat
+ *	unlink,
+ 
  *	opendir
  *	readdir
  *	closedir
+ *
  *	isatty
  *	ttyname
  *	ttyslot

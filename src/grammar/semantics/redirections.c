@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/08 02:01:03 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/08 20:18:37 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	clean_redirection(t_redirect *redirection)
 	if (redirection != NULL)
 	{
 		clean_redirection(redirection->next);
+		ft_free(redirection->redirectee.filename);
 		ft_free(redirection);
 	}
 	dbg("│\t│\t├─%s\n","clean_redirection");
@@ -65,13 +66,13 @@ t_redirect	*join_redir(t_redirect *redir1, t_redirect *redir2)
 	return (redir1);
 }
 
-int		make_io_number(t_token *io_number)
-{dbg("│\t│\t├─%s\n", "make io_number");
-	int	fd;
+char	*make_filename(t_token	*token)
+{dbg("│\t│\t├─%s\n", "make filename");
+	char	*filename;
 
-	if (io_number == NULL)
-		return (0);
-	fd = ft_atoi(io_number->str);
-
-	return (fd);
+	if (token == NULL)
+		return (NULL);
+	filename = token->str;
+	ft_free(token);
+	return (filename);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 20:38:02 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/06 21:58:01 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/08 18:21:05 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	pop_elements(t_dlst **lex, t_dlst **state, int n)
 		if (tmp->prev != NULL)
 			tmp->prev->next = *node;
 		(*node)->prev = tmp->prev;
-		tmp->data =NULL;
+		tmp->data = NULL;
 		ft_dlstdelone(tmp, ft_free);
 		n--;
 	}
