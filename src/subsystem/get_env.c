@@ -11,7 +11,7 @@ t_dlst   *get_enviroment(const char **env, t_dlst **head)
     t_dlst   *next_env;
     t_env    *env_new;
     char        *equal;
-    //char        *key;
+    char        *value;
     size_t      key_size;
     int         i;
 
@@ -22,7 +22,9 @@ t_dlst   *get_enviroment(const char **env, t_dlst **head)
         equal = ft_strrchr(env[i], '='); // Busca el '=' en cada linea de env
         key_size = ft_strlen(env[i]) - ft_strlen(equal); //tamaño de la string que precede al '='(key)
         equal++;
-        set_env(ft_substr(env[i], 0, key_size), equal, env_new);
+        value = ft_substr(equal, 0, ft_strlen(equal));
+        set_env(ft_substr(env[i], 0, key_size), value, env_new);
+        //free(value);
         next_env = ft_dlstnew(env_new);
         ft_dlstaddb(head, next_env);
         i++;
@@ -35,9 +37,9 @@ char    **make_char(t_dlst *head)
     int     i;
     int     j;
     //size_t  s_key = 0;
-    char    *value;
+    char    *value = NULL;
+    char    *tmp;
     char    **env;
-    printf("env size: %i\n\n", ft_dlstsize(head));
     env = (char **)ft_malloc(ft_dlstsize(head) + 1);
     i = 0;
     
@@ -45,18 +47,26 @@ char    **make_char(t_dlst *head)
 	{
 		//s_key = (ft_strlen(((t_env *)head->data)->key));
         j = 0;
+        //printf("value[j] -> %s\n", ((t_env *)head->data)->value[j]);
+        env[i] = ft_strjoin(((t_env *)head->data)->key, "=");
         while (((t_env *)head->data)->value[j])
         {
-            value = ft_strjoin(value, ((t_env *)head->data)->value[j]);
+            //printf("j: %i", j);
+            tmp = ft_strjoin(value, ((t_env *)head->data)->value[j]);
+            env[i] = ft_strjoin(env[i], tmp);
+            //printf("tmp:  %s\n", tmp);
             if (((t_env *)head->data)->value[j + 1])
-                value = ft_strjoin(value, ":");
+                env[i] = ft_strjoin(env[i], ":");
+                //tmp = ft_strjoin(tmp, ":");
             j++;
         }
-        env[i] = ft_strjoin(((t_env *)head->data)->key, "=");
-        env[i] = ft_strjoin(env[i], value);
+        //printf("\n");
+        
+        //env[i] = ft_strjoin(env[i], tmp);
+        //printf("line --> %s\n", env[i]);
+        free(tmp);
 		head = head->next;
         i++;
-        printf("%s\n", env[i]);
 	}
     env[i] = NULL;
     return (env);

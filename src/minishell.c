@@ -86,7 +86,7 @@ int	main(int argc, char const **argv, char const **envp)
  	nueva = make_char(data.envlist); //malloc error
 	while (nueva[j])
 	{
-		printf("--> %s", nueva[j]);
+		printf("--> %s\n", nueva[j]);
 		j++;
 	}
 	while (1)
