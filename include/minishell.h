@@ -51,6 +51,10 @@
 # define TRUE 1
 # define FALSE 0
 
+// Path
+
+# define MAX_PATH 4096
+
 
 # ifdef DEBUG
 #  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})

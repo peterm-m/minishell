@@ -34,25 +34,26 @@ char    **make_char(t_dlst *head)
 {
     int     i;
     int     j;
-    size_t  s_key = 0;
+    //size_t  s_key = 0;
     char    *value;
     char    **env;
-
-    env = ft_malloc((size_t)ft_dlstsize + 1);
+    printf("env size: %i\n\n", ft_dlstsize(head));
+    env = (char **)ft_malloc(ft_dlstsize(head) + 1);
     i = 0;
+    
     while (head != NULL)
 	{
-		s_key = (ft_strlen(((t_env *)head->data)->key));
+		//s_key = (ft_strlen(((t_env *)head->data)->key));
         j = 0;
         while (((t_env *)head->data)->value[j])
         {
             value = ft_strjoin(value, ((t_env *)head->data)->value[j]);
-            if (((t_env *)head->data)->value[i + 1])
-            value = ft_strjoin(value, ":");
+            if (((t_env *)head->data)->value[j + 1])
+                value = ft_strjoin(value, ":");
             j++;
         }
         env[i] = ft_strjoin(((t_env *)head->data)->key, "=");
-        env[i] = ft_strjoin(((t_env *)head->data)->key, value);
+        env[i] = ft_strjoin(env[i], value);
 		head = head->next;
         i++;
         printf("%s\n", env[i]);
