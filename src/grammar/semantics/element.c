@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   element.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:05:58 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/07 21:15:05 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/09 18:32:00 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,17 @@ void	clean_element(t_element *element)
 	ft_free(element);
 }
 
-t_element	*join_element(t_element *element1, t_element *element2)
+void	join_element(t_element *element1, t_element *element2)
 {
-	if (element1 == NULL)
+	if (element1 != NULL && element2 != NULL)
+	{
+		join_word(&(element1->word), element2->word);
+		join_redirection(&(element1->redirect), element2->redirect);
+	}
+	else if (element1 == NULL && element2 != NULL)
 		return (element2);
-	if (element2 == NULL)
-		return (element1);
-	join_word(element1->word, element2->word);
-	join_redir(element1->redirect, element2->redirect);
-	ft_free(element1);
-	return (element2);
+	else if (element2 == NULL && element1 != NULL)
+		return (element2);
+	else
+		return (NULL);
 }

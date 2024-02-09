@@ -64,7 +64,7 @@ void	rule_prefix2(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	io_redirect = (*lex)->prev->data;
 	cmd_prefix = (*lex)->prev->prev->data;
-	*out = join_redir(cmd_prefix->redirect, io_redirect);
+	join_redirection(&(cmd_prefix->redirect), io_redirect);
 	pop_elements(lex, state, 1);
 }
 

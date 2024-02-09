@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/08 20:18:37 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:24:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,28 @@ t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 }
 
 void	clean_redirection(t_redirect *redirection)
-{
+{	dbg("│\t│\t├─%s\n","clean_redirection");
 	if (redirection != NULL)
 	{
 		clean_redirection(redirection->next);
 		ft_free(redirection->redirectee.filename);
 		ft_free(redirection);
 	}
-	dbg("│\t│\t├─%s\n","clean_redirection");
 }
 
-t_redirect	*join_redir(t_redirect *redir1, t_redirect *redir2)
-{
-	dbg("│\t│\t├─%s\n","join_redir");
+void	join_redirection(t_redirect **redir1, t_redirect *redir2)
+{dbg("│\t│\t├─%s\n", "join _redirection");
 	t_redirect	*tmp;
-
-	if (redir1 == NULL)
-		return (redir2);
-	tmp = redir1;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = redir2;
-	return (redir1);
+	
+	if (*redir1 == NULL)
+		*redir1 = redir2;
+	else
+	{
+		tmp = *redir1;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = redir2;
+	}
 }
 
 char	*make_filename(t_token	*token)

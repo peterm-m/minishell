@@ -26,7 +26,7 @@ void	rule_redir_list(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	redirect_list = (*lex)->prev->prev->data;
 	io_redirect = (*lex)->prev->data;
-	*out = join_redir(redirect_list, io_redirect);
+	join_redirection(&(redirect_list), io_redirect);
 	pop_elements(lex, state, 1);
 }
 

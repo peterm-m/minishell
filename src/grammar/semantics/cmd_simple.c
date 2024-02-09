@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/08 20:16:28 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:31:21 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_simple(t_simple *cmd)
 }
 
 void	clean_simple(t_simple *cmd)
-{dbg("│\t│\t├─%s\n","clean_simple");
+{dbg("│\t│\t├─%s\n","clean simple");
 	if (cmd == NULL)
 		return ;
 	if (cmd->words != NULL)
@@ -42,9 +42,10 @@ t_command	*make_simple(t_element *prefix, t_word_list *word,
 	simple->redirects = NULL;
 	simple->words = NULL;
 	aux = make_element(simple->words ,simple->redirects);
-	aux = join_element(aux, prefix);
-	aux->word = join_word(aux->word, word);
-	aux = join_element(aux, suffix);
+	
+	join_element(aux, prefix);
+	join_word(&(aux->word), word);
+	join_element(aux, suffix);
 	simple->redirects = aux->redirect;
 	simple->words = aux->word;
 	ft_free(aux);

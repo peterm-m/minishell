@@ -23,7 +23,7 @@ void	rule_prefix4(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	cmd_prefix = (*lex)->prev->prev->data;
-	*out = join_word(cmd_prefix->word, make_word(word));
+	join_word(&(cmd_prefix->word), make_word(word));
 	pop_elements(lex, state, 1);
 }
 
@@ -51,7 +51,7 @@ void	rule_suffix2(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	io_redirect = (*lex)->prev->data;
 	cmd_suffix = (*lex)->prev->prev->data;
-	cmd_suffix->redirect = join_redir(cmd_suffix->redirect, io_redirect);
+	join_redirection(&(cmd_suffix->redirect), io_redirect);
 	*out = cmd_suffix;
 	pop_elements(lex, state, 1);
 }
@@ -80,7 +80,7 @@ void	rule_suffix4(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	cmd_suffix = (*lex)->prev->prev->data;
-	cmd_suffix->word = join_word(cmd_suffix->word, make_word(word));
+	join_word(&(cmd_suffix->word), make_word(word));
 	*out = cmd_suffix;
 	pop_elements(lex, state, 1);
 }

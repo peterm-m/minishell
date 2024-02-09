@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/07 20:39:26 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/09 18:27:34 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	clean_command(t_command *cmd)
 
 t_command	*join_command_redir(t_command *cmd, t_redirect *redir)
 {dbg("│\t│\t├─%s\n","join redir");
-	cmd->redirects = join_redir(cmd->redirects, redir);
+	join_redirection(&(cmd->redirects), redir);
 	return (cmd);
 }
 
