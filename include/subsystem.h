@@ -26,6 +26,7 @@ typedef struct s_env
 t_dlst   *get_enviroment(const char **env, t_dlst **head);
 void    set_env(char *key, char *value, t_env *tok);
 char    **make_char(t_dlst *head);
+char    *get_env_value(char *str, char **env);
 
 // env_list_utils.c
 t_env *new_t_env(void);

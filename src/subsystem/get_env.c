@@ -34,7 +34,6 @@ char    **make_char(t_dlst *head)
 {
     int     i;
     int     j;
-    size_t  s_key = 0;
     char    *value;
     char    **env;
 
@@ -42,23 +41,36 @@ char    **make_char(t_dlst *head)
     i = 0;
     while (head != NULL)
 	{
-		s_key = (ft_strlen(((t_env *)head->data)->key));
         j = 0;
+        value = NULL;
+        env[i++] = ft_strjoin(((t_env *)head->data)->key, "=");
         while (((t_env *)head->data)->value[j])
         {
             value = ft_strjoin(value, ((t_env *)head->data)->value[j]);
-            if (((t_env *)head->data)->value[i + 1])
-            value = ft_strjoin(value, ":");
-            j++;
+            if (((t_env *)head->data)->value[j++ + 1])
+                value = ft_strjoin(value, ":");
         }
-        env[i] = ft_strjoin(((t_env *)head->data)->key, "=");
-        env[i] = ft_strjoin(((t_env *)head->data)->key, value);
+        env[i - 1] = ft_strjoin(env[i - 1], value);
+        if (value)
+            free(value);
 		head = head->next;
-        i++;
-        printf("%s\n", env[i]);
 	}
     env[i] = NULL;
     return (env);
+}
+
+char    *get_env_value(char *str, char **env)
+{
+    int      i;
+
+    i = 0;
+    while (env[i])
+    {
+        if (ft_strncmp(str, env[i], ft_strlen(str)) == 0)
+            return (ft_strchr(env[i], '=') + 1);
+        i++;
+    }
+    return (NULL);
 }
 
 /* void p_lst(void *e)

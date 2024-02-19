@@ -1,14 +1,13 @@
 #include "minishell.h"
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
     int i;
 
     
     (void)argc;
-    (void)argv;
-    i = -1;
-    while (env[++i])
-        printf("%s\n", env[i]);
+    i = 0;
+    while (argv[++i])
+        printf("%s\n", argv[i]);
     return (EXIT_SUCCESS);
 }

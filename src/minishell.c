@@ -85,9 +85,10 @@ int	main(int argc, char const **argv, char const **envp)
 	char **nueva = make_char(data.envlist); //malloc error
 	while (nueva[j])
 	{
-		printf("%s", nueva[j]);
+		printf("%s\n", nueva[j]);
 		j++;
 	}
+	printf(BHGRN"Buscar variable de entorno: "BHCYN"%s"BHGRN" devuelve:"BHCYN"%s""\n"END, "PATH"END, get_env_value("PATH", nueva));
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);

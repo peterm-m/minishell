@@ -25,9 +25,9 @@ int main(int argc, char **argv)
     i = 1;
     while (argv[i])
     {
-        if (ft_strncmp(argv[i], "PWD", 3) == 0)
+        if (ft_strncmp(argv[i], "PWD", 4) == 0)
         {
-            printf(BHCYN"%s\n"END, argv[i]);
+            printf(BHCYN"%s\n"END, ft_strchr(argv[i], '=') + 1);
             break;
         }
         i++;

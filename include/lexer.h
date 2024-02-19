@@ -22,6 +22,7 @@ typedef struct s_braket_count
 	int	state_braket;
 	int	state_brace;
 }	t_braket_count;
+
 typedef enum e_terminals
 {
 	tt_and_if,
