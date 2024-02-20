@@ -80,11 +80,11 @@ static char	*get_path(int argc, char *dir, char **env)
 	return (path);
 }
 
-int main(int argc, char **argv) //pasar como argumento PATH de env
+int main(int argc, char **argv, char **env) //pasar como argumento PATH de env
 {
 	char	*dir;
 
-	dir = get_path(argc, argv[1], &argv[2]);
+	dir = get_path(argc, argv[1],env);
 	if (dir == NULL)
 		return (EXIT_FAILURE);
     if (chdir(dir) == 0)

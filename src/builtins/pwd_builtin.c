@@ -17,18 +17,18 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
     int i;
 
     (void)argc;
     (void)argv;
     i = 1;
-    while (argv[i])
+    while (env[i])
     {
-        if (ft_strncmp(argv[i], "PWD", 4) == 0)
+        if (ft_strncmp(env[i], "PWD", 4) == 0)
         {
-            printf(BHCYN"%s\n"END, ft_strchr(argv[i], '=') + 1);
+            printf(BHCYN"%s\n"END, ft_strchr(env[i], '=') + 1);
             break;
         }
         i++;

@@ -54,7 +54,7 @@ void print_echo(char **args, int i, int is_flag)
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
     int i;
     int is_flag;

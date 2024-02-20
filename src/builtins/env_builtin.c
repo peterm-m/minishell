@@ -1,13 +1,14 @@
 #include "minishell.h"
 
-int main(int argc, char **argv) //Pasar como argumentos lista de ENV 
+int main(int argc, char **argv, char **env) //Pasar como argumentos lista de ENV 
 {
     int i;
 
     
     (void)argc;
+    (void)argv;
     i = 0;
-    while (argv[++i])
-        printf("%s\n", argv[i]);
+    while (env[++i])
+        printf("%s\n", env[i]);
     return (EXIT_SUCCESS);
 }
