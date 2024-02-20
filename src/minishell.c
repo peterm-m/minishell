@@ -66,14 +66,14 @@ void p_lst(void *e)
 		i++;
 	}
 	printf("\n");
+
 }
 
 int	main(int argc, char const **argv, char const **envp)
 {
 	char	*read_line;
 	t_data	data;
-	int j = 0; // para probar la función make_char
-	char **nueva;
+	int j = 0; // para probar la funcionn make_char
 	
 	(void) argc;
 	(void) argv;
@@ -82,13 +82,13 @@ int	main(int argc, char const **argv, char const **envp)
 	ft_dlstnew(data.envlist);
 	data.envlist = get_enviroment(envp,  &data.envlist);
 	ft_dlstiter(data.envlist, p_lst);
-	printf("Pasar a char **:\n\n");
- 	nueva = make_char(data.envlist); //malloc error
+	char **nueva = make_char(data.envlist); //malloc error
 	while (nueva[j])
 	{
-		printf("--> %s\n", nueva[j]);
+		printf("%s\n", nueva[j]);
 		j++;
 	}
+	printf(BHGRN"Buscar variable de entorno: "BHCYN"%s"BHGRN" devuelve:"BHCYN"%s""\n"END, "PATH"END, get_env_value("PATH", nueva));
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
