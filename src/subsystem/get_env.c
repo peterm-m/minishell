@@ -73,6 +73,41 @@ char    *get_env_value(char *str, char **env)
     return (NULL);
 }
 
+/* int env_size(char **env)
+{
+    int i;
+
+    i = 0;
+    while(env[i])
+        i++;
+    return (i);
+
+} */
+
+/* void    sort_env(char **env)
+{
+    int i;
+    int j;
+    int env_len;
+    char *aux;
+
+    i = 0;
+    while (i < env_len)
+    {
+        j = 0;
+        while (j < env_len - 1)
+        {
+            if (ft_strcmp(env[j], env[j + 1]) > 0)
+            {
+                aux  = env[j];
+                env[j] = env[j + 1];
+                env[j + 1] = aux;
+            }
+            i++;
+        }
+    }
+} */
+
 /* void p_lst(void *e)
 {
     printf("%s===%s", ((t_env_lst *)e)->key, ((t_env_lst *)e)->value);

@@ -1,9 +1,21 @@
 #include "minishell.h"
+char    *get_env_value(char *str, char **env) // BORRAR! repetida para probar por separado
+{
+    int      i;
 
+    i = 0;
+    while (env[i])
+    {
+        if (ft_strncmp(str, env[i], ft_strlen(str)) == 0)
+            return (ft_strchr(env[i], '=') + 1);
+        i++;
+    }
+    return (NULL);
+}
 static int update_pwd(char **env)
 {
     int i;
-    char *new_pwd[MAX_PATH];
+    char *new_pwd;
 
     i = 0;
     if (getcwd(new_pwd, MAX_PATH) == NULL)
@@ -16,7 +28,7 @@ static int update_pwd(char **env)
     {
         if (ft_strncmp("PWD=", env[i], 4) == 0)
         {
-            free(env[i]);
+            //free(env[i]);
             env[i] = ft_strjoin("PWD=", new_pwd);
         }
         i++;
@@ -36,7 +48,7 @@ static int update_oldpwd(char **env)
     {
         if (ft_strncmp("OLDPWD=", env[i], 8) == 0)
         {
-            free(env[i]);
+            //free(env[i]);
             env[i] = new_opwd;
         }
         i++;

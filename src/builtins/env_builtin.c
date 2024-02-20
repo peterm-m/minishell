@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv) //Pasar como argumentos lista de ENV 
 {
     int i;
 

@@ -1,4 +1,5 @@
 #include "minishell.h"
+
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
 	size_t	i;
@@ -43,3 +44,5 @@ OLDPWD=/Users/adiaz-uf
 ZSH=/Users/adiaz-uf/.oh-my-zsh
 PAGER=less
 LESS=-R */
+
+//"USER=adiaz-uf" "MallocNanoZone=0" "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki" "LOGNAME=adiaz-uf" "SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.UzETPWzoJT/Listeners" "PWD=/Users/adiaz-uf/42cursus/minishell" "OLDPWD=/Users/adiaz-uf/42cursus/minishell" "ZSH=/Users/adiaz-uf/.oh-my-zsh"
