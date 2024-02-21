@@ -67,7 +67,7 @@ typedef struct s_token
 
 // lexer.c
 
-t_dlst	*lexer(char *read_line, t_dlst **head);
+t_dlst	*lexer(char *read_line);
 
 // lexer_utils.c
 
@@ -103,7 +103,7 @@ int get_brace_token(char *str, int i, t_token *token);
 
 // tokenize.c
 
-t_dlst *tokenize(char *input, t_dlst **head);
+t_dlst *tokenize(char *input);
 int get_next_token(char *input, int i, t_token *token);
 
 #endif
