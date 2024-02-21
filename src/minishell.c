@@ -73,12 +73,13 @@ int	main(int argc, char const **argv, char const **envp)
 {
 	char	*read_line;
 	t_data	data;
-	int j = 0; // para probar la funcionn make_char
+	//int j = 0; // para probar la funcionn make_char
 	
 	(void) argc;
 	(void) argv;
+	(void) envp;
 	// Prueba Gestion de ENV
-	printf(BHRED"Variables de entorno al inicio del programa: \n"END);
+	/* printf(BHRED"Variables de entorno al inicio del programa: \n"END);
 	ft_dlstnew(data.envlist);
 	data.envlist = get_enviroment(envp,  &data.envlist);
 	ft_dlstiter(data.envlist, p_lst);
@@ -88,7 +89,7 @@ int	main(int argc, char const **argv, char const **envp)
 		printf("%s\n", nueva[j]);
 		j++;
 	}
-	printf(BHGRN"Buscar variable de entorno: "BHCYN"%s"BHGRN" devuelve:"BHCYN"%s""\n"END, "PATH"END, get_env_value("PATH", nueva));
+	printf(BHGRN"Buscar variable de entorno: "BHCYN"%s"BHGRN" devuelve:"BHCYN"%s""\n"END, "PATH"END, get_env_value("PATH", nueva)); */
 	while (1)
 	{
 		read_line = readline(BHMAG"minishell42-> "END);
@@ -99,15 +100,15 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
-/* 		ft_dlstnew(data.lexlist);
+		ft_dlstnew(data.lexlist);
 		data.lexlist = lexer(read_line, &data.lexlist);
 		//heredoc(&data.lexlist, "hola");
 		ft_dlstiter(data.lexlist, tok_p);
-		syntax(data.lexlist);
+		//syntax(data.lexlist);
 		ft_dlstclear(&data.lexlist, ft_free);
-		//expander(&data, read_line); */
+		//expander(&data, read_line);
 	}
 	ft_dlstclear(&data.lexlist, ft_free);
-	ft_dlstclear(&data.envlist, ft_free);
+	//ft_dlstclear(&data.envlist, ft_free);
 	return (0);
 }
