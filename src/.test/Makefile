@@ -4,7 +4,6 @@ SRC_DIR     := ..
 OBJ_DIR     := .build
 
 SRCS        := \
-	.test/test.c \
 	lexer/lexer.c \
 	lexer/tokenize.c \
 	lexer/get_tokens1.c \
@@ -14,11 +13,13 @@ SRCS        := \
 	\
 	grammar/utils.c \
 	grammar/syntax.c \
-	grammar/rules1.c \
-	grammar/rules2.c \
-	grammar/rules3.c \
-	grammar/rules4.c \
 	grammar/tables.c \
+	grammar/rules_grammar1.c \
+	grammar/rules_grammar2.c \
+	grammar/rules_grammar3.c \
+	grammar/rules_grammar4.c \
+	grammar/rules_grammar5.c \
+	grammar/rules_grammar6.c \
 	\
 	grammar/semantics/command.c \
 	grammar/semantics/cmd_group.c \
@@ -27,19 +28,19 @@ SRCS        := \
 	grammar/semantics/element.c \
 	grammar/semantics/word.c \
 	grammar/semantics/redirections.c \
-	grammar/semantics/cmd_conection.c \
+	grammar/semantics/cmd_connection.c \
 	\
 	executer/executer.c \
 	\
 	expansion/expander.c \
 	\
-	subsystem/subsystem.c \
+	subsystem/subsystem.c
 
-SRCS        := $(SRCS:%=$(SRC_DIR)/%)
+SRCS        := $(SRCS:%=$(SRC_DIR)/%) test.c
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CC          := gcc
-CFLAGS      := -Wall -Wextra -Werror -g
+CFLAGS      := -Wall -Wextra -g
 
 RM          := rm -rf
 MAKEFLAGS   += --no-print-directory
@@ -85,7 +86,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(info CREATED $@)
 
 $(RULE_WRAP): 
-	@$(MAKE) -C $(WRAP) debug
+	@$(MAKE) -C $(WRAP)
 
 $(RULE_DLIST):
 	@$(MAKE) -C $(DLIST)

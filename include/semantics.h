@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   semantics.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/21 21:02:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:25:25 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef struct s_word
 
 typedef struct s_word_list
 {
-	t_token				*word;
+	char				*word;
 	struct s_word_list	*next;
-} t_word_list;
+}	t_word_list;
 
 /*
 	REDIRECTIONS
@@ -47,28 +47,29 @@ typedef enum e_redir_option
 /* filename or file descriptor */
 typedef union u_unit_io
 {
-	int			dest;
-	t_token		*filename;
+	int			fd;
+	char		*filename;
 }	t_unit_io;
 
 /* Structure describing a redirection. */
 typedef struct s_redirect
 {
-	t_unit_io			redirector;
-	t_unit_io			redirectee;
+	t_unit_io			source;
+	t_unit_io			dest;
 	int					rflags;
-	int					flags;
+	int					mode_bits;
+	int					flag;
 	t_redir_option		option;
 	char				*here_doc_eof;
 	struct s_redirect	*next;
-} t_redirect;
+}	t_redirect;
 
 /* Auxiliar */
 typedef struct s_element
 {
 	t_word_list	*word;
 	t_redirect	*redirect;
-} t_element;
+}	t_element;
 
 /* Command Types ID*/
 typedef enum e_command_type
@@ -77,25 +78,25 @@ typedef enum e_command_type
 	cmd_connection,
 	cmd_group,
 	cmd_subshell
-}  t_command_type;
+}	t_command_type;
 
 /* Command Types */
 typedef union u_node
 {
-	struct s_connection		*connection;
-	struct s_simple_cmd		*simple;
-	struct s_group_cmd		*group;
-	struct s_subshell_cmd	*subshell;
+	struct s_connection	*connection;
+	struct s_simple		*simple;
+	struct s_group		*group;
+	struct s_subshell	*subshell;
 }	t_node;
 
 /* Command */
 typedef struct s_command
 {
 	t_command_type	type;
-	int				flags;
+	int				flag;
 	t_node			value;
 	t_redirect		*redirects;
-} t_command;
+}	t_command;
 
 /* Connection */
 typedef struct s_connection
@@ -104,55 +105,67 @@ typedef struct s_connection
 	t_command	*first;
 	t_command	*second;
 	int			connector;
-} t_connection;
+}	t_connection;
 
 /* Simple command */
-typedef struct s_simple_cmd
+typedef struct s_simple
 {
 	int			flags;
 	t_word_list	*words;
 	t_redirect	*redirects;
-} t_simple_cmd;
+}	t_simple;
 
 /* Group */
-typedef struct s_group_cmd
+typedef struct s_group
 {
-	int ignore;
-	t_command *command;
-} t_group_cmd;
+	int			ignore;
+	t_command	*command;
+}	t_group;
 
 /* Subshell */
-typedef struct s_subshell_cmd
+typedef struct s_subshell
 {
 	int			flags;
 	t_command	*command;
-} t_subshell_cmd;
+}	t_subshell;
 
 t_command		*make_command(t_command_type type, t_node value);
 void			clean_command(t_command *cmd);
+void			print_command(t_command *cmd);
 t_command		*join_command_redir(t_command *cmd, t_redirect *redir);
 
-t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,int flag);
-void			clean_redirection(t_redirect *redirection);
-t_redirect		*join_redir(t_redirect *redir1, t_redirect *redir2);
+t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
+					int flag);
+void			clean_redirection(t_redirect **redirection);
+void			print_redirection(t_redirect *redirection);
+void			join_redir(t_redirect **redir1, t_redirect *redir2);
+char			*make_filename(t_token	*token);
 
 t_word_list		*make_word(t_token *word);
-void			clean_word(t_word_list *word);
-t_word_list		*join_word(t_word_list *list, t_word_list *word);
+int				make_number(t_token *word);
+void			clean_word(t_word_list **word);
+void			print_word(t_word_list *word);
+void			join_word(t_word_list **word1, t_word_list *word2);
 
 t_command		*make_connection(t_command *cmd1, t_command *cmd2, int type);
 void			clean_connection(t_connection *connection);
+void			print_connection(t_connection *connection);
 
 t_command		*make_group(t_command *cmd);
-void			clean_group(t_group_cmd *group);
+void			clean_group(t_group *group);
+void			print_group(t_group *group);
 
 t_command		*make_subshell(t_command *cmd);
-void			clean_subshell(t_subshell_cmd *subshell);
+void			clean_subshell(t_subshell *subshell);
+void			print_subshell(t_subshell *subshell);
 
-t_command		*make_simple(t_element *element1, t_token *word, t_element *element2);
-void			clean_simple(t_simple_cmd *cmd);
+t_command		*make_simple(t_element *prefix, t_word_list *word,
+					t_element *suffix);
+void			clean_simple(t_simple *cmd);
+void			print_simple(t_simple *cmd);
 
-t_element		*make_element(t_token *word, t_redirect *redir);
+t_element		*join_element(t_element *element1, t_element *element2);
+t_element		*make_element(t_word_list *word, t_redirect *redir);
 void			clean_element(t_element	*element);
 
 #endif

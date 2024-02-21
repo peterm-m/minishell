@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/16 22:53:55 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/21 12:56:58 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_braket_count
 	int	state_braket;
 	int	state_brace;
 }	t_braket_count;
+
 typedef enum e_terminals
 {
 	tt_and_if,
@@ -49,6 +50,7 @@ typedef enum e_terminals
 # define WILDCARD 64
 # define QUEST 128
 # define EXPAND 256
+
 typedef struct s_token
 {
 	char	*str;
@@ -67,7 +69,7 @@ typedef struct s_token
 
 // lexer.c
 
-t_dlst	*lexer(char *read_line, t_dlst **head);
+t_dlst	*lexer(char *read_line);
 
 // lexer_utils.c
 
@@ -81,7 +83,7 @@ t_braket_count check_braces(int state, t_braket_count b_count);
 t_token *new_token(void);
 void	set_token(char *str, int i, int j, int type, t_token *token);
 t_token	*init_token(void);
-void free_token(t_token *token);
+void free_token(void *tok);
 void search_w_q(void *t);
 
 // get_tokens1.c
@@ -103,7 +105,7 @@ int get_brace_token(char *str, int i, t_token *token);
 
 // tokenize.c
 
-t_dlst *tokenize(char *input, t_dlst **head);
+t_dlst *tokenize(char *input);
 int get_next_token(char *input, int i, t_token *token);
 
 #endif

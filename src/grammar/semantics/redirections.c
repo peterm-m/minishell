@@ -6,59 +6,76 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/24 21:24:16 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/21 15:25:25 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#undef LOGS
+#define LOGS 0
+
 t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	int flag)
-{
-	dbg("%s\n","");
+{dbg("│\t│\t├─%s\n","make redir");
 	t_redirect	*redirect;
 
 	redirect = (t_redirect *)ft_malloc(sizeof(t_redirect));
-	redirect->redirector = *source;
-	redirect->redirectee = *dest;
+	redirect->source = *source;
+	redirect->dest = *dest;
 	redirect->here_doc_eof = 0;
 	redirect->option = type;
-	redirect->flags = 0;
+	redirect->flag = 0;
 	redirect->rflags = flag;
 	redirect->next = (t_redirect *) NULL;
 	if (type == r_output_direction)
-		redirect->flags = O_TRUNC | O_WRONLY | O_CREAT;
+		redirect->mode_bits = O_TRUNC | O_WRONLY | O_CREAT;
 	else if (type == r_appending_to)
-		redirect->flags = O_APPEND | O_WRONLY | O_CREAT;
+		redirect->mode_bits = O_APPEND | O_WRONLY | O_CREAT;
 	else if (type == r_input_direction)
-		redirect->flags = O_RDONLY;
+		redirect->mode_bits = O_RDONLY;
 	else if (type == r_reading_until)
-		(void )NULL;
+		redirect->mode_bits = 0;
 	else
 		printf("Error pipeline \n");
 	return (redirect);
 }
 
-void	clean_redirection(t_redirect *redirection)
-{
-	dbg("%s\n","");
-	if (redirection)
+void	clean_redirection(t_redirect **redirection)
+{dbg("├─%s\n","clean_redirection");
+	t_redirect	*aux;
+
+	while (*redirection)
 	{
-		clean_redirection(redirection->next);
-		free(redirection);
+		aux = (*redirection)->next;
+		ft_free(*redirection);
+		*redirection = aux;
 	}
 }
 
-t_redirect	*join_redir(t_redirect *redir1, t_redirect *redir2)
+void	join_redir(t_redirect **redir1, t_redirect *redir2)
 {
-	dbg("%s\n","");
+	dbg("│\t│\t├─%s\n","join_redir");
 	t_redirect	*tmp;
 
-	if (redir1 == NULL)
-		return (redir2);
-	tmp = redir1;
+	if (*redir1 == NULL)
+	{
+		*redir1 = redir2;
+		return ;
+	}
+	tmp = *redir1;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = redir2;
-	return (redir2);
+}
+
+char	*make_filename(t_token	*token)
+{dbg("│\t│\t├─%s\n", "make filename");
+	char	*filename;
+
+	if (token == NULL)
+		return (NULL);
+	filename = token->str;
+	ft_free(token);
+	return (filename);
 }

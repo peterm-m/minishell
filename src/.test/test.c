@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:52:28 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/23 21:47:22 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:54:30 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,802 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//                 TOOLS TESTING
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-t_test_out	compare_token(t_dlst *d, int flag, char *str)
-{
-	t_token	*t;
-	t_dlst	*aux;
-
-	if (!d)
-		return (0);
-	t = (t_token *)d->data;
-	if (strcmp(t->str, str) != 0 || t->flag != flag)
-		return (FAIL);
-	aux = d->next;
-	ft_dlstdelone(d, ft_free);
-	d = aux;
-	return (PASS);
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//
 //                 LEXER TEST
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void	test_eof(void)
+///////////////////////// TOKENS
+
+void	test_simple_tokens(void)
 {
-	TEST_CHECK(PASS == PASS);
+	t_dlst *out = NULL;
+	t_token	*tok;
+
+//----------------------------
+	out = tokenize("");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("&&");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_and_if);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("||"); //mirar
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_or_if);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("|");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_pipe);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("{ }");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_lbrace);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_rbrace);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("{}");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_lbrace);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_rbrace);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("( )");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_lbraket);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_rbraket);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("()");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_lbraket);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_rbraket);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "word") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("<");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_less);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize(">");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_great);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize(">>");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_dgreat);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("<<");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_dless);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("10");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_io_number);
+	TEST_CHECK(tok->str == NULL);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+}
+
+void	test_expansion(void)
+{
+	t_dlst *out = NULL;
+	t_token	*tok;
+
+	out = tokenize("$");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "$") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("$()");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(strcmp(tok->str, "$()") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("${}");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "${}") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("*");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(strcmp(tok->str, "*") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("$word");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "$word") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("wo$rd");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "wo$rd") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word$");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "word$") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("$(word)");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(strcmp(tok->str, "$(word)") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("wo$(word)rd");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(strcmp(tok->str, "wo$(word)rd") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word$(word)");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(strcmp(tok->str, "word$(word)") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("${word}");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "${word}") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("wo${word}rd");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "wo${word}rd") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+	//----------------------------
+	out = tokenize("word${word}");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "word${word}") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("*word");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(strcmp(tok->str, "*word") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("wo*rd");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(strcmp(tok->str, "wo*rd") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word*");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(strcmp(tok->str, "*word") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+}
+
+void	test_singleq(void)
+{
+	t_dlst *out = NULL;
+	t_token	*tok;
+
+	out = tokenize("\'\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'\"\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'\"\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'\"\"\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'\"\"\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'\t\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'\t\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\' \'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\' \'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'\n\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'\n\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'&&\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'&&\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'||\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'||\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'|\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'|\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'{ }\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'{ }\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'{}\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'{}\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'( )\'");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'( )\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'()\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'()\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'word\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'word\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'<\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'>\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'>\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'>>\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'>>\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'<<\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'<<\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'10\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'10\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'$word\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'$word\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'$(word)\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'$(word)\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'${word}\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'${word}\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\'wo*rd\'");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\'wo*rd\'") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+}
+
+void	test_doubleq(void)
+{
+	t_dlst *out = NULL;
+	t_token	*tok;
+
+	out = tokenize("\"\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"\'\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"\'\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"\'\'\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"\'\'\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"\t\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"\t\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\" \"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\" \"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"\n\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"\n\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"&&\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"&&\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"||\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"||\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"|\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"|\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"{ }\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"{ }\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"{}\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"{}\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"( )\"");
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"( )\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"()\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"()\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"word\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"word\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"<\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\">\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\">\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\">>\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\">>\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"<<\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"<<\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"10\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"10\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"$word\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "\"$word\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"$(word)\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(strcmp(tok->str, "\"$(word)\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"${word}\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(strcmp(tok->str, "\"${word}\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("\"wo*rd\"");
+	tok = out->data;
+	TEST_CHECK(1 == 0);
+	tok = out->data;
+	TEST_CHECK(tok->flag == tt_word);
+	TEST_CHECK(strcmp(tok->str, "\"wo*rd\"") == 0);
+	tok = out->next->data;
+	TEST_CHECK(tok->flag == tt_end);
+	TEST_CHECK(tok->str == NULL);
+	ft_dlstclear(&out, free_token);
+}
+
+void	test_multitok(void)
+{
+	t_dlst *out = NULL;
+	t_token	*tok;
+
+	out = tokenize("word word");
+	TEST_CHECK(1 == 0);
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word | word");
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word && word");
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word || word");
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("(word)");
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("{word}");
+	ft_dlstclear(&out, free_token);
+//----------------------------
+	out = tokenize("word > 10");
+	ft_dlstclear(&out, free_token);
+//----------------------------
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,13 +825,13 @@ void	test_eof(void)
 void	test_action_table(void)
 {
 	//tt_and_if
-	TEST_CHECK(table_action(0, tt_and_if) + 32== 126);
-	TEST_CHECK(table_action(1, tt_and_if) + 32== 126);
-	TEST_CHECK(table_action(2, tt_and_if) + 32== 126);
-	TEST_CHECK(table_action(3, tt_and_if) + 32== 53);
-	TEST_CHECK(table_action(4, tt_and_if) + 32== 90);
-	TEST_CHECK(table_action(5, tt_and_if) + 32== 93);
-	TEST_CHECK(table_action(6, tt_and_if) + 32== 95);
+	TEST_CHECK(table_action(0, tt_and_if) + 32 == 126);
+	TEST_CHECK(table_action(1, tt_and_if) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_and_if) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_and_if) + 32 == 53);
+	TEST_CHECK(table_action(4, tt_and_if) + 32 == 90);
+	TEST_CHECK(table_action(5, tt_and_if) + 32 == 93);
+	TEST_CHECK(table_action(6, tt_and_if) + 32 == 95);
 	TEST_CHECK(table_action(7, tt_and_if) + 32 == 96);
 	TEST_CHECK(table_action(8, tt_and_if) + 32 == 104);
 	TEST_CHECK(table_action(9, tt_and_if) + 32 == 106);
@@ -117,13 +883,13 @@ void	test_action_table(void)
 
 	//tt_or_if
 
-	TEST_CHECK(table_action(0, tt_or_if) + 32== 126);
-	TEST_CHECK(table_action(1, tt_or_if) + 32== 126);
-	TEST_CHECK(table_action(2, tt_or_if) + 32== 126);
-	TEST_CHECK(table_action(3, tt_or_if) + 32== 54);
-	TEST_CHECK(table_action(4, tt_or_if) + 32== 90);
-	TEST_CHECK(table_action(5, tt_or_if) + 32== 93);
-	TEST_CHECK(table_action(6, tt_or_if) + 32== 95);
+	TEST_CHECK(table_action(0, tt_or_if) + 32 == 126);
+	TEST_CHECK(table_action(1, tt_or_if) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_or_if) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_or_if) + 32 == 54);
+	TEST_CHECK(table_action(4, tt_or_if) + 32 == 90);
+	TEST_CHECK(table_action(5, tt_or_if) + 32 == 93);
+	TEST_CHECK(table_action(6, tt_or_if) + 32 == 95);
 	TEST_CHECK(table_action(7, tt_or_if) + 32 == 96);
 	TEST_CHECK(table_action(8, tt_or_if) + 32 == 104);
 	TEST_CHECK(table_action(9, tt_or_if) + 32 == 106);
@@ -175,13 +941,13 @@ void	test_action_table(void)
 
 	//tt_pipe
 
-	TEST_CHECK(table_action(0, tt_pipe) + 32== 126);
-	TEST_CHECK(table_action(1, tt_pipe) + 32== 126);
-	TEST_CHECK(table_action(2, tt_pipe) + 32== 126);
-	TEST_CHECK(table_action(3, tt_pipe) + 32== 126);
-	TEST_CHECK(table_action(4, tt_pipe) + 32== 55);
-	TEST_CHECK(table_action(5, tt_pipe) + 32== 93);
-	TEST_CHECK(table_action(6, tt_pipe) + 32== 95);
+	TEST_CHECK(table_action(0, tt_pipe) + 32 == 126);
+	TEST_CHECK(table_action(1, tt_pipe) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_pipe) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_pipe) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_pipe) + 32 == 55);
+	TEST_CHECK(table_action(5, tt_pipe) + 32 == 93);
+	TEST_CHECK(table_action(6, tt_pipe) + 32 == 95);
 	TEST_CHECK(table_action(7, tt_pipe) + 32 == 96);
 	TEST_CHECK(table_action(8, tt_pipe) + 32 == 104);
 	TEST_CHECK(table_action(9, tt_pipe) + 32 == 106);
@@ -233,13 +999,13 @@ void	test_action_table(void)
 
 	//tt_lbrace
 
-	TEST_CHECK(table_action(0, tt_lbrace) + 32== 46);
-	TEST_CHECK(table_action(1, tt_lbrace) + 32== 126);
-	TEST_CHECK(table_action(2, tt_lbrace) + 32== 126);
-	TEST_CHECK(table_action(3, tt_lbrace) + 32== 126);
-	TEST_CHECK(table_action(4, tt_lbrace) + 32== 126);
-	TEST_CHECK(table_action(5, tt_lbrace) + 32== 126);
-	TEST_CHECK(table_action(6, tt_lbrace) + 32== 126);
+	TEST_CHECK(table_action(0, tt_lbrace) + 32 == 46);
+	TEST_CHECK(table_action(1, tt_lbrace) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_lbrace) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_lbrace) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_lbrace) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_lbrace) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_lbrace) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_lbrace) + 32 == 126);
 	TEST_CHECK(table_action(8, tt_lbrace) + 32 == 126);
 	TEST_CHECK(table_action(9, tt_lbrace) + 32 == 126);
@@ -291,13 +1057,13 @@ void	test_action_table(void)
 
 	//tt_rbrace
 
-	TEST_CHECK(table_action(0, tt_rbrace) + 32== 126);
-	TEST_CHECK(table_action(1, tt_rbrace) + 32== 126);
-	TEST_CHECK(table_action(2, tt_rbrace) + 32== 126);
-	TEST_CHECK(table_action(3, tt_rbrace) + 32== 126);
-	TEST_CHECK(table_action(4, tt_rbrace) + 32== 90);
-	TEST_CHECK(table_action(5, tt_rbrace) + 32== 93);
-	TEST_CHECK(table_action(6, tt_rbrace) + 32== 95);
+	TEST_CHECK(table_action(0, tt_rbrace) + 32 == 126);
+	TEST_CHECK(table_action(1, tt_rbrace) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_rbrace) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_rbrace) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_rbrace) + 32 == 90);
+	TEST_CHECK(table_action(5, tt_rbrace) + 32 == 93);
+	TEST_CHECK(table_action(6, tt_rbrace) + 32 == 95);
 	TEST_CHECK(table_action(7, tt_rbrace) + 32 == 96);
 	TEST_CHECK(table_action(8, tt_rbrace) + 32 == 104);
 	TEST_CHECK(table_action(9, tt_rbrace) + 32 == 106);
@@ -349,13 +1115,13 @@ void	test_action_table(void)
 
 	//tt_lbraket
 
-	TEST_CHECK(table_action(0, tt_lbraket) + 32== 47);
-	TEST_CHECK(table_action(1, tt_lbraket) + 32== 126);
-	TEST_CHECK(table_action(2, tt_lbraket) + 32== 126);
-	TEST_CHECK(table_action(3, tt_lbraket) + 32== 126);
-	TEST_CHECK(table_action(4, tt_lbraket) + 32== 126);
-	TEST_CHECK(table_action(5, tt_lbraket) + 32== 126);
-	TEST_CHECK(table_action(6, tt_lbraket) + 32== 126);
+	TEST_CHECK(table_action(0, tt_lbraket) + 32 == 47);
+	TEST_CHECK(table_action(1, tt_lbraket) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_lbraket) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_lbraket) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_lbraket) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_lbraket) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_lbraket) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_lbraket) + 32 == 126);
 	TEST_CHECK(table_action(8, tt_lbraket) + 32 == 126);
 	TEST_CHECK(table_action(9, tt_lbraket) + 32 == 126);
@@ -407,13 +1173,13 @@ void	test_action_table(void)
 
 	//tt_rbraket
 
-	TEST_CHECK(table_action(0, tt_rbraket) + 32== 126);
-	TEST_CHECK(table_action(1, tt_rbraket) + 32== 126);
-	TEST_CHECK(table_action(2, tt_rbraket) + 32== 126);
-	TEST_CHECK(table_action(3, tt_rbraket) + 32== 126);
-	TEST_CHECK(table_action(4, tt_rbraket) + 32== 90);
-	TEST_CHECK(table_action(5, tt_rbraket) + 32== 93);
-	TEST_CHECK(table_action(6, tt_rbraket) + 32== 95);
+	TEST_CHECK(table_action(0, tt_rbraket) + 32 == 126);
+	TEST_CHECK(table_action(1, tt_rbraket) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_rbraket) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_rbraket) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_rbraket) + 32 == 90);
+	TEST_CHECK(table_action(5, tt_rbraket) + 32 == 93);
+	TEST_CHECK(table_action(6, tt_rbraket) + 32 == 95);
 	TEST_CHECK(table_action(7, tt_rbraket) + 32 == 96);
 	TEST_CHECK(table_action(8, tt_rbraket) + 32 == 104);
 	TEST_CHECK(table_action(9, tt_rbraket) + 32 == 106);
@@ -465,13 +1231,13 @@ void	test_action_table(void)
 
 	//WORD
 
-	TEST_CHECK(table_action(0, tt_word) + 32== 41);
-	TEST_CHECK(table_action(1, tt_word) + 32== 126);
-	TEST_CHECK(table_action(2, tt_word) + 32== 126);
-	TEST_CHECK(table_action(3, tt_word) + 32== 126);
-	TEST_CHECK(table_action(4, tt_word) + 32== 126);
-	TEST_CHECK(table_action(5, tt_word) + 32== 126);
-	TEST_CHECK(table_action(6, tt_word) + 32== 126);
+	TEST_CHECK(table_action(0, tt_word) + 32 == 41);
+	TEST_CHECK(table_action(1, tt_word) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_word) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_word) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_word) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_word) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_word) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_word) + 32 == 126);
 	TEST_CHECK(table_action(8, tt_word) + 32 == 58);
 	TEST_CHECK(table_action(9, tt_word) + 32 == 63);
@@ -523,13 +1289,13 @@ void	test_action_table(void)
 
 	//ASSIGMENT T_WORD
 
-	TEST_CHECK(table_action(0, tt_assignment_word) + 32== 45);
-	TEST_CHECK(table_action(1, tt_assignment_word) + 32== 126);
-	TEST_CHECK(table_action(2, tt_assignment_word) + 32== 126);
-	TEST_CHECK(table_action(3, tt_assignment_word) + 32== 126);
-	TEST_CHECK(table_action(4, tt_assignment_word) + 32== 126);
-	TEST_CHECK(table_action(5, tt_assignment_word) + 32== 126);
-	TEST_CHECK(table_action(6, tt_assignment_word) + 32== 126);
+	TEST_CHECK(table_action(0, tt_assignment_word) + 32 == 45);
+	TEST_CHECK(table_action(1, tt_assignment_word) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_assignment_word) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_assignment_word) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_assignment_word) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_assignment_word) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_assignment_word) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_assignment_word) + 32 == 126);
 	TEST_CHECK(table_action(8, tt_assignment_word) + 32 == 60);
 	TEST_CHECK(table_action(9, tt_assignment_word) + 32 == 126);
@@ -581,13 +1347,13 @@ void	test_action_table(void)
 
 	//tt_less
 
-	TEST_CHECK(table_action(0, tt_less) + 32== 48);
-	TEST_CHECK(table_action(1, tt_less) + 32== 126);
-	TEST_CHECK(table_action(2, tt_less) + 32== 126);
-	TEST_CHECK(table_action(3, tt_less) + 32== 126);
-	TEST_CHECK(table_action(4, tt_less) + 32== 126);
-	TEST_CHECK(table_action(5, tt_less) + 32== 126);
-	TEST_CHECK(table_action(6, tt_less) + 32== 126);
+	TEST_CHECK(table_action(0, tt_less) + 32 == 48);
+	TEST_CHECK(table_action(1, tt_less) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_less) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_less) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_less) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_less) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_less) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_less) + 32 == 48);
 	TEST_CHECK(table_action(8, tt_less) + 32 == 48);
 	TEST_CHECK(table_action(9, tt_less) + 32 == 48);
@@ -639,13 +1405,13 @@ void	test_action_table(void)
 
 	//tt_great
 
-	TEST_CHECK(table_action(0, tt_great) + 32== 49);
-	TEST_CHECK(table_action(1, tt_great) + 32== 126);
-	TEST_CHECK(table_action(2, tt_great) + 32== 126);
-	TEST_CHECK(table_action(3, tt_great) + 32== 126);
-	TEST_CHECK(table_action(4, tt_great) + 32== 126);
-	TEST_CHECK(table_action(5, tt_great) + 32== 126);
-	TEST_CHECK(table_action(6, tt_great) + 32== 126);
+	TEST_CHECK(table_action(0, tt_great) + 32 == 49);
+	TEST_CHECK(table_action(1, tt_great) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_great) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_great) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_great) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_great) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_great) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_great) + 32 == 49);
 	TEST_CHECK(table_action(8, tt_great) + 32 == 49);
 	TEST_CHECK(table_action(9, tt_great) + 32 == 49);
@@ -697,13 +1463,13 @@ void	test_action_table(void)
 
 	//tt_dgreat
 
-	TEST_CHECK(table_action(0, tt_dgreat) + 32== 50);
-	TEST_CHECK(table_action(1, tt_dgreat) + 32== 126);
-	TEST_CHECK(table_action(2, tt_dgreat) + 32== 126);
-	TEST_CHECK(table_action(3, tt_dgreat) + 32== 126);
-	TEST_CHECK(table_action(4, tt_dgreat) + 32== 126);
-	TEST_CHECK(table_action(5, tt_dgreat) + 32== 126);
-	TEST_CHECK(table_action(6, tt_dgreat) + 32== 126);
+	TEST_CHECK(table_action(0, tt_dgreat) + 32 == 50);
+	TEST_CHECK(table_action(1, tt_dgreat) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_dgreat) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_dgreat) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_dgreat) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_dgreat) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_dgreat) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_dgreat) + 32 == 50);
 	TEST_CHECK(table_action(8, tt_dgreat) + 32 == 50);
 	TEST_CHECK(table_action(9, tt_dgreat) + 32 == 50);
@@ -755,13 +1521,13 @@ void	test_action_table(void)
 
 	//tt_io_number
 
-	TEST_CHECK(table_action(0, tt_io_number) + 32== 51);
-	TEST_CHECK(table_action(1, tt_io_number) + 32== 126);
-	TEST_CHECK(table_action(2, tt_io_number) + 32== 126);
-	TEST_CHECK(table_action(3, tt_io_number) + 32== 126);
-	TEST_CHECK(table_action(4, tt_io_number) + 32== 126);
-	TEST_CHECK(table_action(5, tt_io_number) + 32== 126);
-	TEST_CHECK(table_action(6, tt_io_number) + 32== 126);
+	TEST_CHECK(table_action(0, tt_io_number) + 32 == 51);
+	TEST_CHECK(table_action(1, tt_io_number) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_io_number) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_io_number) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_io_number) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_io_number) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_io_number) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_io_number) + 32 == 51);
 	TEST_CHECK(table_action(8, tt_io_number) + 32 == 51);
 	TEST_CHECK(table_action(9, tt_io_number) + 32 == 51);
@@ -813,13 +1579,13 @@ void	test_action_table(void)
 
 	//tt_dless
 
-	TEST_CHECK(table_action(0, tt_dless) + 32== 52);
-	TEST_CHECK(table_action(1, tt_dless) + 32== 126);
-	TEST_CHECK(table_action(2, tt_dless) + 32== 126);
-	TEST_CHECK(table_action(3, tt_dless) + 32== 126);
-	TEST_CHECK(table_action(4, tt_dless) + 32== 126);
-	TEST_CHECK(table_action(5, tt_dless) + 32== 126);
-	TEST_CHECK(table_action(6, tt_dless) + 32== 126);
+	TEST_CHECK(table_action(0, tt_dless) + 32 == 52);
+	TEST_CHECK(table_action(1, tt_dless) + 32 == 126);
+	TEST_CHECK(table_action(2, tt_dless) + 32 == 126);
+	TEST_CHECK(table_action(3, tt_dless) + 32 == 126);
+	TEST_CHECK(table_action(4, tt_dless) + 32 == 126);
+	TEST_CHECK(table_action(5, tt_dless) + 32 == 126);
+	TEST_CHECK(table_action(6, tt_dless) + 32 == 126);
 	TEST_CHECK(table_action(7, tt_dless) + 32 == 52);
 	TEST_CHECK(table_action(8, tt_dless) + 32 == 52);
 	TEST_CHECK(table_action(9, tt_dless) + 32 == 52);
@@ -886,11 +1652,11 @@ void	test_action_table(void)
 	TEST_CHECK(table_action(12, tt_end) + 32 == 107);
 	TEST_CHECK(table_action(13, tt_end) + 32 == 109);
 	TEST_CHECK(table_action(14, tt_end) + 32 == 126);
-	TEST_CHECK(table_action(15, tt_end) + 32 == 126); //FAIL 
+	TEST_CHECK(table_action(15, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(16, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(17, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(18, tt_end) + 32 == 126);
-	TEST_CHECK(table_action(19, tt_end) + 32 == 69); // FAIL 
+	TEST_CHECK(table_action(19, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(20, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(21, tt_end) + 32 == 126);
 	TEST_CHECK(table_action(22, tt_end) + 32 == 126);
@@ -1038,13 +1804,809 @@ void	test_goto_table(void)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //
+//                 TEST GRAMMAR UTILS
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_word1(void)
+{
+	t_word_list *out = NULL;
+	t_token *t1 = new_token(); set_token("a", 0, 1, tt_word, t1);
+	t_word_list *word1 = make_word(t1);
+	TEST_CHECK(strcmp(word1->word, "a") == 0);
+	t_token *t2 = new_token(); set_token("b", 0, 1, tt_word, t2);
+	t_word_list *word2 = make_word(t2);
+	TEST_CHECK(strcmp(word2->word, "b") == 0);
+	t_token *t3 = new_token(); set_token("c", 0, 1, tt_word, t3);
+	t_word_list *word3 = make_word(t3);
+	TEST_CHECK(strcmp(word3->word, "c") == 0);
+	t_token *t4 = new_token(); set_token("d", 0, 1, tt_word, t4);
+	t_word_list *word4 = make_word(t4);
+	TEST_CHECK(strcmp(word4->word, "d") == 0);
+	join_word(&word1, word2);
+	join_word(&word1, word3);
+	join_word(&word1, word4);
+	TEST_CHECK(strcmp(word1->word, "a") == 0);
+	TEST_CHECK(strcmp(word1->next->word, "b") == 0);
+	TEST_CHECK(strcmp(word1->next->next->word, "c") == 0);
+	TEST_CHECK(strcmp(word1->next->next->next->word, "d") == 0);
+	TEST_CHECK(word1->next->next->next->next == NULL);
+	clean_word(&word1);
+}
+
+void	test_word2(void)
+{
+	t_word_list *word1 = NULL;
+	t_token *t = new_token(); set_token("a", 0, 1, tt_word, t);
+	t_word_list *word2 = make_word(t);
+	TEST_CHECK(strcmp(word2->word, "a") == 0);
+	join_word(&word1, word2);
+	TEST_CHECK(strcmp(word1->word, "a") == 0);
+	TEST_CHECK(word1->next == NULL);
+	clean_word(&word1);
+}
+
+void	test_word3(void)
+{
+	t_word_list *word2 = NULL;
+	t_token *t = new_token(); set_token("a", 0, 1, tt_word, t);
+	t_word_list *word1 = make_word(t);
+	TEST_CHECK(strcmp(word1->word, "a") == 0);
+	join_word(&word1, word2);
+	TEST_CHECK(strcmp(word1->word, "a") == 0);
+	TEST_CHECK(word1->next == NULL);
+	clean_word(&word1);
+}
+
+void	test_number(void)
+{
+	t_token *t1 = new_token(); set_token("10", 0, 2, tt_io_number, t1);
+	TEST_CHECK(make_number(t1) == 10);
+	t_token *t2 = new_token(); set_token("0", 0, 1, tt_io_number, t2);
+	TEST_CHECK(make_number(t2) == 0);
+	t_token *t3 = new_token(); set_token("1", 0, 1, tt_io_number, t3);
+	TEST_CHECK(make_number(t3) == 1);
+}
+
+void	test_redir_utils(void)
+{
+	t_redirect	*r1 = ft_malloc(sizeof(t_redirect));
+	r1->flag = 1;
+	r1->next = NULL;
+	t_redirect	*r2 = ft_malloc(sizeof(t_redirect));
+	r2->flag = 2;
+	r2->next = NULL;
+	t_redirect	*r3 = ft_malloc(sizeof(t_redirect));
+	r3->flag = 3;
+	r3->next = NULL;
+	join_redir(&r1, r2);
+	join_redir(&r1, r3);
+	TEST_CHECK(r1->flag == 1);
+	TEST_CHECK(r1->next->flag == 2);
+	TEST_CHECK(r1->next->next->flag == 3);
+	clean_redirection(&r1);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR REDIRECTION
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_redir1(void)
+{
+	char		*input = strdup("<file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 1, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 1, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 5, 5, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 1);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_input_direction);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == O_TRUNC | O_WRONLY | O_CREAT);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_redir2(void)
+{
+	char		*input = strdup(">file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	
+	t = new_token(); set_token(input, 0, 1, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 1, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 5, 5, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 1);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_input_direction);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == O_TRUNC | O_WRONLY | O_CREAT);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_redir3(void)
+{
+	char		*input = strdup(">>file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	
+	t = new_token(); set_token(input, 0, 2, tt_dgreat, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 2, 6, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 6, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 0);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_appending_to);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == (O_APPEND|O_WRONLY|O_CREAT));
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_redir4(void)
+{
+		char		*input = strdup("10<file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 2, 3, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 3, 7, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 7, 7, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 10);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_input_direction);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == O_RDONLY);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_redir5(void)
+{
+	char		*input = strdup("10>file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 2, 3, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 3, 7, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 7, 7, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 10);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_output_direction);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == (O_TRUNC|O_WRONLY|O_CREAT));
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+ 
+void	test_redir6(void)
+{
+	char		*input = strdup("10>>file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 2, 4, tt_dgreat, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 4, 8, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 8, 8, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 10);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_appending_to);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == (O_APPEND|O_WRONLY|O_CREAT));
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_redir7(void)
+{
+	char		*input = strdup("<<file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 2, tt_dless, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 2, 6, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 6, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 0);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_reading_until);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == 0);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+
+void	test_redir8(void)
+{
+	char		*input = strdup("10<<file");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 2, 4, tt_dless, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 4, 8, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 8, 8, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 10);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "file") == 0);
+	TEST_CHECK(out->value.simple->redirects->rflags == 0);
+	TEST_CHECK(out->value.simple->redirects->flag == 0);
+	TEST_CHECK(out->value.simple->redirects->option == r_reading_until);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == 0);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR SUFFIX
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void	test_suffix1(void)
+{
+	char		*input = strdup("word1 >word2");
+	t_dlst		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 7, tt_great,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 7, 12, tt_word,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 12, 12,tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word2") == 0);
+	free(input);
+}
+
+void	test_suffix2(void)
+{
+	char		*input = strdup("word1 >word2 >word3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 7, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(strdup("word2"), 0, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 13, 14, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 14, 19, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 19, 19, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(out->value.simple->words->next == NULL);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word2") == 0);
+	TEST_CHECK(strcmp(out->value.simple->redirects->next->dest.filename, "word3") == 0);
+	TEST_CHECK(out->value.simple->redirects->next->next == NULL);
+	TEST_CHECK(out->type == cmd_simple);
+	free(input);
+}
+
+void	test_suffix3(void)
+{
+	char		*input = strdup("word1 word2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token(input, 0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 11, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 11, 11, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->words->next->word, "word2") == 0);
+	TEST_CHECK(out->value.simple->redirects == NULL);
+	free(input);
+}
+
+void	test_suffix4(void)
+{
+	char		*input = strdup("word1 word2 word3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token(input, 0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(strdup("word2"), 0,5 , tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 12, 17, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 17, 17, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->words->next->word, "word2") == 0);
+	TEST_CHECK(strcmp(out->value.simple->words->next->next->word, "word3") == 0);
+	TEST_CHECK(out->value.simple->redirects == NULL);
+	free(input);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR PREFIX
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_prefix1(void)
+{
+	char		*input = strdup(">word1");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token(input, 0, 1, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 1, 6, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 6, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	// command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word1") == 0);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_prefix2(void)
+{
+	char		*input = strdup(">word1 >word2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token(input, 0, 1, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 1, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 7, 8, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 8, 13, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 14, 14, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->redirects->next->dest.filename, "word2") == 0);
+	TEST_CHECK(out->value.simple->redirects->next->next == NULL);
+	free(input);
+}
+
+//void	test_prefix3(void)
+//{
+//	TEST_CHECK(1 == 0);
+//}
+//
+//void	test_prefix4(void)
+//{
+//	TEST_CHECK(1 == 0);
+//}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR SIMPLE
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_simple1(void)
+{
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(">", 0, 1, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 0, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 0, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word3", 0, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 1);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word2") == 0);
+	TEST_CHECK(strcmp(out->value.simple->words->next->word, "word3") == 0);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+}
+
+
+void	test_simple2(void)
+{
+	char		*input = strdup("word1 >word2");
+	t_dlst		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 7, 7, tt_great,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 7, 12, tt_word,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 12, 12,tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word2") == 0);
+	free(input);
+}
+
+void	test_simple3(void)
+{
+	char		*input = strdup(">word1");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+
+	t = new_token(); set_token(input, 0, 1, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 1, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 5, 5, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(out->value.simple->redirects->source.fd == 1);
+	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word1") == 0);
+	TEST_CHECK(out->value.simple->words == NULL);
+	TEST_CHECK(out->value.simple->redirects->next == NULL);
+	free(input);
+}
+
+void	test_simple4(void)
+{
+	char		*input = strdup("word1 word2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token(input, 0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 6, 11, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 11, 11, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(strcmp(out->value.simple->words->next->word, "word2") == 0);
+	TEST_CHECK(out->value.simple->words->next->next == NULL);
+	TEST_CHECK(out->value.simple->redirects == NULL);
+	free(input);
+}
+
+void	test_simple5(void)
+{
+	char		*input = strdup("word1");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token(input, 0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(input, 5, 5, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_simple);
+	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
+	TEST_CHECK(out->value.simple->words->next == NULL);
+	TEST_CHECK(out->value.simple->redirects == NULL);
+	free(input);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR SUBSHELL
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_subshell1(void)
+{ // ( cmd )
+	char		*input = strdup("( word1 )");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	t = new_token(); set_token("(", 0, 1, tt_lbrace,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token(")", 0, 1, tt_rbrace,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("" , 0, 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	syntax(&lex);
+	// token
+	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
+	TEST_CHECK(lex->next == NULL);
+	TEST_CHECK(lex->prev != NULL);
+	//command
+	t_command	*out = lex->prev->data;
+	TEST_CHECK(out->type == cmd_subshell);
+	//TEST_CHECK(out->value.subshell->command->type == cmd_simple);
+	//TEST_CHECK(strcmp(out->value.->, "word1") == 0);
+}
+
+void	test_subshell2(void)
+{
+	char		*input = strdup("( word1 ) >redir1");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_subshell3(void)
+{
+	char		*input = strdup("( word1 ) >redir1 >redir2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR GROUP
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_group1(void)
+{
+	char		*input = strdup("{ word1 }");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_group2(void)
+{
+	char		*input = strdup("{ word1 } >redir1");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_group3(void)
+{
+	char		*input = strdup("{ word1 } >redir1 >redir2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR PIPELINE
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_pipeline1(void)
+{
+	char		*input = strdup("word1 | word2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_pipeline2(void)
+{
+	char		*input = strdup("word1 | word2 | word3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_pipeline3(void)
+{
+	char		*input = strdup("word1 > redir1 | word2 > redir2 | word3 > redir3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                 TEST GRAMMAR AND OR
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void	test_andor1(void)
+{
+	char		*input = strdup("word1 || word2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_andor2(void)
+{
+	char		*input = strdup("word1 && word2");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_andor3(void)
+{
+	char		*input = strdup("word1 || word2 > redir2 && word3 > redir3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+
+void	test_andor4(void)
+{
+	char		*input = strdup("word1 || word2 > redir2 | word3 > redir3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+void	test_andor5(void)
+{
+	char		*input = strdup("word1 && word2 > redir2 | word3 > redir3");
+	t_dlst 		*lex = NULL;
+	t_token		*t;
+	TEST_CHECK(1 == 0);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 //                 RUN TEST
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_LIST = {
-	{ "test EOF", test_eof},
-	{ "test table action", test_action_table},
-	{ "test table go to", test_goto_table},
+	{ "test tokens"      , test_simple_tokens},
+	{ "test expansion"   , test_expansion    },
+	{ "test single quote", test_singleq   },
+	{ "test double quote", test_doubleq   },
+	{ "test multi tokens", test_multitok  },
+	{ "table action"     , test_action_table },
+	{ "table go to"      , test_goto_table   },
+	{ "word utils 1"     , test_word1        },
+	{ "word utils 2"     , test_word2        },
+	{ "word utils 3"     , test_word3        },
+	{ "number utils"     , test_number       },
+	{ "join redir"       , test_redir_utils  },
+	{ "rule  redir 1"    , test_redir1       },
+	{ "rule  redir 2"    , test_redir2       },
+	{ "rule  redir 3"    , test_redir3       },
+	{ "rule  redir 4"    , test_redir4       },
+	{ "rule  redir 5"    , test_redir5       },
+	{ "rule  redir 6"    , test_redir6       },
+	{ "rule  redir 7"    , test_redir7       },
+	{ "rule  redir 8"    , test_redir8       },
+	{ "rule suffix 1"    , test_suffix1      },
+	{ "rule suffix 2"    , test_suffix2      },
+	{ "rule suffix 3"    , test_suffix3      },
+	{ "rule suffix 4"    , test_suffix4      },
+	{ "rule prefix 1"    , test_prefix1      },
+	{ "rule prefix 2"    , test_prefix2      },
+//	{ "rule prefix 3"    , test_prefix3      }, // NO SE ME OCURRE EJEMPLO
+//	{ "rule prefix 4"    , test_prefix4      }, // NO SE ME OCURRE EJEMPLO
+	{ "rule simple 1"    , test_simple1      },
+	{ "rule simple 2"    , test_simple2      },
+	{ "rule simple 3"    , test_simple3      },
+	{ "rule simple 4"    , test_simple4      },
+	{ "rule simple 5"    , test_simple5      },
+//	{ "rule subshell1"   , test_subshell1    }, // IMPLEMENTACION OPCIONAL 
+//	{ "rule subshell2"   , test_subshell2    }, // IMPLEMENTACION OPCIONAL 
+//	{ "rule subshell3"   , test_subshell3    }, // IMPLEMENTACION OPCIONAL 
+//	{ "rule group1"      , test_group1       }, // IMPLEMENTACION OPCIONAL 
+//	{ "rule group2"      , test_group2       }, // IMPLEMENTACION OPCIONAL 
+//	{ "rule group3"      , test_group3       }, // IMPLEMENTACION OPCIONAL 
+	{ "rule pipeline1"   , test_pipeline1    },
+	{ "rule pipeline2"   , test_pipeline2    },
+	{ "rule pipeline3"   , test_pipeline3    },
+	{ "rule andor1"      , test_andor1       },
+	{ "rule andor2"      , test_andor2       },
+	{ "rule andor3"      , test_andor3       },
+	{ "rule andor4"      , test_andor4       },
+	{ "rule andor5"      , test_andor5       },
 	{ NULL, NULL }
 };

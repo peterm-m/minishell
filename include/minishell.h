@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/20 15:43:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/15 23:17:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define LOGS 0
 
 // Standar header
 # include <sys/types.h>
@@ -36,16 +38,7 @@
 # include "executer.h"
 # include "subsystem.h"
 
-// Color
-# define BHBLK "\e[1;90m"
-# define BHRED "\e[1;91m"
-# define BHGRN "\e[1;92m"
-# define BHYEL "\e[1;93m"
-# define BHBLU "\e[1;94m"
-# define BHMAG "\e[1;95m"
-# define BHCYN "\e[1;96m"
-# define BHWHT "\e[1;97m"
-# define END   "\e[0m"
+# include "colors.h"
 
 # ifdef DEBUG
 #  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})

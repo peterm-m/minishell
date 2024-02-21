@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 22:28:25 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/02 00:52:47 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/21 15:21:41 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef union u_redirectee
 
 typedef struct s_redirect
 {
-	t_redirectee		redirector;
+	t_redirectee		source;
 	int					rflags;
 	int					flags;
 	t_rinstructis 		instructis_on;

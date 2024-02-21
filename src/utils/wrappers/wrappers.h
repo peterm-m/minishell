@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/24 21:01:43 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/15 23:17:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/stat.h>
 # include <signal.h>
 # include <errno.h>
+
+#undef DEBUG
 
 // conditional
 # ifdef DEBUG
@@ -57,9 +59,11 @@ void		ft_free(void *ptr);
 
 # endif
 
+#define LOGS 0
+
 # ifdef LOGS
-#  define dbg(fmt, ...) \
-			do { if (LOGS) fprintf(stderr,  "%s:%d:%s(): " fmt, __FILE__,\
+#  define dbg(fmt,...) \
+			do { if (LOGS) fprintf(stderr,  "%-60s:%-3d:%-30s" fmt, __FILE__,\
 			__LINE__, __func__, __VA_ARGS__); } while (0)
 # endif
 
@@ -87,8 +91,14 @@ void		ft_sigaddset(sigset_t *set, int signum);
 
 /**
  * TODO: funciones que aun no tienen wrap
+ * 
  *	ioctl
- *	getenv
+ *
+ *	TODO implementar getenv
+ *	TODO implementar setenv
+ *	TODO implementar putenv
+ *	TODO implementar unsetenv
+ *
  *	tcsetattr
  *	tcgetattr
  *	tgetent
@@ -97,20 +107,24 @@ void		ft_sigaddset(sigset_t *set, int signum);
  *	tgetstr
  *	tgoto
  *	tputs
+ *
  *	wait3
  *	wait4
  *	exit
  *	dup
  *	printf
- *	access
- *	getcwd
- *	chdir
- *	 lstat
- *	unlink,
  *	pipe
+ *
+ *
+ *	access
+ *	chdir
+ *	lstat
+ *	unlink,
+ 
  *	opendir
  *	readdir
  *	closedir
+ *
  *	isatty
  *	ttyname
  *	ttyslot
