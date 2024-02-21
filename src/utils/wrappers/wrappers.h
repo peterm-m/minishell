@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/09 17:36:37 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/15 23:17:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <signal.h>
 # include <errno.h>
 
-#define DEBUG 1
+#undef DEBUG
 
 // conditional
 # ifdef DEBUG
@@ -58,6 +58,8 @@ void		*ft_malloc(size_t size);
 void		ft_free(void *ptr);
 
 # endif
+
+#define LOGS 0
 
 # ifdef LOGS
 #  define dbg(fmt,...) \

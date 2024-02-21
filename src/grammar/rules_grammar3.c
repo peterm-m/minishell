@@ -40,10 +40,10 @@ void	rule_simple5(t_dlst **lex, t_state **state)
 	*out = make_simple(NULL, make_word(word), NULL);
 }
 
-// cmd_prefix :            io_redirect     (rule 20)
+// cmd_prefix :            io_redirect     (rule 20) FIX: leak
 
 void	rule_prefix1(t_dlst **lex, t_state **state)
-{dbg("rule_prefix1 %s\n", "");
+{dbg("│\t├─rule_prefix1 %s\n", "");
 	void	**out;
 	void	*io_redirect;
 
@@ -53,10 +53,10 @@ void	rule_prefix1(t_dlst **lex, t_state **state)
 	*out = make_element(NULL, io_redirect);
 }
 
-// cmd_prefix : cmd_prefix io_redirect     (rule 21)
+// cmd_prefix : cmd_prefix io_redirect     (rule 21) FIX: segmentation
 
 void	rule_prefix2(t_dlst **lex, t_state **state)
-{dbg("rule_prefix2 %s\n", "");
+{dbg("│\t├─rule_prefix2 %s\n", "");
 	void	**out;
 	t_element	*cmd_prefix;
 	t_redirect	*io_redirect;
@@ -64,14 +64,15 @@ void	rule_prefix2(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	io_redirect = (*lex)->prev->data;
 	cmd_prefix = (*lex)->prev->prev->data;
-	join_redirection(&(cmd_prefix->redirect), io_redirect);
+	join_redir(&(cmd_prefix->redirect), io_redirect);
+	*out = cmd_prefix;
 	pop_elements(lex, state, 1);
 }
 
 // cmd_prefix :            ASSIGNMENT_WORD (rule 22) OK
 
 void	rule_prefix3(t_dlst **lex, t_state **state)
-{dbg("rule_prefix3 %s\n", "");
+{dbg("│\t├─rule_prefix3 %s\n", "");
 	void	**out;
 	void		*assignment_word;
 	

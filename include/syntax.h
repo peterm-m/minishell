@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/08 18:18:29 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:37:22 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ int		table_nt_generate(int rule_id);
 
 void	pop_elements(t_dlst **lex, t_dlst **state, int n);
 
-void	syntax(t_dlst *lex);
+void	syntax(t_dlst **lex);
 
 #endif

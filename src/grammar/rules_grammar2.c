@@ -44,20 +44,20 @@ void	rule_subshell(t_dlst **lex, t_state **state)
 	pop_elements(lex, state, 2);
 }
 
-// simple_command : cmd_prefix WORD cmd_suffix (rule 15)
+// simple_command : cmd_prefix WORD cmd_suffix (rule 15) FIX: Segmentation
 
 void	rule_simple1(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_simple1 %s\n", "");
-	void	**out;
-	void	*cmd_prefix;
-	void	*cmd_suffix;
-	void	*word;
+	void		**out;
+	t_element	*cmd_prefix;
+	t_element	*cmd_suffix;
+	void		*word;
 
 	out = &(*lex)->prev->data;
 	cmd_prefix = (*lex)->prev->prev->prev->data;
 	word = (*lex)->prev->prev->data;
 	cmd_suffix = (*lex)->prev->data;
-	*out = make_simple(cmd_prefix, word, cmd_suffix);
+	*out = make_simple(cmd_prefix, make_word(word), cmd_suffix);
 	pop_elements(lex, state, 2);
 }
 
@@ -76,12 +76,12 @@ void	rule_simple2(t_dlst **lex, t_state **state)
 	pop_elements(lex, state, 1);
 }
 
-// simple_command : cmd_prefix                 (rule 17) OK
+// simple_command : cmd_prefix                 (rule 17) FIX: leak
 
 void	rule_simple3(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_simple3 %s\n", "");
-	void	**out;
-	void	*cmd_prefix;
+	void		**out;
+	t_element	*cmd_prefix;
 
 	(void)state;
 	out = &(*lex)->prev->data;

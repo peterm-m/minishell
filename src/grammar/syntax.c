@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/08 01:25:59 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/14 14:17:52 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 // TODO testeo general
 //		rebla por regla
-//		tablas
 //		semantica
 // TODO end_parser
 
@@ -49,18 +48,19 @@ static void	end_parser(t_dlst **lex, t_state **state, int action)
 {
 	(void )lex;
 	(void )state;
-	if (action == ACCEPT)
-		printf("END PARSER\n");
-	else
-		printf("Syntax Error.\n");
-	dbg("├CLEAN %s\n", "");
-	ft_dlstdelone((*lex)->prev, clean_command);
-	ft_dlstclear(state, ft_free);
-	exit(EXIT_SUCCESS);
+	//if (action == ACCEPT)
+	//	printf("END PARSER\n");
+	//else
+	//	printf("Syntax Error.\n");
+	//ªdbg("├CLEAN %s\n", "");
+	//ªft_dlstdelone((*lex)->prev, print_command);
+	//ft_dlstdelone((*lex)->prev, clean_command);
+	//ft_dlstclear(state, ft_free);
+	//exit(EXIT_SUCCESS);
 	return ;
 }
 
-void	syntax(t_dlst *lex)
+void	syntax(t_dlst **lex)
 {
 	int		action;
 	t_state	*state;
@@ -70,37 +70,27 @@ void	syntax(t_dlst *lex)
 	while (1)
 	{
 		action = table_action(*((int *)state->data),
-				((t_token *)(lex->data))->flag & TOK_TYPE);
+				((t_token *)((*lex)->data))->flag & TOK_TYPE);
 		if (action >= SHIFT0 && action <= SHIFT54)
 		{
 			dbg("├SHIFT to %d\n", action);
-			shift(&lex, &state, action);
+			shift(lex, &state, action);
 		}
 		else if (action >= REDUCE0 && action <= REDUCE37)
 		{
 			dbg("├REDUCE to %d\n", action - REDUCE0);
-			reduce(&lex, &state, action);
+			reduce(lex, &state, action);
 		}
 		if (action == GRAMMAR_ERROR || action == UNDEFINED
 			|| action == ACCEPT)
 		{
 			dbg("└END to %d\n\n", action - REDUCE0);
-			end_parser(&lex, &state, action);
+			end_parser(lex, &state, action);
 			break ;
 		}
 	}
 }
 
-/*
-	shift:
-		añade stado actual a state
-		avanza token
-*/
-
 // * aqui deberia estar eliminados los nodos que se han usado en la reducion.
 //
-// * formada la estructura pertinente en la cabeza de lex
-//
-// * eliminados los nodos de state
-//
-// * actualizado el valor de state con la tabla go_to 
+// * formada la estructura del comando en el unico node que quede en lex

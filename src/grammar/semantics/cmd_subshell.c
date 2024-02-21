@@ -6,13 +6,13 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:50:53 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/08 01:14:18 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:58:08 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
-#define LOGS 1
+#define LOGS 0
 
 void	print_subshell(t_subshell *subshell)
 {

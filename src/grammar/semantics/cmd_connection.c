@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:38:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/06 02:24:20 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/15 23:17:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_connection(t_connection *connection)
 
 
 void	clean_connection(t_connection *connection)
-{dbg("│\t│\t├─%s\n","clean connection");
+{dbg("├─%s\n","clean connection");
 	t_command	*cmd1;
 	t_command	*cmd2;
 

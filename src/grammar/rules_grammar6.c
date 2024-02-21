@@ -25,7 +25,7 @@ void	rule_redir5(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.dest = make_number(io_number);
+	source.fd = make_number(io_number);
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_output_direction, &dest, 0);
 	pop_elements(lex, state, 2);
@@ -35,7 +35,7 @@ void	rule_redir5(t_dlst **lex, t_state **state)
 
 void	rule_redir6(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir6 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_token		*io_number;
 	t_unit_io	source;
@@ -44,7 +44,7 @@ void	rule_redir6(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.dest = make_number(io_number);
+	source.fd = make_number(io_number);
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_appending_to, &dest, 0);
 	pop_elements(lex, state, 2);
@@ -54,14 +54,14 @@ void	rule_redir6(t_dlst **lex, t_state **state)
 
 void	rule_redir7(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir7 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_unit_io	source;
 	t_unit_io	dest;
 
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
-	source.dest = 0;
+	source.fd = 0;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	// push_heredoc
@@ -72,7 +72,7 @@ void	rule_redir7(t_dlst **lex, t_state **state)
 
 void	rule_redir8(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_redir8 %s\n", "");
-	void	**out;
+	void		**out;
 	t_token		*word;
 	t_token		*io_number;
 	t_unit_io	source;
@@ -81,7 +81,7 @@ void	rule_redir8(t_dlst **lex, t_state **state)
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
 	io_number = (*lex)->prev->prev->prev->data;
-	source.dest = make_number(io_number);
+	source.fd = make_number(io_number);
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	// push_heredoc

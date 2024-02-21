@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/09 18:27:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/15 23:17:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
-#define LOGS 1
+#define LOGS 0
 
 void	print_command(t_command *cmd)
 {
@@ -29,7 +29,7 @@ void	print_command(t_command *cmd)
 }
 
 void	clean_command(t_command *cmd)
-{dbg("│\t│\t├─%s\n","clean_command");
+{dbg("├─%s\n","clean_command");
 	if (cmd == NULL)
 		return ;
 	if (cmd->type == cmd_simple)
@@ -40,13 +40,13 @@ void	clean_command(t_command *cmd)
 		clean_subshell(cmd->value.subshell);
 	else if (cmd->type == cmd_group)
 		clean_group(cmd->value.group);
-	clean_redirection(cmd->redirects);
+	clean_redirection(&(cmd->redirects));
 	ft_free(cmd);
 }
 
 t_command	*join_command_redir(t_command *cmd, t_redirect *redir)
 {dbg("│\t│\t├─%s\n","join redir");
-	join_redirection(&(cmd->redirects), redir);
+	join_redir(&(cmd->redirects), redir);
 	return (cmd);
 }
 

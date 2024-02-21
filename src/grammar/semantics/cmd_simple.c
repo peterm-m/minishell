@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_simple.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/02/09 18:31:21 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/15 23:17:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
-#define LOGS 1
+#define LOGS 0
 
 void	print_simple(t_simple *cmd)
 {
@@ -22,34 +22,39 @@ void	print_simple(t_simple *cmd)
 }
 
 void	clean_simple(t_simple *cmd)
-{dbg("│\t│\t├─%s\n","clean simple");
+{dbg("├─%s\n","clean_simple");
 	if (cmd == NULL)
 		return ;
 	if (cmd->words != NULL)
-		clean_word(cmd->words);
+		clean_word(&(cmd->words));
 	if (cmd->redirects != NULL)
-		clean_redirection(cmd->redirects);
+		clean_redirection(&(cmd->redirects));
 	ft_free(cmd);
 }
 
 t_command	*make_simple(t_element *prefix, t_word_list *word,
 	t_element *suffix)
 {dbg("│\t│\t├─%s\n","make simple");
-	t_element		*aux;
 	t_simple	*simple;
 
 	simple = (t_simple *)ft_malloc(sizeof(t_simple));
 	simple->redirects = NULL;
 	simple->words = NULL;
-	aux = make_element(simple->words ,simple->redirects);
-	
-	join_element(aux, prefix);
-	join_word(&(aux->word), word);
-	join_element(aux, suffix);
-	simple->redirects = aux->redirect;
-	simple->words = aux->word;
-	ft_free(aux);
+	if (prefix != NULL)
+	{
+		join_word(&(simple->words), prefix->word);
+		join_redir(&(simple->redirects), prefix->redirect);
+		ft_free(prefix);
+	}
+	if (word != NULL)
+		join_word(&(simple->words), word);
+	if (suffix != NULL)
+	{
+		join_word(&(simple->words), suffix->word);
+		join_redir(&(simple->redirects), suffix->redirect);
+		ft_free(suffix);
+	}
 	return (make_command(cmd_simple, (t_node)simple));
 }
 #undef LOGS
-#define LOGS 1
+#define LOGS 0

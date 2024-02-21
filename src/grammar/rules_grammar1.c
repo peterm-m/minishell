@@ -47,7 +47,7 @@ void	rule_and_or1(t_dlst **lex, t_state **state)
 	pop_elements(lex, state, 2);
 }
 
-//and_or : and_or OR_IF  pipeline (rule 5) OK
+//and_or : and_or OR_IF pipeline (rule 5) OK
 
 void	rule_and_or2(t_dlst **lex, t_state **state)
 {dbg("│\t├─rule_and_or2%s\n", "");

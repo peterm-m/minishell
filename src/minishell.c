@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/06 01:17:25 by pedro            ###   ########.fr       */
+/*   Updated: 2024/02/21 12:54:43 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void tok_p(void *t)
 {
  	if (((t_token *)t)->str == NULL)
 	{
-		printf(BHYEL"\nToken: "BHBLU" void\n"
- 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+		printf(BHYEL"\nToken(%p): "BHBLU" void\n"
+ 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,t,
 		((t_token *)t)->flag);
 	}
 	else
 	{
- 		printf(BHYEL"\nToken: "BHBLU"%s\n"
- 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+ 		printf(BHYEL"\nToken(%p): "BHBLU"%s\n"
+ 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,t,
 		((t_token *)t)->str, ((t_token *)t)->flag);
 	}
 }
@@ -47,10 +47,9 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
-		ft_dlstnew(data.lexlist);
-		data.lexlist = lexer(read_line, &data.lexlist);
+		data.lexlist = lexer(read_line);
 		ft_dlstiter(data.lexlist, tok_p);
-		syntax(data.lexlist);
+		syntax(&data.lexlist);
 		ft_dlstclear(&data.lexlist, ft_free);
 		//expander(&data, read_line);
 	}
