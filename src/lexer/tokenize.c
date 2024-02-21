@@ -40,12 +40,14 @@ int get_next_token(char *input, int i, t_token *token)
  * 
  * @return the pointer to the head of the doubly linked list.
  */
-t_dlst *tokenize(char *input, t_dlst **head)
+t_dlst *tokenize(char *input)
 {
 	int		i;
 	t_token	*token;
+	t_dlst	*head;
 
 	i = 0;
+	head = NULL;
 	while(1)
 	{
 		token = new_token();
@@ -53,17 +55,17 @@ t_dlst *tokenize(char *input, t_dlst **head)
 		if (token->flag == 0)
 		{
 			token->flag = tt_end;
-			ft_dlstaddb(head, ft_dlstnew(token));
-			ft_dlstiter(*head, search_w_q);
+			ft_dlstaddb(&head, ft_dlstnew(token));
+			ft_dlstiter(head, search_w_q);
 			break ;
 		}
 		else if(i == LEX_ERROR)
 		{
-			ft_dlstclear(head, ft_free);
+			ft_dlstclear(&head, ft_free);
 			return (NULL);
 		}
 		else 
-			ft_dlstaddb(head, ft_dlstnew(token));
+			ft_dlstaddb(&head, ft_dlstnew(token));
 	}
-	return (*head);
+	return (head);
 }

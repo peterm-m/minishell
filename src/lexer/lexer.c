@@ -115,7 +115,7 @@ int evaluate_state(char *str)
  * 
  * @return The function `lexer` is returning a pointer to a `t_dlst` structure.
  */
-t_dlst	*lexer(char *read_line, t_dlst **head)
+t_dlst	*lexer(char *read_line)
 {
 	int state;
 
@@ -127,5 +127,5 @@ t_dlst	*lexer(char *read_line, t_dlst **head)
 		return (NULL);
 	}
 	printf(BHGRN"Valid Input: Go to tokenizer:\n"END);
-	return (tokenize(read_line, head));
+	return (tokenize(read_line));
 }

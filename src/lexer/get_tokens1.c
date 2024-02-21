@@ -76,6 +76,11 @@ int get_word(char *str, int i, t_token *token)
 	j = 0;
 	while(!in_word(str[i + j]) && str[i + j])
 	{
+/* 		if (str[i + j] == '(' || str[i + j] == '{')
+		{
+			while ((str[i + j] != ')' || str[i + j] != '}'))
+				j++;
+		} */
 		if (str[i + j] == '$')
 			token->flag |= get_dolar_type(str, i + j);
 		j++;
@@ -150,6 +155,6 @@ int get_dolar(char *str, int i, t_token *token)
 	set_token(str, i, j, PARAM_E|tt_word, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-	return (i + j + 1);
+	return (i + j);
 }
 //"$hola" "g{$hh}" "$(ggg)" $fff $(hhh) ${jjj} {lll} (kkk) {(jkk)}

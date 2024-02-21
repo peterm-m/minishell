@@ -101,7 +101,7 @@ int	main(int argc, char const **argv, char const **envp)
 			printf("buffer = %s\n", buffer);
 		}
 		ft_dlstnew(data.lexlist);
-		data.lexlist = lexer(read_line, &data.lexlist);
+		data.lexlist = lexer(read_line);
 		//heredoc(&data.lexlist, "hola");
 		ft_dlstiter(data.lexlist, tok_p);
 		//syntax(data.lexlist);

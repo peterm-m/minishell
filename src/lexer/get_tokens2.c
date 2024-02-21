@@ -93,7 +93,6 @@ int get_braket_token(char *str, int i, t_token *token)
 	set_token(str, i, j, tt_word, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-    printf("i: %d, str: %c\n", i + j, str[i + j - 1]);
 	return (i + j);    
 }
 
