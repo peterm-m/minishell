@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tables.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:30:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/01/23 21:17:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:41:47 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	table_action(int state, int token)
 	"xxx~x~xxxxxxxxx" "yyy~y~yyyyyyyyy" "zzz~z~zzzzzzzzz"\
 	"|||~|~|||||||||";
 
+//	dbg("reduce %d\n", action[NUM_TOKEN * state + token] - CHR_STATE0);
 	if ((token >= 0 && token <= 14) && (state >= 0 && state <= 54))
 		return (action[NUM_TOKEN * state + token] - CHR_STATE0);
 	return (-1);
@@ -105,23 +106,25 @@ int	table_nt_generate(int rule_id)
 	return (nt_generate[rule_id]);
 }
 
-void	(*table_reduce(int rule_id))
-	(t_dlst **, t_state **, int )
+void	(*table_reduce(int rule_id))(t_dlst **, t_state **)
 {
-	static void	(*rules[NUM_RULES])(t_dlst **, t_state **, int) = {\
-		rules_accept, rules_program, rules_program,
-		rules_and_or, rules_and_or, rules_and_or,
-		rules_pipeline, rules_pipeline, rules_command,
-		rules_command, rules_command, rules_compound,
-		rules_compound, rules_group, rules_subshell,
-		rules_simple_cmd1, rules_simple_cmd1, rules_simple_cmd1,
-		rules_simple_cmd2, rules_simple_cmd2, rules_cmd_prefix,
-		rules_cmd_prefix, rules_cmd_prefix, rules_cmd_prefix,
-		rules_cmd_suffix, rules_cmd_suffix, rules_cmd_suffix,
-		rules_cmd_suffix, rules_redirect_list, rules_redirect_list,
-		rules_io_redirect1, rules_io_redirect1, rules_io_redirect1,
-		rules_io_redirect2, rules_io_redirect2, rules_io_redirect2,
-		rules_io_redirect3, rules_io_redirect3};
-
-	return (rules[rule_id]);
+	static void	(*rule[NUM_RULES])(t_dlst **, t_state **) = {\
+		rule_nothing,
+		rule_nothing, rule_nothing, rule_nothing,
+		rule_and_or1, rule_and_or2, rule_nothing,
+		rule_pipeline, rule_nothing, rule_nothing,
+		rule_command, rule_nothing, rule_nothing,
+		rule_group, rule_subshell, 
+		rule_simple1, rule_simple2, rule_simple3,
+		rule_simple4, rule_simple5,
+		rule_prefix1, rule_prefix2, rule_prefix3,
+		rule_prefix4,
+		rule_suffix1, rule_suffix2, rule_suffix3,
+		rule_suffix4,
+		rule_nothing, rule_redir_list, 
+		rule_redir1, rule_redir2, rule_redir3,
+		rule_redir4, rule_redir5, rule_redir6,
+		rule_redir7, rule_redir8};
+	return (rule[rule_id]);
 }
+

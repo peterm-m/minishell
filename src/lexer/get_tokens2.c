@@ -46,10 +46,9 @@ int get_token(char *str, int i, t_token *token) // Pasar como argumento la lista
 		set_token(str, i, 1, tt_less, token);
 	else if (str[i] == '>' && str[i + 1] != '>')
 		set_token(str, i, 1, tt_great, token);
-	else if (str[i] == '(')
+	else if (str[i] == '(' || str[i] == '{' ||
+		str[i] == ')' || str[i] == '}' )
 		return(get_braket_token(str, i, token));
-	else if (str[i] == '{')
-        return(get_brace_token(str, i, token));
 	else
 		return(get_token2(str, i, token));
 	if (token->flag == LEX_ERROR)
@@ -84,29 +83,16 @@ int get_token2(char *str, int i, t_token *token)
 
 int get_braket_token(char *str, int i, t_token *token)
 {
-	int j;
-
-	j = 0;
-    while (str[i + j] != ')')
-        j++;
-    j++;
-	set_token(str, i, j, tt_word, token);
+	if (str[i] == '(')	
+		set_token(str, i, 1, tt_lbraket, token);
+	else if (str[i] == ')')
+		set_token(str, i, 1, tt_rbraket, token);
+	else if (str[i] == '{')
+		set_token(str, i, 1, tt_lbrace, token);
+	else if (str[i] == '}')
+		set_token(str, i, 1, tt_rbrace, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-	return (i + j);    
-}
-
-int get_brace_token(char *str, int i, t_token *token)
-{
-	int j;
-
-	j = 0;
-    while (str[i + j] != '}')
-        j++;
-    j++;
-	set_token(str, i, j, tt_word, token);
-	if (token->flag == LEX_ERROR)
-		return (LEX_ERROR);
-	return (i + j);
+	return (i + 1);    
 }
 

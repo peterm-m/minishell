@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/01/23 21:06:31 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:54:43 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void tok_p(void *t)
 {
  	if (((t_token *)t)->str == NULL)
 	{
-		printf(BHYEL"\nToken: "BHBLU" void\n"
- 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+		printf(BHYEL"\nToken(%p): "BHBLU" void\n"
+ 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,t,
 		((t_token *)t)->flag);
 	}
 	else
 	{
- 		printf(BHYEL"\nToken: "BHBLU"%s\n"
- 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,
+ 		printf(BHYEL"\nToken(%p): "BHBLU"%s\n"
+ 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,t,
 		((t_token *)t)->str, ((t_token *)t)->flag);
 	}
 }

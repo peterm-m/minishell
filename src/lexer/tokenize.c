@@ -18,16 +18,16 @@ int get_next_token(char *input, int i, t_token *token)
 		i++;
 	if (!input[i])
 		return (i);
-	if (is_operator(input[i]))
+	if (input[i] == '$')
+		return(get_dolar(input, i, token));
+	if (is_quotes(input[i]))
+		return (get_string(input, i, token));
+	else if (is_operator(input[i]))
 		return(get_token(input, i, token));
 	else if (!in_word(input[i]) && !ft_isdigit(input[i]))
 		return(get_word(input, i, token));
-	else if (is_quotes(input[i]))
-		return (get_string(input, i, token));
 	else if (ft_isdigit(input[i]))
 		return (get_ionumber(input, i, token));
-	else if (input[i] == '$')
-		return(get_dolar(input, i, token));
 	return (i);
 }
 
@@ -43,8 +43,8 @@ int get_next_token(char *input, int i, t_token *token)
 t_dlst *tokenize(char *input)
 {
 	int		i;
-	t_token	*token;
 	t_dlst	*head;
+	t_token	*token;
 
 	i = 0;
 	head = NULL;

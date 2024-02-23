@@ -19,7 +19,11 @@
 		"array": "c",
 		"string": "c",
 		"string_view": "c",
+<<<<<<< HEAD
 		"sstream": "c",
 		"unistd.h": "c"
+=======
+		"wrappers.h": "c"
+>>>>>>> origin/dbg_parser
 	}
 }
