@@ -1,5 +1,11 @@
 #include "minishell.h" 
 
+int in_brakets(int c)
+{
+	return (c == '(' || c == ')' || 
+		c == '{' || c == '}');
+}
+
 /**
  * The function takes an input string, an index, and a doubly linked list head
  * pointer, and returns the index of the next token in the input string.
@@ -20,9 +26,11 @@ int get_next_token(char *input, int i, t_token *token)
 		return (i);
 	if (input[i] == '$')
 		return(get_dolar(input, i, token));
-	if (is_quotes(input[i]))
-		return (get_string(input, i, token));
-	else if (is_operator(input[i]))
+	if (is_quotes(input[i]) && input[i] == '\'')
+		return (get_string(input, i, token, 0));
+	else if (is_quotes(input[i]) && input[i] == '\"')
+		return (get_string(input, i, token, 1));
+	else if (is_operator(input[i]) || in_brakets(input[i]))
 		return(get_token(input, i, token));
 	else if (!in_word(input[i]) && !ft_isdigit(input[i]))
 		return(get_word(input, i, token));

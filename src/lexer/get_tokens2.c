@@ -11,9 +11,9 @@
  * 
  * @return the index position of the next character after the IO number in the string.
  */
-int get_ionumber(char *str, int i, t_token *token)
+int	get_ionumber(char *str, int i, t_token *token)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	//token = NULL;

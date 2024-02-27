@@ -34,18 +34,19 @@ int get_dolar_type(char *str, int i)
  * 
  * @return The index position of the next character after this quoted token.
  */
-int	get_string(char *str, int i, t_token *token)
+int	get_string(char *str, int i, t_token *token, int d_quote)
 {
 	int		j;
 
 	j = 1; 
 	//printf("comillas: %c\n", str[i + j]);
-	while (!is_quotes(str[i + j++]))
+	while (!is_quotes(str[i + j]))
 	{
-		if (str[i + j] == '$' && str[i + j] == '\"' && 
+		//printf("comillas: %c\n", str[i + j]);
+		if (str[i + j] == '$' && str[i + j] != '\"' && d_quote &&
 			!is_blankspace(str[i + j + 1]) && !is_quotes(str[i + j + 1]))
 			token->flag |= get_dolar_type(str, i + j);
-		//printf("comillas: %c\n", str[i + j]);
+		j++;
 	}
 	if (!in_word(str[i + j]) && !ft_isdigit(str[i + j]))
 	{
@@ -78,9 +79,15 @@ int get_word(char *str, int i, t_token *token)
 	j = 0;
 	while(!in_word(str[i + j]) && str[i + j])
 	{
-		if (str[i + j] == '$' && str[i + j] == '\"' && 
+		if (str[i + j] == '$' && str[i + j] != '\"' && 
 			!is_blankspace(str[i + j + 1]) && !is_quotes(str[i + j + 1]))
-			token->flag |= get_dolar_type(str, i + j);
+		{
+				token->flag |= get_dolar_type(str, i + j);
+				while (!is_blankspace(str[i + j]) && str[i + j])
+					j++;
+		}
+	/* 	else if (in_brakets(str[i + j]))
+			break; */
 		j++;
 	}
 	set_token(str, i, j, tt_word, token);
@@ -106,7 +113,7 @@ int get_dolar2(char *str, int i, t_token *token)
 	int		j;
 
 	j = 2;
-	token->flag = tt_word;
+	token->flag = tt_word|EXPAND;
 	if (str[i] == '$' && str[i + 1] == '(')
 	{
 		token->flag |= COMMD_SUB;
@@ -150,7 +157,7 @@ int get_dolar(char *str, int i, t_token *token)
 		while (!is_blankspace(str[i + j]) && str[i + j])
 			j++;
 	}
-	set_token(str, i, j, PARAM_E|tt_word, token);
+	set_token(str, i, j, EXPAND|PARAM_E|tt_word, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
 	return (i + j);

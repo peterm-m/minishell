@@ -35,7 +35,6 @@ char    **make_char(t_dlst *head)
     int     i;
     int     j;
     char    *value = NULL;
-    //char    *tmp = NULL;
     char    **env;
 
     env = ft_malloc((size_t)ft_dlstsize + 1);

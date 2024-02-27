@@ -45,11 +45,15 @@ typedef enum e_terminals
 # define TOK_TYPE 15
 
 # define LEX_ERROR -1
+
 # define PARAM_E 16
 # define COMMD_SUB 32
+# define EXPAND_Q 256
+# define EXPAND 512
+
 # define WILDCARD 64
 # define QUEST 128
-# define EXPAND 256
+
 
 typedef struct s_token
 {
@@ -89,7 +93,7 @@ void search_w_q(void *t);
 // get_tokens1.c
 
 int get_word(char *str, int i, t_token *token);
-int	get_string(char *str, int i, t_token *token);
+int	get_string(char *str, int i, t_token *token, int d_quote);
 int get_dolar_type(char *str, int i);
 int get_dolar(char *str, int i, t_token *token);
 int get_dolar2(char *str, int i, t_token *token);
@@ -100,12 +104,11 @@ int get_token(char *str, int i, t_token *token);
 int get_token2(char *str, int i, t_token *token);
 int get_ionumber(char *str, int i, t_token *token);
 int get_braket_token(char *str, int i, t_token *token);
-int get_brace_token(char *str, int i, t_token *token);
-
 
 // tokenize.c
 
 t_dlst *tokenize(char *input);
 int get_next_token(char *input, int i, t_token *token);
+int in_brakets(int c);
 
 #endif

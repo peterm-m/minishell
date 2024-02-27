@@ -12,9 +12,10 @@
 int is_operator(int c)
 {
 	return (c == '|' || c == '<' || c == '>' ||
-		c == '&' || c == '(' || c == ')' || 
-		c == '{' || c == '}');
+		c == '&');
 }
+// || c == '(' || c == ')' || 
+	//	c == '{' || c == '}'
 
 /**
  * The function checks if a character is a blank space or a whitespace character.
