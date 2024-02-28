@@ -44,13 +44,13 @@ void	test_simple_tokens(void)
 	t_token	*tok;
 
 //----------------------------
-	out = tokenize("");
+	out = tokenize(ft_strdup(""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_end);
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-/* 	out = tokenize("&&");
+/* 	out = tokenize(ft_strdup("&&"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_and_if);
 	TEST_CHECK(tok->str == NULL);
@@ -59,7 +59,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("||"); //mirar
+	out = tokenize(ft_strdup("||"); //mira)r
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_or_if);
 	TEST_CHECK(tok->str == NULL);
@@ -68,7 +68,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token); */
 //----------------------------
-/* 	out = tokenize("|");
+/* 	out = tokenize(ft_strdup("|"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_pipe);
 	TEST_CHECK(tok->str == NULL);
@@ -77,7 +77,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token); */
 //----------------------------
-	out = tokenize("{ }");
+	out = tokenize(ft_strdup("{ }"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_lbrace);
 	TEST_CHECK(tok->str == NULL);
@@ -89,7 +89,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("{}");
+	out = tokenize(ft_strdup("{}"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_lbrace);
 	TEST_CHECK(tok->str == NULL);
@@ -101,7 +101,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("( )");
+	out = tokenize(ft_strdup("( )"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_lbraket);
 	TEST_CHECK(tok->str == NULL);
@@ -113,7 +113,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("()");
+	out = tokenize(ft_strdup("()"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_lbraket);
 	TEST_CHECK(tok->str == NULL);
@@ -125,7 +125,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word");
+	out = tokenize(ft_strdup("word"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word") == 0);
@@ -134,7 +134,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-/* 	out = tokenize("<");
+/* 	out = tokenize(ft_strdup("<"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_less);
 	TEST_CHECK(tok->str == NULL);
@@ -143,7 +143,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize(">");
+	out = tokenize(ft_strdup(">"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_great);
 	TEST_CHECK(tok->str == NULL);
@@ -152,7 +152,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize(">>");
+	out = tokenize(ft_strdup(">>"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_dgreat);
 	TEST_CHECK(tok->str == NULL);
@@ -161,7 +161,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("<<");
+	out = tokenize(ft_strdup("<<"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_dless);
 	TEST_CHECK(tok->str == NULL);
@@ -170,7 +170,7 @@ void	test_simple_tokens(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token); */
 //----------------------------
-	out = tokenize("10");
+	out = tokenize(ft_strdup("10"));
 	tok = out->data;
 	TEST_CHECK(strcmp(tok->str, "10") == 0);
 	TEST_CHECK(tok->flag == tt_word);
@@ -185,7 +185,7 @@ void	test_expansion(void)
 	t_dlst *out = NULL;
 	t_token	*tok;
 
-/* 	out = tokenize("$");
+/* 	out = tokenize(ft_strdup("$"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "$") == 0);
@@ -194,7 +194,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token); */
 //----------------------------
-	out = tokenize("$()\0");
+	out = tokenize(ft_strdup("$()"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
 	TEST_CHECK(strcmp(tok->str, "$()") == 0);
@@ -203,7 +203,7 @@ void	test_expansion(void)
 	TEST_CHECK(((t_token *)out->next->data)->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("${}\0");
+	out = tokenize(ft_strdup("${}"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "${}") == 0);
@@ -213,7 +213,7 @@ void	test_expansion(void)
 	//ft_dlstiter(out, tok_p);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("*");
+	out = tokenize(ft_strdup("*"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|WILDCARD);
 	TEST_CHECK(strcmp(tok->str, "*") == 0);
@@ -222,7 +222,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("$word");
+	out = tokenize(ft_strdup("$word"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "$word") == 0);
@@ -231,17 +231,17 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	char *readline = "wo$rd\0";
-	out = tokenize(readline);
+	out = tokenize(ft_strdup("a$a"));
+	//ft_dlstiter(out, tok_p);
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
-	TEST_CHECK(strcmp(tok->str, "wo$rd") == 0);
+	TEST_CHECK(strcmp(tok->str, "a$a") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word$\0");//wo$rd word$
+	out = tokenize(ft_strdup("word$"));//wo$rd word)$
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word$") == 0);
@@ -250,7 +250,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("$(word)\0"); //wo$rd word$ $(word) wo$(word)rd word$(word) ${word} word${word}
+	out = tokenize(ft_strdup("$(word)")); //wo$rd word$ $(word) wo$(word)rd word$(word) ${word} word${word)}
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
 	TEST_CHECK(strcmp(tok->str, "$(word)") == 0);
@@ -259,7 +259,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("wo$(word)rd\0");
+	out = tokenize(ft_strdup("wo$(word)rd"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
 	TEST_CHECK(strcmp(tok->str, "wo$(word)rd") == 0);
@@ -268,7 +268,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word$(word)\0");
+	out = tokenize(ft_strdup("word$(word)"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
 	TEST_CHECK(strcmp(tok->str, "word$(word)") == 0);
@@ -277,7 +277,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("${word}\0");
+	out = tokenize(ft_strdup("${word}"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "${word}") == 0);
@@ -286,7 +286,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("wo${word}rd\0");
+	out = tokenize(ft_strdup("wo${word}rd"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "wo${word}rd") == 0);
@@ -295,7 +295,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 	//----------------------------
-	out = tokenize("word${word}\0");
+	out = tokenize(ft_strdup("word${word}"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "word${word}") == 0);
@@ -304,7 +304,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("*word");
+	out = tokenize(ft_strdup("*word"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|WILDCARD);
 	TEST_CHECK(strcmp(tok->str, "*word") == 0);
@@ -313,7 +313,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("wo*rd");
+	out = tokenize(ft_strdup("wo*rd"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|WILDCARD);
 	TEST_CHECK(strcmp(tok->str, "wo*rd") == 0);
@@ -322,7 +322,7 @@ void	test_expansion(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word*");
+	out = tokenize(ft_strdup("word*"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|WILDCARD);
 	TEST_CHECK(strcmp(tok->str, "word*") == 0);//mal
@@ -337,7 +337,7 @@ void	test_singleq(void)
 	t_dlst *out = NULL;
 	t_token	*tok;
 
-	out = tokenize("\'\'");
+	out = tokenize(ft_strdup("\'\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'\'") == 0);
@@ -346,7 +346,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'\"\'");
+	out = tokenize(ft_strdup("\'\"\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'\"\'") == 0);
@@ -355,7 +355,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'\"\"\'");
+	out = tokenize(ft_strdup("\'\"\"\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'\"\"\'") == 0);
@@ -364,7 +364,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'\t\'");
+	out = tokenize(ft_strdup("\'\t\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'\t\'") == 0);
@@ -373,7 +373,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\' \'");
+	out = tokenize(ft_strdup("\' \'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\' \'") == 0);
@@ -382,7 +382,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'\n\'");
+	out = tokenize(ft_strdup("\'\n\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'\n\'") == 0);
@@ -391,7 +391,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'&&\'");
+	out = tokenize(ft_strdup("\'&&\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'&&\'") == 0);
@@ -400,7 +400,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'||\'");
+	out = tokenize(ft_strdup("\'||\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'||\'") == 0);
@@ -409,7 +409,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'|\'");
+	out = tokenize(ft_strdup("\'|\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'|\'") == 0);
@@ -418,7 +418,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'{ }\'");
+	out = tokenize(ft_strdup("\'{ }\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'{ }\'") == 0);
@@ -427,7 +427,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'{}\'");
+	out = tokenize(ft_strdup("\'{}\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'{}\'") == 0);
@@ -436,7 +436,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'( )\'");
+	out = tokenize(ft_strdup("\'( )\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'( )\'") == 0);
@@ -445,7 +445,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'()\'");
+	out = tokenize(ft_strdup("\'()\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'()\'") == 0);
@@ -454,7 +454,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'word\'");
+	out = tokenize(ft_strdup("\'word\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'word\'") == 0);
@@ -463,7 +463,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'<\'");
+	out = tokenize(ft_strdup("\'<\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'<\'") == 0);
@@ -472,7 +472,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'>\'");
+	out = tokenize(ft_strdup("\'>\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'>\'") == 0);
@@ -481,7 +481,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'>>\'");
+	out = tokenize(ft_strdup("\'>>\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'>>\'") == 0);
@@ -490,7 +490,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'<<\'");
+	out = tokenize(ft_strdup("\'<<\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'<<\'") == 0);
@@ -499,7 +499,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'10\'");
+	out = tokenize(ft_strdup("\'10\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'10\'") == 0);
@@ -508,7 +508,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'$word\'");
+	out = tokenize(ft_strdup("\'$word\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'$word\'") == 0);
@@ -517,7 +517,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'$(word)\'");
+	out = tokenize(ft_strdup("\'$(word)\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'$(word)\'") == 0);
@@ -526,7 +526,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'${word}\'");
+	out = tokenize(ft_strdup("\'${word}\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'${word}\'") == 0);
@@ -535,7 +535,7 @@ void	test_singleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\'wo*rd\'");
+	out = tokenize(ft_strdup("\'wo*rd\'"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\'wo*rd\'") == 0);
@@ -550,7 +550,7 @@ void	test_doubleq(void)
 	t_dlst *out = NULL;
 	t_token	*tok;
 
-	out = tokenize("\"\"");
+	out = tokenize(ft_strdup("\"\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"\"") == 0);
@@ -559,7 +559,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"\'\"");
+	out = tokenize(ft_strdup("\"\'\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"\'\"") == 0);
@@ -568,7 +568,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"\'\'\"");
+	out = tokenize(ft_strdup("\"\'\'\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"\'\'\"") == 0);
@@ -577,7 +577,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"\t\"");
+	out = tokenize(ft_strdup("\"\t\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"\t\"") == 0);
@@ -586,7 +586,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\" \"");
+	out = tokenize(ft_strdup("\" \""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\" \"") == 0);
@@ -595,7 +595,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"\n\"");
+	out = tokenize(ft_strdup("\"\n\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"\n\"") == 0);
@@ -604,7 +604,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"&&\"");
+	out = tokenize(ft_strdup("\"&&\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"&&\"") == 0);
@@ -613,7 +613,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"||\"");
+	out = tokenize(ft_strdup("\"||\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"||\"") == 0);
@@ -622,7 +622,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"|\"");
+	out = tokenize(ft_strdup("\"|\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"|\"") == 0);
@@ -631,7 +631,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"{ }\"");
+	out = tokenize(ft_strdup("\"{ }\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"{ }\"") == 0);
@@ -640,7 +640,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"{}\"");
+	out = tokenize(ft_strdup("\"{}\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"{}\"") == 0);
@@ -649,7 +649,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"( )\"");
+	out = tokenize(ft_strdup("\"( )\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"( )\"") == 0);
@@ -658,7 +658,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"()\"");
+	out = tokenize(ft_strdup("\"()\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"()\"") == 0);
@@ -667,7 +667,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"word\"");
+	out = tokenize(ft_strdup("\"word\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"word\"") == 0);
@@ -676,7 +676,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"<\"");
+	out = tokenize(ft_strdup("\"<\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"<\"") == 0);//mal
@@ -685,7 +685,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\">\"");
+	out = tokenize(ft_strdup("\">\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\">\"") == 0);
@@ -694,7 +694,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\">>\"");
+	out = tokenize(ft_strdup("\">>\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\">>\"") == 0);
@@ -703,7 +703,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"<<\"");
+	out = tokenize(ft_strdup("\"<<\""));
 	tok = out->data;
 
 	TEST_CHECK(tok->flag == tt_word);
@@ -713,7 +713,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"10\"");
+	out = tokenize(ft_strdup("\"10\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"10\"") == 0);
@@ -722,7 +722,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"$word\"");
+	out = tokenize(ft_strdup("\"$word\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "\"$word\"") == 0);
@@ -731,7 +731,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"$(word)\"");
+	out = tokenize(ft_strdup("\"$(word)\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
 	TEST_CHECK(strcmp(tok->str, "\"$(word)\"") == 0);
@@ -740,7 +740,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"${word}\"");
+	out = tokenize(ft_strdup("\"${word}\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word|PARAM_E);
 	TEST_CHECK(strcmp(tok->str, "\"${word}\"") == 0);
@@ -749,7 +749,7 @@ void	test_doubleq(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("\"wo*rd\"");
+	out = tokenize(ft_strdup("\"wo*rd\""));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "\"wo*rd\"") == 0);
@@ -764,7 +764,7 @@ void	test_multitok(void)
 	t_dlst *out = NULL;
 	t_token	*tok;
 
-	out = tokenize("word1 word2");
+	out = tokenize(ft_strdup("word1 word2"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word1") == 0);
@@ -776,7 +776,7 @@ void	test_multitok(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word1 | word2");
+	out = tokenize(ft_strdup("word1 | word2"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word1") == 0);
@@ -791,7 +791,7 @@ void	test_multitok(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word1 && word2\0");
+	out = tokenize(ft_strdup("word1 && word2"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word1") == 0);
@@ -806,7 +806,7 @@ void	test_multitok(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word1 || word2");
+	out = tokenize(ft_strdup("word1 || word2"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word1") == 0);
@@ -821,7 +821,7 @@ void	test_multitok(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("(word)");
+	out = tokenize(ft_strdup("(word)"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_lbraket);
 	TEST_CHECK(tok->str == NULL);
@@ -836,7 +836,7 @@ void	test_multitok(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("{word}");
+	out = tokenize(ft_strdup("{word}"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_lbrace);
 	TEST_CHECK(tok->str == NULL);
@@ -851,7 +851,7 @@ void	test_multitok(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize("word > 10");
+	out = tokenize(ft_strdup("word > 10"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_word);
 	TEST_CHECK(strcmp(tok->str, "word") == 0);
@@ -873,7 +873,7 @@ void	test_redirections(void)
 	t_token	*tok;
 	TEST_CHECK(1 == 0);
 	//----------------------------
-	out = tokenize("10>word");
+	out = tokenize(ft_strdup("10>word"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_io_number);
 	TEST_CHECK(strcmp(tok->str, "10") == 0);
@@ -888,7 +888,7 @@ void	test_redirections(void)
 	TEST_CHECK(tok->str == NULL);
 	ft_dlstclear(&out, free_token);
 //----------------------------
-	out = tokenize(">word");
+	out = tokenize(ft_strdup(">word"));
 	tok = out->data;
 	TEST_CHECK(tok->flag == tt_great);
 	TEST_CHECK(tok->str == NULL);

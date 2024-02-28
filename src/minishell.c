@@ -16,14 +16,14 @@ void tok_p(void *t)
 {
  	if (((t_token *)t)->str == NULL)
 	{
-		printf(BHYEL"\nToken(%p): "BHBLU" void\n"
- 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,t,
+		printf(BHYEL"\nToken(%p): "BHRED"void\n"
+ 		BHYEL"Flag:                  "BHGRN"%d\n\n"END,t,
 		((t_token *)t)->flag);
 	}
 	else
 	{
  		printf(BHYEL"\nToken(%p): "BHBLU"%s\n"
- 		BHYEL"Flag(0/1/2): "BHGRN"%d\n\n"END,t,
+ 		BHYEL"Flag:                  "BHGRN"%d\n\n"END,t,
 		((t_token *)t)->str, ((t_token *)t)->flag);
 	}
 }
@@ -100,6 +100,18 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
+		char *s = malloc(sizeof(char) * 6);
+		s[5] = '\0';
+		s[0] = 'w';
+		s[1] = 'o';
+		s[2] = '$';
+		s[3] = 'r';
+		s[4] = 'd';
+/* 		ft_dlstnew(data.lexlist);
+		data.lexlist = lexer(s);
+		ft_dlstiter(data.lexlist, tok_p);
+		ft_dlstclear(&data.lexlist, ft_free); */
+		//----------------------
 		ft_dlstnew(data.lexlist);
 		//heredoc(&data.lexlist, "hola");
 		data.lexlist = lexer(read_line);

@@ -75,7 +75,7 @@ int get_token2(char *str, int i, t_token *token)
 	else if (str[i] == '>' && str[i + 1] == '>')
 		set_token(str, i, 2, tt_dgreat, token);
 	else if (str[i] == '&' && str[i + 1] == '&')
-		set_token(str, i, 2, tt_and_if, token);
+		set_token(str, i, 2, tt_and_if_aux, token);
 	else if (str[i] == '<' && str[i + 1] == '<')
 		set_token(str, i, 2, tt_dless, token);
 	if (token->flag == LEX_ERROR)

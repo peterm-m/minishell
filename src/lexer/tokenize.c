@@ -18,7 +18,7 @@ int in_brakets(int c)
  * 
  * @return The function `get_next_token` returns an integer value.
  */
-int get_next_token(char *input, int i, t_token *token)
+int get_next_token(const char *input, int i, t_token *token)
 {
 	while (is_blankspace(input[i]))
 		i++;
@@ -48,7 +48,7 @@ int get_next_token(char *input, int i, t_token *token)
  * 
  * @return the pointer to the head of the doubly linked list.
  */
-t_dlst *tokenize(char *input)
+t_dlst *tokenize(const char *input)
 {
 	int		i;
 	t_dlst	*head;
@@ -60,7 +60,7 @@ t_dlst *tokenize(char *input)
 	{
 		token = new_token();
 		i = get_next_token(input, i, token);
-		if (token->flag == 15)
+		if (token->flag == 0)
 		{
 			token->flag = tt_end;
 			ft_dlstaddb(&head, ft_dlstnew(token));

@@ -39,7 +39,8 @@ typedef enum e_terminals
 	tt_dgreat,
 	tt_io_number,
 	tt_dless,
-	tt_end
+	tt_end,
+	tt_and_if_aux,
 }	t_terminals;
 
 # define TOK_TYPE 15
@@ -107,8 +108,8 @@ int get_braket_token(char *str, int i, t_token *token);
 
 // tokenize.c
 
-t_dlst *tokenize(char *input);
-int get_next_token(char *input, int i, t_token *token);
+t_dlst *tokenize(const char *input);
+int get_next_token(const char *input, int i, t_token *token);
 int in_brakets(int c);
 
 #endif
