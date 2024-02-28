@@ -1,17 +1,4 @@
 #include "minishell.h"
-char    *get_env_value(char *str, char **env) // BORRAR! repetida para probar por separado
-{
-    int      i;
-
-    i = 0;
-    while (env[i])
-    {
-        if (ft_strncmp(str, env[i], ft_strlen(str)) == 0)
-            return (ft_strchr(env[i], '=') + 1);
-        i++;
-    }
-    return (NULL);
-}
 static int update_pwd(char **env)
 {
     int i;
@@ -24,6 +11,7 @@ static int update_pwd(char **env)
 		return (EXIT_FAILURE);
 	}
     i = 0;
+    ft_setenv("PWD", new_pwd, TRUE);
     while (env[i])
     {
         if (ft_strncmp("PWD=", env[i], 4) == 0)
@@ -41,10 +29,11 @@ static int update_oldpwd(char **env)
     int i;
     char *new_opwd;
 
-    new_opwd = ft_strjoin("OLDPWD=", get_env_value("PWD", env));
+    new_opwd = getenv("PWD");//get_env
     i = 0;
 
-    while (env[i])
+    ft_setenv("OLDPWD", new_opwd, TRUE);
+/*     while (env[i])
     {
         if (ft_strncmp("OLDPWD=", env[i], 8) == 0)
         {
@@ -52,8 +41,8 @@ static int update_oldpwd(char **env)
             env[i] = new_opwd;
         }
         i++;
-    }
-    if (update_oldpwd(env) == EXIT_FAILURE)
+    } */
+    if (update_pwd(env) == EXIT_FAILURE)
         return (EXIT_FAILURE); 
     return (EXIT_SUCCESS);
 }
@@ -65,13 +54,13 @@ static char	*get_path(int argc, char *dir, char **env)
 	path = NULL;
 	if (argc == 1)
 	{
-		path = get_env_value("HOME", env);
+		path = getenv("HOME");
 		if (path == NULL)
 			printf("Error\n");
 	}
 	else if (dir && ft_strncmp(dir, "-", 2) == 0)
 	{
-		path = get_env_value("OLDPWD", env);
+		path = getenv("OLDPWD");
 		if (path == NULL)
 			printf("Error\n");
 	}
