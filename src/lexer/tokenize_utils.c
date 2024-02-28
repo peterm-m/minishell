@@ -6,7 +6,7 @@ t_token	*new_token(void)
 
 	token = ft_malloc(sizeof(t_token));
 	token->str = NULL;
-	token->flag = 0;
+	token->flag = 15;
 	return (token);
 }
 
@@ -21,7 +21,7 @@ void	set_token(char *str, int i, int j, int type, t_token *token)
 			return ;
 		}
 	}
-	token->flag |= type;
+	token->flag &= type;
 }
 
 void	free_token(void *tok)

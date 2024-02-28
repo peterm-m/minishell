@@ -60,7 +60,7 @@ t_dlst *tokenize(char *input)
 	{
 		token = new_token();
 		i = get_next_token(input, i, token);
-		if (token->flag == 0)
+		if (token->flag == 15)
 		{
 			token->flag = tt_end;
 			ft_dlstaddb(&head, ft_dlstnew(token));

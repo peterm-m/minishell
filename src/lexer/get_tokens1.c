@@ -79,15 +79,15 @@ int get_word(char *str, int i, t_token *token)
 	j = 0;
 	while(!in_word(str[i + j]) && str[i + j])
 	{
-		if (str[i + j] == '$' && str[i + j] != '\"' && 
+		if (str[i + j] == '$' && str[i + j] != '\"' && str[i + j + 1] &&
 			!is_blankspace(str[i + j + 1]) && !is_quotes(str[i + j + 1]))
 		{
 				token->flag |= get_dolar_type(str, i + j);
 				while (!is_blankspace(str[i + j]) && str[i + j])
 					j++;
 		}
-	/* 	else if (in_brakets(str[i + j]))
-			break; */
+	 	if (in_brakets(str[i + j]))
+			break;
 		j++;
 	}
 	set_token(str, i, j, tt_word, token);

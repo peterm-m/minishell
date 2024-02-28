@@ -101,6 +101,7 @@ int	main(int argc, char const **argv, char const **envp)
 			printf("buffer = %s\n", buffer);
 		}
 		ft_dlstnew(data.lexlist);
+		//heredoc(&data.lexlist, "hola");
 		data.lexlist = lexer(read_line);
 		//heredoc(&data.lexlist, "hola");
 		ft_dlstiter(data.lexlist, tok_p);
@@ -108,7 +109,7 @@ int	main(int argc, char const **argv, char const **envp)
 		ft_dlstclear(&data.lexlist, ft_free);
 		//expander(&data, read_line);
 	}
-	ft_dlstclear(&data.lexlist, ft_free);
+	//ft_dlstclear(&data.lexlist, ft_free);
 	//ft_dlstclear(&data.envlist, ft_free);
 	return (0);
 }
