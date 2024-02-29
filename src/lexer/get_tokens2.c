@@ -5,21 +5,19 @@
  * it as a token to a doubly linked list.
  * 
  * @param str A pointer to a character array (string) that contains the input.
- * @param i The parameter `i` represents the current index in the string `str`. It is used to keep
+ * @param i The current index in the string `str`. It is used to keep
  * track of the position while parsing the string.
- * @param head A double linked list pointer, which is a pointer to the head of the list.
  * 
- * @return the index position of the next character after the IO number in the string.
+ * @return the index position of the next character after the token.
  */
 int	get_ionumber(char *str, int i, t_token *token)
 {
 	int	j;
 
 	j = 0;
-	//token = NULL;
 	while (ft_isdigit(str[i + j]))
 		j++;
-	set_token(str, i, j, tt_word, token);
+	set_token(str + i, j, tt_word, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
 	if (str[i + j] == '>' || str[i + j] == '<')
@@ -32,25 +30,24 @@ int	get_ionumber(char *str, int i, t_token *token)
  * specific characters in a string.
  * 
  * @param str A pointer to a character array (string) that contains the input.
- * @param i An integer that represents the current index position in the string
- * `str`. It is used to iterate through the characters of the string.
- * @param head A pointer to a pointer to a doubly linked list (t_dlst).
+ * @param i The current index position in the string `str`.
+ * It is used to iterate through the characters of the string.
  * 
  * @return the updated value of the variable 'i'.
  */
-int get_token(char *str, int i, t_token *token) // Pasar como argumento la lista de tokens
+int	get_token(char *str, int i, t_token *token)
 {
 	if (str[i] == '|' && str[i + 1] != '|')
-		set_token(str, i, 1, tt_pipe, token);
+		set_token(str + i, 1, tt_pipe, token);
 	else if (str[i] == '<' && str[i + 1] != '<')
-		set_token(str, i, 1, tt_less, token);
+		set_token(str + i, 1, tt_less, token);
 	else if (str[i] == '>' && str[i + 1] != '>')
-		set_token(str, i, 1, tt_great, token);
-	else if (str[i] == '(' || str[i] == '{' ||
-		str[i] == ')' || str[i] == '}' )
-		return(get_braket_token(str, i, token));
+		set_token(str + i, 1, tt_great, token);
+	else if (str[i] == '(' || str[i] == '{'
+		|| str[i] == ')' || str[i] == '}' )
+		return (get_braket_token(str, i, token));
 	else
-		return(get_token2(str, i, token));
+		return (get_token2(str, i, token));
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
 	i++;
@@ -58,43 +55,41 @@ int get_token(char *str, int i, t_token *token) // Pasar como argumento la lista
 }
 
 /**
- * The function adds tokens to a doubly linked list based on specific characters in a
- * string.
+ * The function adds tokens to a doubly linked list based on 
+ * specific characters in a string.
  * 
  * @param str A pointer to a character array (string) that contains the input.
- * @param i An integer that represents the current index position in the string
+ * @param i The current index position in the string
  * `str`. It is used to determine the position of the token in the string.
- * @param head A pointer to a pointer to a doubly linked list (t_dlst).
- * 
+ *  
  * @return the updated value of the variable 'i'.
  */
-int get_token2(char *str, int i, t_token *token)
+int	get_token2(char *str, int i, t_token *token)
 {
 	if (str[i] == '|' && str[i + 1] == '|')
-		set_token(str, i, 2, tt_or_if, token);
+		set_token(str + i, 2, tt_or_if, token);
 	else if (str[i] == '>' && str[i + 1] == '>')
-		set_token(str, i, 2, tt_dgreat, token);
+		set_token(str + i, 2, tt_dgreat, token);
 	else if (str[i] == '&' && str[i + 1] == '&')
-		set_token(str, i, 2, tt_and_if_aux, token);
+		set_token(str + i, 2, tt_and_if_aux, token);
 	else if (str[i] == '<' && str[i + 1] == '<')
-		set_token(str, i, 2, tt_dless, token);
+		set_token(str + i, 2, tt_dless, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
 	return (i + 2);
 }
 
-int get_braket_token(char *str, int i, t_token *token)
+int	get_braket_token(char *str, int i, t_token *token)
 {
-	if (str[i] == '(')	
-		set_token(str, i, 1, tt_lbraket, token);
+	if (str[i] == '(')
+		set_token(&str[i], 1, tt_lbraket, token);
 	else if (str[i] == ')')
-		set_token(str, i, 1, tt_rbraket, token);
+		set_token(&str[i], 1, tt_rbraket, token);
 	else if (str[i] == '{')
-		set_token(str, i, 1, tt_lbrace, token);
+		set_token(&str[i], 1, tt_lbrace, token);
 	else if (str[i] == '}')
-		set_token(str, i, 1, tt_rbrace, token);
+		set_token(&str[i], 1, tt_rbrace, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-	return (i + 1);    
+	return (i + 1);
 }
-

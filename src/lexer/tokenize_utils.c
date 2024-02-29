@@ -2,7 +2,7 @@
 
 t_token	*new_token(void)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = ft_malloc(sizeof(t_token));
 	token->str = NULL;
@@ -10,12 +10,13 @@ t_token	*new_token(void)
 	return (token);
 }
 
-void	set_token(char *str, int i, int j, int type, t_token *token)
+void	set_token(char *str, int j, int type, t_token *token)
 {
 	if ((type & TOK_TYPE) == tt_word || (type & TOK_TYPE) == tt_io_number
-			|| (type & TOK_TYPE) == tt_assignment_word )
+		|| (type & TOK_TYPE) == tt_assignment_word)
 	{
-		if (!(token->str = ft_substr(str, i, j)))
+		token->str = ft_substr(str, 0, j);
+		if (!token->str)
 		{
 			token->flag = LEX_ERROR;
 			return ;

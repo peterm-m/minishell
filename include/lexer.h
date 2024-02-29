@@ -86,7 +86,7 @@ t_braket_count check_braces(int state, t_braket_count b_count);
 
 // tokenize_utils.c
 t_token *new_token(void);
-void	set_token(char *str, int i, int j, int type, t_token *token);
+void	set_token(char *str, int j, int type, t_token *token);
 t_token	*init_token(void);
 void free_token(void *tok);
 void search_w_q(void *t);

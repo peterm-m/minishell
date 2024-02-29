@@ -9,10 +9,10 @@
  * @return The function is_operator is returning 1 if the input 
  * character c is a token Otherwise, it is returning 0.
  */
-int is_operator(int c)
+int	is_operator(int c)
 {
-	return (c == '|' || c == '<' || c == '>' ||
-		c == '&');
+	return (c == '|' || c == '<' || c == '>'
+		|| c == '&');
 }
 // || c == '(' || c == ')' || 
 	//	c == '{' || c == '}'
@@ -22,7 +22,7 @@ int is_operator(int c)
  * 
  * @param c The parameter "c" is of type char and represents a character.
  * 
- * @return a boolean value indicating whether the character is a blank space or not.
+ * @return Boolean value indicating if the character is a blank space or not.
  */
 int	is_blankspace(char c)
 {
@@ -37,7 +37,7 @@ int	is_blankspace(char c)
  * @return returns 1 if the character c is either a single quote (') or 
  * a double quote (") and returns 0 otherwise.
  */
-int is_quotes(char c)
+int	is_quotes(char c)
 {
 	return (c == '\'' || c == '"');
 }
@@ -56,7 +56,7 @@ int	in_word(char c)
 	return (is_operator(c) || is_blankspace(c) || c == '\0');
 }
 
-t_braket_count check_braces(int state, t_braket_count b_count)
+t_braket_count	check_braces(int state, t_braket_count b_count)
 {
 	if (state == 15)
 		b_count.state_braket++;
