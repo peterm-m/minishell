@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_strncmp(char *s1, char *s2, size_t n)
+/* int	ft_strncmp(char *s1, char *s2, size_t n)
 {
 	size_t	i;
 
@@ -15,7 +15,29 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 		n--;
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
-}
+}//TODO: BORRAR
+
+char	*ft_strchr(const char *s, int c)
+{
+	char	aux;
+	char	*str;
+	int		i;
+
+	aux = (char)c;
+	str = (char *)s;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == aux)
+			return (&str[i]);
+		else
+			i++;
+	}
+	if (aux == '\0')
+		return (&str[i]);
+	else
+		return (0);
+}//TODO: BORRAR */
 
 int main(int argc, char **argv, char **env)
 {
@@ -23,16 +45,18 @@ int main(int argc, char **argv, char **env)
 
     (void)argc;
     (void)argv;
-    i = 1;
-    while (env[i])
+    i = 0;
+    printf(BHCYN"%s\n"END, getenv("PWD"));//MÉTODO 1
+
+/*     while (env[i])                     //MÉTODO 2
     {
-        if (ft_strncmp(env[i], "PWD", 4) == 0)
+        if (ft_strncmp(env[i], "PWD", 3) == 0)
         {
             printf(BHCYN"%s\n"END, ft_strchr(env[i], '=') + 1);
             break;
         }
         i++;
-    }
+    } */
     return (EXIT_SUCCESS);
 }
 //SHLVL=1 PWD=/Users/adiaz-uf/42cursus/minishell OLDPWD=/Users/adiaz-uf

@@ -59,6 +59,7 @@ int main(int argc, char **argv, char **env)
     int i;
     int is_flag;
 
+    (void) env;
     i = 1;
     is_flag = FALSE;
     while (argv[i] && has_flag(argv[i]))
