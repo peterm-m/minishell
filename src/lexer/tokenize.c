@@ -72,8 +72,7 @@ t_dlst *tokenize(const char *input)
 			ft_dlstclear(&head, ft_free);
 			return (NULL);
 		}
-		else 
-			ft_dlstaddb(&head, ft_dlstnew(token));
+		ft_dlstaddb(&head, ft_dlstnew(token));
 	}
 	return (head);
 }

@@ -16,9 +16,9 @@
 int get_dolar_type(char *str, int i)
 {
 	if (str[i] == '$' && str[i + 1] == '(')
-		return (COMMD_SUB);
+		return (COMMD_SUB|EXPAND);
 	else
-		return (PARAM_E);
+		return (PARAM_E|EXPAND);
 }
 
 /**
@@ -34,16 +34,16 @@ int get_dolar_type(char *str, int i)
  * 
  * @return The index position of the next character after this quoted token.
  */
-int	get_string(char *str, int i, t_token *token, int d_quote)
+int	get_string(char *str, int i, t_token *token, int d_quote)//&& str[i + j] != '\"'
 {
 	int		j;
 
 	j = 1; 
-	//printf("comillas: %c\n", str[i + j]);
+	//printf("comillas: %c\n", str[i + j]);    
 	while (!is_quotes(str[i + j]))
 	{
 		//printf("comillas: %c\n", str[i + j]);
-		if (str[i + j] == '$' && str[i + j] != '\"' && d_quote &&
+		if (str[i + j] == '$' && d_quote &&
 			!is_blankspace(str[i + j + 1]) && !is_quotes(str[i + j + 1]))
 			token->flag |= get_dolar_type(str, i + j);
 		j++;
@@ -52,7 +52,8 @@ int	get_string(char *str, int i, t_token *token, int d_quote)
 	{
 		while(!in_word(str[i + j++]) && str[i + j])
 		{
-			if (str[i + j] == '$' && !is_blankspace(str[i + j + 1]) && !is_quotes(str[i + j + 1]))
+			if (str[i + j] == '$' && !is_blankspace(str[i + j + 1]) && 
+				!is_quotes(str[i + j + 1]) && d_quote)
 				token->flag |= get_dolar_type(str, i + j);
 		}
 	}
@@ -82,9 +83,9 @@ int get_word(char *str, int i, t_token *token)
 		if (str[i + j] == '$' && str[i + j] != '\"' && str[i + j + 1] &&
 			!is_blankspace(str[i + j + 1]) && !is_quotes(str[i + j + 1]))
 		{
-				token->flag |= get_dolar_type(str, i + j);
-				while (!is_blankspace(str[i + j]) && str[i + j])
-					j++;
+			token->flag |= get_dolar_type(str, i + j);
+			while (!is_blankspace(str[i + j]) && str[i + j])
+				j++;
 		}
 	 	if (in_brakets(str[i + j]))
 			break;
