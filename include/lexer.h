@@ -108,8 +108,8 @@ int get_braket_token(char *str, int i, t_token *token);
 
 // tokenize.c
 
-t_dlst *tokenize(const char *input);
-int get_next_token(const char *input, int i, t_token *token);
+t_dlst *tokenize(char *input);
+int get_next_token(char *input, int i, t_token *token);
 int in_brakets(int c);
 
 #endif

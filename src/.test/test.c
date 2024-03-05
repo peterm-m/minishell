@@ -880,7 +880,6 @@ void	test_redirections(void)
 {
 	t_dlst *out = NULL;
 	t_token	*tok;
-	TEST_CHECK(1 == 0);
 	//---------------------------------
 	out = tokenize(ft_strdup("10>word"));
 	tok = out->data;
@@ -1995,9 +1994,9 @@ void	test_redir1(void)
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 1, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2023,9 +2022,9 @@ void	test_redir2(void)
 	t_token		*t;
 
 	
-	t = new_token(); set_token(input, 1, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2051,9 +2050,9 @@ void	test_redir3(void)
 	t_token		*t;
 
 	
-	t = new_token(); set_token(input, 2, tt_dgreat, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 6, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 6, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_dgreat, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2074,14 +2073,13 @@ void	test_redir3(void)
 
 void	test_redir4(void)
 {
-		char		*input = strdup("10<file");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 3, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("10", 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2097,19 +2095,17 @@ void	test_redir4(void)
 	TEST_CHECK(out->value.simple->redirects->option == r_input_direction);
 	TEST_CHECK(out->value.simple->redirects->mode_bits == O_RDONLY);
 	TEST_CHECK(out->value.simple->redirects->next == NULL);
-	free(input);
 }
 
 void	test_redir5(void)
 {
-	char		*input = strdup("10>file");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 3, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("10", 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2125,20 +2121,18 @@ void	test_redir5(void)
 	TEST_CHECK(out->value.simple->redirects->option == r_output_direction);
 	TEST_CHECK(out->value.simple->redirects->mode_bits == (O_TRUNC|O_WRONLY|O_CREAT));
 	TEST_CHECK(out->value.simple->redirects->next == NULL);
-	free(input);
 }
 
  
 void	test_redir6(void)
 {
-	char		*input = strdup("10>>file");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 4, tt_dgreat, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("10", 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_dgreat, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2154,18 +2148,16 @@ void	test_redir6(void)
 	TEST_CHECK(out->value.simple->redirects->option == r_appending_to);
 	TEST_CHECK(out->value.simple->redirects->mode_bits == (O_APPEND|O_WRONLY|O_CREAT));
 	TEST_CHECK(out->value.simple->redirects->next == NULL);
-	free(input);
 }
 
 void	test_redir7(void)
 {
-	char		*input = strdup("<<file");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 2, tt_dless, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 6, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 6, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_dless, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2181,7 +2173,6 @@ void	test_redir7(void)
 	TEST_CHECK(out->value.simple->redirects->option == r_reading_until);
 	TEST_CHECK(out->value.simple->redirects->mode_bits == 0);
 	TEST_CHECK(out->value.simple->redirects->next == NULL);
-	free(input);
 }
 
 
@@ -2191,10 +2182,10 @@ void	test_redir8(void)
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 4, tt_dless, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("10", 2, tt_io_number, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_dless, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("file", 4, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2226,10 +2217,10 @@ void	test_suffix1(void)
 	t_dlst		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_great,t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 12, tt_word,t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 12,tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 5,tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2245,16 +2236,15 @@ void	test_suffix1(void)
 
 void	test_suffix2(void)
 {
-	char		*input = strdup("word1 >word2 >word3");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(strdup("word2"), 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 14, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 19, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 19, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word3", 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2268,17 +2258,15 @@ void	test_suffix2(void)
 	TEST_CHECK(strcmp(out->value.simple->redirects->next->dest.filename, "word3") == 0);
 	TEST_CHECK(out->value.simple->redirects->next->next == NULL);
 	TEST_CHECK(out->type == cmd_simple);
-	free(input);
 }
 
 void	test_suffix3(void)
 {
-	char		*input = strdup("word1 word2");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 11, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 11, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2290,18 +2278,16 @@ void	test_suffix3(void)
 	TEST_CHECK(strcmp(out->value.simple->words->word, "word1") == 0);
 	TEST_CHECK(strcmp(out->value.simple->words->next->word, "word2") == 0);
 	TEST_CHECK(out->value.simple->redirects == NULL);
-	free(input);
 }
 
 void	test_suffix4(void)
 {
-	char		*input = strdup("word1 word2 word3");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	t = new_token(); set_token(strdup("word2"), 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 17, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 17, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word3", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2314,7 +2300,6 @@ void	test_suffix4(void)
 	TEST_CHECK(strcmp(out->value.simple->words->next->word, "word2") == 0);
 	TEST_CHECK(strcmp(out->value.simple->words->next->next->word, "word3") == 0);
 	TEST_CHECK(out->value.simple->redirects == NULL);
-	free(input);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2325,12 +2310,11 @@ void	test_suffix4(void)
 
 void	test_prefix1(void)
 {
-	char		*input = strdup(">word1");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
-	t = new_token(); set_token(input, 1, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 6, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 6, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2340,19 +2324,17 @@ void	test_prefix1(void)
 	t_command	*out = lex->prev->data;
 	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word1") == 0);
 	TEST_CHECK(out->value.simple->redirects->next == NULL);
-	free(input);
 }
 
 void	test_prefix2(void)
 {
-	char		*input = strdup(">word1 >word2");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
-	t = new_token(); set_token(input, 1, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 13, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 14, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2362,7 +2344,6 @@ void	test_prefix2(void)
 	TEST_CHECK(strcmp(out->value.simple->redirects->dest.filename, "word1") == 0);
 	TEST_CHECK(strcmp(out->value.simple->redirects->next->dest.filename, "word2") == 0);
 	TEST_CHECK(out->value.simple->redirects->next->next == NULL);
-	free(input);
 }
 
 //void	test_prefix3(void)
@@ -2413,10 +2394,10 @@ void	test_simple2(void)
 	t_dlst		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_great,t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 12, tt_word,t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 12,tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_great,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word,t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0,tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2436,9 +2417,9 @@ void	test_simple3(void)
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 1, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 5, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_less, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2459,9 +2440,9 @@ void	test_simple4(void)
 	char		*input = strdup("word1 word2");
 	t_dlst 		*lex = NULL;
 	t_token		*t;
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 11, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 11, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	// token
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2584,10 +2565,10 @@ void	test_pipeline1(void)
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 7, tt_pipe,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 13, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 13, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_pipe,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
 	TEST_CHECK(lex->next == NULL);
@@ -2612,7 +2593,7 @@ void	test_pipeline2(void)
 	t = new_token(); set_token("", 0, tt_pipe,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	t = new_token(); set_token("word2", 5, tt_word, t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	t = new_token(); set_token("", 0, tt_pipe,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token("word3",  0, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word3", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
@@ -2701,10 +2682,10 @@ void	test_andor1(void)
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 	
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_or_if,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 14, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 14, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_or_if,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 14, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
 	TEST_CHECK(lex->next == NULL);
@@ -2725,10 +2706,10 @@ void	test_andor2(void)
 	t_dlst 		*lex = NULL;
 	t_token		*t;
 	
-	t = new_token(); set_token(input, 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 8, tt_and_if,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 14, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
-	t = new_token(); set_token(input, 14, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word1", 5, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("input", 0, tt_and_if,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("word2", 14, tt_word,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
+	t = new_token(); set_token("input", 0, tt_end,  t); ft_dlstaddb(&lex, ft_dlstnew(t));
 	syntax(&lex);
 	TEST_CHECK(((t_token *)(lex->data))->flag == tt_end);
 	TEST_CHECK(lex->next == NULL);
