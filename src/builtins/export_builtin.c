@@ -33,7 +33,7 @@ void    print_sorted_env(char **env)
     sort_env(env);
     i = -1;
     while (env[++i])
-        printf ("%s\n", env[i])
+        printf ("declare -x %s\n", env[i])
 }
 
 int main(int argc, char **argv, char **env)
