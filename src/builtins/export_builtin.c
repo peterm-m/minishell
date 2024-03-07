@@ -1,4 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_builtin.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
+/*   Updated: 2024/03/05 19:09:01 by adiaz-uf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+int get_env_len(char **env)
+{
+    int i;
+
+    i = 0;
+    while (env[i])
+        i++;
+    return (i);
+}
 
 void    sort_env(char **env)
 {
@@ -33,7 +55,7 @@ void    print_sorted_env(char **env)
     sort_env(env);
     i = -1;
     while (env[++i])
-        printf ("%s\n", env[i])
+        printf ("%s\n", env[i]);
 }
 
 int main(int argc, char **argv, char **env)
