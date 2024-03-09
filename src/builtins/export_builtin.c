@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/05 19:09:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:36:08 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    print_sorted_env(char **env)
     sort_env(env);
     i = -1;
     while (env[++i])
-        printf ("%s\n", env[i]);
+        printf ("declare -x %s\n", env[i])
 }
 
 int main(int argc, char **argv, char **env)

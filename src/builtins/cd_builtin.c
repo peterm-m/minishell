@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_builtin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
+/*   Updated: 2024/03/05 20:14:52 by adiaz-uf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
 static int update_pwd(char **env)
 {
-    int i;
-    char *new_pwd;
+    int     i;
+    char    *new_pwd;
 
     if (getcwd(new_pwd, MAX_PATH) == NULL)
 	{
-		printf("Error\n");
+        printf("Error\n");
 		return (EXIT_FAILURE);
 	}
     i = 0;
     setenv("PWD", new_pwd, TRUE);
     printf("PWD en update_opwd: %s\n", new_pwd);
-    //free(new_pwd);
 /*     while (env[i])
     {
         if (ft_strncmp("PWD=", env[i], 4) == 0)
@@ -64,8 +76,6 @@ static char	*get_path(int argc, char *dir, char **env)
 	{
 		path = getenv("OLDPWD");
         printf("OLDPWD en get_Path: %s\n", path);
-        char *path2 = getenv("PWD");
-        printf("PWD en get_Path: %s\n", path2);
 		if (path == NULL)
 			printf("Error\n");
 	}
@@ -84,7 +94,6 @@ int main(int argc, char **argv, char **env) //pasar como argumento PATH de env
 	dir = get_path(argc, argv[1],env);
 	if (dir == NULL)
 		return (EXIT_FAILURE);
-    printf("chdir = %d\n", chdir(dir));
     if (chdir(dir) == 0)
 	{
         if (argv[1] && ft_strncmp(argv[1], "-", 2) == 0)
