@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/07 18:36:08 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:52:40 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ void    sort_env(char **env)
     int env_len;
     char *aux;
 
+    env_len = get_env_len(env);
     i = 0;
-    env_len = get_env_len;
-    while (i < env_len)
+    while (i < env_len - 1)
     {
-        j = 0;
-        while (j < env_len - 1)
+        j = i + 1;
+        while (j < env_len)
         {
-            if (ft_strcmp(env[j], env[j + 1]) > 0)
+            if (strcmp(env[i], env[j]) > 0)
             {
-                aux  = env[j];
-                env[j] = env[j + 1];
-                env[j + 1] = aux;
+                aux  = env[i];
+                env[i] = env[j];
+                env[j] = aux;
             }
-            i++;
+            j++;
         }
-        env_len--;
+        i++;
     }
 }
 
@@ -55,15 +55,32 @@ void    print_sorted_env(char **env)
     sort_env(env);
     i = -1;
     while (env[++i])
-        printf ("declare -x %s\n", env[i])
+        printf ("declare -x %s\n", env[i]);
 }
 
 int main(int argc, char **argv, char **env)
 {
+    char    *name;
+    char    *value;
+    int     i;
+
     if (argc == 1)
     {
         print_sorted_env(env);
         return(EXIT_SUCCESS);
     }
-    
+    i = 0;
+    while (argv[1][i] && argv[1][i] != '=')
+        i++;
+    name = ft_substr(argv[1], 0, i);
+    i++;
+    value = ft_strdup(argv[1]+i);
+    if (!name || !value)
+        return (EXIT_FAILURE);
+    setenv(name, value, 1);//TODO: FT_setenv
+    printf("%s\n",getenv("AAA"));
+    print_sorted_env(env);
+    free(name);
+    free(value);      
+    return(EXIT_SUCCESS);
 }
