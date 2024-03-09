@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/21 12:54:43 by pedro            ###   ########.fr       */
+/*   Updated: 2024/03/09 11:19:31 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,6 @@ int	main(int argc, char const **argv, char const **envp)
 			char *buffer = readline("quote >$");
 			printf("buffer = %s\n", buffer);
 		}
-		char *s = malloc(sizeof(char) * 6);
-		s[5] = '\0';
-		s[0] = 'w';
-		s[1] = 'o';
-		s[2] = '$';
-		s[3] = 'r';
-		s[4] = 'd';
-/* 		ft_dlstnew(data.lexlist);
-		data.lexlist = lexer(s);
-		ft_dlstiter(data.lexlist, tok_p);
-		ft_dlstclear(&data.lexlist, ft_free); */
-		//----------------------
 		ft_dlstnew(data.lexlist);
 		//heredoc(&data.lexlist, "hola");
 		data.lexlist = lexer(read_line);
