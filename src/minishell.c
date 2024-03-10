@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/07 21:10:22 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:55:54 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void p_lst(void *e)
 
 }
 
+void leakss()
+{
+	system("leaks minishell");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*read_line;
@@ -111,12 +116,13 @@ int	main(int argc, char **argv, char **envp)
 		while (envp[++i])
 			printf("%s\n", envp[i]);
 		printf("\n\n\n"); */
-		execve("src/builtins/cd_builtin.c", argv, envp);
+		
+		//execve("src/builtins/cd_builtin.c", argv, envp);
 /* 		i = -1;
 		while (envp[++i])
 			printf("%s\n", envp[i]); */
 		//expander(&data, read_line);
 	}
-	ft_dlstclear(&data.lexlist, ft_free);
+	//ft_dlstclear(&data.lexlist, ft_free);
 	return (0);
 }

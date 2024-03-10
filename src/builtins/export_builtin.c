@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/07 20:52:40 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/10 11:43:13 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,10 @@ int main(int argc, char **argv, char **env)
         i++;
     name = ft_substr(argv[1], 0, i);
     i++;
-    value = ft_strdup(argv[1]+i);
+    value = ft_strdup(argv[1] + i);
     if (!name || !value)
         return (EXIT_FAILURE);
     setenv(name, value, 1);//TODO: FT_setenv
-    printf("%s\n",getenv("AAA"));
-    print_sorted_env(env);
     free(name);
     free(value);      
     return(EXIT_SUCCESS);

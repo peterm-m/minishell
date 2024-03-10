@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/05 20:14:52 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/10 10:39:47 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int update_pwd(char **env)
 {
     int     i;
-    char    *new_pwd;
+    char    new_pwd[MAX_PATH];
 
     if (getcwd(new_pwd, MAX_PATH) == NULL)
 	{
@@ -24,38 +24,17 @@ static int update_pwd(char **env)
 	}
     i = 0;
     setenv("PWD", new_pwd, TRUE);
-    printf("PWD en update_opwd: %s\n", new_pwd);
-/*     while (env[i])
-    {
-        if (ft_strncmp("PWD=", env[i], 4) == 0)
-        {
-            //free(env[i]);
-            env[i] = ft_strjoin("PWD=", new_pwd);
-        }
-        i++;
-    } */
+    printf("PWD en update_pwd con getcwd: %s\n", new_pwd);   //sobra
     return (EXIT_SUCCESS);
 }
 
 static int update_oldpwd(char **env)
 {
     int i;
-    char *new_opwd;
 
-    new_opwd = getenv("PWD");//get_env
     i = 0;
-    printf("OLDPWD en update_opwd: %s\n", new_opwd);
-    setenv("OLDPWD", new_opwd, TRUE);
-/*     while (env[i])
-    {
-        if (ft_strncmp("OLDPWD=", env[i], 8) == 0)
-        {
-            //free(env[i]);
-            env[i] = new_opwd;
-        }
-        i++;
-    } */
-    printf("OLDPWD en update_opwd: %s\n", new_opwd);
+    setenv("OLDPWD", getenv("PWD"), TRUE);
+    printf("OLDPWD en update_opwd: %s\n", getenv("OLDPWD"));    //sobra
     if (update_pwd(env) == EXIT_FAILURE)
         return (EXIT_FAILURE); 
     return (EXIT_SUCCESS);
@@ -70,20 +49,16 @@ static char	*get_path(int argc, char *dir, char **env)
 	{
 		path = getenv("HOME");
 		if (path == NULL)
-			printf("Error\n");
+			printf("Home not set\n");
 	}
 	else if (dir && ft_strncmp(dir, "-", 2) == 0)
 	{
 		path = getenv("OLDPWD");
-        printf("OLDPWD en get_Path: %s\n", path);
 		if (path == NULL)
-			printf("Error\n");
+			printf("OLDPWD not set\n");
 	}
 	else
-    {
-		path = dir;
-        printf("dir get_Path: %s\n", path);
-    }
+		path = dir;          
 	return (path);
 }
 
@@ -102,5 +77,6 @@ int main(int argc, char **argv, char **env) //pasar como argumento PATH de env
             return (EXIT_FAILURE); 
 		return (EXIT_SUCCESS);
 	}
+    printf("cd: no such file or directory\n");
     return (EXIT_FAILURE);
 }
