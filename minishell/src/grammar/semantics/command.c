@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/08 14:59:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:25:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	clean_command(t_command *cmd)
 {
 	if (cmd == NULL)
 		return ;
+	dbg("├─%s\n", "clean_command");
 	if (cmd->type == cmd_simple)
 		clean_simple(cmd->value.simple);
 	else if (cmd->type == cmd_connection)
@@ -42,7 +43,6 @@ void	clean_command(t_command *cmd)
 		clean_group(cmd->value.group);
 	clean_redirection(&(cmd->redirects));
 	ft_free(cmd);
-	dbg("├─%s\n", "clean_command");
 }
 
 t_command	*join_command_redir(t_command *cmd, t_redirect *redir)

@@ -6,11 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/08 19:04:47 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:25:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#undef LOGS 
+#define LOGS 0
 
 // TODO testeo clean structuras
 // TODO end_parser
@@ -51,11 +53,14 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 // En caso de error implementar la limpieza
 // En caso de error implementar diagnostico
 
-static void	end_parser(t_dlst **lex, t_state **state, int action)
+static void	end_parser(t_dlst **lex, t_state **state)
 {
-	(void )lex;
-	(void)state;
-	(void)action;
+	t_command	*cmd;
+
+	cmd = (*lex)->prev->data;
+	ft_free((*state)->next->data);
+	ft_free((*state)->data);
+	clean_command(cmd);
 	return ;
 }
 	// TODO
@@ -95,7 +100,7 @@ void	syntax(t_dlst **lex)
 			|| action == ACCEPT)
 		{
 			dbg("└END to %d\n\n", action - REDUCE0);
-			end_parser(lex, &state, action);
+			end_parser(lex, &state);
 			break ;
 		}
 	}

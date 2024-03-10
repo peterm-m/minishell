@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/09 12:17:41 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/10 17:49:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <sys/stat.h>
 # include <signal.h>
 # include <errno.h>
+
+//# define DEBUG 1
 
 // conditional
 # ifdef DEBUG

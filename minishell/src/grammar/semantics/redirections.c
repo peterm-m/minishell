@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/08 14:58:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/10 16:25:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ void	clean_redirection(t_redirect **redirection)
 {
 	t_redirect	*aux;
 
+	dbg("├─%s\n", "clean_redirection");
 	while (*redirection)
 	{
 		aux = (*redirection)->next;
 		ft_free(*redirection);
 		*redirection = aux;
 	}
-	dbg("├─%s\n", "clean_redirection");
 }
 
 void	join_redir(t_redirect **redir1, t_redirect *redir2)
