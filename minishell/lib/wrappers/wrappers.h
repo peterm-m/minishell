@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/10 17:49:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/10 18:54:27 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,6 @@ void		ft_sigaddset(sigset_t *set, int signum);
  * TODO: funciones que aun no tienen wrap
  * 
  *	ioctl
- *
- *	TODO implementar getenv
- *	TODO implementar setenv
- *	TODO implementar putenv
- *	TODO implementar unsetenv
  *
  *	tcsetattr
  *	tcgetattr

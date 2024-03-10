@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/08 14:30:34 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/10 20:15:12 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,6 @@ TEST_BINARY := $(BINARY)_test_runner
 
 # %.o file names
 NAMES := \
-	minishell.c \
-	\
 	lexer/lexer.c \
 	lexer/tokenize.c \
 	lexer/get_tokens1.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:43:33 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2022/09/26 10:59:29 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:04:18 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c) /// TODO: ESTE SPLIT ESTA MAL. PRODUCE LEAKS
 {
 	size_t	i;
 	size_t	j;

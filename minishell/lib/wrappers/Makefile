@@ -16,7 +16,6 @@ SRCS = \
 	ft_sigemptyset.c\
 	ft_signal.c\
 	ft_stat.c\
-	ft_stdlib.c\
 	ft_unistd.c\
 	ft_wait.c\
 	ft_waitpid.c\
