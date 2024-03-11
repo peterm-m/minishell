@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 01:46:23 by pedro            ###   ########.fr       */
+/*   Updated: 2024/03/11 12:27:47 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,23 @@ char 	**list_to_arr(t_word_list *words)
 // 		usando el resto de argumentos como parametros.
 // Si falla 
 // Si no se lanza de forma asincrona, la shell espera a que se complete el comando y recopila su salida.
-	
 
 void	executer(t_simple *cmd)
 {
 	pid_t		pid;
 	t_path_name	filename;
 	char		**argv;
+	int			status;
 
 	search_path(cmd->words->word, &filename);
 	argv = list_to_arr(cmd->words);
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		(void) filename;
-		(void) argv;
-		(void) environ;
-	 	exit(0);
+		if (execve(filename.path_name, argv, environ) == -1)
+			return ; // TODO: gestionar error. 
 	}
 	else
-	{
-		(void) 0;
-	}
+		waitpid(pid, &status, WUNTRACED);
 	return ;
 }

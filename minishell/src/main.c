@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/10 18:30:10 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:38:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	interactive_loop(int argc, char **argv)
 		add_history(read_line);
 		if (read_line == NULL)
 			return (EXIT_SUCCESS);
-		//tokens = lexer(read_line);
-		//if (tokens == NULL)
-		//	continue ;
-		//syntax(&tokens);
+		tokens = lexer(read_line);
+		if (tokens == NULL)
+			continue ;
+		syntax(&tokens);
 		//redirections();
 		//executers();
 		//????
