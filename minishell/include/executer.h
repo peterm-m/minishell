@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 16:02:21 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:35:30 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_mjob
 	t_process		*first_process;
 	pid_t			pgid;
 	char			notified;
-	struct termios	tmode;
+	//struct termios	tmode;
 	int				stdin;
 	int				stdout;
 	int				stderr;

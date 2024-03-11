@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:43:33 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/10 20:04:18 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:58:43 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c) /// TODO: ESTE SPLIT ESTA MAL. PRODUCE LEAKS
+char	**ft_split(char const *s, char c)
 {
-	size_t	i;
+	int		i;
 	size_t	j;
 	int		index;
 	char	**split;
@@ -60,20 +60,18 @@ char	**ft_split(char const *s, char c) /// TODO: ESTE SPLIT ESTA MAL. PRODUCE LE
 	split = malloc((ft_count_words(s, c) + 1) * sizeof(char *));
 	if (!s || !split)
 		return (0);
-	i = 0;
+	i = -1;
 	j = 0;
 	index = -1;
-	while (i <= ft_strlen(s))
+	while (++i <= (int)ft_strlen(s))
 	{
 		if (s[i] != c && index < 0)
 			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		else if ((s[i] == c || i == (int)ft_strlen(s)) && index >= 0)
 		{
-			split[j] = word_dup(s, index, i);
+			split[j++] = word_dup(s, index, i);
 			index = -1;
-			j++;
 		}
-		i++;
 	}
 	split[j] = 0;
 	return (split);
