@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 12:27:47 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:52:04 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,9 @@ void	executer(t_simple *cmd)
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		if (execve(filename.path_name, argv, environ) == -1)
-			return ; // TODO: gestionar error. 
+		ft_signal(SIGINT, SIG_DFL);
+		ft_execve(filename.path_name, argv, environ);
+		// TODO: gestionar error. 
 	}
 	else
 		waitpid(pid, &status, WUNTRACED);

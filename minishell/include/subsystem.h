@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/28 21:17:48 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:03:04 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SUBSYSTEM_H
 # define SUBSYSTEM_H
 
-#include <minishell.h>
+#include "minishell.h"
 
 extern char	**environ;
 
@@ -30,6 +30,9 @@ typedef struct s_env
 	char	*key;
 	char	**value;
 }	t_env;
+
+void	initial_signals(void);
+void	sigint_handler(int sig);
 
 //get_env.c
 t_dlst	*get_enviroment(const char **env, t_dlst **head);

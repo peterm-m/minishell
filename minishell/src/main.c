@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 12:38:15 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:02:44 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	interactive_loop(int argc, char **argv)
 		read_line = readline(PROMPT);
 		add_history(read_line);
 		if (read_line == NULL)
-			return (EXIT_SUCCESS);
+		{
+			printf("\n");
+			exit (EXIT_SUCCESS);
+		}
 		tokens = lexer(read_line);
 		if (tokens == NULL)
 			continue ;
@@ -51,7 +54,7 @@ int	main(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	//initialization();
+	initial_signals();
 	interactive_loop(argc, argv);
 	return (EXIT_SUCCESS);
 }
