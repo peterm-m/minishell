@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:52:28 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/09 12:31:23 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:18:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	test_expansion(void)
 
 	out = tokenize(ft_strdup("\"\'$expand\'\""));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|EXPAND|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|EXPAND|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "\"\'$expand\'\"") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -205,7 +205,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("$()"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(tok->flag == ((tt_word|COMMD_SUB)));
 	TEST_CHECK(strcmp(tok->str, "$()") == 0);
 	tok = out->next->data;
 	TEST_CHECK(((t_token *)out->next->data)->flag == tt_end);
@@ -214,7 +214,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("${}"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "${}") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -224,7 +224,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("*"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(tok->flag == (tt_word|WILDCARD));
 	TEST_CHECK(strcmp(tok->str, "*") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -233,7 +233,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("$word"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "$word") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -243,7 +243,7 @@ void	test_expansion(void)
 	out = tokenize(ft_strdup("a$a"));
 	//ft_dlstiter(out, tok_p);
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "a$a") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -261,7 +261,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("$(word)")); //wo$rd word$ $(word) wo$(word)rd word$(word) ${word} word${word)}
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(tok->flag == (tt_word|COMMD_SUB));
 	TEST_CHECK(strcmp(tok->str, "$(word)") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -270,7 +270,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("wo$(word)rd"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(tok->flag == (tt_word|COMMD_SUB));
 	TEST_CHECK(strcmp(tok->str, "wo$(word)rd") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -279,7 +279,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("word$(word)"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(tok->flag == (tt_word|COMMD_SUB));
 	TEST_CHECK(strcmp(tok->str, "word$(word)") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -288,7 +288,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("${word}"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "${word}") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -297,7 +297,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("wo${word}rd"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "wo${word}rd") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -306,7 +306,7 @@ void	test_expansion(void)
 	//----------------------------
 	out = tokenize(ft_strdup("word${word}"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "word${word}") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -315,7 +315,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("*word"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(tok->flag == (tt_word|WILDCARD));
 	TEST_CHECK(strcmp(tok->str, "*word") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -324,7 +324,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("wo*rd"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(tok->flag == (tt_word|WILDCARD));
 	TEST_CHECK(strcmp(tok->str, "wo*rd") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -333,7 +333,7 @@ void	test_expansion(void)
 //----------------------------
 	out = tokenize(ft_strdup("word*"));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|WILDCARD);
+	TEST_CHECK(tok->flag == (tt_word|WILDCARD));
 	TEST_CHECK(strcmp(tok->str, "word*") == 0);//mal
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -733,7 +733,7 @@ void	test_doubleq(void)
 //----------------------------
 	out = tokenize(ft_strdup("\"$word\""));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "\"$word\"") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -742,7 +742,7 @@ void	test_doubleq(void)
 //----------------------------
 	out = tokenize(ft_strdup("\"$(word)\""));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|COMMD_SUB);
+	TEST_CHECK(tok->flag == (tt_word|COMMD_SUB));
 	TEST_CHECK(strcmp(tok->str, "\"$(word)\"") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -751,7 +751,7 @@ void	test_doubleq(void)
 //----------------------------
 	out = tokenize(ft_strdup("\"${word}\""));
 	tok = out->data;
-	TEST_CHECK(tok->flag == tt_word|PARAM_E);
+	TEST_CHECK(tok->flag == (tt_word|PARAM_E));
 	TEST_CHECK(strcmp(tok->str, "\"${word}\"") == 0);
 	tok = out->next->data;
 	TEST_CHECK(tok->flag == tt_end);
@@ -1906,6 +1906,7 @@ void	test_goto_table(void)
 void	test_word1(void)
 {
 	t_word_list *out = NULL;
+	(void)out;
 	t_token *t1 = new_token(); set_token("a", 1, tt_word, t1);
 	t_word_list *word1 = make_word(t1);
 	TEST_CHECK(strcmp(word1->word, "a") == 0);
@@ -2027,7 +2028,7 @@ void	test_redir2(void)
 	TEST_CHECK(out->value.simple->redirects->rflags == 0);
 	TEST_CHECK(out->value.simple->redirects->flag == 0);
 	TEST_CHECK(out->value.simple->redirects->option == r_output_direction);
-	TEST_CHECK(out->value.simple->redirects->mode_bits == O_TRUNC | O_WRONLY | O_CREAT);
+	TEST_CHECK(out->value.simple->redirects->mode_bits == (O_TRUNC | O_WRONLY | O_CREAT));
 	TEST_CHECK(out->value.simple->redirects->next == NULL);
 	free(input);
 }
@@ -2432,6 +2433,8 @@ void	test_subshell3(void)
 {
 	char		*input = strdup("( word1 ) >redir1 >redir2");
 	t_token	*lex = NULL; //lexer(input);
+	free(input);
+	(void)lex;
 	TEST_CHECK(1 == 0);
 }
 
@@ -2445,7 +2448,8 @@ void	test_group1(void)
 {
 	char		*input = strdup("{ word1 }");
 	t_dlst 		*lex = NULL;
-	t_token		*t;
+	free(input);
+	(void)lex;
 	TEST_CHECK(1 == 0);
 }
 
@@ -2453,7 +2457,8 @@ void	test_group2(void)
 {
 	char		*input = strdup("{ word1 } >redir1");
 	t_dlst 		*lex = NULL;
-	t_token		*t;
+	free(input);
+	(void)lex;
 	TEST_CHECK(1 == 0);
 
 }
@@ -2462,9 +2467,9 @@ void	test_group3(void)
 {
 	char		*input = strdup("{ word1 } >redir1 >redir2");
 	t_dlst 		*lex = NULL;
-	t_token		*t;
-	TEST_CHECK(1 == 0);
 	free(input);
+	(void)lex;
+	TEST_CHECK(1 == 0);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
