@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/10 16:25:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:42:17 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	redirect->rflags = flag;
 	redirect->next = (t_redirect *) NULL;
 	if (type == r_output_direction)
-		redirect->mode_bits = O_TRUNC | O_WRONLY | O_CREAT;
+		redirect->mode_bits = (O_CREAT | O_TRUNC | O_WRONLY);
 	else if (type == r_appending_to)
-		redirect->mode_bits = O_APPEND | O_WRONLY | O_CREAT;
+		redirect->mode_bits = (O_CREAT | O_APPEND | O_WRONLY);
 	else if (type == r_input_direction)
 		redirect->mode_bits = O_RDONLY;
 	else if (type == r_reading_until)

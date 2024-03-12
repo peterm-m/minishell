@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 19:28:06 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:16:08 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,12 @@ void	executer(t_simple *cmd)
 	search_builtin(cmd->words->word, &filename);
 	printf("TERMINA\n\n");
 	argv = list_to_arr(cmd->words);
+	open_redir(cmd->redirects);
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		printf("filename.path_name %s\n", filename.path_name);
-		ft_signal(SIGINT, SIG_DFL); // CHECK 
+		make_redir(cmd->redirects);
+		ft_signal(SIGINT, SIG_DFL);
 		ft_execve(filename.path_name, argv, environ);
 		// TODO: gestionar error. 
 	}

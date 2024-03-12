@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_connection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:38:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/10 16:25:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:05:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
 #define LOGS 0
+
+void	run_connection(t_connection *connection)
+{
+	(void) connection;
+	return ;
+}
 
 void	print_connection(t_connection *connection)
 {
