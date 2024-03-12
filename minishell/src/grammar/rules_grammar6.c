@@ -59,7 +59,7 @@ void	rule_redir6(t_dlst **lex, t_state **state)
 // POSIX RULE 36
 // io_redirect :           DLESS  WORD
 
-void	rule_redir7(t_dlst **lex, t_state **state)
+void	rule_redir7(t_dlst **lex, t_state **state) // CHECK
 {
 	void		**out;
 	t_token		*word;
@@ -69,7 +69,7 @@ void	rule_redir7(t_dlst **lex, t_state **state)
 	dbg("│\t├─rule_redir7 %s\n", "");
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
-	source.fd = 0;
+	source.fd = STDIN_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	//TODO: push_heredoc

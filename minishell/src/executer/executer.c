@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 19:18:24 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:38:02 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 	else path emty string
 */
 
-void	serach_builtin(char *name, t_path_name *path)
-{
-    static char	**name_builtin = \
-	{"cd", "echo", "env", "pwd", "export", "unset", "exit"};
-	
-}
+//void	serach_builtin(char *name, t_path_name *path)
+//{
+//    static char	**name_builtin = 
+//	{"cd", "echo", "env", "pwd", "export", "unset", "exit"};
+//	
+//}
 
 // TODO: testear que pasa si NULL en input
 //		 testear PATH no existe
@@ -99,11 +99,13 @@ void	executer(t_simple *cmd)
 
 	search_path(cmd->words->word, &filename);
 	argv = list_to_arr(cmd->words);
+	open_redir(cmd->redirects);
 	pid = ft_fork();
 	if (pid == 0)
 	{
 		printf("filename.path_name %s\n", filename.path_name);
-		ft_signal(SIGINT, SIG_DFL); // CHECK 
+		make_redir(cmd->redirects);
+		ft_signal(SIGINT, SIG_DFL);
 		ft_execve(filename.path_name, argv, environ);
 		// TODO: gestionar error. 
 	}

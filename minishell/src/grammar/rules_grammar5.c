@@ -28,6 +28,7 @@ void	rule_redir_list(t_dlst **lex, t_state **state)
 	t_redirect	*io_redirect;
 
 	dbg("│\t├─rule_redir_list%s\n", "");
+	(void) out;
 	out = &(*lex)->prev->data;
 	redirect_list = (*lex)->prev->prev->data;
 	io_redirect = (*lex)->prev->data;
@@ -48,7 +49,7 @@ void	rule_redir1(t_dlst **lex, t_state **state)
 	dbg("│\t├─rule_redir1 %s\n", "");
 	word = (*lex)->prev->data;
 	out = &(*lex)->prev->data;
-	source.fd = 1;
+	source.fd = STDOUT_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_input_direction, &dest, 0);
 	pop_elements(lex, state, 1);
@@ -67,7 +68,7 @@ void	rule_redir2(t_dlst **lex, t_state **state)
 	dbg("│\t├─rule_redir2 %s\n", "");
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
-	source.fd = 1;
+	source.fd = STDOUT_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_output_direction, &dest, 0);
 	pop_elements(lex, state, 1);
@@ -86,7 +87,7 @@ void	rule_redir3(t_dlst **lex, t_state **state)
 	dbg("│\t├─rule_redir3 %s\n", "");
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
-	source.fd = 0;
+	source.fd = STDOUT_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_appending_to, &dest, 0);
 	pop_elements(lex, state, 1);
