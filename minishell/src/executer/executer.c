@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 20:16:08 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:23:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,27 @@
 	else path emty string
 */
 
-void	search_builtin(char *name, t_path_name *path)
+int	search_builtin(char *name, t_path_name *path)
 {
+	static char	*builtins[8] = \
+	{"cd", "echo", "env", "pwd", "export", "unset", "exit", NULL};
 	int			i;
-	int			find;
-	static char	*directory = "/src/builtins/";
-    static char	*builtins[7] = \
-	{"cd", "echo", "env", "pwd", "export", "unset", "exit"};
 
-	printf("Empieza a buscar\n");//
+	if (ft_strlen(name) > 6)
+		return (FALSE);
 	i = 0;
-	find = 0;
-	while (i < 7)
+	while (builtins[i])
 	{
-		printf("Builtin[%i]: %s\n",i, builtins[i]);//
-		if (ft_strncmp(name, builtins[i], ft_strlen(builtins[i]) + 1) == 0 && find == 0)
-		{
-			ft_strlcpy(path->path_name, directory, PATH_MAX);
-			ft_strlcat(path->path_name, builtins[i], PATH_MAX);
-			printf(BHYEL"Path a validar: %s\n"END, path->path_name);//
-			printf("pwd: %s\n", getenv("PWD"));//
-			if (access(path->path_name, F_OK) == 0) // CHECK
-			{
-				printf(BHGRN"Path valido: %s\n"END, path->path_name);//
-				find = 1;
-			}	
-		}
+		if (ft_strncmp(name, builtins[i], ft_strlen(builtins[i]) + 1) == 0)
+			break ;
 		i++;
 	}
- /* 	if (find == 0)
-		path->path_name[0] = '\0'; */
-	printf("TERMINA search builtins\n\n");
+	if (builtins[i] == NULL)
+		return (FALSE);
+	ft_strlcpy(path->path_name, BUILTINS_DIR, PATH_MAX);
+	ft_strlcat(path->path_name, "/", PATH_MAX);
+	ft_strlcat(path->path_name, name, PATH_MAX);
+	return (TRUE);
 }
 
 // TODO: testear que pasa si NULL en input
@@ -55,7 +45,7 @@ void	search_builtin(char *name, t_path_name *path)
 //		 testear que pasa si no se encuentra dir
 //		 testear que pasa si existe pero sin permisos de ejecucion
 
-void	search_path(char *name, t_path_name *path)
+int	search_path(char *name, t_path_name *path)
 {
 	int			i;
 	int			find;
@@ -71,14 +61,13 @@ void	search_path(char *name, t_path_name *path)
 			ft_strlcpy(path->path_name, directorys[i], PATH_MAX);
 			ft_strlcat(path->path_name, "/", PATH_MAX);
 			ft_strlcat(path->path_name, name, PATH_MAX);
-			if (access(path->path_name, X_OK) == 0) // CHECK
+			if (access(path->path_name, X_OK) == 0)
 				find = 1;
 		}
 		ft_free(directorys[i++]);
 	}
-	if (find == 0)
-		path->path_name[0] = '\0';
 	ft_free(directorys);
+	return (find);
 }
 
 char	**list_to_arr(t_word_list *words)
@@ -88,7 +77,7 @@ char	**list_to_arr(t_word_list *words)
 	t_word_list	*tmp;
 
 	n_word = 0;
-	tmp = words; 
+	tmp = words;
 	while (tmp)
 	{
 		tmp = tmp->next;
@@ -123,9 +112,10 @@ void	executer(t_simple *cmd)
 	char		**argv;
 	int			status;
 
-	search_path(cmd->words->word, &filename);
-	search_builtin(cmd->words->word, &filename);
-	printf("TERMINA\n\n");
+	status = search_builtin(cmd->words->word, &filename);
+	if (status == FALSE)
+		search_path(cmd->words->word, &filename);
+	status = 0;
 	argv = list_to_arr(cmd->words);
 	open_redir(cmd->redirects);
 	pid = ft_fork();
@@ -134,10 +124,9 @@ void	executer(t_simple *cmd)
 		make_redir(cmd->redirects);
 		ft_signal(SIGINT, SIG_DFL);
 		ft_execve(filename.path_name, argv, environ);
-		// TODO: gestionar error. 
+		// TODO: gestionar error.
 	}
 	else
 		waitpid(pid, &status, WUNTRACED);
-		
 	return ;
 }

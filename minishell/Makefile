@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/12 20:24:40 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/12 21:39:41 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ LIBDIR := lib
 TESTDIR := .test
 BINDIR := .build
 LOGDIR := .log
+
+BUILTINDIR := builtins
 
 CC := gcc
 
@@ -132,7 +134,7 @@ help:
 	@echo "    help     - Prints a help message with target rules       "
 
 # Rule for link and generate the binary file
-all: make_libs $(BINARYS)
+all: make_libs make_builtins $(BINARYS)
 
 re: fclean all
 
@@ -148,11 +150,11 @@ $(BINDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -c $^ -o $@ $(DEBUG) $(INCLUDE) $(CFLAGS)
 
 # Rule for cleaning the project
-clean:
-	@rm -rvf $(LOGDIR) $(BINDIR);
+clean: clean_builtins
+	@rm -rvf $(LOGDIR) $(BINDIR)
 
 # Rule for cleaning the project
-fclean: clean fclean_libs
+fclean: clean fclean_libs fclean_builtins
 	@rm -rvf $(BINDIR) $(BINARY)
 
 # Rule for run valgrind tool
@@ -167,7 +169,7 @@ valgrind:
 	@echo -en "\nCheck the log file: $(LOGDIR)/$@.log\n"
 
 # Compile tests and run the test binary
-tests: make_libs $(OBJECTS)
+tests: make_libs make_builtins $(OBJECTS)
 	@echo -en "$(BROWN)CC $(END_COLOR)";
 	$(CC) -c $(TESTDIR)/main.c -o $(BINDIR)/main.o $(DEBUG) $(INCLUDE) $(CFLAGS) $(LIBS)
 	$(CC) -o $(BINDIR)/$(TEST_BINARY) $(OBJECTS) $(BINDIR)/main.o $(DEBUG)  $(CFLAGS) $(LIBS)
@@ -193,3 +195,16 @@ fclean_libs:
 	@make -C $(LIBDIR)/dlst fclean
 	@make -C $(LIBDIR)/libft fclean
 	@make -C $(LIBDIR)/wrappers fclean
+
+#
+# BUILTINS RULES
+#
+
+make_builtins:
+	@make -C $(BUILTINDIR)
+
+clean_builtins:
+	@make -C $(BUILTINDIR) clean
+
+fclean_builtins:
+	@make -C $(BUILTINDIR) fclean
