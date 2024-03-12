@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 13:38:02 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:02:55 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	executer(t_simple *cmd)
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		printf("filename.path_name %s\n", filename.path_name);
 		make_redir(cmd->redirects);
 		ft_signal(SIGINT, SIG_DFL);
 		ft_execve(filename.path_name, argv, environ);

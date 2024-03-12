@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/11 18:46:03 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/03/12 16:13:52 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,10 @@ DEBUG := -g3
 
 DIR_DUP     = mkdir -p $(@D)
 
-# Dependency libraries
+# Dependency libraries  
 INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
 
-LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
+LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib\
 	-ldlst     -L$(LIBDIR)/dlst     \
 	-lft       -L$(LIBDIR)/libft    \
 	-lwrappers -L$(LIBDIR)/wrappers 
@@ -104,6 +104,7 @@ NAMES := \
 	subsystem/subsystem.c \
 	subsystem/environ.c \
 	subsystem/signals.c \
+	subsystem/redirection.c \
 	\
 	executer/executer.c \
 	\

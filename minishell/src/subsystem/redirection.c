@@ -6,11 +6,13 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 15:57:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:03:34 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO: PIPES
 
 void	make_redir(t_redirect *redirections)
 {
