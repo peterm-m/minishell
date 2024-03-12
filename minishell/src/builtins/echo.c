@@ -1,4 +1,5 @@
-#include "minishell.h"
+#include "../../lib/wrappers/wrappers.h"
+#include "../../lib/libft/libft.h"
 
 /**
  * The function checks if a given string starts with 
@@ -14,15 +15,15 @@ int has_flag(char *str)
 
     i = 0;
     if (!str[i])
-        return (FALSE);
+        return (0);
     if (str[i] != '-')
-        return (FALSE);
+        return (0);
     i++;
     while (str[i] && str[i] == 'n')
         i++;
     if  (!str[i])
-        return (TRUE);
-    return (FALSE);
+        return (1);
+    return (0);
 }
 /**
  * Prints the elements of an array of strings, separated by spaces,
@@ -59,11 +60,12 @@ int main(int argc, char **argv)
     int i;
     int is_flag;
 
+    (void)argc;
     i = 1;
-    is_flag = FALSE;
+    is_flag = 0;
     while (argv[i] && has_flag(argv[i]))
     {
-        is_flag = TRUE;
+        is_flag = 1;
         i++;
     }
     print_echo(argv, i, is_flag);

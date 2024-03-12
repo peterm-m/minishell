@@ -3,8 +3,7 @@
 int main(int argc, char **argv, char **env)
 {
     int i;
-
-    
+  
     (void)argc;
     (void)argv;
     i = -1;

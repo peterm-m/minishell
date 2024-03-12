@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 16:02:55 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:16:08 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,38 @@
 	else path emty string
 */
 
-//void	serach_builtin(char *name, t_path_name *path)
-//{
-//    static char	**name_builtin = 
-//	{"cd", "echo", "env", "pwd", "export", "unset", "exit"};
-//	
-//}
+void	search_builtin(char *name, t_path_name *path)
+{
+	int			i;
+	int			find;
+	static char	*directory = "/src/builtins/";
+    static char	*builtins[7] = \
+	{"cd", "echo", "env", "pwd", "export", "unset", "exit"};
+
+	printf("Empieza a buscar\n");//
+	i = 0;
+	find = 0;
+	while (i < 7)
+	{
+		printf("Builtin[%i]: %s\n",i, builtins[i]);//
+		if (ft_strncmp(name, builtins[i], ft_strlen(builtins[i]) + 1) == 0 && find == 0)
+		{
+			ft_strlcpy(path->path_name, directory, PATH_MAX);
+			ft_strlcat(path->path_name, builtins[i], PATH_MAX);
+			printf(BHYEL"Path a validar: %s\n"END, path->path_name);//
+			printf("pwd: %s\n", getenv("PWD"));//
+			if (access(path->path_name, F_OK) == 0) // CHECK
+			{
+				printf(BHGRN"Path valido: %s\n"END, path->path_name);//
+				find = 1;
+			}	
+		}
+		i++;
+	}
+ /* 	if (find == 0)
+		path->path_name[0] = '\0'; */
+	printf("TERMINA search builtins\n\n");
+}
 
 // TODO: testear que pasa si NULL en input
 //		 testear PATH no existe
@@ -98,6 +124,8 @@ void	executer(t_simple *cmd)
 	int			status;
 
 	search_path(cmd->words->word, &filename);
+	search_builtin(cmd->words->word, &filename);
+	printf("TERMINA\n\n");
 	argv = list_to_arr(cmd->words);
 	open_redir(cmd->redirects);
 	pid = ft_fork();
@@ -110,5 +138,6 @@ void	executer(t_simple *cmd)
 	}
 	else
 		waitpid(pid, &status, WUNTRACED);
+		
 	return ;
 }
