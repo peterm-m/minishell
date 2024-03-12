@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/12 16:08:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:21:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	run_simple(t_simple *simple)
 {
-	(void) simple;
+	executer(simple);
 	return ;
 }
 
