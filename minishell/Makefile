@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/12 20:21:06 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/12 20:24:40 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,6 @@ NAMES := \
 	expansion/quote_removal.c \
 	expansion/tilde_expansion.c \
 	\
-	subsystem/subsystem.c \
 	subsystem/signals.c \
 	subsystem/redirection.c \
 	\
