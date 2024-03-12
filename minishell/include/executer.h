@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 18:35:30 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:17:56 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXECUTER_H
 
 # include "minishell.h"
-# include <limits.h>
+
 
 typedef struct s_file_name
 {
@@ -34,20 +34,20 @@ typedef struct s_process
 	char				completed;
 	char				stopped;
 	int					status;
-} t_process;
+}	t_process;
 
 typedef struct s_mjob
 {
-	struct t_mjob	*next;
+	struct s_mjob	*next;
 	char			*command;
 	t_process		*first_process;
 	pid_t			pgid;
 	char			notified;
-	//struct termios	tmode;
+	struct termios	tmode;
 	int				stdin;
 	int				stdout;
 	int				stderr;
-} t_mjob;
+}	t_mjob;
 
 
 void	executer(t_simple *cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 16:32:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:13:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 // Extern header
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <termios.h>
+
 # include "ft_dlst.h"
 # include "libft.h"
 # include "wrappers.h"

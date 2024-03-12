@@ -1,9 +1,13 @@
 
 NAME := libwrappers.a
-NAME_DBG := libwrappers_dbg.a
 SRC_DIR := .
 
 SRCS = \
+	ft_setenv.c\
+	ft_unsetenv.c\
+	ft_clearenv.c\
+	ft_getenv.c\
+	ft_putenv.c\
 	ft_close.c\
 	ft_dup2.c\
 	ft_error.c\
@@ -41,32 +45,21 @@ ARFLAGS  := -r -c -s
 
 CCFLAGS = -Wall -Werror -Wextra -g
 
-DEBUG := -DLOGS=1 
-
 all: $(NAME)
-
-debug: fclean
-debug: CCFLAGS+=-DDEBUG
-debug: $(NAME_DBG)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	$(info CREATED $(NAME))
 
-$(NAME_DBG): $(OBJS)
-	@$(AR) $(ARFLAGS) $(NAME_DBG) $(OBJS)
-	$(info CREATED $(NAME_DBG))
-
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	$(CC) $(CCFLAGS) $(DEBUG) -c $< -o $@
+	$(CC) $(CCFLAGS) -c $< -o $@ -I../libft
 	$(info CREATED $@)
 
 clean:
 	@$(CLEANER) $(BUILD_DIR)
 
 fclean: clean
-	@$(CLEANER) $(NAME_DBG)
 	@$(CLEANER) $(NAME)
 
 re:

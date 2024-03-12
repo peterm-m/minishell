@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/12 16:13:52 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/12 19:37:03 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,6 @@ NAMES := \
 	expansion/tilde_expansion.c \
 	\
 	subsystem/subsystem.c \
-	subsystem/environ.c \
 	subsystem/signals.c \
 	subsystem/redirection.c \
 	\

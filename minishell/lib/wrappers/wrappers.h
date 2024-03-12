@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/10 18:54:27 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:49:26 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <sys/stat.h>
 # include <signal.h>
 # include <errno.h>
+
+# include "libft.h"
+
+extern char	**environ;
 
 //# define DEBUG 1
 
@@ -86,6 +90,12 @@ pid_t		ft_fork(void);
 t_handler	*ft_signal(int signum, t_handler *handler);
 void		ft_sigemptyset(sigset_t *set);
 void		ft_sigaddset(sigset_t *set, int signum);
+
+char		*ft_getenv(const char *name);
+int			ft_setenv(const char *name, const char *value, int overwrite);
+int			ft_unsetenv(const char *name);
+int			ft_putenv(char *string);
+int			ft_clearenv(void);
 
 #endif
 

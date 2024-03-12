@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 16:03:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:14:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 void	make_redir(t_redirect *redirections)
 {
 	t_redirect	*redir;
-	t_redirect	*tmp;
 
 	redir = redirections;
 	while (redir != NULL)
