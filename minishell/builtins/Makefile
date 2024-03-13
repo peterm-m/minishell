@@ -16,7 +16,6 @@ LIBDIR := ../lib
 INCLUDES := -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers
 LIBS := $(INCLUDES) \
 	-lft       -L$(LIBDIR)/libft    \
-	-lwrappers -L$(LIBDIR)/wrappers
 
 all: $(NAME_CD) $(NAME_ECHO) $(NAME_ENV) $(NAME_EXIT) $(NAME_EXPORT) $(NAME_PWD) $(NAME_UNSET)
 
@@ -42,25 +41,25 @@ $(NAME_UNSET): $(NAME_UNSET).o
 	$(CC) -o $(NAME_UNSET) $+ $(DEBUG) $(CFLAGS) $(LIBS)
 
 $(NAME_CD).o: $(NAME_CD).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 $(NAME_ECHO).o: $(NAME_ECHO).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 $(NAME_ENV).o: $(NAME_ENV).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 $(NAME_EXIT).o: $(NAME_EXIT).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 $(NAME_EXPORT).o: $(NAME_EXPORT).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 $(NAME_PWD).o: $(NAME_PWD).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 $(NAME_UNSET).o: $(NAME_UNSET).c
-	$(CC) -c $^ -o $@ $(INCLUDES) $(CFLAGS)
+	$(CC) -c $^ -o $@ $(LIBS) $(CFLAGS)
 
 
 clean:

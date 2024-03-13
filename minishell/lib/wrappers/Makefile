@@ -43,17 +43,17 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -g
+CCFLAGS = -Wall -Werror -Wextra -I../libft
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	@$(AR) $(ARFLAGS) ../libft/libft.a $(OBJS)
 	$(info CREATED $(NAME))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(DIR_DUP)
-	$(CC) $(CCFLAGS) -c $< -o $@ -I../libft
+	$(CC) $(CCFLAGS) -c $< -o $@ 
 	$(info CREATED $@)
 
 clean:

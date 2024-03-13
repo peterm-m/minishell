@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/12 21:39:41 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/13 12:15:56 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,13 +54,13 @@ DEBUG := -g3
 
 DIR_DUP     = mkdir -p $(@D)
 
-# Dependency libraries  
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
+# Dependency libraries  -I$(LIBDIR)/readline/8.2.7/include
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers 
 
-LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib\
+# -L$(LIBDIR)/readline/8.2.7/lib
+LIBS := -lreadline \
 	-ldlst     -L$(LIBDIR)/dlst     \
-	-lft       -L$(LIBDIR)/libft    \
-	-lwrappers -L$(LIBDIR)/wrappers 
+	-lft       -L$(LIBDIR)/libft
 
 # Test libraries
 TEST_LIBS := -L /usr/lib

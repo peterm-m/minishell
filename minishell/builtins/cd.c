@@ -16,7 +16,6 @@
 
 static int	update_pwd(void)
 {
-	int		i;
 	char	new_pwd[PATH_MAX];
 
 	if (getcwd(new_pwd, PATH_MAX) == NULL)
@@ -24,7 +23,6 @@ static int	update_pwd(void)
 		printf("Error\n");
 		return (EXIT_FAILURE);
 	}
-	i = 0;
 	ft_setenv("PWD", new_pwd, 1);
 	//printf("PWD en update_pwd con getcwd: %s\n", new_pwd);   //sobra
 	return (EXIT_SUCCESS);
@@ -32,9 +30,6 @@ static int	update_pwd(void)
 
 static int update_oldpwd()
 {
-	int i;
-
-	i = 0;
 	ft_setenv("OLDPWD", ft_getenv("PWD"), 1);
 	//printf("OLDPWD en update_opwd: %s\n", getenv("OLDPWD"));    //sobra
 	if (update_pwd() == EXIT_FAILURE)
