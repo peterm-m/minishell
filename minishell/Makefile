@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/17 15:06:00 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/17 19:43:21 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ NAMES := \
 	subsystem/redirection.c \
 	\
 	executer/executer.c \
+	executer/ft_execle.c \
 	\
 	builtins/cd.c \
 	builtins/echo.c \

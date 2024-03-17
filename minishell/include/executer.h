@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/17 17:18:32 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:44:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_mjob
 	int				stderr;
 }	t_mjob;
 
+void	ft_execle(t_word_list *args);
 void	executer(t_simple *cmd);
-//void	expander(t_data *data, char *input);
 
 #endif

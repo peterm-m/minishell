@@ -6,16 +6,12 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 22:23:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:48:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-	if path_name find put this in path
-	else path emty string
-*/
 
 int	search_builtin(char *name, t_path_name *path)
 {
@@ -40,60 +36,6 @@ int	search_builtin(char *name, t_path_name *path)
 	return (TRUE);
 }
 
-// TODO: testear que pasa si NULL en input
-//		 testear PATH no existe
-//		 testear que pasa si no se encuentra dir
-//		 testear que pasa si existe pero sin permisos de ejecucion
-
-int	search_path(char *name, t_path_name *path)
-{
-	int			i;
-	int			find;
-	char		**directorys;
-
-	i = 0;
-	find = 0;
-	directorys = ft_split(ft_getenv("PATH"), ':');
-	while (directorys[i])
-	{
-		if (find == 0)
-		{
-			ft_strlcpy(path->path_name, directorys[i], PATH_MAX);
-			ft_strlcat(path->path_name, "/", PATH_MAX);
-			ft_strlcat(path->path_name, name, PATH_MAX);
-			if (access(path->path_name, X_OK) == 0)
-				find = 1;
-		}
-		ft_free(directorys[i++]);
-	}
-	ft_free(directorys);
-	return (find);
-}
-
-char	**list_to_arr(t_word_list *words)
-{
-	size_t		n_word;
-	char		**arr;
-	t_word_list	*tmp;
-
-	n_word = 0;
-	tmp = words;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		n_word++;
-	}
-	arr = ft_malloc((n_word +1) * sizeof(char *));
-	arr[n_word] = NULL;
-	n_word = 0;
-	tmp = words;
-	while (tmp)
-	{
-		arr[n_word++] = tmp->word;
-		tmp = tmp->next;
-	}
-	return (arr);
-}
 
 //NO: Si no nombre del comando no tiene barras, intenta localizarlo en las funciones
 
@@ -108,25 +50,21 @@ char	**list_to_arr(t_word_list *words)
 void	executer(t_simple *cmd)
 {
 	pid_t		pid;
-	t_path_name	filename;
-	char		**argv;
 	int			status;
 
-	status = search_builtin(cmd->words->word, &filename);
-	if (status == FALSE)
-		search_path(cmd->words->word, &filename);
-	status = 0;
-	argv = list_to_arr(cmd->words);
+	if (search_builtin(cmd->words->word) == 1) // Como lo tenias si es builtin se ejecuta, cambias status general y retornas 1
+		return ;
 	open_redir(cmd->redirects);
 	pid = ft_fork();
 	if (pid == 0)
 	{
+		child_signals();
 		make_redir(cmd->redirects);
-		ft_signal(SIGINT, SIG_DFL);
-		ft_execve(filename.path_name, argv, environ);
-		// TODO: gestionar error.
+		ft_execle(cmd->words);
 	}
 	else
 		waitpid(pid, &status, WUNTRACED);
 	return ;
 }
+
+// TODO: gestionar error.

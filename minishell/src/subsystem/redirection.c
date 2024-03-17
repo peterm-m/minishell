@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/17 17:16:17 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:08:50 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ void	make_redir(t_redirect *redirections)
 		ft_close(redir->dest.fd);
 		redir = redir->next;
 	}
-}
-
-void	make_pipe(void)
-{
-	return ;
 }
 
 void	open_redir(t_redirect *redirections)
