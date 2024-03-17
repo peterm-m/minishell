@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/12 20:09:40 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:30:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*get_path(int argc, char *dir)
 	return (path);
 }
 
-int main(int argc, char **argv, char **env) //pasar como argumento PATH de env
+int	bin_cd(int argc, char **argv, char **env) //pasar como argumento PATH de env
 {
 	char	*dir;
 

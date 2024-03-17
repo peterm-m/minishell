@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/13 12:15:56 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/17 15:06:00 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ ifeq ($(OS),Darwin)
 	COLOR_PREFIX := 033
 endif
 
-BROWN=\$(COLOR_PREFIX)[0;33m
-BLUE=\$(COLOR_PREFIX)[1;34m
-END_COLOR=\$(COLOR_PREFIX)[0m
+BROWN    = \$(COLOR_PREFIX)[0;33m
+BLUE     = \$(COLOR_PREFIX)[1;34m
+RED      = \$(COLOR_PREFIX)[1;91m
+END_COLOR= \$(COLOR_PREFIX)[0m
 
 # Source code directory structure
 SRCDIR := src
@@ -42,6 +43,8 @@ BUILTINDIR := builtins
 
 CC := gcc
 
+
+
 STD := -std=gnu99
 
 STACK := -fstack-protector-all -Wstack-protector
@@ -53,12 +56,13 @@ CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
 DEBUG := -g3 
 
 DIR_DUP     = mkdir -p $(@D)
+CLEANER     = rm -rvf
 
-# Dependency libraries  -I$(LIBDIR)/readline/8.2.7/include
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers 
+# Dependency libraries  
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
 
-# -L$(LIBDIR)/readline/8.2.7/lib
-LIBS := -lreadline \
+# 
+LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst     \
 	-lft       -L$(LIBDIR)/libft
 
@@ -108,6 +112,14 @@ NAMES := \
 	\
 	executer/executer.c \
 	\
+	builtins/cd.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/exit.c \
+	builtins/export.c \
+	builtins/pwd.c \
+	builtins/unset.c \
+	\
 
 NAMES := $(NAMES:%=$(SRCDIR)/%)
 
@@ -127,14 +139,14 @@ help:
 	@echo "Target rules:"
 	@echo "    all      - Compiles and generates binary file            "
 	@echo "    re       - Fclean, Compiles and generates binary file    "
-	@echo "    tests    - Compiles with cmocka and run tests binary file"`
+	@echo "    tests    - Compiles with cmocka and run tests binary file"
 	@echo "    valgrind - Runs binary file using valgrind tool          "
 	@echo "    clean    - Removing object files                         "
 	@echo "    fclean   - Removing object files and binary              "
 	@echo "    help     - Prints a help message with target rules       "
 
 # Rule for link and generate the binary file
-all: make_libs make_builtins $(BINARYS)
+all: make_libs $(BINARYS)
 
 re: fclean all
 
@@ -150,12 +162,12 @@ $(BINDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -c $^ -o $@ $(DEBUG) $(INCLUDE) $(CFLAGS)
 
 # Rule for cleaning the project
-clean: clean_builtins
-	@rm -rvf $(LOGDIR) $(BINDIR)
+clean:
+	@$(CLEANER) $(LOGDIR) $(BINDIR)
 
 # Rule for cleaning the project
-fclean: clean fclean_libs fclean_builtins
-	@rm -rvf $(BINDIR) $(BINARY)
+fclean: clean fclean_libs
+	@$(CLEANER) $(BINDIR) $(BINARY)
 
 # Rule for run valgrind tool
 valgrind:
@@ -169,7 +181,7 @@ valgrind:
 	@echo -en "\nCheck the log file: $(LOGDIR)/$@.log\n"
 
 # Compile tests and run the test binary
-tests: make_libs make_builtins $(OBJECTS)
+tests: make_libs $(OBJECTS)
 	@echo -en "$(BROWN)CC $(END_COLOR)";
 	$(CC) -c $(TESTDIR)/main.c -o $(BINDIR)/main.o $(DEBUG) $(INCLUDE) $(CFLAGS) $(LIBS)
 	$(CC) -o $(BINDIR)/$(TEST_BINARY) $(OBJECTS) $(BINDIR)/main.o $(DEBUG)  $(CFLAGS) $(LIBS)
@@ -195,16 +207,3 @@ fclean_libs:
 	@make -C $(LIBDIR)/dlst fclean
 	@make -C $(LIBDIR)/libft fclean
 	@make -C $(LIBDIR)/wrappers fclean
-
-#
-# BUILTINS RULES
-#
-
-make_builtins:
-	@make -C $(BUILTINDIR)
-
-clean_builtins:
-	@make -C $(BUILTINDIR) clean
-
-fclean_builtins:
-	@make -C $(BUILTINDIR) fclean

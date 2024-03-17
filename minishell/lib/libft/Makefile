@@ -3,55 +3,111 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adiaz-uf <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 18:04:07 by adiaz-uf          #+#    #+#              #
-#    Updated: 2022/09/28 13:37:52 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/03/17 15:04:16 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
+SRC_DIR := .
+
+SRCS = \
+	ft_atoi.c \
+	ft_bzero.c \
+	ft_calloc.c \
+	ft_isalnum.c \
+	ft_isalpha.c \
+	ft_isascii.c \
+	ft_isdigit.c \
+	ft_isprint.c \
+	ft_memchr.c \
+	ft_memcmp.c \
+	ft_memcpy.c \
+	ft_memmove.c \
+	ft_memset.c \
+	ft_putchar_fd.c \
+	ft_putendl_fd.c \
+	ft_putnbr_fd.c \
+	ft_putstr_fd.c \
+	ft_strchr.c \
+	ft_strdup.c \
+	ft_strlcat.c \
+	ft_strlcpy.c \
+	ft_strlen.c \
+	ft_strncmp.c \
+	ft_strnstr.c \
+	ft_strrchr.c \
+	ft_tolower.c \
+	ft_toupper.c \
+	ft_strmapi.c \
+	ft_substr.c \
+	ft_strjoin.c \
+	ft_strtrim.c \
+	ft_split.c \
+	ft_itoa.c \
+	ft_striteri.c \
+	ft_lstnew.c \
+	ft_lstadd_front.c \
+	ft_lstlast.c \
+	ft_lstsize.c \
+	ft_lstadd_back.c \
+	ft_lstdelone.c \
+	ft_lstiter.c \
+	ft_lstclear.c \
+	ft_lstmap.c 
+
+SRCS := $(SRCS:%=$(SRC_DIR)/%)
+
+BUILD_DIR := .build
+
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+
+OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
+
 CC = gcc
+DIR_DUP = mkdir -p $(@D)
+CLEANER = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror 
+AR := ar
+ARFLAGS  := -r -c -s
 
-SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
-	  ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
-	  ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
-	  ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-	  ft_putstr_fd.c ft_strchr.c ft_strdup.c ft_strlcat.c \
-	  ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c \
-	  ft_strrchr.c ft_tolower.c ft_toupper.c ft_strmapi.c \
-	  ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
-	  ft_itoa.c ft_striteri.c
+CCFLAGS = -Wall -Werror -Wextra 
 
-OBJS = $(SRC:.c=.o)
+OS := $(shell uname -s)
 
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstlast.c ft_lstsize.c \
-		ft_lstadd_back.c ft_lstdelone.c ft_lstiter.c ft_lstclear.c \
-		ft_lstmap.c
+SHELL := bash
 
-BONUS_OBJS = $(BONUS:.c=.o)
+COLOR_PREFIX := e
 
-INCLUDE = libft.h
+ifeq ($(OS),Darwin)
+	COLOR_PREFIX := 033
+endif
 
-$(NAME):$(OBJS) $(INCLUDE)
-	@ar rsc $(NAME) $(OBJS)
+BROWN    = \$(COLOR_PREFIX)[0;33m
+BLUE     = \$(COLOR_PREFIX)[1;34m
+RED      = \$(COLOR_PREFIX)[1;91m
+END_COLOR= \$(COLOR_PREFIX)[0m
 
 all: $(NAME)
 
-%.o : %.c
-	@$(CC) $(CCFLAGS) -c -o $@ $<
+$(NAME): $(OBJS)
+	@echo -en "$(BROWN)AR $(END_COLOR)";
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo -en "$(BROWN)CREATED $(END_COLOR)";
+	@$(DIR_DUP)
+	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJS) $(BONUS_OBJS)
-fclean:	clean
-	@rm -f $(NAME)
+	@$(CLEANER) $(BUILD_DIR)
 
-re: fclean all
+fclean: clean 
+	@$(CLEANER) $(NAME)
 
-bonus: $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
-
-.PHONY: all clean fclean re bonus
+re:
+	$(MAKE) fclean
+	$(MAKE) all

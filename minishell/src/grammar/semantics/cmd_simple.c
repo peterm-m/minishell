@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_simple.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/12 17:21:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:00:55 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ t_command	*make_simple(t_element *prefix, t_word_list *word,
 	}
 	return (make_command(cmd_simple, (t_node)simple));
 }
+
 #undef LOGS
 #define LOGS 0

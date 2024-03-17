@@ -1,17 +1,17 @@
 #include "minishell.h"
 
-int is_number(char *num)
+int	is_number(char *num)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while(num[i])
-    {
-        if (!ft_isdigit(num[i]))
-            return (FALSE);
-        i++;
-    }
-    return (TRUE);
+	i = 0;
+	while (num[i])
+	{
+		if (!ft_isdigit(num[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }
 
 static void	exit_no_numeric(char *cmd)
@@ -24,23 +24,25 @@ static void	exit_no_numeric(char *cmd)
 }
 
 
-int main (int argc, char **argv, char **env)
+int	bin_exit(int argc, char **argv, char **env)
 {
-    if (argc == 1)
-    {
-        ft_putstr_fd("exit\n", 2);
-        exit(EXIT_SUCCESS);
-    }
-    if (argc >= 2)
-    {
-        if (is_number(argv[1]) && argc >= 3)
-        {
-			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-            return(EXIT_SUCCESS);
-        }
-		if (!is_number(argv[1]))
-        	exit_no_numeric(argv[1]);
+	(void) env;
+	if (argc == 1)
+	{
 		ft_putstr_fd("exit\n", 2);
-        exit(ft_atoi(argv[1]));
-    }
+		exit(EXIT_SUCCESS);
+	}
+	if (argc >= 2)
+	{
+		if (is_number(argv[1]) && argc >= 3)
+		{
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			return (EXIT_SUCCESS);
+		}
+		if (!is_number(argv[1]))
+			exit_no_numeric(argv[1]);
+		ft_putstr_fd("exit\n", 2);
+		exit(ft_atoi(argv[1]));
+	}
+	exit (EXIT_SUCCESS);
 }

@@ -45,16 +45,32 @@ ARFLAGS  := -r -c -s
 
 CCFLAGS = -Wall -Werror -Wextra -I../libft
 
+OS := $(shell uname -s)
+
+SHELL := bash
+
+COLOR_PREFIX := e
+
+ifeq ($(OS),Darwin)
+	COLOR_PREFIX := 033
+endif
+
+BROWN    = \$(COLOR_PREFIX)[0;33m
+BLUE     = \$(COLOR_PREFIX)[1;34m
+RED      = \$(COLOR_PREFIX)[1;91m
+END_COLOR= \$(COLOR_PREFIX)[0m
+
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(AR) $(ARFLAGS) ../libft/libft.a $(OBJS)
-	$(info CREATED $(NAME))
+	@echo -en "$(BROWN)AR $(END_COLOR)";
+	$(AR) $(ARFLAGS) ../libft/libft.a $(OBJS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo -en "$(BROWN)CREATED $(END_COLOR)";
 	@$(DIR_DUP)
 	$(CC) $(CCFLAGS) -c $< -o $@ 
-	$(info CREATED $@)
 
 clean:
 	@$(CLEANER) $(BUILD_DIR)

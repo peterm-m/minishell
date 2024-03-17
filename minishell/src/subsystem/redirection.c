@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 20:14:12 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:16:17 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	make_redir(t_redirect *redirections)
 	}
 }
 
+void	make_pipe(void)
+{
+	return ;
+}
+
 void	open_redir(t_redirect *redirections)
 {
 	t_redirect	*redir;
@@ -36,7 +41,7 @@ void	open_redir(t_redirect *redirections)
 	while (redir != NULL)
 	{
 		fd = ft_open(redir->dest.filename, redir->mode_bits,
-			(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
+				(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
 		if (fd > 0)
 			redir->dest.fd = fd;
 		redir = redir->next;

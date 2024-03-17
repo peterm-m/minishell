@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/12 17:48:02 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:29:07 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void    print_sorted_env(char **env)
         printf ("declare -x %s\n", env[i]);
 }
 
-int main(int argc, char **argv, char **env)
+int bin_export(int argc, char **argv, char **env)
 {
     char    *name;
     char    *value;

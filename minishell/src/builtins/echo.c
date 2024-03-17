@@ -55,7 +55,7 @@ void print_echo(char **args, int i, int is_flag)
     }
 }
 
-int main(int argc, char **argv)
+int bin_echo(int argc, char **argv)
 {
     int i;
     int is_flag;

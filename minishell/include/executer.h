@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 20:17:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 17:18:32 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define EXECUTER_H
 
 # include "minishell.h"
-
 
 typedef struct s_file_name
 {
@@ -48,7 +47,6 @@ typedef struct s_mjob
 	int				stdout;
 	int				stderr;
 }	t_mjob;
-
 
 void	executer(t_simple *cmd);
 //void	expander(t_data *data, char *input);

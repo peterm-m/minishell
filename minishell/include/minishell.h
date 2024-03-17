@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 20:20:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:04:23 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@
 # include "executer.h"
 # include "subsystem.h"
 # include "expansion.h"
+# include "builtin.h"
 
 # include "colors.h"
 
-extern int  g_exit_status;
+extern int	g_exit_status;
 
 // Bool
 # define TRUE 1
