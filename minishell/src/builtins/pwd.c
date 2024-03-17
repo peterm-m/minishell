@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int main(int argc, char **argv, char **env)
+int bin_pwd(int argc, char **argv, char **env)
 {
 
     (void)argc;
