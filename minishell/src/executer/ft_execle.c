@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 19:22:57 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:30:39 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_execle(t_word_list *args)
 	char		**argv;
 
 	argv = list_to_arr(args);
-	if (search_path(args->word, &filename))
+	if (search_path(args->word, &filename) == 0) // TODO: gestion archivo no enconrado 
 		return ;
 	ft_execve(filename.path_name, argv, environ);
 }
