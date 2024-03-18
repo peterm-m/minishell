@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:39 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/05 18:36:40 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:52:25 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,21 @@ int	get_ionumber(char *str, int i, t_token *token)
 	j = 0;
 	while (ft_isdigit(str[i + j]))
 		j++;
-	set_token(str + i, j, tt_word, token);
+	while (is_blankspace(str[i + j]))
+		j++;	
+	if (str[i + j] == '>' || str[i + j] == '<')
+	{
+		set_token(str + i, j, tt_word, token);
+		token->flag = tt_io_number;
+	}
+	else if (str[i + j] == '=')
+	{
+		while (!in_word(str[i + j]) && str[i + j])
+			j++;
+		set_token(str + i, j, tt_word, token);
+	}
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-	if (str[i + j] == '>' || str[i + j] == '<')
-		token->flag = tt_io_number;
 	return (i + j);
 }
 

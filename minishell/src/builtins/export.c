@@ -6,20 +6,18 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 19:35:11 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:05:59 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int get_arr_len(char **env)
+void	exit_not_identifier(char *cmd)
 {
-	int i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd("not an identifier\n", 2);
+	ft_putstr_fd(cmd, 2);
 }
 
 void    sort_env()
@@ -73,7 +71,12 @@ int export_args(char **argv)
 		{
 			if (argv[j][i] == '=' && valid == 0)
 			{
-				ft_putenv(argv[j]);		
+				printf("\nstr: %s\n", argv[j]);
+				printf(" j:0 %c", argv[j][0]);
+				if (ft_isdigit(argv[j][0] == 1))
+					exit_not_identifier(argv[j]);
+				else
+					ft_putenv(argv[j]);		
 				valid = 1;
 			}
 			i++;	

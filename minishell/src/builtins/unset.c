@@ -2,9 +2,8 @@
 
 int unset_main(char **argv)
 {
-	char    *name;
-	int     i;
 	int		argc;
+	int		i;
 
 	argc = get_arr_len(argv);
 	if (argc == 1)
@@ -14,17 +13,12 @@ int unset_main(char **argv)
 	}
 	if (ft_strncmp(argv[1], "_", 2) == 0)
 		return (EXIT_SUCCESS);
-	i = 0;
-	while (argv[1][i] && argv[1][i] != '=')
-		i++;
-	name = ft_substr(argv[1], 0, i);
-	if (!name)
-		return (EXIT_SUCCESS);
-	if (ft_unsetenv(name) == -1)
+	i = 1;
+	while (argv[i])
 	{
-		free(name);
-		return (EXIT_FAILURE);
+		if (ft_getenv(argv[i]) != NULL)
+			ft_unsetenv(argv[i]);
+		i++;
 	}
-	free(name);
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:17 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/05 18:36:18 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:08:33 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	search_w_q(void *t)
 	if (token != NULL && token->str != NULL && !is_quotes(token->str[0]))
 	{
 		if (ft_strchr(token->str, '*') != 0)
-			token->flag |= WILDCARD;
+			token->flag |= (EXPAND | WILDCARD);
 		if (ft_strchr(token->str, '?') != 0)
-			token->flag |= QUEST;
+			token->flag |= (EXPAND | QUEST);
 	}
 	else if (token != NULL && token->str == NULL)
 	{

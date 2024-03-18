@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 19:21:52 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:03:17 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	executer(t_simple *cmd)
 	pid_t		pid;
 	int			status;
 
-	if (search_builtin(cmd->words) == 1) // Como lo tenias si es builtin se ejecuta, cambias status general y retornas 1
+	if (search_builtin(cmd->words) != -1) // Como lo tenias si es builtin se ejecuta, cambias status general y retornas 1
 		return ;
 	open_redir(cmd->redirects);
 	pid = ft_fork();

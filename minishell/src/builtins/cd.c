@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 19:08:03 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:20:03 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,19 @@ static int	update_pwd(void)
 
 static int update_oldpwd()
 {
-	ft_setenv("OLDPWD", ft_getenv("PWD"), 1);
+	int		i;
+	char	*old_pwd;
+
+	i = 0;
+	while (environ[i])
+	{
+		if (ft_strncmp(environ[i], "PWD", 4) == 0)
+		{
+			old_pwd = ft_strjoin("OLDPWD", ft_getenv("PWD"));
+			ft_putenv(environ[i]);
+		}
+		i++;
+	}
 	if (update_pwd() == EXIT_FAILURE)
 		return (EXIT_FAILURE); 
 	return (EXIT_SUCCESS);
