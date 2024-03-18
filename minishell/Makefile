@@ -6,7 +6,7 @@
 #    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/15 18:34:31 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/03/18 19:14:11 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ ifeq ($(OS),Darwin)
 	COLOR_PREFIX := 033
 endif
 
-BROWN=\$(COLOR_PREFIX)[0;33m
-BLUE=\$(COLOR_PREFIX)[1;34m
-END_COLOR=\$(COLOR_PREFIX)[0m
+BROWN    = \$(COLOR_PREFIX)[0;33m
+BLUE     = \$(COLOR_PREFIX)[1;34m
+RED      = \$(COLOR_PREFIX)[1;91m
+END_COLOR= \$(COLOR_PREFIX)[0m
 
 # Source code directory structure
 SRCDIR := src
@@ -39,6 +40,8 @@ BINDIR := .build
 LOGDIR := .log
 
 CC := gcc
+
+
 
 STD := -std=gnu99
 
@@ -51,9 +54,11 @@ CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
 DEBUG := -g3 
 
 DIR_DUP     = mkdir -p $(@D)
+CLEANER     = rm -rvf
 
-# Dependency libraries 
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers  -I$(LIBDIR)/readline/8.2.7/include
+# Dependency libraries  
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
+
 # 
 LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst     \
@@ -104,6 +109,15 @@ NAMES := \
 	subsystem/redirection.c \
 	\
 	executer/executer.c \
+	executer/ft_execle.c \
+	\
+	builtins/cd.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/exit.c \
+	builtins/export.c \
+	builtins/pwd.c \
+	builtins/unset.c \
 	\
 	builtins/cd.c \
 	builtins/echo.c \
@@ -132,13 +146,14 @@ help:
 	@echo "Target rules:"
 	@echo "    all      - Compiles and generates binary file            "
 	@echo "    re       - Fclean, Compiles and generates binary file    "
-	@echo "    tests    - Compiles with cmocka and run tests binary file"`
+	@echo "    tests    - Compiles with cmocka and run tests binary file"
 	@echo "    valgrind - Runs binary file using valgrind tool          "
 	@echo "    clean    - Removing object files                         "
 	@echo "    fclean   - Removing object files and binary              "
 	@echo "    help     - Prints a help message with target rules       "
 
 # Rule for link and generate the binary file
+all: make_libs $(BINARYS)
 all: make_libs $(BINARYS)
 
 re: fclean all
@@ -156,11 +171,11 @@ $(BINDIR)/%.o: $(SRCDIR)/%.c
 
 # Rule for cleaning the project
 clean:
-	@rm -rvf $(LOGDIR) $(BINDIR)
+	@$(CLEANER) $(LOGDIR) $(BINDIR)
 
 # Rule for cleaning the project
 fclean: clean fclean_libs
-	@rm -rvf $(BINDIR) $(BINARY)
+	@$(CLEANER) $(BINDIR) $(BINARY)
 
 # Rule for run valgrind tool
 valgrind:
@@ -174,7 +189,7 @@ valgrind:
 	@echo -en "\nCheck the log file: $(LOGDIR)/$@.log\n"
 
 # Compile tests and run the test binary
-tests: make_libs make_builtins $(OBJECTS)
+tests: make_libs $(OBJECTS)
 	@echo -en "$(BROWN)CC $(END_COLOR)";
 	$(CC) -c $(TESTDIR)/main.c -o $(BINDIR)/main.o $(DEBUG) $(INCLUDE) $(CFLAGS) $(LIBS)
 	$(CC) -o $(BINDIR)/$(TEST_BINARY) $(OBJECTS) $(BINDIR)/main.o $(DEBUG)  $(CFLAGS) $(LIBS)
@@ -200,4 +215,3 @@ fclean_libs:
 	@make -C $(LIBDIR)/dlst fclean
 	@make -C $(LIBDIR)/libft fclean
 	@make -C $(LIBDIR)/wrappers fclean
-

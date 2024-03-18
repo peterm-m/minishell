@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/15 20:22:20 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:13:13 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ t_command	*make_simple(t_element *prefix, t_word_list *word,
 	}
 	return (make_command(cmd_simple, (t_node)simple));
 }
+
 #undef LOGS
 #define LOGS 0

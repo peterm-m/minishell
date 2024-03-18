@@ -8,10 +8,19 @@
 	return (number % 256);
 } */
 
-int is_number(char *num)
+int	is_number(char *num)
 {
 	int i;
+	int i;
 
+	i = 0;
+	while (num[i])
+	{
+		if (!ft_isdigit(num[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 	i = 0;
 	while(num[i])
 	{
@@ -47,12 +56,12 @@ int exit_main(char **argv)
 		if (is_number(argv[1]) && argc >= 3)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			return(EXIT_SUCCESS);
+			return (EXIT_SUCCESS);
 		}
 		if (!is_number(argv[1]))
 			exit_no_numeric(argv[1]);
 		ft_putstr_fd("exit\n", 2);
 		exit(ft_atoi(argv[1]) % 256);
 	}
-	return (EXIT_FAILURE);
-}
+	exit(ft_atoi(argv[1]));
+	}

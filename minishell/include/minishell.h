@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/15 18:25:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:07:47 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # include "colors.h"
 
-extern int  g_exit_status;
+extern int	g_exit_status;
 
 // Bool
 # define TRUE 1

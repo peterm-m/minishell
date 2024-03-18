@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subsystem.h                                        :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/17 19:43:44 by pedromar         ###   ########.fr       */
+/*   Created: 2024/03/17 14:26:13 by pedromar          #+#    #+#             */
+/*   Updated: 2024/03/17 17:13:40 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SUBSYSTEM_H
-# define SUBSYSTEM_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-# include "minishell.h"
+int	bin_cd(int argc, char **argv, char **env);
+int	bin_echo(int argc, char **argv, char **env);
+int	bin_env(int argc, char **argv, char **env);
+int	bin_pwd(int argc, char **argv, char **env);
+int	bin_exit(int argc, char **argv, char **env);
+int	bin_unset(int argc, char **argv, char **env);
 
-void	make_redir(t_redirect *redirections);
-void	open_redir(t_redirect *redirections);
-
-void	initial_signals(void);
-void	child_signals(void);
-void	sigint_handler(int sig);
-
-#endif
+#endif //BUILTIN_H
