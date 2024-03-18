@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-int	env_main(char **env)
+int	env_main()
 {
 	int	i;
 
 	i = -1;
-	while (env[++i])
-		printf("%s\n", env[i]);
+	while (environ[++i])
+		printf("%s\n", environ[i]);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/17 19:45:03 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:22:57 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	search_path(char *name, t_path_name *path)
 	return (find);
 }
 
-static char	**list_to_arr(t_word_list *words)
+char	**list_to_arr(t_word_list *words)
 {
 	size_t		n_word;
 	char		**arr;

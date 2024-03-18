@@ -5,7 +5,7 @@
 
 int cd_main(char **argv);
 int	echo_main(char **argv);
-int	env_main(char **env);
+int	env_main();
 int exit_main (char **argv);
 int export_main(char **argv);
 int	pwd_main();

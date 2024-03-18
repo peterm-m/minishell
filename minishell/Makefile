@@ -6,7 +6,7 @@
 #    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/18 19:14:11 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/03/18 19:24:22 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,14 +119,6 @@ NAMES := \
 	builtins/pwd.c \
 	builtins/unset.c \
 	\
-	builtins/cd.c \
-	builtins/echo.c \
-	builtins/env.c \
-	builtins/exit.c \
-	builtins/export.c \
-	builtins/pwd.c \
-	builtins/unset.c \
-	
 
 NAMES := $(NAMES:%=$(SRCDIR)/%)
 

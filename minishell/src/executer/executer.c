@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 19:13:05 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:21:52 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,24 @@
 	 return (TRUE);
 }*/
 
-int	search_builtin2(char *name, char **argv)
+int	search_builtin(t_word_list *words)
 {
-	if (ft_strncmp(name, "cd", 3) == 0)
+	char **argv;
+
+	argv = list_to_arr(words);
+	if (ft_strncmp(argv[0], "cd", 3) == 0)
 		return (cd_main(argv));
-	else if (ft_strncmp(name, "echo", 5) == 0) // ECHO OK
+	else if (ft_strncmp(argv[0], "echo", 5) == 0) // ECHO OK
 		return (echo_main(argv));
-	else if (ft_strncmp(name, "env", 4) == 0) // ENV OK
-		return (env_main(environ));
-	else if (ft_strncmp(name, "exit", 5) == 0) // EXIT OK
+	else if (ft_strncmp(argv[0], "env", 4) == 0) // ENV OK
+		return (env_main());
+	else if (ft_strncmp(argv[0], "exit", 5) == 0) // EXIT OK
 		return (exit_main(argv));
-	else if (ft_strncmp(name, "export", 7) == 0)
+	else if (ft_strncmp(argv[0], "export", 7) == 0)
 		return (export_main(argv));
-	else if (ft_strncmp(name, "pwd", 4) == 0) // PWD OK
+	else if (ft_strncmp(argv[0], "pwd", 4) == 0) // PWD OK
 		return (pwd_main());
-	else if (ft_strncmp(name, "unset", 6) == 0)
+	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		return (unset_main(argv));
 	return (-1);
 }
@@ -71,7 +74,7 @@ void	executer(t_simple *cmd)
 	pid_t		pid;
 	int			status;
 
-	if (search_builtin(cmd->words->word) == 1) // Como lo tenias si es builtin se ejecuta, cambias status general y retornas 1
+	if (search_builtin(cmd->words) == 1) // Como lo tenias si es builtin se ejecuta, cambias status general y retornas 1
 		return ;
 	open_redir(cmd->redirects);
 	pid = ft_fork();

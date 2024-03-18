@@ -11,7 +11,6 @@
 int	is_number(char *num)
 {
 	int i;
-	int i;
 
 	i = 0;
 	while (num[i])
@@ -60,8 +59,7 @@ int exit_main(char **argv)
 		}
 		if (!is_number(argv[1]))
 			exit_no_numeric(argv[1]);
-		ft_putstr_fd("exit\n", 2);
-		exit(ft_atoi(argv[1]) % 256);
 	}
-	exit(ft_atoi(argv[1]));
-	}
+	ft_putstr_fd("exit\n", 2);
+	exit(ft_atoi(argv[1]) % 256);
+}
