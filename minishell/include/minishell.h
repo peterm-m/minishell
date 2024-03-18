@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 20:20:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:25:01 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # include "executer.h"
 # include "subsystem.h"
 # include "expansion.h"
+# include "builtins.h"
 
 # include "colors.h"
 
@@ -52,7 +53,7 @@ extern int  g_exit_status;
 
 // Path
 
-# define PROMPT "\e[1;95mminishell42->\e[0m"
+# define PROMPT "\e[1;95mminishell42-> \e[0m"
 
 # ifdef DEBUG
 #  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})

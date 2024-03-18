@@ -1,5 +1,4 @@
-#include "../../lib/wrappers/wrappers.h"
-#include "../../lib/libft/libft.h"
+#include "minishell.h"
 
 /**
  * The function checks if a given string starts with 
@@ -11,19 +10,19 @@
  */
 int has_flag(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (!str[i])
-        return (0);
-    if (str[i] != '-')
-        return (0);
-    i++;
-    while (str[i] && str[i] == 'n')
-        i++;
-    if  (!str[i])
-        return (1);
-    return (0);
+	i = 0;
+	if (!str[i])
+		return (0);
+	if (str[i] != '-')
+		return (0);
+	i++;
+	while (str[i] && str[i] == 'n')
+		i++;
+	if  (!str[i])
+		return (1);
+	return (0);
 }
 /**
  * Prints the elements of an array of strings, separated by spaces,
@@ -39,35 +38,34 @@ int has_flag(char *str)
  */
 void print_echo(char **args, int i, int is_flag)
 {
-    if (!args[i])
+	if (!args[i])
 	{
 		if (!is_flag)
 			printf("\n");
 		return ;
 	}
-    while (args[i++])
-    {
-        printf ("%s", args[i - 1]);
-        if (args[i])
-            printf (" ");
-        else if (!args[i] &&  !is_flag)
-            printf ("\n");
-    }
+	while (args[i++])
+	{
+		printf ("%s", args[i - 1]);
+		if (args[i])
+			printf (" ");
+		else if (!args[i] && !is_flag)
+			printf ("\n");
+	}
 }
 
-int main(int argc, char **argv)
+int	echo_main(char **argv)
 {
-    int i;
-    int is_flag;
+	int	i;
+	int	is_flag;
 
-    (void)argc;
-    i = 1;
-    is_flag = 0;
-    while (argv[i] && has_flag(argv[i]))
-    {
-        is_flag = 1;
-        i++;
-    }
-    print_echo(argv, i, is_flag);
-    return (EXIT_SUCCESS);
+	i = 1;
+	is_flag = 0;
+	while (argv[i] && has_flag(argv[i]))
+	{
+		is_flag = 1;
+		i++;
+	}
+	print_echo(argv, i, is_flag);
+	return (EXIT_SUCCESS);
 }

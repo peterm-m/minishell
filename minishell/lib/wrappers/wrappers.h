@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 19:49:26 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:25:22 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int			ft_clearenv(void);
  *	chdir
  *	lstat
  *	unlink,
- 
+ *
  *	opendir
  *	readdir
  *	closedir

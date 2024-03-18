@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 22:23:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:19:38 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	else path emty string
 */
 
-int	search_builtin(char *name, t_path_name *path)
+/* int	search_builtin(char *name, t_path_name *path)
 {
 	static char	*builtins[8] = \
 	{"cd", "echo", "env", "pwd", "export", "unset", "exit", NULL};
@@ -37,7 +37,26 @@ int	search_builtin(char *name, t_path_name *path)
 	ft_strlcpy(path->path_name, BUILTINS_DIR, PATH_MAX);
 	ft_strlcat(path->path_name, "/", PATH_MAX);
 	ft_strlcat(path->path_name, name, PATH_MAX);
-	return (TRUE);
+	 return (TRUE);
+}*/
+
+int	search_builtin2(char *name, char **argv)
+{
+	if (ft_strncmp(name, "cd", 3) == 0)
+		return (cd_main(argv));
+	else if (ft_strncmp(name, "echo", 5) == 0) // ECHO OK
+		return (echo_main(argv));
+	else if (ft_strncmp(name, "env", 4) == 0) // ENV OK
+		return (env_main(environ));
+	else if (ft_strncmp(name, "exit", 5) == 0) // EXIT OK
+		return (exit_main(argv));
+	else if (ft_strncmp(name, "export", 7) == 0)
+		return (export_main(argv));
+	else if (ft_strncmp(name, "pwd", 4) == 0) // PWD OK
+		return (pwd_main());
+	else if (ft_strncmp(name, "unset", 6) == 0)
+		return (unset_main(argv));
+	return (-1);
 }
 
 // TODO: testear que pasa si NULL en input
@@ -54,7 +73,7 @@ int	search_path(char *name, t_path_name *path)
 	i = 0;
 	find = 0;
 	directorys = ft_split(ft_getenv("PATH"), ':');
-	while (directorys[i])
+	while (directorys && directorys[i])
 	{
 		if (find == 0)
 		{
@@ -112,11 +131,12 @@ void	executer(t_simple *cmd)
 	char		**argv;
 	int			status;
 
-	status = search_builtin(cmd->words->word, &filename);
-	if (status == FALSE)
-		search_path(cmd->words->word, &filename);
-	status = 0;
 	argv = list_to_arr(cmd->words);
+	status = search_builtin2(cmd->words->word, argv);
+	if (status != -1)
+		return ;
+	search_path(cmd->words->word, &filename);
+	status = 0;
 	open_redir(cmd->redirects);
 	pid = ft_fork();
 	if (pid == 0)

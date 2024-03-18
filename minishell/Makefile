@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
+#    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/13 12:15:56 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/15 18:34:31 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,6 @@ TESTDIR := .test
 BINDIR := .build
 LOGDIR := .log
 
-BUILTINDIR := builtins
-
 CC := gcc
 
 STD := -std=gnu99
@@ -54,11 +52,10 @@ DEBUG := -g3
 
 DIR_DUP     = mkdir -p $(@D)
 
-# Dependency libraries  -I$(LIBDIR)/readline/8.2.7/include
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers 
-
-# -L$(LIBDIR)/readline/8.2.7/lib
-LIBS := -lreadline \
+# Dependency libraries 
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers  -I$(LIBDIR)/readline/8.2.7/include
+# 
+LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst     \
 	-lft       -L$(LIBDIR)/libft
 
@@ -108,6 +105,14 @@ NAMES := \
 	\
 	executer/executer.c \
 	\
+	builtins/cd.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/exit.c \
+	builtins/export.c \
+	builtins/pwd.c \
+	builtins/unset.c \
+	
 
 NAMES := $(NAMES:%=$(SRCDIR)/%)
 
@@ -134,7 +139,7 @@ help:
 	@echo "    help     - Prints a help message with target rules       "
 
 # Rule for link and generate the binary file
-all: make_libs make_builtins $(BINARYS)
+all: make_libs $(BINARYS)
 
 re: fclean all
 
@@ -150,11 +155,11 @@ $(BINDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) -c $^ -o $@ $(DEBUG) $(INCLUDE) $(CFLAGS)
 
 # Rule for cleaning the project
-clean: clean_builtins
+clean:
 	@rm -rvf $(LOGDIR) $(BINDIR)
 
 # Rule for cleaning the project
-fclean: clean fclean_libs fclean_builtins
+fclean: clean fclean_libs
 	@rm -rvf $(BINDIR) $(BINARY)
 
 # Rule for run valgrind tool
@@ -196,15 +201,3 @@ fclean_libs:
 	@make -C $(LIBDIR)/libft fclean
 	@make -C $(LIBDIR)/wrappers fclean
 
-#
-# BUILTINS RULES
-#
-
-make_builtins:
-	@make -C $(BUILTINDIR)
-
-clean_builtins:
-	@make -C $(BUILTINDIR) clean
-
-fclean_builtins:
-	@make -C $(BUILTINDIR) fclean

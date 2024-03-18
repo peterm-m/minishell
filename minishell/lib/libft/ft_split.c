@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 13:43:33 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/11 18:58:43 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:15:19 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ char	**ft_split(char const *s, char c)
 	int		index;
 	char	**split;
 
+	if (!s)
+		return (NULL);
 	split = malloc((ft_count_words(s, c) + 1) * sizeof(char *));
-	if (!s || !split)
+	if (!split)
 		return (0);
 	i = -1;
 	j = 0;

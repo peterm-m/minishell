@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/11 18:02:44 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:25:13 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	initial_signals();
+	//TODO: init environ if NULL
 	interactive_loop(argc, argv);
 	return (EXIT_SUCCESS);
 }
