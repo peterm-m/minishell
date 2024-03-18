@@ -1,13 +1,5 @@
 #include "minishell.h"
 
-/* int	exit_number(char *num)
-{
-	int number;
-
-	number = ft_atoi(num);
-	return (number % 256);
-} */
-
 int	is_number(char *num)
 {
 	int i;

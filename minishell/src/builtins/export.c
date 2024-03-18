@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 19:07:11 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:35:11 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,33 @@ void    print_sorted_env()
 		printf ("declare -x %s\n", environ[i]);
 }
 
-int export_main(char **argv)
+int export_args(char **argv)
 {
-	int		find;
-	int     argc;
 	int     i;
 	int		j;
+	int		valid;
+
+	j = 1;
+	while (argv[j])
+	{
+		i = 0;
+		valid = 0;
+		while (argv[j][i])
+		{
+			if (argv[j][i] == '=' && valid == 0)
+			{
+				ft_putenv(argv[j]);		
+				valid = 1;
+			}
+			i++;	
+		}
+		j++;
+	}
+	return (EXIT_SUCCESS);
+}
+int export_main(char **argv)
+{
+	int     argc;
 
 	argc = get_arr_len(argv);
 	if (argc == 1)
@@ -71,15 +92,5 @@ int export_main(char **argv)
 		print_sorted_env();
 		return(EXIT_SUCCESS);
 	}
-	j = 0;
-	find = 0;
-	i = -1;
-	while (argv[++j][i])
-	{
-		while (argv[j][++i])
-		if (argv[1][i] == '=')
-			ft_putenv(argv[j]);
-	}
-	ft_putenv(argv[1]);
-	return(EXIT_SUCCESS);
+	return(export_args(argv));
 }
