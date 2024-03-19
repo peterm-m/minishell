@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:42:07 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2022/09/16 10:25:24 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:04:16 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	size_t	i;
-
 	if (n == 0)
 		return (0);
-	i = 0;
 	while ((unsigned char)*s1 == (unsigned char)*s2 \
 		&& *s1 != '\0' && n - 1 > 0)
 	{

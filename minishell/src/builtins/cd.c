@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 20:20:03 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:28:21 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 static int	update_pwd(void)
 {
-	char	new_pwd[PATH_MAX];
+	char	pwd[PATH_MAX];
+	char	*new_pwd;
 
-	if (getcwd(new_pwd, PATH_MAX) == NULL)
+	if (getcwd(pwd, PATH_MAX) == NULL)
 	{
 		printf("Error\n");
 		return (EXIT_FAILURE);
 	}
-	ft_setenv("PWD", new_pwd, 1);
+	new_pwd = ft_strjoin("PWD=", getcwd(pwd, PATH_MAX));
+	ft_putenv(new_pwd);
 	return (EXIT_SUCCESS);
 }
 
@@ -31,16 +33,11 @@ static int update_oldpwd()
 	char	*old_pwd;
 
 	i = 0;
-	while (environ[i])
-	{
-		if (ft_strncmp(environ[i], "PWD", 4) == 0)
-		{
-			old_pwd = ft_strjoin("OLDPWD", ft_getenv("PWD"));
-			ft_putenv(environ[i]);
-		}
-		i++;
-	}
-	if (update_pwd() == EXIT_FAILURE)
+	if (ft_getenv("PWD") == NULL)
+		return (EXIT_FAILURE);
+	old_pwd = ft_strjoin("OLDPWD=", ft_getenv("PWD"));
+	ft_putenv(old_pwd);
+	if (update_pwd() == EXIT_FAILURE || !old_pwd)
 		return (EXIT_FAILURE); 
 	return (EXIT_SUCCESS);
 }
@@ -56,6 +53,12 @@ static char	*get_path(int argc, char *dir)
 		if (path == NULL)
 			printf("Home not set\n");
 	}
+	else if (dir && ft_strncmp(dir, "~", 2) == 0)
+	{
+		path = ft_getenv("HOME");
+		if (path == NULL)
+			printf("HOME not set\n");
+	}
 	else if (dir && ft_strncmp(dir, "-", 2) == 0)
 	{
 		path = ft_getenv("OLDPWD");
@@ -67,7 +70,7 @@ static char	*get_path(int argc, char *dir)
 	return (path);
 }
 
-int cd_main(char **argv) //pasar como argumento PATH de env
+int cd_main(char **argv)
 {
 	char	*dir;
 	int		argc;
@@ -80,7 +83,7 @@ int cd_main(char **argv) //pasar como argumento PATH de env
 	{
 		if (argv[1] && ft_strncmp(argv[1], "-", 2) == 0)
 			printf("%s\n", dir);
-		if (update_oldpwd() == EXIT_FAILURE) // actualiza las variables PWD y OLDPWD del ENV
+		if (update_oldpwd() == EXIT_FAILURE)
 			return (EXIT_FAILURE); 
 		return (EXIT_SUCCESS);
 	}

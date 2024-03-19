@@ -6,27 +6,47 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 21:09:25 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:41:39 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* void print_lexer(void *p)
+/* void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
 {
 	printf("%s\n", (*(t_token *)(p)).str);
 	printf("%i\n", (*(t_token *)(p)).flag);
 } */
+
+char *get_prompt(int counter)
+{
+	char	*directory;
+	char	*prompt;
+	
+	directory = ft_strrchr(ft_getenv("PWD"), '/');
+	if (counter % 3 == 0)
+		prompt = ft_strjoin("\e[1;95m",directory + 1);
+	else if (counter % 3 == 1)
+		prompt = ft_strjoin("\e[1;96m",directory + 1);
+	else
+		prompt = ft_strjoin("\e[1;93m",directory + 1);
+	prompt = ft_strjoin(prompt, "42 -> \e[0m");	
+	counter++;
+	return (prompt);	
+}
+
 int	interactive_loop(int argc, char **argv)
 {
 	char	*read_line;
 	t_dlst	*tokens;
+	int counter;
 
-	(void) argc;
-	(void) argv;
+	counter = -1;
+	(void) argc; // SOBRA
+	(void) argv; // SOBRA
 	while (1)
 	{
-		read_line = readline(PROMPT);
+		read_line = readline(get_prompt(++counter));
 		add_history(read_line);
 		if (read_line == NULL)
 		{
@@ -34,7 +54,7 @@ int	interactive_loop(int argc, char **argv)
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
-		//ft_dlstiter(tokens, print_lexer);
+		//ft_dlstiter(tokens, print_lexer);   //TODO  BORRAR: Imprimir lista tokens
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);

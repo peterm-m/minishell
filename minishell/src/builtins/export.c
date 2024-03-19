@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 20:05:59 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:08:59 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,6 @@ void	exit_not_identifier(char *cmd)
 	ft_putstr_fd("export: ", 2);
 	ft_putstr_fd("not an identifier\n", 2);
 	ft_putstr_fd(cmd, 2);
-}
-
-void    sort_env()
-{
-	int i;
-	int j;
-	int env_len;
-	char *aux;
-
-	env_len = get_arr_len(environ);
-	i = 0;
-	while (i < env_len - 1)
-	{
-		j = i + 1;
-		while (j < env_len)
-		{
-			if (strcmp(environ[i], environ[j]) > 0)
-			{
-				aux  = environ[i];
-				environ[i] = environ[j];
-				environ[j] = aux;
-			}
-			j++;
-		}
-		i++;
-	}
 }
 
 void    print_sorted_env()

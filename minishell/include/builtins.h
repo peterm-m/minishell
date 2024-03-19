@@ -10,6 +10,9 @@ int exit_main (char **argv);
 int export_main(char **argv);
 int	pwd_main();
 int unset_main(char **argv);
+
+// UTILS 
 int get_arr_len(char **env);
+void    sort_env();
 
 #endif
