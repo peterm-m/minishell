@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:38:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/12 16:05:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:40:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,26 @@
 void	run_connection(t_connection *connection)
 {
 	(void) connection;
+/*
+	Si connection type && o ||:
+		Execute the first command.
+			If the result of that is successful:
+				si conector && or falla el comando y el conector es ||
+				Execute the second command
+			Else
+				Return.
+	Si pipeline
+		mientras que hay el segundo comando sea una pipe
+		{
+			open pipe
+				execute primero con fd input original y fd pipe[1]
+			cerrar  fd input original
+			fd in original = fd pipe[0]
+		}
+		execute las command 
+		si ( fd input original >= 0)
+			cerrar fd input original
+*/
 	return ;
 }
 
