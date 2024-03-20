@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/08 14:33:00 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:26:40 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_word_list	*make_word(t_token *word)
 	new->next = NULL;
 	new->word = word->str;
 	ft_free(word);
+/* 	if (word->flag == EXPAND)
+		expander(new); */
 	return (new);
 }
 

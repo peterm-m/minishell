@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 18:37:46 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/15 18:24:38 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:15:51 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 
 int		tilde_expansion(t_word *word);
 int		parameter_expansion(t_word *word);
+void	expander(t_word *input);
 
 #endif

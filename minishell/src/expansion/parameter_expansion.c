@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 20:15:12 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:21:18 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 static char	*get_parameter(char *word)
 {
-	(void)word;
-	return (NULL);
+	int	i;
+
+	i = 0; 
+	if (word[i] == '{' || word[i] == '(')
+		i++;
+	while (word[i] && !in_word(word[i]) && word[i] != '$'
+		&& !is_quotes(word[i]) && word[i] != ')' && word[i] != '}')
+		i++;
+	printf("word a expandir: %s\n", ft_substr(word, 0, i));
+	printf("Encuetra en env: %s\n", ft_getenv(ft_substr(word, 0, i)));
+	return (ft_getenv(ft_substr(word, 0, i)));
 }
 
 static int	is_special_parameter(char *parameter)

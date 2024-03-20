@@ -39,6 +39,13 @@ void	expander(t_word *input)
 	while (*(input->word))
 	{
 		/*body    $alphanum  o "$alphanum" ${alphanum} $(alphanum)  o ~ pero no  '$alphanum'  "~"  etc etc   */
+		if (*input->word == '$')
+			parameter_expansion(input);
+/* 		else if (*input->word == '*')
+			make_wildcard_expansion();
+		else if (*input->word == '?')
+			make_quest_expansion(); */
 		input->word++;
 	}
 }
+
