@@ -6,17 +6,17 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 19:48:46 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:56:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
+void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
 {
-	printf("%s\n", (*(t_token *)(p)).str);
-	printf("%i\n", (*(t_token *)(p)).flag);
-} */
+	printf(BHYEL"str:  %s, flag:  ", (*(t_token *)(p)).str);
+	printf("%i\n"END, (*(t_token *)(p)).flag);
+}
 
 char *get_prompt(int counter)
 {
@@ -54,7 +54,7 @@ int	interactive_loop(int argc, char **argv)
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
-		//ft_dlstiter(tokens, print_lexer);   //TODO  BORRAR: Imprimir lista tokens
+		ft_dlstiter(tokens, print_lexer);   //TODO  BORRAR: Imprimir lista tokens
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);
@@ -89,7 +89,7 @@ void	setup_term(void)
 
 int	main(int argc, char **argv)
 {
-	setup_term();
+//	setup_term();
 	initial_signals();
 	//TODO: init environ if NULL
 	interactive_loop(argc, argv);

@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:39 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 20:52:25 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:38:38 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	get_ionumber(char *str, int i, t_token *token)
 			j++;
 		set_token(str + i, j, tt_word, token);
 	}
+	else
+		set_token(str + i, j, tt_word, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
 	return (i + j);
