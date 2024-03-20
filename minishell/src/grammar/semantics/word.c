@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 19:02:11 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:42:02 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ t_word_list	*make_word(t_token *word)
 	new->next = NULL;
 	new->word = word->str;
 	ft_free(word);
-	//if (word->flag == EXPAND)
+	printf("word a checkear expansion: %s\n", word->str);
+	if (word->flag | EXPAND)
 		expander(new);
 	return (new);
 }

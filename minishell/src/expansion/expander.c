@@ -33,7 +33,7 @@ void get_expansion(t_data *data, char *str, int i)
 	}   
 }
 */
-void	expander(t_word *input)
+void	expander(t_word_list *input)
 {
 	// if NULL gestionar
 	while (*(input->word))

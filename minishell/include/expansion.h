@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 18:37:46 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/19 20:15:51 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:00:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 
-int		tilde_expansion(t_word *word);
-int		parameter_expansion(t_word *word);
-void	expander(t_word *input);
+int		tilde_expansion(t_word_list *word);
+int		parameter_expansion(t_word_list *word);
+void	expander(t_word_list *input);
 
 #endif

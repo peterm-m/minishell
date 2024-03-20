@@ -1,0 +1,6 @@
+Makefile
+include
+lib
+minishell
+out1
+src

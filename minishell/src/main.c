@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 19:35:33 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:13:23 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
 {
-	printf(BHYEL"str:  %s, flag:  ", (*(t_token *)(p)).str);
-	printf("%i\n"END, (*(t_token *)(p)).flag);
+	printf(BHYEL"str:  %s, flag:  "END, (*(t_token *)(p)).str);
+	printf(BHYEL"%i\n"END, (*(t_token *)(p)).flag);
 }
 
 char *get_prompt(int counter)
@@ -89,7 +89,7 @@ void	setup_term(void)
 
 int	main(int argc, char **argv)
 {
-	setup_term();
+//	setup_term();
 	initial_signals();
 	//TODO: init environ if NULL
 	interactive_loop(argc, argv);
