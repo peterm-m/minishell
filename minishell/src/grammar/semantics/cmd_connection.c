@@ -3,42 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_connection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:38:01 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/19 18:40:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:58:21 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
 #define LOGS 0
-
-void	run_connection(t_connection *connection)
-{
-	(void) connection;
-/*
-	Si connection type && o ||:
-		Execute the first command.
-			If the result of that is successful:
-				si conector && or falla el comando y el conector es ||
-				Execute the second command
-			Else
-				Return.
-	Si pipeline
-		mientras que hay el segundo comando sea una pipe
-		{
-			open pipe
-				execute primero con fd input original y fd pipe[1]
-			cerrar  fd input original
-			fd in original = fd pipe[0]
-		}
-		execute las command 
-		si ( fd input original >= 0)
-			cerrar fd input original
-*/
-	return ;
-}
 
 void	print_connection(t_connection *connection)
 {

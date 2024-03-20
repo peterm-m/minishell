@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/18 19:51:42 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/03/20 20:32:23 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,11 @@ NAMES := \
 	subsystem/signals.c \
 	subsystem/redirection.c \
 	\
-	executer/executer.c \
+	executer/execute_builtin.c \
+	executer/execute_command.c \
+	executer/execute_connection.c \
+	executer/execute_simple.c \
+	executer/execute_subshell.c \
 	executer/ft_execle.c \
 	\
 	builtins/cd.c \

@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_simple.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/18 19:13:13 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:58:09 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
 #define LOGS 0
-
-void	run_simple(t_simple *simple)
-{
-	executer(simple);
-	return ;
-}
 
 void	print_simple(t_simple *cmd)
 {

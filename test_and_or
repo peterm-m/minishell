@@ -95,9 +95,6 @@ false && (true && false) ; echo $?
 false && (false && true) ; echo $?
 false && (false && false) ; echo $?
 
-
-
-
 https://man7.org/linux/man-pages/man1/cd.1p.html
 https://man7.org/linux/man-pages/man1/exit.1p.html
 https://man7.org/linux/man-pages/man1/env.1p.html
