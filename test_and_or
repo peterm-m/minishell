@@ -94,3 +94,4 @@ true && (false && false) ; echo $?
 false && (true && false) ; echo $?
 false && (false && true) ; echo $?
 false && (false && false) ; echo $?
+ls > 1(un numero)
