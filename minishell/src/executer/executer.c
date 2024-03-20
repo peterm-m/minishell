@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 19:48:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:21:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	executer(t_simple *cmd)
 
 	if (search_builtin(cmd->words) != -1)
 		return ;
-	open_redir(cmd->redirects);
+	//open_redir(cmd->redirects);
 	pid = ft_fork();
 	if (pid == 0)
 	{

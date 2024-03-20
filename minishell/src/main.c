@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 19:56:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:14:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	interactive_loop(int argc, char **argv)
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
-		ft_dlstiter(tokens, print_lexer);   //TODO  BORRAR: Imprimir lista tokens
+		//ft_dlstiter(tokens, print_lexer);   //TODO  BORRAR: Imprimir lista tokens
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);
