@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 20:03:17 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:28:07 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	executer(t_simple *cmd)
 	pid_t		pid;
 	int			status;
 
-	if (search_builtin(cmd->words) != -1) // Como lo tenias si es builtin se ejecuta, cambias status general y retornas 1
+	if (search_builtin(cmd->words) != -1)
 		return ;
 	open_redir(cmd->redirects);
 	pid = ft_fork();
@@ -85,7 +85,11 @@ void	executer(t_simple *cmd)
 		ft_execle(cmd->words);
 	}
 	else
+	{
+		wait_signals();
 		waitpid(pid, &status, WUNTRACED);
+		initial_signals();
+	}
 	return ;
 }
 
