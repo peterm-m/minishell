@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 20:55:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:05:19 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO: He leido que las built in no se ejecutan en un proces por separado.
+//	Por tanto no hay que hacer un fork
+//		IMPLEMENTAR:
+//			Las redirecciones no se hacen con dup2 cambiando la salida por el archivo
+//			Creo que lo mas facil es que los print o cualquier salida la cambies por
+//			writes que envien la salida al archivo
+
 
 int	execute_builtin(t_word_list *words)
 {
