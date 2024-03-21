@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:32:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/21 15:07:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:44:57 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	execute_command(t_command *cmd)
 {
+	// TODO: Si cmd->redirects != NULL hacer redirecciones externas (comprobar como se hacen)
 	if (cmd->type == cmd_simple)
 		execute_simple(cmd->value.simple);
 	else if (cmd->type == cmd_connection)
