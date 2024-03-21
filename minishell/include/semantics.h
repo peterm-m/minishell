@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   semantics.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/12 16:10:22 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:41:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct s_subshell
 t_command		*make_command(t_command_type type, t_node value);
 void			clean_command(t_command *cmd);
 void			print_command(t_command *cmd);
-void			run_command(t_command *cmd);
+//void			run_command(t_command *cmd);
 t_command		*join_command_redir(t_command *cmd, t_redirect *redir);
 
 t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
@@ -151,12 +151,12 @@ void			join_word(t_word_list **word1, t_word_list *word2);
 t_command		*make_connection(t_command *cmd1, t_command *cmd2, int type);
 void			clean_connection(t_connection *connection);
 void			print_connection(t_connection *connection);
-void			run_connection(t_connection *connection);
+//void			run_connection(t_connection *connection);
 
 t_command		*make_group(t_command *cmd);
 void			clean_group(t_group *group);
 void			print_group(t_group *group);
-void			run_group(t_group *group);
+//void			run_group(t_group *group);
 
 t_command		*make_subshell(t_command *cmd);
 void			clean_subshell(t_subshell *subshell);
@@ -166,7 +166,7 @@ t_command		*make_simple(t_element *prefix, t_word_list *word,
 					t_element *suffix);
 void			clean_simple(t_simple *cmd);
 void			print_simple(t_simple *cmd);
-void			run_simple(t_simple *simple);
+//void			run_simple(t_simple *simple);
 
 t_element		*join_element(t_element *element1, t_element *element2);
 t_element		*make_element(t_word_list *word, t_redirect *redir);
