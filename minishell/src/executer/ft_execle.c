@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 19:30:39 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:11:32 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	search_path(char *name, t_path_name *path)
 			ft_strlcpy(path->path_name, directorys[i], PATH_MAX);
 			ft_strlcat(path->path_name, "/", PATH_MAX);
 			ft_strlcat(path->path_name, name, PATH_MAX);
-			if (access(path->path_name, X_OK) == 0)
+			if (access(path->path_name, F_OK) == 0)
 				find = 1;
 		}
 		ft_free(directorys[i++]);
@@ -56,7 +56,7 @@ char	**list_to_arr(t_word_list *words)
 	while (tmp)
 	{
 		tmp = tmp->next;
-		n_word++;
+		n_word++ ;
 	}
 	arr = ft_malloc((n_word +1) * sizeof(char *));
 	arr[n_word] = NULL;
@@ -76,7 +76,9 @@ void	ft_execle(t_word_list *args)
 	char		**argv;
 
 	argv = list_to_arr(args);
-	if (search_path(args->word, &filename) == 0) // TODO: gestion archivo no enconrado 
-		return ;
+	if (search_path(args->word, &filename) == 0)
+		exit(STATUS_CMD_NOT_FOUND);
+	else if (access(filename.path_name, X_OK) != 0)
+		exit(STATUS_CMD_NOT_EXEC);
 	ft_execve(filename.path_name, argv, environ);
 }

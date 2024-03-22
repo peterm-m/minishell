@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/21 17:41:14 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:37:14 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	*g_exit_status;
+int	g_exit_status;
 
 void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
 {
@@ -98,7 +98,7 @@ int	main(int argc, char **argv)
 int	main()
 {
 //	setup_term();
-	g_exit_status = NULL;
+	g_exit_status = 0;
 	initial_signals();
 	interactive_loop();
 	return (EXIT_SUCCESS);

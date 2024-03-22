@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_connection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:54:23 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/21 15:13:20 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:24:16 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 int	execute_and(t_connection *cmd)
 {
-	(void)cmd;
-	printf("---> %d\n", __LINE__);
+	execute_command(cmd->first);
+	if (g_exit_status == 0)
+		execute_command(cmd->second);
 	return (0);
 }
 
 int	execute_or(t_connection *cmd)
 {
-	(void)cmd;
-	printf("---> %d\n", __LINE__);
+	execute_command(cmd->first);
+	if (g_exit_status != 0)
+		execute_command(cmd->second);
 	return (0);
 }
 
 int	execute_pipe(t_connection *cmd)
 {
 	(void)cmd;
+	// TODO: gestion pipes 
 	printf("---> %d\n", __LINE__);
 	return (0);
 }

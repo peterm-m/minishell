@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/21 16:23:39 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:16:06 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void	execute_simple(t_simple *cmd)
 	else
 	{
 		wait_signals();
-		ft_waitpid(pid, g_exit_status, WUNTRACED);
+		ft_waitpid(pid, &g_exit_status, WUNTRACED);
+		if (WEXITSTATUS(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
 		initial_signals();
 	}
-	//printf("---> statsu%d\n", g_exit_status);
 	return ;
 }
 
