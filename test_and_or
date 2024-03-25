@@ -122,4 +122,21 @@ https://man7.org/linux/man-pages/man1/unset.1p.html
 		si ( fd input original >= 0)
 			cerrar fd input original
 */
+
+Si creas un archivo que en directorio que se llame ls, y este es el unico que empieza por la letra 'l'
+	y ejecutas
+	>l*
+ejecuta el comando ls.
+Por que?
+	la expansion de l* dara como resultado solo el nombre de archivo ls (sin su path completo)
+	en el siguiente paso de la ejecución la rutina encargada de ejecutar,
+	buscara en PATH si existe tal ejecutable de la forma /{path}/ls
+	y en esta ocasion encontrara /bin/ls que es el comando ls original. 
+
+Conclusion:
+	La expansion aaa*aaa sustituye el nombre del archivo no el path
+
+Ejecutar env -i bash genera un bash con un env por defecto para eliminar todas las varibles del entorno usar:
+
+unset $(env | cut -d= -f1)
 ls > 1(un numero)

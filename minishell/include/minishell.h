@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 19:07:47 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:28:32 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # include "colors.h"
 
-extern int	g_exit_status;
+extern int *g_exit_status;
 
 // Bool
 # define TRUE 1
@@ -58,7 +58,5 @@ extern int	g_exit_status;
 # ifdef DEBUG
 #  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})
 # endif
-
-int	interactive_loop(int argc, char **argv);
 
 #endif
