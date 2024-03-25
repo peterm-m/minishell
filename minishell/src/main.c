@@ -6,13 +6,13 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/25 18:42:20 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:11:09 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	*g_exit_status;
+int	g_exit_status;
 
 void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
 {
@@ -99,7 +99,7 @@ int	main(int argc, char **argv)
 int	main()
 {
 //	setup_term();
-	g_exit_status = NULL;
+	g_exit_status = 0;
 	initial_signals();
 	interactive_loop();
 	return (EXIT_SUCCESS);

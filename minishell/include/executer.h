@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 20:57:20 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:59:48 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define EXECUTER_H
 
 # include "minishell.h"
+
+# define STATUS_CMD_NOT_FOUND 127
+# define STATUS_CMD_NOT_EXEC 126
 
 typedef struct s_file_name
 {
@@ -55,6 +58,6 @@ void	execute_simple(t_simple *cmd);
 int		execute_builtin(t_word_list *words);
 int		execute_command(t_command *cmd);
 int		execute_connection(t_connection *cmd);
-int		execute_subshell(t_subshell *cmd);
+void	execute_subshell(t_subshell *cmd);
 
 #endif
