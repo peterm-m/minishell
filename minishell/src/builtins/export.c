@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/19 19:08:59 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:40:50 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int export_args(char **argv)
 		{
 			if (argv[j][i] == '=' && valid == 0)
 			{
-				printf("\nstr: %s\n", argv[j]);
-				printf(" j:0 %c", argv[j][0]);
 				if (ft_isdigit(argv[j][0] == 1))
 					exit_not_identifier(argv[j]);
 				else

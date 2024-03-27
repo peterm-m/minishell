@@ -3,83 +3,133 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 20:02:18 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:07:47 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_parameter(char *word)
+static char	*get_parameter(char **word)
 {
 	int	i;
 	int	brace;
+	char *param;
+	char *word2;
 
 	brace = FALSE;
 	i = 0; 
-	if (word[i] == '{' || word[i] == '(')
+	word2 = ft_strjoin("", *word);
+	printf("word a buscar: %s\n", *word);
+	printf("COPIA de word a buscar: %s\n", word2);
+ 	if (word2[i] == '{' || word2[i] == '(')
 	{
-		i++;
+		printf("HAY BRAKETS\n");
 		brace = TRUE;
+		i++;
 	}
-	printf("word a buscar: %s\n", word);
-	while (word[i] && !in_word(word[i])
-		&& !is_quotes(word[i]) && word[i] != ')' && word[i] != '}')
+	while (word2[i] && !in_word(word2[i]) && word2[i] != '$'
+		&& !is_quotes(word2[i]) && word2[i] != ')' && word2[i] != '}')
 			i++;
-	if (brace == TRUE)
-		printf("word a expandir: %s\n", ft_substr(word, 1, i - 1));
+ 	if (brace == TRUE)
+		param = ft_substr(word2, 0, i + 1);
 	else
-		printf("word a expandir: %s\n", ft_substr(word, 0, i));
-	//printf("Encuetra en env: %s\n", ft_getenv(ft_substr(word, 0, i)));
-	if (brace == TRUE)
-		return (ft_substr(word, 1, i - 1));
-	return (ft_substr(word, 0, i));
+		param = ft_substr(word2, 0, i);
+	free(word2);
+	return (param);
 }
 
 static int	is_special_parameter(char *parameter)
 {
-	if (ft_strchr("*@#?-$!0", parameter[0]) == 0)
+	char	*param;
+
+	param = NULL;
+	if (parameter[0] == '{' || parameter[0] == '(')
+		param = ft_substr(parameter, 1, ft_strlen(parameter) - 2);
+	else
+		param = ft_strdup(parameter);
+	if (ft_strchr("*@#?-$!0", param[0]) == 0)
+	{
+		free(param);
 		return (FALSE);
+	}
+	free(param);
 	return (TRUE);
 }
 
 static int	is_valid_identifier(char *parameter)
 {
 	(void)parameter;
-	return (EXIT_FAILURE);
+	return (TRUE);
 }
 
-static int	expand_spacial_parameters(char *parameter, char *word)
+static int	expand_spacial_parameters(char *parameter, char **word)
 {
 	(void)parameter;
-	(void)word;
-	return (EXIT_FAILURE);
+	*word = ft_strjoin(*word, parameter);
+	printf("word expanded: %s\n", *word);
+	return (1);
+}
+
+static int	expand_parameters(char *parameter, char **word)
+{
+	char	*tmp;
+	char	size;
+	char	*param;
+	char	*after_param;
+	char	*before_param;
+	
+	printf("param: %s\n", parameter);
+	size =  ft_strlen(*word) + ft_strlen(ft_getenv(parameter)) - ft_strlen(parameter) + 1;
+	tmp = ft_strnstr(*word, parameter, ft_strlen(*word));
+	//printf("TMP: %s\n", tmp);
+	before_param = ft_substr(*word, 0, ft_strlen(*word) - ft_strlen(tmp));
+	//printf("before_param: %s\n", before_param);
+	after_param = ft_strdup(*word + ft_strlen(parameter));
+	//printf("after_param: %s\n", after_param);
+	if (parameter[0] == '{' || parameter[0] == '(')
+		param = ft_substr(parameter, 1, ft_strlen(parameter) - 2);
+	else
+		param = ft_strdup(parameter);
+	if (!ft_getenv(parameter))
+	{
+		*word = ft_strjoin(before_param, "");
+		*word = ft_strjoin(*word, after_param);
+		return (1);
+	}
+	*word = ft_strjoin(before_param, ft_getenv(param));
+	*word = ft_strjoin(*word, after_param);
+	printf("word expanded1: %s\n", *word);
+	return (1);
 }
 
 int	parameter_expansion(t_word_list *word)
 {
 	char	*parameter;
-//	char	*value_var;
 	char	*out;
 
 	out = word->word;
-	if (*out++ != '$')
+	if (*out != '$')
 		return (EXIT_FAILURE);
-	parameter = get_parameter(out);
+	out++;
+	parameter = get_parameter(&out);
+	printf("Salida GET_PARAMETER: %s\n", parameter);
+	printf("OUT en Salida GET_PARAMETER: %s\n", out);
 	if (is_special_parameter(parameter))
-		printf("Parametro especial: %s\n", parameter);
-		//expand_spacial_parameters(parameter, out);
+		expand_spacial_parameters(parameter, &out);
 	else if (is_valid_identifier(parameter))
-		(void) 0;//expand_parameters(parameter, out); TODO
+		expand_parameters(parameter, &out);
 	else
 	{
 		// TODO: gestionar fallo
 		return (EXIT_FAILURE);
 	}
+	printf("word expandida: %s\n", out);
 	ft_free(word->word);
 	word->word = out;
+	printf("word expandida: %s\n", &word->word[0]);
 	return (EXIT_SUCCESS);
 }
 

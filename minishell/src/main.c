@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/26 17:55:10 by pedro            ###   ########.fr       */
+=======
+/*   Updated: 2024/03/25 20:11:09 by adiaz-uf         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +20,17 @@ int	g_exit_status;
 
 void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
 {
-	printf(BHYEL"str:  %s, flag:  ", (*(t_token *)(p)).str);
-	printf("%i\n"END, (*(t_token *)(p)).flag);
+	printf(BHYEL"str:  %s, flag:  "END, (*(t_token *)(p)).str);
+	printf(BHYEL"%i\n"END, (*(t_token *)(p)).flag);
 }
 
 char *get_prompt(int counter)
 {
 	char	*directory;
+	char	pwd[PATH_MAX];
 	char	*prompt;
 	
-	directory = ft_strrchr(ft_getenv("PWD"), '/');
+	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
 	// Esto de segmentation si nos vacian el env. En ese caso getenv(PWD) es NULL,
 	//directory es NULL, cuando haces el strjoin da segmentation,
 	//TODO: puedes poner un promp por defecto en caso de que no tengamos PWD.
@@ -53,8 +58,8 @@ static int	interactive_loop(void)
 	counter = -1;
 	while (1)
 	{
-//		read_line = readline(get_prompt(++counter));
-		read_line = readline("minishell >");
+		read_line = readline(get_prompt(++counter));
+		//read_line = readline("minishell >");
 		add_history(read_line);
 		if (read_line == NULL)
 		{
@@ -62,7 +67,7 @@ static int	interactive_loop(void)
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
-		//ft_dlstiter(tokens, print_lexer); //TODO  BORRAR: Imprimir lista tokens
+		ft_dlstiter(tokens, print_lexer); //TODO  BORRAR: Imprimir lista tokens
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);

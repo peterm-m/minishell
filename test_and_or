@@ -139,6 +139,7 @@ Conclusion:
 Ejecutar env -i bash genera un bash con un env por defecto para eliminar todas las varibles del entorno usar:
 
 unset $(env | cut -d= -f1)
+<<<<<<< HEAD
 
 
 Una pipe es un mecanismo de comunicacion unidireccional entre procesos.
@@ -164,3 +165,6 @@ pipe():
 	si error, retorna menor que 1
 
 cmd1 | cmd2
+=======
+ls > 1(un numero)
+>>>>>>> refs/remotes/origin/master

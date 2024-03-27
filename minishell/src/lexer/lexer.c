@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:26 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/09 12:59:48 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:02:52 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	states(int i, int j)
 	{13, 4, 2, 7, 1, 9, 5, 15, 16, 17, 18, 14},
 	{12, 4, 2, 7, 1, 9, 5, 15, 16, 17, 18, 14},
 	{13, 11, 2, 11, 1, 11, 11, 15, 16, 17, 18, 14},
+	{13, 4, 2, 11, 1, 11, 5, 15, 16, 17, 18, 14},
 	{13, 11, 2, 11, 1, 11, 11, 15, 16, 17, 18, 14},
-	{13, 11, 2, 11, 1, 11, 11, 15, 16, 17, 18, 14},
-	{13, 11, 2, 11, 1, 11, 11, 15, 16, 17, 18, 14},
+	{13, 4, 2, 11, 1, 11, 5, 15, 16, 17, 18, 14},
 	};
 
 	return (states[i][j]);
@@ -115,6 +115,11 @@ int	evaluate_state(char *str)
 	while (i < len)
 	{
 		state = states(state, in_abc(str[i++]));
+		if (state == 11)
+		{
+			printf(BHRED "minishell: parse error near %c\n"END, str[i - 1]);
+			return (LEX_ERROR);
+		}
 		b_counter = check_braces(state, b_counter);
 		if (b_counter.state_brace < 0 || b_counter.state_braket < 0)
 			return (LEX_ERROR);
@@ -138,9 +143,6 @@ t_dlst	*lexer(char *read_line)
 
 	state = evaluate_state(read_line);
 	if (state != 12 && state != 14 && state != 16 && state != 18 && state != 13)
-	{
-		printf(BHRED "minishell: syntax error \n" END);
 		return (NULL);
-	}
 	return (tokenize(read_line));
 }
