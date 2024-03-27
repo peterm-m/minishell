@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/22 13:37:14 by pedro            ###   ########.fr       */
+/*   Updated: 2024/03/26 17:55:10 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,27 @@ int	main(int argc, char **argv)
 
 #else
 
-//void	setup_term(void)
-//{
-//	struct termios	t;
-//
-//	tcgetattr(0, &t);
-//	t.c_lflag &= ~ECHOCTL;
-//	tcsetattr(0, TCSANOW, &t);
-//}
+void	setup_term(void)
+{
+	static struct termios	initial = { \
+            .c_iflag = 0,
+            .c_oflag = 0,
+            .c_cflag = 0,
+            .c_lflag = 0,
+            .c_cc = NULL };
+
+	if (initial.c_cc == NULL)
+		if (tcgetattr(STDIN_FILENO, &initial) == -1)
+			exit(EXIT_FAILURE);
+	if (isatty(STDIN_FILENO) == 0 ||
+		isatty(STDOUT_FILENO) == 0)
+		exit(EXIT_SUCCESS);
+}
 
 int	main()
 {
-//	setup_term();
 	g_exit_status = 0;
+	setup_term();
 	initial_signals();
 	interactive_loop();
 	return (EXIT_SUCCESS);
