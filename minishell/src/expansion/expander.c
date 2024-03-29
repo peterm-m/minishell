@@ -36,11 +36,18 @@ void get_expansion(t_data *data, char *str, int i)
 void	expander(t_word_list *input)
 {
 	// if NULL gestionar
+	//char *tmp;
+
 	while (*(input->word))
 	{
 		/*body    $alphanum  o "$alphanum" ${alphanum} $(alphanum)  o ~ pero no  '$alphanum'  "~"  etc etc   */
 		if (*input->word == '$')
+		{
 			parameter_expansion(input);
+			//tmp = ft_strdup(input->word);
+			printf("word en expander: %s \n", input->word);
+			//printf("word en expander_TMP: %s \n", tmp);
+		}
 		//printf("input: %c\n", *input->word);
 /* 		else if (*input->word == '*')
 			make_wildcard_expansion();

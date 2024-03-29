@@ -29,10 +29,8 @@ static int	update_pwd(void)
 
 static int update_oldpwd()
 {
-	int		i;
 	char	*old_pwd;
 
-	i = 0;
 	if (ft_getenv("PWD") == NULL)
 		return (EXIT_FAILURE);
 	old_pwd = ft_strjoin("OLDPWD=", ft_getenv("PWD"));

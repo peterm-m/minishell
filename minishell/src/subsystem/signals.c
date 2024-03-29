@@ -16,9 +16,9 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
-	rl_on_new_line();
+/* 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
+	rl_redisplay(); */ //TODO:QUITAR COMENTARIO
 }
 
 void	wait_handler(int sig)
