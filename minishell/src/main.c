@@ -54,9 +54,9 @@ static int	interactive_loop(void)
 	counter = -1;
 	while (1)
 	{
-		read_line = readline(get_prompt(++counter));
-		//read_line = readline("minishell >");
-		add_history(read_line);
+		//read_line = readline(get_prompt(++counter));
+		read_line = "$HOME$PWD";
+		//add_history(read_line);
 		if (read_line == NULL)
 		{
 			printf("\n");
@@ -70,9 +70,9 @@ static int	interactive_loop(void)
 		//redirections();
 		//executers();
 		//????
-		rl_on_new_line();
+		//rl_on_new_line();  TODO:QUITAR COMENTARIO
 	}
-	rl_clear_history();
+	//rl_clear_history(); TODO:QUITAR COMENTARIO
 	return (0);
 }
 

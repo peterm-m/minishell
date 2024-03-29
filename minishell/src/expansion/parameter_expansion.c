@@ -101,7 +101,7 @@ static int	expand_parameters(char *parameter, char **word)
 	}
 	*word = ft_strjoin(before_param, ft_getenv(param));
 	*word = ft_strjoin(*word, after_param);
-	printf("word expanded1: %s\n", *word);
+	printf("word expanded en expand paramteer: %s\n", *&word[0]);
 	return (1);
 }
 
@@ -111,6 +111,7 @@ int	parameter_expansion(t_word_list *word)
 	char	*out;
 
 	out = word->word;
+	printf("word al entrar en param_expansion: %s\n", &word->word[0]);
 	if (*out != '$')
 		return (EXIT_FAILURE);
 	out++;
@@ -127,9 +128,13 @@ int	parameter_expansion(t_word_list *word)
 		return (EXIT_FAILURE);
 	}
 	printf("word expandida: %s\n", out);
-	ft_free(word->word);
+	printf("antes de igualar: %s\n", word->word);
+	if (word->word)
+		ft_free(word->word);
+	//word->word = ft_strjoin("", out);
 	word->word = out;
-	printf("word expandida: %s\n", &word->word[0]);
+	//ft_free(out);
+	printf("word expandida_f: %s\n", word->word);
 	return (EXIT_SUCCESS);
 }
 
