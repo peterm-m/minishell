@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fork.c                                          :+:      :+:    :+:   */
+/*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 16:30:59 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/25 13:25:36 by pedro            ###   ########.fr       */
+/*   Created: 2024/03/25 12:45:34 by pedro             #+#    #+#             */
+/*   Updated: 2024/03/25 13:55:14 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
 
-pid_t	ft_fork(void)
+void	ft_pipe(t_pipe *p)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid < 0)
-		unix_error("Fork error");
-	return (pid);
+	if (pipe(p->pipe) < 0)
+		unix_error("Pipe error");
 }

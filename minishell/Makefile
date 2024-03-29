@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/20 20:32:23 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/27 10:46:11 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,6 @@ LOGDIR := .log
 
 CC := gcc
 
-
-
 STD := -std=gnu99
 
 STACK := -fstack-protector-all -Wstack-protector
@@ -56,11 +54,13 @@ DEBUG := -g3
 DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
-# Dependency libraries  
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
+# Dependency libraries
+# -I$(LIBDIR)/readline/8.2.7/include
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers 
 
-# 
-LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
+# -I$(LIBDIR)/readline/8.2.7/include
+
+LIBS := -lreadline \
 	-ldlst     -L$(LIBDIR)/dlst     \
 	-lft       -L$(LIBDIR)/libft
 
@@ -107,10 +107,12 @@ NAMES := \
 	\
 	subsystem/signals.c \
 	subsystem/redirection.c \
+	subsystem/pipe.c \
 	\
 	executer/execute_builtin.c \
 	executer/execute_command.c \
 	executer/execute_connection.c \
+	executer/execute_pipeline.c \
 	executer/execute_simple.c \
 	executer/execute_subshell.c \
 	executer/ft_execle.c \
@@ -150,7 +152,6 @@ help:
 	@echo "    help     - Prints a help message with target rules       "
 
 # Rule for link and generate the binary file
-all: make_libs $(BINARYS)
 all: make_libs $(BINARYS)
 
 re: fclean all

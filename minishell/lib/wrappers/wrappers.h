@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/15 20:25:22 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:52:54 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,13 @@ void		ft_free(void *ptr);
 
 typedef void	t_handler(int);
 
+typedef union u_pipe
+{
+	int	pipe[2];
+}	t_pipe;
+
 void		unix_error(char *msg);
+
 int			ft_open(const char *pathname, int flags, mode_t mode);
 ssize_t		ft_read(int fd, void *buf, size_t count);
 ssize_t		ft_write(int fd, const void *buf, size_t count);
@@ -90,7 +96,7 @@ pid_t		ft_fork(void);
 t_handler	*ft_signal(int signum, t_handler *handler);
 void		ft_sigemptyset(sigset_t *set);
 void		ft_sigaddset(sigset_t *set, int signum);
-
+void		ft_pipe(t_pipe *pipe);
 char		*ft_getenv(const char *name);
 int			ft_setenv(const char *name, const char *value, int overwrite);
 int			ft_unsetenv(const char *name);

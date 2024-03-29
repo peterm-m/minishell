@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 20:35:51 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/03/26 22:18:44 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	end_parser(t_dlst **lex, t_state **state)
 	cmd = (*lex)->prev->data;
 	ft_free((*state)->next->data);
 	ft_free((*state)->data);
-	execute_command(cmd);
+	execute_command(cmd, NO_PIPE, NO_PIPE);
 	clean_command(cmd);
 	return ;
 }
