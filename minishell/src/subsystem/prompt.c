@@ -6,9 +6,10 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/27 12:49:56 by pedro            ###   ########.fr       */
+/*   Updated: 2024/03/29 17:52:30 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//TODO: aqui gestion prompt
