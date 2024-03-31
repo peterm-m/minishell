@@ -1,8 +1,9 @@
 #include "minishell.h"
 
-int	pwd_main()
+int	pwd_main(int fd)
 {
-	printf("%s\n", ft_getenv("PWD"));
+	//printf("%s\n", ft_getenv("PWD"));
+	ft_putendl_fd(ft_getenv("PWD"), fd);
 	return (EXIT_SUCCESS);
 }
 //SHLVL=1 PWD=/Users/adiaz-uf/42cursus/minishell OLDPWD=/Users/adiaz-uf

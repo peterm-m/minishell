@@ -26,17 +26,17 @@ int	execute_builtin(t_word_list *words)
 
 	argv = list_to_arr(words);
 	if (ft_strncmp(argv[0], "cd", 3) == 0)
-		return (cd_main(argv));
+		return (cd_main(argv, fd));
 	else if (ft_strncmp(argv[0], "echo", 5) == 0)
-		return (echo_main(argv));
+		return (echo_main(argv, fd));
 	else if (ft_strncmp(argv[0], "env", 4) == 0)
-		return (env_main());
+		return (env_main(fd));
 	else if (ft_strncmp(argv[0], "exit", 5) == 0)
 		return (exit_main(argv));
 	else if (ft_strncmp(argv[0], "export", 7) == 0)
-		return (export_main(argv));
+		return (export_main(argvfd));
 	else if (ft_strncmp(argv[0], "pwd", 4) == 0)
-		return (pwd_main());
+		return (pwd_main(fd));
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		return (unset_main(argv));
 	return (-1);

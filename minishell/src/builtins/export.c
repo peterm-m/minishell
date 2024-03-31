@@ -20,17 +20,17 @@ void	exit_not_identifier(char *cmd)
 	ft_putstr_fd(cmd, 2);
 }
 
-void    print_sorted_env()
+void    print_sorted_env(int fd)
 {
 	int i;
 
 	sort_env();
 	i = -1;
 	while (environ[++i])
-		printf ("declare -x %s\n", environ[i]);
+		ft_putendl_fd(environ[i], fd); //printf ("declare -x %s\n", environ[i]);
 }
 
-int export_args(char **argv)
+int export_args(char **argv, int fd)
 {
 	int     i;
 	int		j;
@@ -57,14 +57,14 @@ int export_args(char **argv)
 	}
 	return (EXIT_SUCCESS);
 }
-int export_main(char **argv)
+int export_main(char **argv, int fd)
 {
 	int     argc;
 
 	argc = get_arr_len(argv);
 	if (argc == 1)
 	{
-		print_sorted_env();
+		print_sorted_env(fd);
 		return(EXIT_SUCCESS);
 	}
 	return(export_args(argv));

@@ -36,25 +36,26 @@ int has_flag(char *str)
  * 
  * @return EXIT_SUCCESS or FAILURE_SUCCESS
  */
-void print_echo(char **args, int i, int is_flag)
+void print_echo(char **args, int i, int is_flag, int fd)
 {
 	if (!args[i])
 	{
 		if (!is_flag)
-			printf("\n");
+			ft_putchar_fd('\n', fd);
 		return ;
 	}
 	while (args[i++])
 	{
-		printf ("%s", args[i - 1]);
+		ft_putendl_fd(args[i - 1], fd);
+		//printf ("%s", args[i - 1]);
 		if (args[i])
-			printf (" ");
+			ft_putendl_fd(" ", fd);//printf (" ");
 		else if (!args[i] && !is_flag)
-			printf ("\n");
+			ft_putchar_fd('\n', fd);
 	}
 }
 
-int	echo_main(char **argv)
+int	echo_main(char **argv, int fd)
 {
 	int	i;
 	int	is_flag;
@@ -66,6 +67,6 @@ int	echo_main(char **argv)
 		is_flag = 1;
 		i++;
 	}
-	print_echo(argv, i, is_flag);
+	print_echo(argv, i, is_flag, fd);
 	return (EXIT_SUCCESS);
 }
