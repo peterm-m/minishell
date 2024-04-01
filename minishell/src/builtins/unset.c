@@ -8,7 +8,7 @@ int unset_main(char **argv)
 	argc = get_arr_len(argv);
 	if (argc == 1)
 	{
-		printf("unset: not enough arguments\n");
+		ft_putendl_fd("unset: not enough arguments", 2);
 		return(EXIT_SUCCESS);
 	}
 	if (ft_strncmp(argv[1], "_", 2) == 0)

@@ -22,7 +22,7 @@ int	is_number(char *num)
 	return (1);
 }
 
-static void	exit_no_numeric(char *cmd)
+static void	exit_no_numeric(char *cmd, int fd)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd("exit: ", 2);
