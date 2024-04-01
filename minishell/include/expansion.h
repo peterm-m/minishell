@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 18:37:46 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/20 20:00:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:22:13 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 # include "minishell.h"
 
-int		tilde_expansion(t_word_list *word);
-int		parameter_expansion(t_word_list *word);
-void	expander(t_word_list *input);
+void	expander(t_token *input);
+int		tilde_expansion(t_token *word);
+int		parameter_expansion(t_token *word, int index_dolar);
+void	field_spliting(void);
+void	pathname(void);
+void	quote_remove(void);
 
 #endif

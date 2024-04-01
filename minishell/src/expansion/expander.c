@@ -1,60 +1,262 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/30 13:03:41 by pedro             #+#    #+#             */
+/*   Updated: 2024/04/02 00:21:18 by pedro            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-/* char *get_env_var(t_data *data, char *str, int i)
+int	search_character(char *str, char c)
 {
-	char    *env_var;
-	size_t  var_size;
-	int     var_pos;
+	int	i;
+	static int	single_q = 0;
+	static int	double_q = 0;
 
-	var_pos = 0;
-	var_size = ft_strlen(&str[i]);
-	while (ft_strnstr((char *)data->env[var_pos], &str[i], var_size) == 0)
-		var_pos++;
-	env_var = ft_strnstr((char *)data->env[var_pos], &str[i], var_size);
-	printf("%s\n", env_var);
-	return (0);
-}
-
-void get_expansion(t_data *data, char *str, int i)
-{   
-	char *env_var;
-
-	if (str[i] == '$' && str[i + 1] == '{')
+	i = 0;
+	while (str[i])
 	{
-		env_var = get_env_var(data, str, i+1);
-		printf("env: %c\n", str[i]);
-		getchar();
+		single_q = (single_q + (str[i] == '\'' && double_q == 0)) % 2;
+		double_q = (double_q + (str[i] == '\"' && single_q == 0)) % 2;
+		if (str[i] == c)
+			if ((c == '$' && single_q == 0) ||
+				(double_q == 0 && single_q == 0))
+				break ;
+		i++;
 	}
-	else if ((str[i] == '$' && str[i + 1] != '('))
-	{
-		env_var = get_env_var(data, str, i);
-		printf("env: %c\n", str[i]);
-		getchar();       
-	}   
+	return (i);
 }
-*/
-void	expander(t_word_list *input)
-{
-	// if NULL gestionar
-	//char *tmp;
 
-	while (*(input->word))
+void	expander(t_token *input)
+{
+	int		i;
+
+	i = 0;
+	if (input->str[0] == '~')
+		i += tilde_expansion(input);
+	if (input->flag & PARAM_E)
 	{
-		/*body    $alphanum  o "$alphanum" ${alphanum} $(alphanum)  o ~ pero no  '$alphanum'  "~"  etc etc   */
-		if (*input->word == '$')
+		while (1)
 		{
-			parameter_expansion(input);
-			//tmp = ft_strdup(input->word);
-			printf("word en expander: %s \n", input->word);
-			//printf("word en expander_TMP: %s \n", tmp);
+			printf("1 %s\n", input->str +i);
+			i += search_character(input->str + i, '$');
+			if (!input->str[i])
+				break ;
+			while (input->str[i] == '$')
+				i++;
+			parameter_expansion(input, i);
 		}
-		//printf("input: %c\n", *input->word);
-/* 		else if (*input->word == '*')
-			make_wildcard_expansion();
-		else if (*input->word == '?')
-			make_quest_expansion(); */
-		else
-			input->word++;
 	}
+	
 }
 
+/*
+$HOME
+--$HOME
+$HOME--
+--$HOME--
+$NOVAR
+--$NOVAR
+$NOVAR--
+--$NOVAR--
+$HOME$HOME
+--$HOME$HOME
+$HOME$HOME--
+--$HOME$HOME--
+$HOME$USER
+--$HOME$USER
+$HOME$USER--
+--$HOME$USER--
+$USER$HOME
+--$USER$HOME
+$USER$HOME--
+--$USER$HOME--
+$NOVAR$HOME
+--$NOVAR$HOME
+$NOVAR$HOME--
+--$NOVAR$HOME--
+$NOVAR$NOVAR
+--$NOVAR$NOVAR
+$NOVAR$NOVAR--
+--$NOVAR$NOVAR--
+
+~$HOME
+~--$HOME
+~$HOME--
+~--$HOME--
+~$NOVAR
+~--$NOVAR
+~$NOVAR--
+~--$NOVAR--
+~$HOME$HOME
+~--$HOME$HOME
+~$HOME$HOME--
+~--$HOME$HOME--
+~$HOME$USER
+~--$HOME$USER
+~$HOME$USER--
+~--$HOME$USER--
+~$USER$HOME
+~--$USER$HOME
+~$USER$HOME--
+~--$USER$HOME--
+~$NOVAR$HOME
+~--$NOVAR$HOME
+~$NOVAR$HOME--
+~--$NOVAR$HOME--
+~$NOVAR$NOVAR
+~--$NOVAR$NOVAR
+~$NOVAR$NOVAR--
+~--$NOVAR$NOVAR--
+
+~/$HOME
+~/--$HOME
+~/$HOME--
+~/--$HOME--
+~/$NOVAR
+~/--$NOVAR
+~/$NOVAR--
+~/--$NOVAR--
+~/$HOME$HOME
+~/--$HOME$HOME
+~/$HOME$HOME--
+~/--$HOME$HOME--
+~/$HOME$USER
+~/--$HOME$USER
+~/$HOME$USER--
+~/--$HOME$USER--
+~/$USER$HOME
+~/--$USER$HOME
+~/$USER$HOME--
+~/--$USER$HOME--
+~/$NOVAR$HOME
+~/--$NOVAR$HOME
+~/$NOVAR$HOME--
+~/--$NOVAR$HOME--
+~/$NOVAR$NOVAR
+~/--$NOVAR$NOVAR
+~/$NOVAR$NOVAR--
+~/--$NOVAR$NOVAR--
+
+"~"/$HOME
+"~"/--$HOME
+"~"/$HOME--
+"~"/--$HOME--
+"~"/$NOVAR
+"~"/--$NOVAR
+"~"/$NOVAR--
+"~"/--$NOVAR--
+"~"/$HOME$HOME
+"~"/--$HOME$HOME
+"~"/$HOME$HOME--
+"~"/--$HOME$HOME--
+"~"/$HOME$USER
+"~"/--$HOME$USER
+"~"/$HOME$USER--
+"~"/--$HOME$USER--
+"~"/$USER$HOME
+"~"/--$USER$HOME
+"~"/$USER$HOME--
+"~"/--$USER$HOME--
+"~"/$NOVAR$HOME
+"~"/--$NOVAR$HOME
+"~"/$NOVAR$HOME--
+"~"/--$NOVAR$HOME--
+"~"/$NOVAR$NOVAR
+"~"/--$NOVAR$NOVAR
+"~"/$NOVAR$NOVAR--
+"~"/--$NOVAR$NOVAR--
+
+'~'/$HOME
+'~'/--$HOME
+'~'/$HOME--
+'~'/--$HOME--
+'~'/$NOVAR
+'~'/--$NOVAR
+'~'/$NOVAR--
+'~'/--$NOVAR--
+'~'/$HOME$HOME
+'~'/--$HOME$HOME
+'~'/$HOME$HOME--
+'~'/--$HOME$HOME--
+'~'/$HOME$USER
+'~'/--$HOME$USER
+'~'/$HOME$USER--
+'~'/--$HOME$USER--
+'~'/$USER$HOME
+'~'/--$USER$HOME
+'~'/$USER$HOME--
+'~'/--$USER$HOME--
+'~'/$NOVAR$HOME
+'~'/--$NOVAR$HOME
+'~'/$NOVAR$HOME--
+'~'/--$NOVAR$HOME--
+'~'/$NOVAR$NOVAR
+'~'/--$NOVAR$NOVAR
+'~'/$NOVAR$NOVAR--
+'~'/--$NOVAR$NOVAR--
+
+"$HOME"
+--"$HOME"
+"$HOME"--
+--"$HOME"--
+"$NOVAR"
+--"$NOVAR"
+"$NOVAR"--
+--"$NOVAR"--
+"$HOME""$HOME"
+--"$HOME""$HOME"
+"$HOME""$HOME"--
+--"$HOME""$HOME"--
+"$HOME"$USER
+--"$HOME"$USER
+"$HOME"$USER--
+--"$HOME"$USER--
+$USER"$HOME"
+--$USER"$HOME"
+$USER"$HOME"--
+--$USER"$HOME"--
+"$NOVAR""$HOME"
+--"$NOVAR""$HOME"
+"$NOVAR""$HOME"--
+--"$NOVAR""$HOME"--
+"$NOVAR""$NOVAR"
+--"$NOVAR""$NOVAR"
+"$NOVAR""$NOVAR"--
+--"$NOVAR""$NOVAR"--
+
+'$HOME'
+--'$HOME'
+'$HOME'--
+--'$HOME'--
+'$NOVAR'
+--'$NOVAR'
+'$NOVAR'--
+--'$NOVAR'--
+'$HOME'$HOME'
+--'$HOME'$HOME'
+'$HOME'$HOME'--
+--'$HOME'$HOME'--
+'$HOME'$USER
+--'$HOME'$USER
+'$HOME'$USER--
+--'$HOME'$USER--
+$USER'$HOME'
+--$USER'$HOME'
+$USER'$HOME'--
+--$USER'$HOME'--
+'$NOVAR'$HOME'
+--'$NOVAR'$HOME'
+'$NOVAR'$HOME'--
+--'$NOVAR'$HOME'--
+'$NOVAR'$NOVAR'
+--'$NOVAR'$NOVAR'
+'$NOVAR'$NOVAR'--
+--'$NOVAR'$NOVAR'--
+
+*/

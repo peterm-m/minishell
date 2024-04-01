@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/25 19:12:04 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/03/30 01:15:22 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ t_word_list	*make_word(t_token *word)
 	dbg("│\t│\t├─%s\n", "make word");
 	if (word == NULL)
 		return (NULL);
+	expander(word);
 	new = (t_word_list *)ft_malloc(sizeof(t_word_list));
 	new->next = NULL;
 	new->word = word->str;
 	ft_free(word);
-	//printf("word a checkear expansion: %s\n", word->str);
-	if (word->flag | EXPAND)
-		expander(new);
 	return (new);
 }
 

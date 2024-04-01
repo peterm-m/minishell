@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/26 17:55:10 by pedro            ###   ########.fr       */
-=======
-/*   Updated: 2024/03/25 20:11:09 by adiaz-uf         ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Updated: 2024/03/30 11:37:43 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +54,22 @@ static int	interactive_loop(void)
 	counter = -1;
 	while (1)
 	{
-		//read_line = readline(get_prompt(++counter));
-		read_line = "$HOME$PWD";
-		//add_history(read_line);
+		read_line = readline(get_prompt(++counter));
+		add_history(read_line);
 		if (read_line == NULL)
 		{
 			printf("\n");
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
-		ft_dlstiter(tokens, print_lexer); //TODO  BORRAR: Imprimir lista tokens
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);
-		//redirections();
 		//executers();
 		//????
-		//rl_on_new_line();  TODO:QUITAR COMENTARIO
+		rl_on_new_line();
 	}
-	//rl_clear_history(); TODO:QUITAR COMENTARIO
+	rl_clear_history();
 	return (0);
 }
 
@@ -116,4 +109,5 @@ int	main()
 	interactive_loop();
 	return (EXIT_SUCCESS);
 }
+
 #endif

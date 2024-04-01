@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:27:05 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/19 21:00:12 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:53:44 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
-/* 	rl_on_new_line();
+ 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay(); */ //TODO:QUITAR COMENTARIO
+	rl_redisplay();
 }
 
 void	wait_handler(int sig)
 {
 	if (sig == SIGQUIT)
+	{
+		g_exit_status = 131;
 		printf("Quit: 3\n");
+	}
 	else if (sig == SIGINT)
+	{
+		g_exit_status = 130;
 		printf("\n");
+	}
 }
 
 void	initial_signals(void)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 18:04:07 by adiaz-uf          #+#    #+#              #
-#    Updated: 2024/03/17 15:04:16 by pedromar         ###   ########.fr        #
+#    Updated: 2024/03/31 21:53:42 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = \
 	ft_strmapi.c \
 	ft_substr.c \
 	ft_strjoin.c \
+	ft_strnjoin.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \
