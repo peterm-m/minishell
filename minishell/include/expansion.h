@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 18:37:46 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 00:22:13 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 17:21:20 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int		tilde_expansion(t_token *word);
 int		parameter_expansion(t_token *word, int index_dolar);
 void	field_spliting(void);
 void	pathname(void);
-void	quote_remove(void);
+void	quote_remove(char *str);
 
 #endif

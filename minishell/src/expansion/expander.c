@@ -6,31 +6,11 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:03:41 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 00:26:55 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 17:21:42 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	search_character(char *str, char c)
-{
-	int	i;
-	static int	single_q = 0;
-	static int	double_q = 0;
-
-	i = 0;
-	while (str[i])
-	{
-		single_q = (single_q + (str[i] == '\'' && double_q == 0)) % 2;
-		double_q = (double_q + (str[i] == '\"' && single_q == 0)) % 2;
-		if (str[i] == c)
-			if ((c == '$' && single_q == 0) ||
-				(double_q == 0 && single_q == 0))
-				break ;
-		i++;
-	}
-	return (i);
-}
 
 void	expander(t_token *input)
 {
@@ -52,7 +32,7 @@ void	expander(t_token *input)
 			parameter_expansion(input, i);
 		}
 	}
-	
+	quote_remove(input->str);
 }
 
 /*

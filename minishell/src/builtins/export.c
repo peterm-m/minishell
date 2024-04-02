@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/20 19:40:50 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:45:06 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    print_sorted_env(int fd)
 		ft_putendl_fd(environ[i], fd); //printf ("declare -x %s\n", environ[i]);
 }
 
-int export_args(char **argv, int fd)
+int export_args(char **argv)
 {
 	int     i;
 	int		j;

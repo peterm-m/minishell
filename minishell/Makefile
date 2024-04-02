@@ -6,7 +6,7 @@
 #    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/03/27 10:46:11 by pedro            ###   ########.fr        #
+#    Updated: 2024/04/02 17:09:46 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,11 +108,11 @@ NAMES := \
 	subsystem/signals.c \
 	subsystem/redirection.c \
 	subsystem/pipe.c \
+	subsystem/search_character.c\
 	\
 	executer/execute_builtin.c \
 	executer/execute_command.c \
 	executer/execute_connection.c \
-	executer/execute_pipeline.c \
 	executer/execute_simple.c \
 	executer/execute_subshell.c \
 	executer/ft_execle.c \
