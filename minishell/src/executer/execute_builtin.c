@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/01 20:28:00 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 19:04:15 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int is_builtin(char *str)
+{
+	if (ft_strncmp(str, "cd", 3) == 0)
+		return (1);
+	else if (ft_strncmp(str, "echo", 5) == 0)
+		return (1);
+	else if (ft_strncmp(str, "env", 4) == 0)
+		return (1);
+	else if (ft_strncmp(str, "exit", 5) == 0)
+		return (1);
+	else if (ft_strncmp(str, "export", 7) == 0)
+		return (1);
+	else if (ft_strncmp(str, "pwd", 4) == 0)
+		return (1);
+	else if (ft_strncmp(str, "unset", 6) == 0)
+		return (1);
+	return (0);
+}
 
 // TODO: He leido que las built in no se ejecutan en un proces por separado.
 //	Por tanto no hay que hacer un fork
@@ -23,6 +42,7 @@
 int	execute_builtin(t_word_list *words)
 {
 	char	**argv;
+	int 	fd = 1; // TODO: Cambiar
 
 	argv = list_to_arr(words);
 	if (ft_strncmp(argv[0], "cd", 3) == 0)
@@ -34,7 +54,7 @@ int	execute_builtin(t_word_list *words)
 	else if (ft_strncmp(argv[0], "exit", 5) == 0)
 		return (exit_main(argv));
 	else if (ft_strncmp(argv[0], "export", 7) == 0)
-		return (export_main(argvfd));
+		return (export_main(argv, fd));
 	else if (ft_strncmp(argv[0], "pwd", 4) == 0)
 		return (pwd_main(fd));
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)

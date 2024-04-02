@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/30 11:37:43 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 19:54:04 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char *get_prompt(int counter)
 {
 	char	*directory;
 	char	pwd[PATH_MAX];
+	char	*base = "\e[1;95mminishell42\e[0m";
 	char	*prompt;
 	
 	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
@@ -34,13 +35,9 @@ char *get_prompt(int counter)
 //		directory = ;
 	// Por otro lado, si no se te ocurre como hacerlo, o si prefieres avanzar en otros lados.
 	// no se si el manejo del promp es mandatory. Podemos usar todo el tiempo el mismo.
-	if (counter % 3 == 0)
-		prompt = ft_strjoin("\e[1;95m",directory + 1);
-	else if (counter % 3 == 1)
-		prompt = ft_strjoin("\e[1;96m",directory + 1);
-	else
-		prompt = ft_strjoin("\e[1;93m",directory + 1);
-	prompt = ft_strjoin(prompt, "42 -> \e[0m");	
+	prompt = ft_strjoin(base,"\e[1;92m (");
+	prompt = ft_strjoin(prompt, directory + 1);
+	prompt = ft_strjoin(prompt, ")> \e[0m");	
 	counter++;
 	return (prompt);
 }

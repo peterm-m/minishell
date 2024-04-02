@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:03:41 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 00:26:55 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 19:45:47 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ void	expander(t_token *input)
 			parameter_expansion(input, i);
 		}
 	}
-	
 }
 
 /*
 $HOME
 --$HOME
-$HOME--
+$HOME-- 
 --$HOME--
 $NOVAR
 --$NOVAR

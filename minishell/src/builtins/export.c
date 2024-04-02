@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/20 19:40:50 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:48:19 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ int export_main(char **argv, int fd)
 		print_sorted_env(fd);
 		return(EXIT_SUCCESS);
 	}
-	return(export_args(argv));
+	return(export_args(argv, fd));
 }

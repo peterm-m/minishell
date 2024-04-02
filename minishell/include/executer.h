@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/27 16:29:06 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 19:04:54 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ int		execute_pipe(t_command *cmd, int fd_in, int fd_out);
 int		execute_connection(t_command *cmd, int fd_in, int fd_out);
 void	execute_subshell(t_subshell *cmd, int fd_in, int fd_out);
 
+int is_builtin(char *str);
 #endif

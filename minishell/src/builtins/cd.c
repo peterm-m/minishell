@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/19 19:28:21 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:47:01 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	update_pwd(int fd)
 	if (getcwd(pwd, PATH_MAX) == NULL)
 	{
 		//printf("Error\n");
-		ft_putendl_fd("Error\n", fd)
+		ft_putendl_fd("Error\n", fd);
 		return (EXIT_FAILURE);
 	}
 	new_pwd = ft_strjoin("PWD=", getcwd(pwd, PATH_MAX));
