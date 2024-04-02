@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:49 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 17:20:39 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 17:44:51 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	quote_remove(char *str)
 			j++;
 		str[i++] = str[j++];
 	}
-	while (i <= j)
+	while (i < j)
 		str[i++] = '\0'; 
 	return (i);
 }
