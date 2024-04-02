@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 21:33:31 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/01 17:49:43 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 20:40:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	char *append_str(char *dest, char *str)
+static	char	*append_str(char *dest, char *str)
 {
 	while (*str)
 		*dest++ = *str++;
@@ -39,6 +39,6 @@ char	*ft_strnjoin(char **s, int n)
 	while (++i < n)
 		if (s[i])
 			aux = append_str(aux, (char *)s[i]);
-	aux = '\0';
+	*aux = '\0';
 	return (out);
 }

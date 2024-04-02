@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/02 17:56:46 by pedro            ###   ########.fr        #
+#    Updated: 2024/04/02 19:43:20 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,9 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-# -I$(LIBDIR)/readline/8.2.7/include
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers 
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
 
-# -I$(LIBDIR)/readline/8.2.7/include
-
-LIBS := -lreadline \
+LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst     \
 	-lft       -L$(LIBDIR)/libft
 
@@ -100,9 +97,9 @@ NAMES := \
 	\
 	expansion/expander.c \
 	expansion/parameter_expansion.c \
-	expansion/pathname.c \
 	expansion/quote_removal.c \
 	expansion/tilde_expansion.c \
+	expansion/filename_expansion.c \
 	\
 	subsystem/signals.c \
 	subsystem/redirection.c \

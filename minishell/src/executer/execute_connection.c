@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_connection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:54:23 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 16:31:32 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 19:24:23 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	execute_pipe(t_command *cmd, int fd_in, int fd_out)
 
 int	execute_connection(t_command *cmd, int fd_in, int fd_out)
 {
-	t_connection *connection;
+	t_connection	*connection;
 
 	connection = cmd->value.connection;
 	if (connection->connector == tt_and_if)

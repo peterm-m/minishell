@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   semantics.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/25 18:14:43 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:37:32 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_word
 typedef struct s_word_list
 {
 	char				*word;
-	char				*expansion;
 	struct s_word_list	*next;
 }	t_word_list;
 
