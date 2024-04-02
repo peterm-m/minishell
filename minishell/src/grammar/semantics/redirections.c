@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 16:34:26 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 20:50:00 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 void heredoc(t_dlst **lex, char *delimiter)
 {
 	char *line;
@@ -33,12 +33,12 @@ void heredoc(t_dlst **lex, char *delimiter)
 	}
 	//full_history = ft_strjoin(full_history, delimiter);
 	if (is_quotes(delimiter[0]) && is_quotes(delimiter[size]))
-		expand(full_history);
+		printf("quotes\n");
+		//expand(full_history);
 	token = new_token();
-	set_token(full_history, 0, ft_strlen(full_history), tt_dgreat, token);
+	set_token(full_history, ft_strlen(full_history), tt_dgreat, token);
 	ft_dlstaddb(lex, ft_dlstnew(token));
 }
-*/
 #undef LOGS
 #define LOGS 0
 

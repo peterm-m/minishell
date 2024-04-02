@@ -6,11 +6,30 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:45:00 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:53:05 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int is_builtin(char *str)
+{
+	if (ft_strncmp(str, "cd", 3) == 0)
+		return (1);
+	else if (ft_strncmp(str, "echo", 5) == 0)
+		return (1);
+	else if (ft_strncmp(str, "env", 4) == 0)
+		return (1);
+	else if (ft_strncmp(str, "exit", 5) == 0)
+		return (1);
+	else if (ft_strncmp(str, "export", 7) == 0)
+		return (1);
+	else if (ft_strncmp(str, "pwd", 4) == 0)
+		return (1);
+	else if (ft_strncmp(str, "unset", 6) == 0)
+		return (1);
+	return (0);
+}
 
 // TODO: He leido que las built in no se ejecutan en un proces por separado.
 //	Por tanto no hay que hacer un fork
@@ -23,6 +42,7 @@
 int	execute_builtin(t_word_list *words, int fd_in, int fd_out)
 {
 	char	**argv;
+	int 	fd = 1; // TODO: Cambiar
 
 	argv = list_to_arr(words);
 	if (ft_strncmp(argv[0], "cd", 3) == 0)

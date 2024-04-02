@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:03:41 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 20:43:42 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:53:25 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	expander(t_token *input)
 /*
 $HOME
 --$HOME
-$HOME--
+$HOME-- 
 --$HOME--
 
 $NOVAR
