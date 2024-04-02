@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:03:41 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 17:21:42 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 18:38:28 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 void	expander(t_token *input)
 {
-	int		i;
+	char	*aux;
 
-	i = 0;
 	if (input->str[0] == '~')
-		i += tilde_expansion(input);
+	{
+		aux = tilde_expansion(input->str);
+		free(input->str);
+		input->str = aux;
+	}
 	if (input->flag & PARAM_E)
 	{
-		while (1)
-		{
-			printf("1 %s\n", input->str +i);
-			i += search_character(input->str + i, '$');
-			if (!input->str[i])
-				break ;
-			while (input->str[i] == '$')
-				i++;
-			parameter_expansion(input, i);
-		}
+		aux = parameter_expansion(input->str);
+		free(input->str);
+		input->str = aux;
+	}
+	if (input->flag & (WILDCARD|QUEST))
+	{
+		input->str = filename_expansion(input->str);
+		free(input->str);
+		input->str = aux;
 	}
 	quote_remove(input->str);
 }
