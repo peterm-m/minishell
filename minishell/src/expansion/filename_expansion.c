@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pathname.c                                         :+:      :+:    :+:   */
+/*   filename_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/22 17:03:40 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 18:07:12 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Step 3: find the final entry
 	Permissions
 */
 
-void	pathname(void)
+void	filename_expansion(void)
 {
 	return ;
 }

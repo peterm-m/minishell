@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 18:37:46 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 17:21:20 by pedro            ###   ########.fr       */
+/*   Created: 2024/04/02 18:07:00 by pedro             #+#    #+#             */
+/*   Updated: 2024/04/02 18:07:01 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef EXPANSION_H
 # define EXPANSION_H
@@ -17,9 +19,8 @@
 
 void	expander(t_token *input);
 int		tilde_expansion(t_token *word);
-int		parameter_expansion(t_token *word, int index_dolar);
-void	field_spliting(void);
-void	pathname(void);
+int		parameter_expansion(t_token *word, int start_expan);
+void	filename_expansion(void);
 void	quote_remove(char *str);
 
 #endif

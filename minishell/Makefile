@@ -6,7 +6,7 @@
 #    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/02 17:09:46 by pedro            ###   ########.fr        #
+#    Updated: 2024/04/02 17:56:46 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,6 @@ NAMES := \
 	grammar/semantics/cmd_connection.c \
 	\
 	expansion/expander.c \
-	expansion/field_splitting.c \
 	expansion/parameter_expansion.c \
 	expansion/pathname.c \
 	expansion/quote_removal.c \
