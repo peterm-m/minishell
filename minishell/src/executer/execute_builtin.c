@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 19:04:15 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:48:36 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,24 @@ int is_builtin(char *str)
 //			writes que envien la salida al archivo
 
 
-int	execute_builtin(t_word_list *words)
+int	execute_builtin(t_word_list *words, int fd_in, int fd_out)
 {
 	char	**argv;
 	int 	fd = 1; // TODO: Cambiar
 
 	argv = list_to_arr(words);
 	if (ft_strncmp(argv[0], "cd", 3) == 0)
-		return (cd_main(argv, fd));
+		return (cd_main(argv, fd_in));
 	else if (ft_strncmp(argv[0], "echo", 5) == 0)
-		return (echo_main(argv, fd));
+		return (echo_main(argv, fd_in));
 	else if (ft_strncmp(argv[0], "env", 4) == 0)
-		return (env_main(fd));
+		return (env_main(fd_in));
 	else if (ft_strncmp(argv[0], "exit", 5) == 0)
 		return (exit_main(argv));
 	else if (ft_strncmp(argv[0], "export", 7) == 0)
-		return (export_main(argv, fd));
+		return (export_main(argv, fd_in));
 	else if (ft_strncmp(argv[0], "pwd", 4) == 0)
-		return (pwd_main(fd));
+		return (pwd_main(fd_in));
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		return (unset_main(argv));
 	return (-1);

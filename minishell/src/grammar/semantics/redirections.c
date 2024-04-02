@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 18:55:08 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:50:00 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void heredoc(t_dlst **lex, char *delimiter)
 	set_token(full_history, ft_strlen(full_history), tt_dgreat, token);
 	ft_dlstaddb(lex, ft_dlstnew(token));
 }
-
 #undef LOGS
 #define LOGS 0
 

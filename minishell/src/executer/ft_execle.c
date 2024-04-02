@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/22 17:11:32 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 12:30:13 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,14 @@ void	ft_execle(t_word_list *args)
 
 	argv = list_to_arr(args);
 	if (search_path(args->word, &filename) == 0)
+	{
+		printf("%s: Command not found", args->word);
 		exit(STATUS_CMD_NOT_FOUND);
+	}
 	else if (access(filename.path_name, X_OK) != 0)
+	{
+		printf("%s: Permission denied", args->word);
 		exit(STATUS_CMD_NOT_EXEC);
+	}
 	ft_execve(filename.path_name, argv, environ);
 }

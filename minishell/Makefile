@@ -6,7 +6,7 @@
 #    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/02 19:56:36 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/04/02 20:50:05 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,6 @@ NAMES := \
 	grammar/semantics/cmd_connection.c \
 	\
 	expansion/expander.c \
-	expansion/field_splitting.c \
 	expansion/parameter_expansion.c \
 	expansion/pathname.c \
 	expansion/quote_removal.c \
@@ -108,11 +107,11 @@ NAMES := \
 	subsystem/signals.c \
 	subsystem/redirection.c \
 	subsystem/pipe.c \
+	subsystem/search_character.c\
 	\
 	executer/execute_builtin.c \
 	executer/execute_command.c \
 	executer/execute_connection.c \
-	executer/execute_pipeline.c \
 	executer/execute_simple.c \
 	executer/execute_subshell.c \
 	executer/ft_execle.c \

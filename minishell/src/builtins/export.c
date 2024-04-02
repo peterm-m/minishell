@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/02 18:48:19 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:49:37 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    print_sorted_env(int fd)
 		ft_putendl_fd(environ[i], fd); //printf ("declare -x %s\n", environ[i]);
 }
 
-int export_args(char **argv, int fd)
+int export_args(char **argv)
 {
 	int     i;
 	int		j;
@@ -67,5 +67,5 @@ int export_main(char **argv, int fd)
 		print_sorted_env(fd);
 		return(EXIT_SUCCESS);
 	}
-	return(export_args(argv, fd));
+	return(export_args(argv));
 }

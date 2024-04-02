@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   field_splitting.c                                  :+:      :+:    :+:   */
+/*   filename_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 21:03:06 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/29 21:03:45 by pedromar         ###   ########.fr       */
+/*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
+/*   Updated: 2024/04/02 18:20:32 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
-void	field_spliting(void)
+void	filename_expansion(char *str)
 {
 	return ;
 }
