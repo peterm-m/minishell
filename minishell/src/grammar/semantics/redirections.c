@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 20:50:00 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:36:39 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void heredoc(t_dlst **lex, char *delimiter)
+void	heredoc(t_dlst **lex, char *delimiter)
 {
-	char *line;
-	char *full_history;
+	char	*line;
+	char	*full_history;
 	int		size;
 	t_token	*token;
 

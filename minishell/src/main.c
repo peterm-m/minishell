@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 19:54:04 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:27:47 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *get_prompt(int counter)
 	char	pwd[PATH_MAX];
 	char	*base = "\e[1;95mminishell42\e[0m";
 	char	*prompt;
-	
+
 	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
 	// Esto de segmentation si nos vacian el env. En ese caso getenv(PWD) es NULL,
 	//directory es NULL, cuando haces el strjoin da segmentation,
@@ -37,7 +37,7 @@ char *get_prompt(int counter)
 	// no se si el manejo del promp es mandatory. Podemos usar todo el tiempo el mismo.
 	prompt = ft_strjoin(base,"\e[1;92m (");
 	prompt = ft_strjoin(prompt, directory + 1);
-	prompt = ft_strjoin(prompt, ")> \e[0m");	
+	prompt = ft_strjoin(prompt, ")> \e[0m");
 	counter++;
 	return (prompt);
 }
@@ -46,7 +46,7 @@ static int	interactive_loop(void)
 {
 	char	*read_line;
 	t_dlst	*tokens;
-	int counter;
+	int		counter;
 
 	counter = -1;
 	while (1)
@@ -59,11 +59,13 @@ static int	interactive_loop(void)
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
+		//ft_dlstiter(tokens, print_lexer);
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);
 		//executers();
 		//????
+		printf("%d\n", g_exit_status);
 		rl_on_new_line();
 	}
 	rl_clear_history();

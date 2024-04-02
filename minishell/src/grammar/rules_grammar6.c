@@ -72,7 +72,7 @@ void	rule_redir7(t_dlst **lex, t_state **state) // CHECK
 	source.fd = STDIN_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
-	//TODO: push_heredoc
+	//TODO: push_heredoc(t_redirection *out)
 	pop_elements(lex, state, 1);
 }
 

@@ -6,13 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:53:05 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:45:17 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_builtin(char *str)
+int	is_builtin(char *str)
 {
 	if (ft_strncmp(str, "cd", 3) == 0)
 		return (1);
@@ -34,29 +34,31 @@ int is_builtin(char *str)
 // TODO: He leido que las built in no se ejecutan en un proces por separado.
 //	Por tanto no hay que hacer un fork
 //		IMPLEMENTAR:
-//			Las redirecciones no se hacen con dup2 cambiando la salida por el archivo
-//			Creo que lo mas facil es que los print o cualquier salida la cambies por
+//			Las redirecciones no se hacen con dup2 cambiando
+// la salida por el archivo
+//			Creo que lo mas facil es que los print o cualquier
+// salida la cambies por
 //			writes que envien la salida al archivo
-
 
 int	execute_builtin(t_word_list *words, int fd_in, int fd_out)
 {
 	char	**argv;
-	int 	fd = 1; // TODO: Cambiar
 
 	argv = list_to_arr(words);
+	if (fd_out == NO_PIPE)
+		fd_out = STDOUT_FILENO;
 	if (ft_strncmp(argv[0], "cd", 3) == 0)
-		return (cd_main(argv, fd_in));
+		return (cd_main(argv, fd_out));
 	else if (ft_strncmp(argv[0], "echo", 5) == 0)
-		return (echo_main(argv, fd_in));
+		return (echo_main(argv, fd_out));
 	else if (ft_strncmp(argv[0], "env", 4) == 0)
-		return (env_main(fd_in));
+		return (env_main(fd_out));
 	else if (ft_strncmp(argv[0], "exit", 5) == 0)
 		return (exit_main(argv));
 	else if (ft_strncmp(argv[0], "export", 7) == 0)
-		return (export_main(argv, fd_in));
+		return (export_main(argv, fd_out));
 	else if (ft_strncmp(argv[0], "pwd", 4) == 0)
-		return (pwd_main(fd_in));
+		return (pwd_main(fd_out));
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		return (unset_main(argv));
 	return (-1);

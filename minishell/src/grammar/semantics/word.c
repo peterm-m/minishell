@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:39:20 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:21:04 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ t_word_list	*make_word(t_token *token)
 	dbg("│\t│\t├─%s\n", "make word");
 	if (token == NULL)
 		return (NULL);
-	if (token->flag & EXPAND)
-		expander(token);
+	expander(token);
 	new = (t_word_list *)ft_malloc(sizeof(t_word_list));
 	new->next = NULL;
 	new->word = token->str;

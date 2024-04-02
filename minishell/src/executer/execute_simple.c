@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:25:40 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:31:21 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static	void	wait_command(pid_t pid, int type)
 	{
 		while (1)
 		{
-			tmp = waitpid(-1, &status, WUNTRACED|WNOHANG);
+			tmp = waitpid(-1, &status, WUNTRACED | WNOHANG);
 			if (tmp < 0)
 				break ;
 			else if (tmp == pid && WIFEXITED(status))
