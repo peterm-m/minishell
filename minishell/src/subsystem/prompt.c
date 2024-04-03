@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/03 12:23:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:31:05 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,10 @@
 
 void	setup_term(void)
 {
-	static struct termios	initial = { \
-				.c_iflag = 0,
-				.c_oflag = 0,
-				.c_cflag = 0,
-				.c_lflag = 0,
-				.c_cc = NULL };
+	struct termios	initial;
 
-	if (initial.c_cc == NULL)
-		if (tcgetattr(STDIN_FILENO, &initial) == -1)
-			exit(EXIT_FAILURE);
+	if (tcgetattr(STDIN_FILENO, &initial) == -1)
+		exit(EXIT_FAILURE);
 	if (isatty(STDIN_FILENO) == 0 ||
 		isatty(STDOUT_FILENO) == 0)
 		exit(EXIT_SUCCESS);

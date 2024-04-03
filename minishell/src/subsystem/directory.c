@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:10:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 17:15:24 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:30:37 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	num_files_dir(char *name)
 	char			n_files;
 	DIR				*d;
 
-	d = opendir(".");
+	d = opendir(name);
 	n_files = 0;
 	if (d)
 	{

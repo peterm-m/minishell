@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 17:16:29 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:28:10 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ static int	match(char *pattern, char *text)
 // TODO user funcion get_file_names que la cadena se forma ordenada 
 static void	select_files(DIR *d, char *file_name, char *str)
 {
-	int				i;
 	char			*pattern;
 	struct dirent	*dir;
 
 	pattern = str;
-	i = 0;
 	while (1)
 	{
 		dir = readdir(d);
