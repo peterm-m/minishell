@@ -6,7 +6,7 @@
 #    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/02 21:52:19 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/04/03 19:06:07 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,10 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers
 
-LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
-	-ldlst     -L$(LIBDIR)/dlst     \
+LIBS := -lreadline  \
+	-ldlst     -L$(LIBDIR)/dlst \
 	-lft       -L$(LIBDIR)/libft
 
 # Test libraries
@@ -97,13 +97,14 @@ NAMES := \
 	\
 	expansion/expander.c \
 	expansion/parameter_expansion.c \
-	expansion/pathname.c \
 	expansion/quote_removal.c \
 	expansion/tilde_expansion.c \
+	expansion/filename_expansion.c \
 	\
 	subsystem/signals.c \
 	subsystem/redirection.c \
-	subsystem/pipe.c \
+	subsystem/prompt.c \
+	subsystem/directory.c \
 	subsystem/search_character.c\
 	\
 	executer/execute_builtin.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 16:40:47 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/03 12:26:39 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 			IN_PIPE no wait
 		4) restore signals
 */
+// TODO: gestionar error.
 
 static	void	wait_command(pid_t pid, int type)
 {
@@ -46,7 +47,7 @@ static	void	wait_command(pid_t pid, int type)
 	{
 		while (1)
 		{
-			tmp = waitpid(-1, &status, WUNTRACED|WNOHANG);
+			tmp = waitpid(-1, &status, WUNTRACED | WNOHANG);
 			if (tmp < 0)
 				break ;
 			else if (tmp == pid && WIFEXITED(status))
@@ -81,5 +82,3 @@ void	execute_simple(t_command *cmd, int fd_in, int fd_out)
 	}
 	return ;
 }
-
-// TODO: gestionar error.

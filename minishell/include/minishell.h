@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/22 13:37:24 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/03 14:37:22 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <limits.h>
+# include <dirent.h>
 
 // Extern header
 # include <readline/readline.h>
 # include <readline/history.h>
-#include <termios.h>
+# include <termios.h>
 
 # include "ft_dlst.h"
 # include "libft.h"
@@ -45,15 +46,11 @@
 
 # include "colors.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 // Bool
 # define TRUE 1
 # define FALSE 0
-
-// Path
-
-# define PROMPT "\e[1;95mminishell42-> \e[0m"
 
 # ifdef DEBUG
 #  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})

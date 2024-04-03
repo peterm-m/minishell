@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 17:09:12 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/03 17:07:59 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 
 # include "minishell.h"
 
+# define PROMPT "minishell42"
+
 int		search_character(char *str, char c);
+
+char	*get_prompt(void);
+void	setup_term(void);
 
 void	make_redir(t_redirect *redirections);
 void	open_redir(t_redirect *redirections);
@@ -27,5 +32,8 @@ void	initial_signals(void);
 void	wait_signals(void);
 void	child_signals(void);
 void	sigint_handler(int sig);
+
+int		num_files_dir(char *name);
+char	**get_file_names(char *name);
 
 #endif

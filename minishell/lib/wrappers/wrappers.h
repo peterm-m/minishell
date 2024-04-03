@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/25 20:52:54 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/03 17:25:35 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int			ft_setenv(const char *name, const char *value, int overwrite);
 int			ft_unsetenv(const char *name);
 int			ft_putenv(char *string);
 int			ft_clearenv(void);
+int			ft_dup2(int fd1, int fd2);
 
 #endif
 

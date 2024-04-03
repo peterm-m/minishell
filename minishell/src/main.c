@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 19:54:04 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:27:38 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,14 @@
 
 int	g_exit_status;
 
-void print_lexer(void *p)   //TODO  BORRAR: Imprimir lista tokens
-{
-	printf(BHYEL"str:  %s, flag:  "END, (*(t_token *)(p)).str);
-	printf(BHYEL"%i\n"END, (*(t_token *)(p)).flag);
-}
-
-char *get_prompt(int counter)
-{
-	char	*directory;
-	char	pwd[PATH_MAX];
-	char	*base = "\e[1;95mminishell42\e[0m";
-	char	*prompt;
-	
-	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
-	// Esto de segmentation si nos vacian el env. En ese caso getenv(PWD) es NULL,
-	//directory es NULL, cuando haces el strjoin da segmentation,
-	//TODO: puedes poner un promp por defecto en caso de que no tengamos PWD.
-//	if (directory == NULL)
-//		directory = ;
-	// Por otro lado, si no se te ocurre como hacerlo, o si prefieres avanzar en otros lados.
-	// no se si el manejo del promp es mandatory. Podemos usar todo el tiempo el mismo.
-	prompt = ft_strjoin(base,"\e[1;92m (");
-	prompt = ft_strjoin(prompt, directory + 1);
-	prompt = ft_strjoin(prompt, ")> \e[0m");	
-	counter++;
-	return (prompt);
-}
-
 static int	interactive_loop(void)
 {
 	char	*read_line;
 	t_dlst	*tokens;
-	int counter;
 
-	counter = -1;
 	while (1)
 	{
-		read_line = readline(get_prompt(++counter));
+		read_line = readline(get_prompt());
 		add_history(read_line);
 		if (read_line == NULL)
 		{
@@ -59,43 +29,15 @@ static int	interactive_loop(void)
 			exit (EXIT_SUCCESS);
 		}
 		tokens = lexer(read_line);
+		//ft_dlstiter(tokens, print_lexer);
 		if (tokens == NULL)
 			continue ;
 		syntax(&tokens);
 		//executers();
-		//????
 		rl_on_new_line();
 	}
 	rl_clear_history();
 	return (0);
-}
-
-#ifdef DEBUG
-
-int	main(int argc, char **argv)
-{
-	interactive_loop(argc, argv);
-	rl_clear_history();
-	return (EXIT_SUCCESS);
-}
-
-#else
-
-void	setup_term(void)
-{
-	static struct termios	initial = { \
-            .c_iflag = 0,
-            .c_oflag = 0,
-            .c_cflag = 0,
-            .c_lflag = 0,
-            .c_cc = NULL };
-
-	if (initial.c_cc == NULL)
-		if (tcgetattr(STDIN_FILENO, &initial) == -1)
-			exit(EXIT_FAILURE);
-	if (isatty(STDIN_FILENO) == 0 ||
-		isatty(STDOUT_FILENO) == 0)
-		exit(EXIT_SUCCESS);
 }
 
 int	main()
@@ -106,5 +48,3 @@ int	main()
 	interactive_loop();
 	return (EXIT_SUCCESS);
 }
-
-#endif

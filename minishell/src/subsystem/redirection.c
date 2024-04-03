@@ -3,18 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/25 13:32:11 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/03 12:21:34 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO: PIPES
-
 // TODO gestion de errores de archivos
+
+void	close_pipe(int fd_in, int fd_out)
+{
+	if (fd_in > STDIN_FILENO)
+		close(fd_in);
+	if (fd_out > STDIN_FILENO)
+		close(fd_out);
+}
+
+void	make_pipe(int fd_in, int fd_out)
+{
+	if (fd_in != NO_PIPE)
+		ft_dup2(fd_in, STDIN_FILENO);
+	if (fd_in > 0)
+		ft_close(fd_in);
+	if (fd_out != NO_PIPE)
+		ft_dup2(fd_out, STDOUT_FILENO);
+	if (fd_out == 0 || fd_out > 1)
+		ft_close(fd_out);	
+}
+
 void	make_redir(t_redirect *redirections)
 {
 	t_redirect	*redir;

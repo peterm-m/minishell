@@ -8,7 +8,7 @@
  * 
  * @return either TRUE or FALSE.
  */
-int has_flag(char *str)
+int	has_flag(char *str)
 {
 	int i;
 
@@ -20,7 +20,7 @@ int has_flag(char *str)
 	i++;
 	while (str[i] && str[i] == 'n')
 		i++;
-	if  (!str[i])
+	if (!str[i])
 		return (1);
 	return (0);
 }
@@ -46,10 +46,10 @@ void print_echo(char **args, int i, int is_flag, int fd)
 	}
 	while (args[i++])
 	{
-		ft_putendl_fd(args[i - 1], fd);
+		ft_putstr_fd(args[i - 1], fd);
 		//printf ("%s", args[i - 1]);
 		if (args[i])
-			ft_putendl_fd(" ", fd);//printf (" ");
+			ft_putstr_fd(" ", fd);//printf (" ");
 		else if (!args[i] && !is_flag)
 			ft_putchar_fd('\n', fd);
 	}

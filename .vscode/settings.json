@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "sstream": "c",
+        "typeindex": "c",
+        "typeinfo": "c",
+        "ranges": "c",
+        "thread": "c"
+    }
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:49 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 17:44:51 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 21:20:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	quote_remove(char *str)
 	{
 		single_q = (single_q + (str[j] == '\'' && double_q == 0)) % 2;
 		double_q = (double_q + (str[j] == '\"' && single_q == 0)) % 2;
-		if ((str[j] == '\"' && single_q == 0) || (str[j] == '\'' && double_q == 0))
+		if ((str[j] == '\"' && single_q == 0)
+			|| (str[j] == '\'' && double_q == 0))
 			j++;
 		str[i++] = str[j++];
 	}
 	while (i < j)
-		str[i++] = '\0'; 
-	return (i);
+		str[i++] = '\0';
 }

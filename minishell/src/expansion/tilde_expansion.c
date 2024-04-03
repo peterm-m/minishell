@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilde_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:45:13 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 18:39:52 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 20:00:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ char	*tilde_expansion(char *str)
 		return (0);
 	home = ft_getenv("HOME");
 	out = ft_strjoin(home, ++out);
+	free(str);
 	return (out);
 }

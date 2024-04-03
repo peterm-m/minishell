@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 12:30:13 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/02 20:45:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ void	ft_execle(t_word_list *args)
 	argv = list_to_arr(args);
 	if (search_path(args->word, &filename) == 0)
 	{
-		printf("%s: Command not found", args->word);
+		ft_putstr_fd(args->word, 2);
+		ft_putstr_fd(": Command not found\n", 2);
 		exit(STATUS_CMD_NOT_FOUND);
 	}
 	else if (access(filename.path_name, X_OK) != 0)
 	{
-		printf("%s: Permission denied", args->word);
+		ft_putstr_fd(args->word, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
 		exit(STATUS_CMD_NOT_EXEC);
 	}
 	ft_execve(filename.path_name, argv, environ);
