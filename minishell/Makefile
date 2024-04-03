@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/03 17:31:02 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/03 17:33:25 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,10 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers
 
-LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
-	-ldlst     -L$(LIBDIR)/dlst     \
+LIBS := -lreadline  \
+	-ldlst     -L$(LIBDIR)/dlst \
 	-lft       -L$(LIBDIR)/libft
 
 # Test libraries

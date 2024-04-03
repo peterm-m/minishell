@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 14:28:29 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:45:11 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,25 @@ static char	*make_expansion(char *str, int start_expan)
 }
 
 // TODO: FIX si la expansion no existe, hace falta disminuir i en uno
+// TODO: FIX: cuando solo aparece $? no funciona bien
+//                               "$?" si en algun momento
+//                             el puntero queda desplazado 
 
 char	*parameter_expansion(char *str)
 {
+	char	*out;
 	int		i;
 
 	i = 0;
+	out = str;
 	while (1)
 	{
-		i += search_character(str + i, '$');
-		while (str[i] == '$')
+		i += search_character(out + i, '$');
+		while (out[i] == '$')
 			i++;
-		if (!str[i])
+		if (!out[i])
 			break ;
-		str = make_expansion(str, i);
+		out = make_expansion(out, i);
 	}
-	return (str);
+	return (out);
 }
