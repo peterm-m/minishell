@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 21:45:17 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:29:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_builtin(char *str)
 // salida la cambies por
 //			writes que envien la salida al archivo
 
-int	execute_builtin(t_word_list *words, int fd_in, int fd_out)
+int	execute_builtin(t_word_list *words, int fd_out)
 {
 	char	**argv;
 

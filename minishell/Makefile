@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/02 20:52:47 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/03 17:19:15 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,6 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-# -I$(LIBDIR)/readline/8.2.7/include
 INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
 
 LIBS := -lreadline -L$(LIBDIR)/readline/8.2.7/lib \
@@ -104,7 +103,8 @@ NAMES := \
 	\
 	subsystem/signals.c \
 	subsystem/redirection.c \
-	subsystem/pipe.c \
+	subsystem/prompt.c \
+	subsystem/directory.c \
 	subsystem/search_character.c\
 	\
 	executer/execute_builtin.c \

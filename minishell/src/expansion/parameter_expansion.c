@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:44:39 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:28:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ static char	*make_expansion(char *str, int start_expan)
 		free(aux[1]);
 	if (aux[2])
 		free(aux[2]);
+	free(str);
 	return (out);
 }
 
+// TODO: FIX si la expansion no existe, hace falta disminuir i en uno
+
 char	*parameter_expansion(char *str)
 {
-	char	*out;
 	int		i;
 
 	i = 0;
@@ -72,10 +74,7 @@ char	*parameter_expansion(char *str)
 			i++;
 		if (!str[i])
 			break ;
-		out = make_expansion(str, i);
-		free(str);
-		str = out;
+		str = make_expansion(str, i);
 	}
 	return (str);
 }
-

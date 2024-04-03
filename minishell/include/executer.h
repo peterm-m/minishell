@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:48:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:30:09 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**list_to_arr(t_word_list *words);
 
 int		execute_command(t_command *cmd, int fd_in, int fd_out);
 void	execute_simple(t_command *cmd, int fd_in, int fd_out);
-int		execute_builtin(t_word_list *words, int fd_in, int fd_out);
+int		execute_builtin(t_word_list *words, int fd_out);
 int		execute_connection(t_command *cmd, int fd_in, int fd_out);
 void	execute_subshell(t_subshell *cmd, int fd_in, int fd_out);
 
