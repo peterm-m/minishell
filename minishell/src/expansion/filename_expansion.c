@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 17:33:42 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:33:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int	match(char *pattern, char *name)
 }
 
 
-// TODO usar funcion get_file_names que la cadena se forma ordenada 
+// TODO: esta garantizado que la salida esta ordenada alphanumericamente
+
 static void	select_files(DIR *d, char *file_name, char *str)
 {
 	char			*pattern;
@@ -67,7 +68,7 @@ static void	select_files(DIR *d, char *file_name, char *str)
 		if (match(pattern, dir->d_name))
 		{
 			file_name += ft_strlcpy(file_name, dir->d_name, PATH_MAX);
-			*file_name++ = ' ';
+			*file_name++ = 31;
 		}
 		pattern = str;
 	}

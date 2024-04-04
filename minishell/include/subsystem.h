@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 17:07:59 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:29:19 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ void	sigint_handler(int sig);
 
 int		num_files_dir(char *name);
 char	**get_file_names(char *name);
+
+char	**list_to_arr(t_word_list *words);
+void	clean_arr(char **arr);
 
 #endif

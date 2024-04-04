@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/03 17:33:25 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/04 18:30:58 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ NAMES := \
 	subsystem/prompt.c \
 	subsystem/directory.c \
 	subsystem/search_character.c\
+	subsystem/array.c \
 	\
 	executer/execute_builtin.c \
 	executer/execute_command.c \
