@@ -6,7 +6,7 @@
 #    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/03 19:06:07 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/04/03 21:20:09 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,9 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include
 
-LIBS := -lreadline  \
+LIBS := -lreadline  -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst \
 	-lft       -L$(LIBDIR)/libft
 
@@ -103,6 +103,7 @@ NAMES := \
 	\
 	subsystem/signals.c \
 	subsystem/redirection.c \
+	subsystem/heredoc.c\
 	subsystem/prompt.c \
 	subsystem/directory.c \
 	subsystem/search_character.c\

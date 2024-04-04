@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 12:30:09 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:16:40 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ int		execute_builtin(t_word_list *words, int fd_out);
 int		execute_connection(t_command *cmd, int fd_in, int fd_out);
 void	execute_subshell(t_subshell *cmd, int fd_in, int fd_out);
 
-int is_builtin(char *str);
+int 	is_builtin(char *str);
 #endif

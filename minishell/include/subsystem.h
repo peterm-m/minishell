@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 17:07:59 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:20:23 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	sigint_handler(int sig);
 
 int		num_files_dir(char *name);
 char	**get_file_names(char *name);
+
+void heredoc(t_redirect *redir, char *delimiter);
 
 #endif

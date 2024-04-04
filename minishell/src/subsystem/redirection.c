@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 12:21:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:12:01 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,15 @@ void	open_redir(t_redirect *redirections)
 	redir = redirections;
 	while (redir != NULL)
 	{
-		fd = ft_open(redir->dest.filename, redir->mode_bits,
+		if (redir->option == r_reading_until)
+			heredoc(redir, redir->dest.filename);
+		else
+		{
+			fd = ft_open(redir->dest.filename, redir->mode_bits,
 				(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
-		if (fd > 0)
-			redir->dest.fd = fd;
+			if (fd > 0)
+				redir->dest.fd = fd;
+		}
 		redir = redir->next;
 	}
 }

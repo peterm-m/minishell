@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 21:21:04 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:02:05 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,31 @@ void	clean_word(t_word_list **word)
 
 t_word_list	*make_word(t_token *token)
 {
+	char		*tmp;
 	t_word_list	*new;
+	t_word_list	*new2;
 
 	dbg("│\t│\t├─%s\n", "make word");
 	if (token == NULL)
 		return (NULL);
 	expander(token);
-	new = (t_word_list *)ft_malloc(sizeof(t_word_list));
-	new->next = NULL;
-	new->word = token->str;
+	tmp = token->str;
+	new = ft_malloc(sizeof(t_word_list));
+	if (token->flag & WILDCARD)
+	{
+		while (tmp != '\0')
+		{
+			new2 = ft_malloc(sizeof(t_word_list));
+			new2->next = NULL;
+			new2->word = ft_strdup(tmp);
+			tmp += PATH_MAX + 1;
+		}
+	}
+	else
+	{
+		new->word = token->str;
+		new->next = NULL;
+	}
 	ft_free(token);
 	return (new);
 }

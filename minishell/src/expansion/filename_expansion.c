@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filename_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 18:13:16 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:02:46 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ static void	select_files(DIR *d, char *file_name, char *str)
 			continue ;
 		if (match(pattern, dir->d_name))
 		{
-			file_name += ft_strlcpy(file_name, dir->d_name, 256);
-			*file_name++ = ' ';
+			ft_strlcpy(file_name, dir->d_name, PATH_MAX);
+			file_name += PATH_MAX;
+			*file_name++ = '\0';
 		}
 		pattern = str;
 	}
@@ -79,26 +80,8 @@ char	*filename_expansion(char *str)
 	int		i;
 	char	*out;
 
-	i = num_files_dir(".");char	*filename_expansion(char *str)
-{
-	DIR		*d;
-	int		i;
-	char	*out;
-
 	i = num_files_dir(".");
-	out = ft_calloc(257 * i, sizeof(char));
-	if (out == NULL)
-		return (str);
-	d = opendir(".");
-	if (d)
-	{
-		select_files(d, out, str);
-		closedir(d);
-	}
-	return (out);
-}
-
-	out = ft_calloc(257 * i, sizeof(char));
+	out = ft_calloc((PATH_MAX +1) * i, sizeof(char));
 	if (out == NULL)
 		return (str);
 	d = opendir(".");
