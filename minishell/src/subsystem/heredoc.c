@@ -26,13 +26,12 @@ char	*ft_expand_heredoc(char *str, int expand)
 }
 
 
-void heredoc(t_redirect *redir, char *delimiter)//, int fd_in, int fd_out
+void heredoc(t_redirect *redir, char *delimiter)
 {
 	char 	*line;
 	char	*del;
 	int		expand;
 	char 	*full_history;
-
 
 	line = NULL;
 	full_history = NULL;
@@ -46,11 +45,9 @@ void heredoc(t_redirect *redir, char *delimiter)//, int fd_in, int fd_out
 		del = ft_strdup(delimiter);
 	while (TRUE)
 	{
-		signal(SIGINT, ft_heredoc_handler);
 		line = readline(BHRED"heredoc> "END);
-		signal(SIGINT, sigint_handler);//defecto
-		if (ft_strncmp(line, del, ft_strlen(del)) != 0)
-			return (free(line));
+		if (!line || ft_strncmp(line, del, ft_strlen(del) + 1) == 0)
+			return ;
 		line = ft_expand_heredoc(line, expand);
 		redir->here_doc_eof = ft_strjoin(redir->here_doc_eof, line);
 		redir->here_doc_eof = ft_strjoin(redir->here_doc_eof, "\n");

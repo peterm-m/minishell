@@ -72,7 +72,8 @@ void	rule_redir7(t_dlst **lex, t_state **state) // CHECK
 	source.fd = STDIN_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
-	//TODO: push_heredoc(t_redirection *out)
+	heredoc((t_redirect *)out, dest.filename);
+	printf("heredoc obtenido: %s\n", ((t_redirect *)out)->here_doc_eof);
 	pop_elements(lex, state, 1);
 }
 
