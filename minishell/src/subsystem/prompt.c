@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/04 19:42:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:10:39 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*get_prompt(void)
 	char	*prompt;
 
 	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
-	prompt = ft_strjoin(BHMAG PROMPT END, BHGRN " (");
+	prompt = ft_strjoin(BHMAG PROMPT, " (" BHGRN);
 	prompt = ft_strjoin(prompt, directory + 1);
-	prompt = ft_strjoin(prompt, ")>"END);
+	prompt = ft_strjoin(prompt, BHMAG") -> "END);
 	return (prompt);
 }

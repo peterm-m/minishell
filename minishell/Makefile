@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/04 19:54:14 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/04 20:11:09 by adiaz-uf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ NAMES := \
 	\
 	subsystem/signals.c \
 	subsystem/redirection.c \
+	subsystem/heredoc.c\
 	subsystem/prompt.c \
 	subsystem/directory.c \
 	subsystem/search_character.c\
