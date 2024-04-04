@@ -6,18 +6,16 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 18:33:48 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:37:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 // TODO: testear que pasa si NULL en input
 //		 testear PATH no existe
 //		 testear que pasa si no se encuentra dir
 //		 testear que pasa si existe pero sin permisos de ejecucion
-
 //TODO gestion error, name or path to long
 
 static int	search_path(char *name, t_path_name *path)

@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 18:33:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:36:08 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	match(char *pattern, char *name)
 
 
 // TODO: esta garantizado que la salida esta ordenada alphanumericamente
+// TODO: implementar el comportamiento cuando empieza por "./"
 
 static void	select_files(DIR *d, char *file_name, char *str)
 {
