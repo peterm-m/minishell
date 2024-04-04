@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:12:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:07:36 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	make_pipe(int fd_in, int fd_out)
 	if (fd_out != NO_PIPE)
 		ft_dup2(fd_out, STDOUT_FILENO);
 	if (fd_out == 0 || fd_out > 1)
-		ft_close(fd_out);	
+		ft_close(fd_out);
 }
 
 void	make_redir(t_redirect *redirections)
@@ -56,15 +56,10 @@ void	open_redir(t_redirect *redirections)
 	redir = redirections;
 	while (redir != NULL)
 	{
-		if (redir->option == r_reading_until)
-			heredoc(redir, redir->dest.filename);
-		else
-		{
-			fd = ft_open(redir->dest.filename, redir->mode_bits,
+		fd = ft_open(redir->dest.filename, redir->mode_bits,
 				(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
-			if (fd > 0)
-				redir->dest.fd = fd;
-		}
+		if (fd > 0)
+			redir->dest.fd = fd;
 		redir = redir->next;
 	}
 }

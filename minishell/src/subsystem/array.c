@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 18:37:52 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:40:21 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	clean_arr(char **arr)
 	free(arr);
 }
 
-static size_t get_size_arr(t_word_list *words)
+static size_t	get_size_arr(t_word_list *words)
 {
 	t_word_list	*tmp;
 	char		*str;

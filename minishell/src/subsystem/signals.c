@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:27:05 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 19:56:41 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:42:56 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	printf("\n");
- 	rl_on_new_line();
+	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }

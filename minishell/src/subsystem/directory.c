@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:10:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 17:30:37 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:46:16 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	num_files_dir(char *name)
 
 // TODO: funcion que de lista de elementos
 // en un directorio ordenados alphanumericamente
+//  falta el llenado del array despues del break
 
 char	**get_file_names(char *name)
 {
@@ -51,7 +52,6 @@ char	**get_file_names(char *name)
 			dir = readdir(d);
 			if (!dir)
 				break ;
-			// fill array con nombres de archivos ordenados
 		}
 		closedir(d);
 	}

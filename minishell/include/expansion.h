@@ -6,11 +6,9 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:07:00 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 20:52:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:47:43 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef EXPANSION_H
 # define EXPANSION_H
