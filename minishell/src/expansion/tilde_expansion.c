@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:45:13 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 20:00:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:00:37 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 char	*tilde_expansion(char *str)
 {
-	char	*home;
+	char	*arr[2];
 	char	*out;
 
-	out = str;
-	if (out[1] != '\0' && out[1] != '/')
-		return (0);
-	home = ft_getenv("HOME");
-	out = ft_strjoin(home, ++out);
+	if (str[1] != '\0' && str[1] != '/')
+		return (str);
+	arr[0] = ft_getenv("HOME");
+	arr[1] = str +1;
+	out = ft_strnjoin(arr, 2);
 	free(str);
 	return (out);
 }
