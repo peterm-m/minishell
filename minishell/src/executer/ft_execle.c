@@ -6,18 +6,16 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 20:05:56 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:49:28 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 // TODO: testear que pasa si NULL en input
 //		 testear PATH no existe
 //		 testear que pasa si no se encuentra dir
 //		 testear que pasa si existe pero sin permisos de ejecucion
-
 //TODO gestion error, name or path to long
 
 static int	search_path(char *name, t_path_name *path)
@@ -39,35 +37,10 @@ static int	search_path(char *name, t_path_name *path)
 			if (access(path->path_name, F_OK) == 0)
 				find = 1;
 		}
-		ft_free(directorys[i++]);
+		free(directorys[i++]);
 	}
-	ft_free(directorys);
+	free(directorys);
 	return (find);
-}
-
-char	**list_to_arr(t_word_list *words)
-{
-	size_t		n_word;
-	char		**arr;
-	t_word_list	*tmp;
-
-	n_word = 0;
-	tmp = words;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		n_word++ ;
-	}
-	arr = ft_malloc((n_word +1) * sizeof(char *));
-	arr[n_word] = NULL;
-	n_word = 0;
-	tmp = words;
-	while (tmp)
-	{
-		arr[n_word++] = tmp->word;
-		tmp = tmp->next;
-	}
-	return (arr);
 }
 
 void	ft_execle(t_word_list *args)
@@ -90,4 +63,5 @@ void	ft_execle(t_word_list *args)
 		exit(STATUS_CMD_NOT_EXEC);
 	}
 	ft_execve(filename.path_name, argv, environ);
+	clean_arr(argv);
 }

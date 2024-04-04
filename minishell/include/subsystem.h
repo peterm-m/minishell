@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 21:20:23 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:49:19 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	sigint_handler(int sig);
 
 int		num_files_dir(char *name);
 char	**get_file_names(char *name);
+
+char	**list_to_arr(t_word_list *words);
+void	clean_arr(char **arr);
 
 void heredoc(t_redirect *redir, char *delimiter);
 

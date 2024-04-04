@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 21:02:46 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:51:18 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	match_wildcard(int c, char *pattern, char *name)
 	{
 		if (match_character(pattern, name))
 			return (1);
-		if (*name != '\0' && (*name++ == c || c == '?'))
+		if (*name == '\0' || (*name++ == c || c == '?'))
 			break ;
 	}
 	return (0);
@@ -31,7 +31,7 @@ static int	match_character(char *pattern, char *name)
 	if (pattern[0] == '\0')
 		return (1);
 	if (pattern[0] == '*')
-		return (match_wildcard(pattern[0], pattern + 1, name));
+		return (match_wildcard(pattern[1], pattern + 1, name));
 	if (*name != '\0' && (pattern[0] == '?' || pattern[0] == *name))
 		return (match_character(pattern + 1, name + 1));
 	return (0);
@@ -39,18 +39,20 @@ static int	match_character(char *pattern, char *name)
 
 static int	match(char *pattern, char *name)
 {
-	while (1)
+	while (*name)
 	{
 		if (match_character(pattern, name))
 			return (1);
-		if (*name++ != '\0')
+		if (*name++ == '\0')
 			break ;
 	}
 	return (0);
 }
 
 
-// TODO user funcion get_file_names que la cadena se forma ordenada 
+// TODO: esta garantizado que la salida esta ordenada alphanumericamente
+// TODO: implementar el comportamiento cuando empieza por "./"
+
 static void	select_files(DIR *d, char *file_name, char *str)
 {
 	char			*pattern;
@@ -66,9 +68,8 @@ static void	select_files(DIR *d, char *file_name, char *str)
 			continue ;
 		if (match(pattern, dir->d_name))
 		{
-			ft_strlcpy(file_name, dir->d_name, PATH_MAX);
-			file_name += PATH_MAX;
-			*file_name++ = '\0';
+			file_name += ft_strlcpy(file_name, dir->d_name, PATH_MAX);
+			*file_name++ = 31;
 		}
 		pattern = str;
 	}
