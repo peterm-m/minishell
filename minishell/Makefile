@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/04 18:30:58 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/04 19:54:14 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,9 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include 
 
-LIBS := -lreadline  \
+LIBS := -lreadline  -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst \
 	-lft       -L$(LIBDIR)/libft
 

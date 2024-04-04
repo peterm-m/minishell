@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 12:21:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:42:48 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	make_pipe(int fd_in, int fd_out)
 	if (fd_out != NO_PIPE)
 		ft_dup2(fd_out, STDOUT_FILENO);
 	if (fd_out == 0 || fd_out > 1)
-		ft_close(fd_out);	
+		ft_close(fd_out);
 }
 
 void	make_redir(t_redirect *redirections)

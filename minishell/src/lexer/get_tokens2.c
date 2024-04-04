@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokens2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:39 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/20 19:38:38 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:43:22 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_ionumber(char *str, int i, t_token *token)
 	while (ft_isdigit(str[i + j]))
 		j++;
 	while (is_blankspace(str[i + j]))
-		j++;	
+		j++;
 	if (str[i + j] == '>' || str[i + j] == '<')
 	{
 		set_token(str + i, j, tt_word, token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filename_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 18:36:08 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/04 19:40:00 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int	match(char *pattern, char *name)
 	}
 	return (0);
 }
-
 
 // TODO: esta garantizado que la salida esta ordenada alphanumericamente
 // TODO: implementar el comportamiento cuando empieza por "./"
