@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/02 21:11:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:49:01 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	print_sorted_env(int fd)
 
 int	export_args(char **argv)
 {
-	int		i;
-	int		j;
-	int		valid;
+	int	i;
+	int	j;
+	int	valid;
 
 	j = 1;
 	while (argv[j])
@@ -44,7 +44,7 @@ int	export_args(char **argv)
 		valid = 0;
 		while (argv[j][i])
 		{
-			printf("cadena: %s; %c \n", argv[j],  argv[j][0]);
+			printf("cadena: %s; %c \n", argv[j], argv[j][0]);
 			if (argv[j][i] == '=' && valid == 0)
 			{
 				if (ft_isdigit(argv[j][0] == 1))

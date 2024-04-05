@@ -6,11 +6,11 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:17 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/05 16:58:21 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:48:12 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h" 
+#include "minishell.h"
 
 t_token	*new_token(void)
 {
@@ -41,7 +41,7 @@ void	free_token(void *tok)
 {
 	t_token	*t;
 
-	t = (t_token *) tok;
+	t = (t_token *)tok;
 	if (t->str)
 		ft_free(t->str);
 	ft_free((void *)t);
@@ -52,26 +52,26 @@ void	search_w_q(void *t)
 	t_token	*token;
 	int		i;
 
-	i = 0;
-	token = (t_token *) t;
+	i = -1;
+	token = (t_token *)t;
 	if (token != NULL && token->str != NULL && !is_quotes(token->str[0]))
 	{
-		while (token->str[i])
+		while (token->str[++i])
 		{
 			if (token->str[i] == '*')
 			{
 				token->flag |= (EXPAND | WILDCARD);
-				break;
+				break ;
 			}
 			if (token->str[i] == '?' && ((i > 0 && token->str[i - 1] != '$')
-				|| (i == 0)))
+					|| (i == 0)))
 			{
 				token->flag |= (EXPAND | QUEST);
-				break;
+				break ;
 			}
-			i++;
 		}
 	}
-	else if (token != NULL && token->str == NULL && token->flag == tt_and_if_aux)
+	else if (token != NULL && token->str == NULL
+		&& token->flag == tt_and_if_aux)
 		token->flag = tt_and_if;
 }

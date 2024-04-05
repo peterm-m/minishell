@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/05 19:50:09 by adiaz-uf          #+#    #+#             */
+/*   Updated: 2024/04/05 19:50:10 by adiaz-uf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	is_number(char *num)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (num[i])
@@ -13,7 +25,7 @@ int	is_number(char *num)
 	}
 	return (TRUE);
 	i = 0;
-	while(num[i])
+	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
 			return (0);
@@ -28,11 +40,10 @@ static void	exit_no_numeric(char *cmd)
 	ft_putstr_fd("exit: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
-	exit (255);
+	exit(255);
 }
 
-
-int exit_main(char **argv)
+int	exit_main(char **argv)
 {
 	int	argc;
 

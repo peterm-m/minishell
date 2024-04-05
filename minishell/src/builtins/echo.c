@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/05 19:50:24 by adiaz-uf          #+#    #+#             */
+/*   Updated: 2024/04/05 19:53:55 by adiaz-uf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /**
@@ -10,7 +22,7 @@
  */
 int	has_flag(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str[i])
@@ -36,7 +48,8 @@ int	has_flag(char *str)
  * 
  * @return EXIT_SUCCESS or FAILURE_SUCCESS
  */
-void print_echo(char **args, int i, int is_flag, int fd)
+
+void	print_echo(char **args, int i, int is_flag, int fd)
 {
 	if (!args[i])
 	{
@@ -47,9 +60,8 @@ void print_echo(char **args, int i, int is_flag, int fd)
 	while (args[i++])
 	{
 		ft_putstr_fd(args[i - 1], fd);
-		//printf ("%s", args[i - 1]);
 		if (args[i])
-			ft_putstr_fd(" ", fd);//printf (" ");
+			ft_putstr_fd(" ", fd);
 		else if (!args[i] && !is_flag)
 			ft_putchar_fd('\n', fd);
 	}

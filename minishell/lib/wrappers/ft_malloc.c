@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 16:16:37 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/12 19:45:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/05 20:01:51 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 #ifdef DEBUG
 
-static t_mem_info* memoryInformation = NULL;
-static int atexitCalled = 0;
+static t_mem_info	*memoryInformation = NULL;
+static int			atexitCalled = 0;
 
 static t_mem_info	*dbg_add_mem_info(t_mem_info *memoryInfo, void *ptrToReturn,
-	size_t bytes, int line, const char *filename, const char *functionname)
+		size_t bytes, int line, const char *filename, const char *functionname)
 {
 	t_mem_info	*new_mem_info;
 
@@ -50,8 +50,7 @@ static int	search_mem_list(const char *filename, int line)
 	{
 		if (len == strlen(tmp->filename))
 		{
-			if (!memcmp(filename, tmp->filename, len)
-				&& tmp->line == line)
+			if (!memcmp(filename, tmp->filename, len) && tmp->line == line)
 				return (counter);
 		}
 		tmp = tmp->next;
@@ -93,8 +92,11 @@ void	*ft_malloc(t_reserve reserve)
 	if (pos == -1)
 	{
 		memoryInformation = dbg_add_mem_info(memoryInformation,
-				ptrToReturn, reserve.bytes, reserve.line,
-				reserve.file, reserve.func);
+												ptrToReturn,
+												reserve.bytes,
+												reserve.line,
+												reserve.file,
+												reserve.func);
 		if (!memoryInformation)
 		{
 			free(ptrToReturn);
@@ -108,10 +110,13 @@ void	*ft_malloc(t_reserve reserve)
 
 void	ft_free(void *ptrToFree)
 {
-	t_mem_info	*tmp = memoryInformation;
-	t_mem_info	*toFree = NULL;
-	t_mem_info	*prev = NULL;
+	t_mem_info	*tmp;
+	t_mem_info	*toFree;
+	t_mem_info	*prev;
 
+	tmp = memoryInformation;
+	toFree = NULL;
+	prev = NULL;
 	if (tmp->ptr == ptrToFree)
 	{
 		toFree = tmp;
@@ -145,11 +150,15 @@ void	ft_free(void *ptrToFree)
 
 void	ft_leaks(void)
 {
-	t_mem_info	*tmp = memoryInformation;
-	t_mem_info	*prev = NULL;
-	size_t		sum = 0;
-	int			nbBlocks = 0;
+	t_mem_info	*tmp;
+	t_mem_info	*prev;
+	size_t		sum;
+	int			nbBlocks;
 
+	tmp = memoryInformation;
+	prev = NULL;
+	sum = 0;
+	nbBlocks = 0;
 	if (tmp)
 		printf("Memory Leaks detected.\n");
 	while (tmp)
@@ -157,7 +166,10 @@ void	ft_leaks(void)
 		prev = tmp;
 		printf("\n%ld bytes lost\n", tmp->bytes);
 		printf("address : 0x%p in %s\t%s:%d\n",
-			tmp->ptr, tmp->functionname, tmp->filename, tmp->line);
+				tmp->ptr,
+				tmp->functionname,
+				tmp->filename,
+				tmp->line);
 		printf("\n====================================\n");
 		sum += tmp->bytes;
 		tmp = tmp->next;

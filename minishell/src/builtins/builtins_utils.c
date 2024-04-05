@@ -6,15 +6,15 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/19 19:09:02 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:53:04 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int get_arr_len(char **env)
+int	get_arr_len(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -22,12 +22,12 @@ int get_arr_len(char **env)
 	return (i);
 }
 
-void    sort_env()
+void	sort_env(void)
 {
-	int i;
-	int j;
-	int env_len;
-	char *aux;
+	int		i;
+	int		j;
+	int		env_len;
+	char	*aux;
 
 	env_len = get_arr_len(environ);
 	i = 0;
@@ -38,7 +38,7 @@ void    sort_env()
 		{
 			if (strcmp(environ[i], environ[j]) > 0)
 			{
-				aux  = environ[i];
+				aux = environ[i];
 				environ[i] = environ[j];
 				environ[j] = aux;
 			}
