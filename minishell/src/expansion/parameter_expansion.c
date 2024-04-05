@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 17:45:11 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:34:07 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*parameter_value(char *str, int start_expan, int end_expan)
 	return (value);
 }
 
-static char	*make_expansion(char *str, int start_expan)
+char	*make_expansion(char *str, int start_expan)
 {
 	int		end_expan;
 	char	*out;

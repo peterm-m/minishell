@@ -65,6 +65,7 @@ void	rule_redir7(t_dlst **lex, t_state **state) // CHECK
 	t_token		*word;
 	t_unit_io	source;
 	t_unit_io	dest;
+	int fd;
 
 	dbg("│\t├─rule_redir7 %s\n", "");
 	out = &(*lex)->prev->data;
@@ -73,7 +74,7 @@ void	rule_redir7(t_dlst **lex, t_state **state) // CHECK
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	heredoc((t_redirect *)out, dest.filename);
-	printf("heredoc obtenido: %s\n", ((t_redirect *)out)->here_doc_eof);
+	printf("Llamando heredoc desde rules_grammar6.c: rule7->\nheredoc guardado en here_doc_eof: %s\n", ((t_redirect *)out)->here_doc_eof);
 	pop_elements(lex, state, 1);
 }
 

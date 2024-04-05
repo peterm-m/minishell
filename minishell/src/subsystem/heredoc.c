@@ -9,36 +9,53 @@ static void	ft_heredoc_handler(int sig)
 
 char	*ft_expand_heredoc(char *str, int expand)
 {
-	char	*tmp;
 	int		i;
+	char	*out;
 
+	i = 0;
 	if (expand == TRUE)
 	{
-		i = -1;
-		while (str[++i])
-			if (str[i] == '$' && (str[i + 1] == '\0' || str[i + 1] == ' '))
-				return (str);
-		tmp = parameter_expansion(str);
+		out = str;
+		while (1)
+		{
+			i += search_character(out + i, '$');
+			while (out[i] == '$')
+				i++;
+			if (!out[i])
+				break ;
+			out = make_expansion(out, i);
+		}
+		return (out);
 	}
-	else
-		tmp = ft_strdup(str);
-	return (tmp);
+	return (str);
 }
+int	streq(char *str1, char *str2)
+{
+	size_t	i;
 
+	if ((str1 && !str2) || (!str1 && str2))
+		return (FALSE);
+	i = 0;
+	while (str1[i] || str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (FALSE);
+		i += 1;
+	}
+	return (TRUE);
+}
 
 void heredoc(t_redirect *redir, char *delimiter)
 {
 	char 	*line;
 	char	*del;
 	int		expand;
-	char 	*full_history;
 
 	line = NULL;
-	full_history = NULL;
-	expand = 0;
+	expand = 1;
 	if (is_quotes(delimiter[0]) && is_quotes(delimiter[ft_strlen(delimiter)]))
 	{
-		expand = 1;
+		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);
 	}
 	else
@@ -47,12 +64,27 @@ void heredoc(t_redirect *redir, char *delimiter)
 	{
 		line = readline(BHRED"heredoc> "END);
 		if (!line || ft_strncmp(line, del, ft_strlen(del) + 1) == 0)
-			return ;
+			break ;
 		line = ft_expand_heredoc(line, expand);
 		redir->here_doc_eof = ft_strjoin(redir->here_doc_eof, line);
 		redir->here_doc_eof = ft_strjoin(redir->here_doc_eof, "\n");
-		free(line);
 	}
+	free(line);
+/* 	char	*buff;
+	int		fd[2];
+
+	pipe(fd);
+	while (1)
+	{
+		buff = readline("> ");
+		if (streq(buff, delimiter))
+			break ;
+		ft_putendl_fd(buff, fd[1]);
+	}
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	free(buff); */
 }
 
 /*
