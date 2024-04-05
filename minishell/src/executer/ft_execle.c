@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:49:28 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:46:28 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_execle(t_word_list *args)
 	t_path_name	filename;
 	char		**argv;
 
-	
 	argv = list_to_arr(args);
 	if (search_path(args->word, &filename) == 0)
 	{
