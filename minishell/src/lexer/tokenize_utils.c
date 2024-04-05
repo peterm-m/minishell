@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:17 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/18 21:08:33 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:58:21 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,28 @@ void	free_token(void *tok)
 void	search_w_q(void *t)
 {
 	t_token	*token;
+	int		i;
 
+	i = 0;
 	token = (t_token *) t;
 	if (token != NULL && token->str != NULL && !is_quotes(token->str[0]))
 	{
-		if (ft_strchr(token->str, '*') != 0)
-			token->flag |= (EXPAND | WILDCARD);
-		if (ft_strchr(token->str, '?') != 0)
-			token->flag |= (EXPAND | QUEST);
+		while (token->str[i])
+		{
+			if (token->str[i] == '*')
+			{
+				token->flag |= (EXPAND | WILDCARD);
+				break;
+			}
+			if (token->str[i] == '?' && ((i > 0 && token->str[i - 1] != '$')
+				|| (i == 0)))
+			{
+				token->flag |= (EXPAND | QUEST);
+				break;
+			}
+			i++;
+		}
 	}
-	else if (token != NULL && token->str == NULL)
-	{
-		if (token->flag == tt_and_if_aux)
-			token->flag = tt_and_if;
-	}
+	else if (token != NULL && token->str == NULL && token->flag == tt_and_if_aux)
+		token->flag = tt_and_if;
 }
