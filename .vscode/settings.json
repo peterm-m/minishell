@@ -4,6 +4,23 @@
         "typeindex": "c",
         "typeinfo": "c",
         "ranges": "c",
-        "thread": "c"
+        "thread": "c",
+        "minishell.h": "c",
+        "__bit_reference": "c",
+        "__functional_base": "c",
+        "algorithm": "c",
+        "atomic": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "__memory": "c",
+        "functional": "c",
+        "iterator": "c",
+        "limits": "c",
+        "memory": "c",
+        "ratio": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "vector": "c",
+        "utility": "c"
     }
 }

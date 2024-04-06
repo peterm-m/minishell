@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/06 17:14:45 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/06 19:14:54 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +39,17 @@ TESTDIR := .test
 BINDIR := .build
 LOGDIR := .log
 
-CC := gcc
+CC := clang
 
 STD := -std=gnu99
 
 STACK := -fstack-protector-all -Wstack-protector
 
-WARNS := -Wall -Wextra
+WARNS := -Wall -Wextra 
 
-CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
+CFLAGS := $(STD) $(STACK) $(WARNS)
 
-DEBUG := -g3 
+DEBUG := -g3 -fsanitize=address
 
 DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf

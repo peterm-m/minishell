@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/01 16:26:50 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/06 19:18:50 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,15 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 // En caso de error implementar la limpieza
 // En caso de error implementar diagnostico
 
-static void	end_parser(t_dlst **lex, t_state **state)
+static void	end_parser(t_dlst **lex, t_state **state, int action)
 {
 	t_command	*cmd;
 
 	cmd = (*lex)->prev->data;
+	if (action == ACCEPT)
+		execute_command(cmd, NO_PIPE, NO_PIPE);
 	ft_free((*state)->next->data);
 	ft_free((*state)->data);
-	execute_command(cmd, NO_PIPE, NO_PIPE);
 	clean_command(cmd);
 	return ;
 }
@@ -101,7 +102,7 @@ void	syntax(t_dlst **lex)
 			|| action == ACCEPT)
 		{
 			dbg("└END to %d\n\n", action - REDUCE0);
-			end_parser(lex, &state);
+			end_parser(lex, &state, action);
 			break ;
 		}
 	}

@@ -37,14 +37,14 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 
-CC = gcc
+CC = clang
 DIR_DUP = mkdir -p $(@D)
 CLEANER = rm -rf
 
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -I../libft
+CCFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -I../libft
 
 OS := $(shell uname -s)
 

@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:54:23 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:36:13 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:12:14 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	execute_pipe(t_command *cmd, int fd_in, int fd_out)
 
 	command = cmd;
 	prev = fd_in;
-	while (command->value.connection->connector == tt_pipe)
+	while (command  && command->type == cmd_connection
+		&& command->value.connection->connector == tt_pipe)
 	{
 		ft_pipe(&pipe);
 		execute_command(command->value.connection->first, prev, pipe.pipe[1]);
