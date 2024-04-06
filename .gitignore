@@ -4,6 +4,9 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+.built
+*.a
+*.o
 
 # Icon must end with two \r
 Icon

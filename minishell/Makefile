@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/04 20:11:09 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/04/06 17:14:45 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ NAMES := \
 	subsystem/prompt.c \
 	subsystem/directory.c \
 	subsystem/search_character.c\
+	subsystem/pathname.c \
 	subsystem/array.c \
 	\
 	executer/execute_builtin.c \
