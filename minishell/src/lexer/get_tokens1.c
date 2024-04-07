@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:44 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/07 12:50:36 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:09:10 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	get_dolar2(char *str, int i, t_token *token)
 	set_token(&str[i], j + 1, token->flag, token);
 	if (token->flag == LEX_ERROR)
 		return (LEX_ERROR);
-	return (i + j + 2);
+	return (i + j + 1);
 }
 
 /**
