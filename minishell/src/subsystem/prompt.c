@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/07 12:42:49 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:20:48 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,19 @@ void	setup_term(void)
 		exit(EXIT_SUCCESS);
 }
 
-// TODO: leaks and check NULL
-//	only change if change cwd
 
 char	*get_prompt(void)
 {
-	char	*directory;
-	char	pwd[PATH_MAX];
-	char	*prompt;
+	static char	prompt[PATH_MAX];
+	char		pwd[PATH_MAX];
+	char		*name_cwd;
+	char		*aux;
 
-	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
-	prompt = ft_strjoin(BHMAG PROMPT BHCYN, directory + 1);
-	prompt = ft_strjoin(prompt, BHMAG") -> "END);
+	getcwd(pwd, PATH_MAX);
+	name_cwd = ft_strrchr(pwd, '/');
+	aux = prompt;
+	aux += ft_strlcpy(aux, BHMAG PROMPT BHCYN, PATH_MAX);
+	aux += ft_strlcpy(aux, name_cwd + 1, PATH_MAX);
+	aux += ft_strlcpy(aux, BHMAG") -> "END, PATH_MAX);
 	return (prompt);
 }
