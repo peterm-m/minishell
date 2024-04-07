@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:50:09 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/05 19:50:10 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:13:36 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	exit_main(char **argv)
 		ft_putstr_fd("exit\n", 2);
 		exit(EXIT_SUCCESS);
 	}
-	if (argc >= 2)
+	else if (argc >= 2)
 	{
 		if (is_number(argv[1]) && argc >= 3)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 13:45:51 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:13:33 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,59 +53,55 @@ static void	reduce(t_dlst **lex, t_state **state, int action)
 // En caso de error implementar la limpieza
 // En caso de error implementar diagnostico
 
-static void	end_parser(t_dlst **lex, t_state **state, int action)
+static t_command	*end_parser(t_dlst **lex, t_state **state, int action)
 {
 	t_command	*cmd;
 
 	cmd = (*lex)->prev->data;
-	if (action == ACCEPT)
-	{
-		execute_command(cmd, NO_PIPE, NO_PIPE);
-		clean_command(cmd);
-	}
 	ft_free((*state)->next->data);
 	ft_free((*state)->data);
-	return ;
+	if (action == ACCEPT)
+		return (cmd);
+	return (NULL);
 }
-	// TODO
-	//if (action == ACCEPT)
-	//	printf("END PARSER\n");
-	//else
-	//	printf("Syntax Error.\n");
-	//dbg("├CLEAN %s\n", "");
-	//ft_dlstdelone((*lex)->prev, print_command);
-	//ft_dlstdelone((*lex)->prev, clean_command);
-	//ft_dlstclear(state, ft_free);
-	//exit(EXIT_SUCCESS);
+
+// TODO
+//if (action == ACCEPT)
+//	printf("END PARSER\n");
+//else
+//	printf("Syntax Error.\n");
+//dbg("├CLEAN %s\n", "");
+//ft_dlstdelone((*lex)->prev, print_command);
+//ft_dlstdelone((*lex)->prev, clean_command);
+//ft_dlstclear(state, ft_free);
+//exit(EXIT_SUCCESS);
 
 /*
 	Loop for LR-parser
 	https://en.wikipedia.org/wiki/LR_parser
 */
 
-void	syntax(t_dlst **lex)
+t_command	*syntax(t_dlst *lex)
 {
-	int		action;
-	t_state	*state;
+	int			action;
+	t_state		*state;
 
 	state = ft_dlstnew(ft_malloc(sizeof(int)));
 	*((int *)state->data) = 0;
 	while (1)
 	{
 		action = table_action(*((int *)state->data),
-				((t_token *)((*lex)->data))->flag & TOK_TYPE);
+				((t_token *)(lex->data))->flag & TOK_TYPE);
 		if (action >= SHIFT0 && action <= SHIFT54)
-			shift(lex, &state, action);
+			shift(&lex, &state, action);
 		else if (action >= REDUCE0 && action <= REDUCE37)
-		{
-			reduce(lex, &state, action);
-		}
+			reduce(&lex, &state, action);
 		if (action == GRAMMAR_ERROR || action == UNDEFINED
 			|| action == ACCEPT)
 		{
 			dbg("└END to %d\n\n", action - REDUCE0);
-			end_parser(lex, &state, action);
 			break ;
 		}
 	}
+	return (end_parser(&lex, &state, action));
 }

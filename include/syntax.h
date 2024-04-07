@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/02/12 16:37:22 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/07 18:15:27 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,53 +67,53 @@ typedef enum e_non_terminal
 	nt_io_redirect
 }	t_non_terminal;
 
-void	rule_nothing(t_dlst **lst, t_state **state);
+void		rule_nothing(t_dlst **lst, t_state **state);
 
-void	rule_and_or1(t_dlst **lex, t_state **state);
-void	rule_and_or2(t_dlst **lex, t_state **state);
+void		rule_and_or1(t_dlst **lex, t_state **state);
+void		rule_and_or2(t_dlst **lex, t_state **state);
 
-void	rule_pipeline(t_dlst **lex, t_state **state);
+void		rule_pipeline(t_dlst **lex, t_state **state);
 
-void	rule_command(t_dlst **lex, t_state **state);
+void		rule_command(t_dlst **lex, t_state **state);
 
-void	rule_group(t_dlst **lex, t_state **state);
+void		rule_group(t_dlst **lex, t_state **state);
 
-void	rule_subshell(t_dlst **lex, t_state **state);
+void		rule_subshell(t_dlst **lex, t_state **state);
 
-void	rule_simple1(t_dlst **lex, t_state **state);
-void	rule_simple2(t_dlst **lex, t_state **state);
-void	rule_simple3(t_dlst **lex, t_state **state);
-void	rule_simple4(t_dlst **lex, t_state **state);
-void	rule_simple5(t_dlst **lex, t_state **state);
+void		rule_simple1(t_dlst **lex, t_state **state);
+void		rule_simple2(t_dlst **lex, t_state **state);
+void		rule_simple3(t_dlst **lex, t_state **state);
+void		rule_simple4(t_dlst **lex, t_state **state);
+void		rule_simple5(t_dlst **lex, t_state **state);
 
-void	rule_prefix1(t_dlst **lex, t_state **state);
-void	rule_prefix2(t_dlst **lex, t_state **state);
-void	rule_prefix3(t_dlst **lex, t_state **state);
-void	rule_prefix4(t_dlst **lex, t_state **state);
+void		rule_prefix1(t_dlst **lex, t_state **state);
+void		rule_prefix2(t_dlst **lex, t_state **state);
+void		rule_prefix3(t_dlst **lex, t_state **state);
+void		rule_prefix4(t_dlst **lex, t_state **state);
 
-void	rule_suffix1(t_dlst **lex, t_state **state);
-void	rule_suffix2(t_dlst **lex, t_state **state);
-void	rule_suffix3(t_dlst **lex, t_state **state);
-void	rule_suffix4(t_dlst **lex, t_state **state);
+void		rule_suffix1(t_dlst **lex, t_state **state);
+void		rule_suffix2(t_dlst **lex, t_state **state);
+void		rule_suffix3(t_dlst **lex, t_state **state);
+void		rule_suffix4(t_dlst **lex, t_state **state);
 
-void	rule_redir_list(t_dlst **lex, t_state **state);
+void		rule_redir_list(t_dlst **lex, t_state **state);
 
-void	rule_redir1(t_dlst **lex, t_state **state);
-void	rule_redir2(t_dlst **lex, t_state **state);
-void	rule_redir3(t_dlst **lex, t_state **state);
-void	rule_redir4(t_dlst **lex, t_state **state);
-void	rule_redir5(t_dlst **lex, t_state **state);
-void	rule_redir6(t_dlst **lex, t_state **state);
-void	rule_redir7(t_dlst **lex, t_state **state);
-void	rule_redir8(t_dlst **lex, t_state **state);
+void		rule_redir1(t_dlst **lex, t_state **state);
+void		rule_redir2(t_dlst **lex, t_state **state);
+void		rule_redir3(t_dlst **lex, t_state **state);
+void		rule_redir4(t_dlst **lex, t_state **state);
+void		rule_redir5(t_dlst **lex, t_state **state);
+void		rule_redir6(t_dlst **lex, t_state **state);
+void		rule_redir7(t_dlst **lex, t_state **state);
+void		rule_redir8(t_dlst **lex, t_state **state);
 
-int		table_action(int state, int token);
-int		table_goto(int state, int n_terminal);
+int			table_action(int state, int token);
+int			table_goto(int state, int n_terminal);
 void	(*table_reduce(int rule))(t_dlst **, t_state **);
-int		table_nt_generate(int rule_id);
+int			table_nt_generate(int rule_id);
 
-void	pop_elements(t_dlst **lex, t_dlst **state, int n);
+void		pop_elements(t_dlst **lex, t_dlst **state, int n);
 
-void	syntax(t_dlst **lex);
+t_command	*syntax(t_dlst *lex);
 
 #endif

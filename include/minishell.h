@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:52:19 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:01:17 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 
 // Intern header
 # include "lexer.h"
-# include "syntax.h"
 # include "semantics.h"
+# include "syntax.h"
 # include "executer.h"
 # include "subsystem.h"
 # include "expansion.h"
