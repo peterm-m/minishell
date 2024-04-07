@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 20:11:02 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:26:06 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_path_name
 }	t_path_name;
 
 void	ft_execle(t_word_list *args);
-char	**list_to_arr(t_word_list *words);
 
 int		execute_command(t_command *cmd, int fd_in, int fd_out);
 void	execute_simple(t_command *cmd, int fd_in, int fd_out);

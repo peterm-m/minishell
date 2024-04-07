@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:40:21 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:23:55 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_arr(char **arr)
+void	clean_argv(char **arr)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ void	clean_arr(char **arr)
 	free(arr);
 }
 
-static size_t	get_size_arr(t_word_list *words)
+static size_t	get_size_argv(t_word_list *words)
 {
 	t_word_list	*tmp;
 	char		*str;
@@ -62,7 +62,7 @@ static char	**fill_arr(t_word_list *words, char **arr)
 	return (arr);
 }
 
-char	**list_to_arr(t_word_list *words)
+char	**list_to_argv(t_word_list *words)
 {
 	size_t	n_word;
 	char	**arr;

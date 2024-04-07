@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/07 17:48:10 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/07 19:25:58 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ NAMES := \
 	subsystem/directory.c \
 	subsystem/search_character.c\
 	subsystem/pathname.c \
-	subsystem/array.c \
+	subsystem/argv.c \
 	\
 	executer/execute_builtin.c \
 	executer/execute_command.c \

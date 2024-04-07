@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 17:32:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:23:55 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	execute_builtin(t_word_list *words, int fd_out)
 	char	**argv;
 	int		status;
 
-	argv = list_to_arr(words);
+	argv = list_to_argv(words);
 	status = -1;
 	if (fd_out == NO_PIPE)
 		fd_out = STDOUT_FILENO;
@@ -63,7 +63,7 @@ int	execute_builtin(t_word_list *words, int fd_out)
 		status = pwd_main(fd_out);
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		status = unset_main(argv);
-	clean_arr(argv);
+	clean_argv(argv);
 	if (status != -1)
 		g_exit_status = status;
 	return (status);
@@ -72,7 +72,7 @@ int	execute_builtin(t_word_list *words, int fd_out)
 {
 	char	**argv;
 
-	argv = list_to_arr(words);
+	argv = list_to_argv(words);
 	if (fd_out == NO_PIPE)
 		fd_out = STDOUT_FILENO;
 	if (ft_strncmp(argv[0], "cd", 3) == 0)
@@ -89,6 +89,6 @@ int	execute_builtin(t_word_list *words, int fd_out)
 		g_exit_status = pwd_main(fd_out);
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		g_exit_status = unset_main(argv);
-	clean_arr(argv);
+	clean_argv(argv);
 	return (-1);
 } */
