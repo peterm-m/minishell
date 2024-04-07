@@ -1,1 +1,3 @@
 get_word: ~$HOME	OK
+quote_remove quote_removal.c:26 -> ("ls"), "ls" ok
+clean_redirection redirections.c:50 -> ls ("sdfghjk")

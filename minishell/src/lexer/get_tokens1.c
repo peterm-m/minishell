@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:44 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/07 13:09:10 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:22:53 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ int	get_string(char *str, int i, t_token *token, int d_quote)
 	}
 	if (!in_word(str[i + j]) && !ft_isdigit(str[i + j]))
 	{
-		while (!in_word(str[i + j++]) && str[i + j])
+		while (!in_word(str[i + j]) && str[i + j] && str[i + j] != ')')
 		{
 			if (str[i + j] == '$' && !is_blankspace(str[i + j + 1])
 				&& !is_quotes(str[i + j + 1]) && d_quote)
 				token->flag |= get_dolar_type(str, i + j);
+			j++;
 		}
 	}
 	set_token(&str[i], j, tt_word, token);
