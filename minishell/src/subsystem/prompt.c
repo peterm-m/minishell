@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/05 19:42:11 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:18:55 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ char	*get_prompt(void)
 	char	*prompt;
 
 	directory = ft_strrchr(getcwd(pwd, PATH_MAX), '/');
-	prompt = ft_strjoin(BHMAG PROMPT, " (" BHCYN);
-	prompt = ft_strjoin(prompt, directory + 1);
+	prompt = ft_strjoin(BHMAG PROMPT BHCYN, directory + 1);
 	prompt = ft_strjoin(prompt, BHMAG") -> "END);
 	return (prompt);
 }

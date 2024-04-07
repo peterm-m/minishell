@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:32:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/03 12:30:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 11:51:08 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	execute_command(t_command *cmd, int fd_in, int fd_out)
 {
 	if (cmd->type == cmd_simple)
 	{
-		if (is_builtin(cmd->value.simple->words->word))
-			g_exit_status = execute_builtin(cmd->value.simple->words, fd_out);
-		else
+		if (execute_builtin(cmd->value.simple->words, fd_out) == -1)
 			execute_simple(cmd, fd_in, fd_out);
 	}
 	else if (cmd->type == cmd_connection)

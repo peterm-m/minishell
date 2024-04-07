@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokens2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:39 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/04 19:43:22 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 10:57:37 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_ionumber(char *str, int i, t_token *token)
 		set_token(str + i, j, tt_word, token);
 		token->flag = tt_io_number;
 	}
-	else if (str[i + j] == '=')
+	else if (!in_word(str[i + j]))
 	{
 		while (!in_word(str[i + j]) && str[i + j])
 			j++;
