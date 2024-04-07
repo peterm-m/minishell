@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 13:22:40 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/06 18:03:11 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:27:13 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static int	search_path(char *name, t_path_name *path)
 
 int	get_pathname(char *name, t_path_name *path)
 {
-	int	len_name;
-
 	if (ft_strchr((const char *)name, '/') != NULL)
 		return (ft_strlcpy(path->path_name, name, PATH_MAX));
 	else
