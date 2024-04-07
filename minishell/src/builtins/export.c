@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/05 19:49:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:28:18 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	exit_not_identifier(char *cmd)
 {
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd("export: ", 2);
-	ft_putstr_fd("not an identifier\n", 2);
+	ft_putstr_fd("export: '", 2);
 	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd("' not a valid identifier\n", 2);
 	return (EXIT_FAILURE);
 }
 
@@ -44,13 +44,11 @@ int	export_args(char **argv)
 		valid = 0;
 		while (argv[j][i])
 		{
-			printf("cadena: %s; %c \n", argv[j], argv[j][0]);
+			if (ft_isdigit(argv[j][0]))
+				return (exit_not_identifier(argv[j]));
 			if (argv[j][i] == '=' && valid == 0)
 			{
-				if (ft_isdigit(argv[j][0] == 1))
-					return (exit_not_identifier(argv[j]));
-				else
-					ft_putenv(argv[j]);
+				ft_putenv(argv[j]);
 				valid = 1;
 			}
 			i++;

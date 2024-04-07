@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/05 19:53:04 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 10:47:09 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sort_env(void)
 		j = i + 1;
 		while (j < env_len)
 		{
-			if (strcmp(environ[i], environ[j]) > 0)
+			if (ft_strncmp(environ[i], environ[j], ft_strlen(environ[i])) > 0)
 			{
 				aux = environ[i];
 				environ[i] = environ[j];

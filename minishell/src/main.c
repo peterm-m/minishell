@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:45:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:28:47 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_status;
+
+/* void print_lexer(t_token *token) // ¡NO BORRAR!
+{
+	printf(BHYEL"token: %s\n FLAG: %i\n"END,token->str, token->flag);
+} */
 
 static int	interactive_loop(void)
 {
