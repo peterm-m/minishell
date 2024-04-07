@@ -1,0 +1,24 @@
+
+CD
+------------------
+sin argumentos y sin HOME
+sin argumentos y con HOME
+
+argumento empieza con /
+si primer componente de directory empieza con . o ..
+
+si existe CDPATH
+
+ECHO
+------------------
+
+
+
+PWD
+------------------
+Print the absolute pathname of the current working directory
+The return status is zero unless an error is encountered while determining the name of the current directory or an invalid option is supplied.
+
+
+EXPORT
+------------------

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/07 12:18:55 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:42:49 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO checkear
 
 void	setup_term(void)
 {
@@ -22,6 +24,9 @@ void	setup_term(void)
 		|| isatty(STDOUT_FILENO) == 0)
 		exit(EXIT_SUCCESS);
 }
+
+// TODO: leaks and check NULL
+//	only change if change cwd
 
 char	*get_prompt(void)
 {
