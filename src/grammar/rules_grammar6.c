@@ -73,7 +73,7 @@ void	rule_redir7(t_dlst **lex, t_state **state) // CHECK
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_reading_until, &dest, 0);
 	heredoc((t_redirect *)out, dest.filename);
-	printf("Llamando heredoc desde rules_grammar6.c: rule7->\nheredoc guardado en here_doc_eof: %s\n", ((t_redirect *)out)->here_doc_eof);
+	printf("Llamando heredoc desde rules_grammar6.c: rule7->\nheredoc guardado en here_doc_eof:\n"BHRED"%s"END, ((t_redirect *)out)->dest.filename);
 	pop_elements(lex, state, 1);
 }
 
