@@ -3,6 +3,9 @@ quote_remove quote_removal.c:26 -> ("ls"), "ls" OK
 clean_redirection redirections.c:50 -> ls ("sdfghjk")
 execute_builtin.c:54 -> $VAR_NO_EXISTE OK
 
+ft_putendl_fd.c:21 -> al hacer 'export KEY=VALUE' y luego 'env' dar error, en el bucle que 
+	imprime las variables: mirar env para ver posible solución
+También hay un error al hacer 'export KEY=VALUE' y luego 'export'
 ls
 ls || ls
 ls && ls
