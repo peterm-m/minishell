@@ -67,7 +67,7 @@ char	**list_to_argv(t_word_list *words)
 	size_t	n_word;
 	char	**arr;
 
-	n_word = get_size_arr(words);
+	n_word = get_size_argv(words);
 	arr = ft_calloc((n_word + 1), sizeof(char *));
 	arr = fill_arr(words, arr);
 	return (arr);

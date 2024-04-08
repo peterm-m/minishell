@@ -39,11 +39,12 @@ void	heredoc(t_redirect *redir, char *delimiter)
 {
 	char	*line;
 	char	*del;
+	char	*full_heredoc;
 	int		expand;
 
 	line = NULL;
 	expand = 1;
-	if (is_quotes(delimiter[0]) && is_quotes(delimiter[ft_strlen(delimiter)]))
+	if (is_quotes(delimiter[0]) && is_quotes(delimiter[ft_strlen(delimiter) - 1]))
 	{
 		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);
@@ -56,8 +57,13 @@ void	heredoc(t_redirect *redir, char *delimiter)
 		if (!line || ft_strncmp(line, del, ft_strlen(del) + 1) == 0)
 			break ;
 		line = ft_expand_heredoc(line, expand);
-		redir->here_doc_eof = ft_strjoin(redir->here_doc_eof, line);
-		redir->here_doc_eof = ft_strjoin(redir->here_doc_eof, "\n");
+		if (full_heredoc == NULL)
+			full_heredoc = ft_strdup(line);
+		else
+			full_heredoc = ft_strjoin(full_heredoc, line);
+		full_heredoc = ft_strjoin(full_heredoc, "\n");
 	}
+	ft_free(redir->dest.filename);
+	redir->dest.filename = full_heredoc;
 	free(line);
 }

@@ -29,7 +29,8 @@ void	pop_elements(t_dlst **lex, t_dlst **state, int n)
 		tmp = (*state)->next;
 		ft_dlstdelone(*state, ft_free);
 		*state = tmp;
-		tmp = (*node)->prev;
+		printf("prev= %s\n", ((t_token *)(*node)->prev->data)->str);
+		tmp = (*node)->prev; //TODO: Error porque aquí (*node)->prev es NULL
 		if (tmp->prev != NULL)
 			tmp->prev->next = *node;
 		(*node)->prev = tmp->prev;
