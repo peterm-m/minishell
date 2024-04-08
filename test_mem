@@ -1,7 +1,7 @@
 get_word: ~$HOME	OK
-quote_remove quote_removal.c:26 -> ("ls"), "ls" ok
+quote_remove quote_removal.c:26 -> ("ls"), "ls" OK
 clean_redirection redirections.c:50 -> ls ("sdfghjk")
-execute_builtin.c:54 -> $VAR_NO_EXISTE
+execute_builtin.c:54 -> $VAR_NO_EXISTE OK
 
 ls
 ls || ls

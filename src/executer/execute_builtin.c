@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 19:23:55 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/08 19:25:34 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ int	execute_builtin(t_word_list *words, int fd_out)
 	status = -1;
 	if (fd_out == NO_PIPE)
 		fd_out = STDOUT_FILENO;
-	if (ft_strncmp(argv[0], "cd", 3) == 0)
+	if (argv[0] && ft_strncmp(argv[0], "cd", 3) == 0)
 		status = cd_main(argv, fd_out);
-	else if (ft_strncmp(argv[0], "echo", 5) == 0)
+	else if (argv[0] && ft_strncmp(argv[0], "echo", 5) == 0)
 		status = echo_main(argv, fd_out);
-	else if (ft_strncmp(argv[0], "env", 4) == 0)
+	else if (argv[0] && ft_strncmp(argv[0], "env", 4) == 0)
 		status = env_main(fd_out);
-	else if (ft_strncmp(argv[0], "exit", 5) == 0)
+	else if (argv[0] && ft_strncmp(argv[0], "exit", 5) == 0)
 		status = exit_main(argv);
-	else if (ft_strncmp(argv[0], "export", 7) == 0)
+	else if (argv[0] && ft_strncmp(argv[0], "export", 7) == 0)
 		status = export_main(argv, fd_out);
-	else if (ft_strncmp(argv[0], "pwd", 4) == 0)
+	else if (argv[0] && ft_strncmp(argv[0], "pwd", 4) == 0)
 		status = pwd_main(fd_out);
-	else if (ft_strncmp(argv[0], "unset", 6) == 0)
+	else if (argv[0] && ft_strncmp(argv[0], "unset", 6) == 0)
 		status = unset_main(argv);
 	clean_argv(argv);
 	if (status != -1)
