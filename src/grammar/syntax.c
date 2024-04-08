@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 18:13:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:58:48 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
-#define LOGS 0
+#define LOGS 1
 
 // TODO testeo clean structuras
 // TODO end_parser
@@ -58,8 +58,9 @@ static t_command	*end_parser(t_dlst **lex, t_state **state, int action)
 	t_command	*cmd;
 
 	cmd = (*lex)->prev->data;
-	ft_free((*state)->next->data);
-	ft_free((*state)->data);
+	ft_free((*lex)->prev);
+	ft_dlstclear(state, ft_free);
+	ft_dlstdelone(*lex, ft_free);
 	if (action == ACCEPT)
 		return (cmd);
 	return (NULL);
