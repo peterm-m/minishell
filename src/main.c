@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 18:12:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:04:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	g_exit_status;
 
-/* void print_lexer(t_token *token) // ¡NO BORRAR!
+/*
+void print_lexer(t_token *token) // ¡NO BORRAR!
 {
-	printf(BHYEL"token: %s\n FLAG: %i\n"END,token->str, token->flag);
-} */
+	printf(BHYEL"token: %s\t FLAG: %i puntero token: %p\t puntero string: \
+		%p\n"END,token->str, token->flag, token, token->str);
+}
+*/
 
 static int	interactive_loop(void)
 {
@@ -32,7 +35,7 @@ static int	interactive_loop(void)
 		if (read_line == NULL)
 			break ;
 		tokens = lexer(read_line);
-		//ft_dlstiter(tokens, print_lexer);
+//		ft_dlstiter(tokens, print_lexer);
 		if (tokens == NULL)
 			continue ;
 		cmd = syntax(tokens);

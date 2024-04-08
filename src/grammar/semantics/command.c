@@ -3,30 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 00:59:42 by pedro             #+#    #+#             */
-/*   Updated: 2024/03/20 20:57:49 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:01:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
 #define LOGS 0
-
-void	print_command(t_command *cmd)
-{
-	if (cmd == NULL)
-		return ;
-	if (cmd->type == cmd_simple)
-		print_simple(cmd->value.simple);
-	else if (cmd->type == cmd_connection)
-		print_connection(cmd->value.connection);
-	else if (cmd->type == cmd_subshell)
-		print_subshell(cmd->value.subshell);
-	else if (cmd->type == cmd_group)
-		print_group(cmd->value.group);
-}
 
 void	clean_command(t_command *cmd)
 {

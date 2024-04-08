@@ -3,23 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_simple.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:56:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 20:50:42 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:01:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
 #define LOGS 0
-
-void	print_simple(t_simple *cmd)
-{
-	fprintf(stderr, "simple cmd: flag %d\nword: ", cmd->flags);
-	print_word(cmd->words);
-	fprintf(stderr, "redir: \n");
-}
 
 void	clean_simple(t_simple *cmd)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   semantics.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:21:43 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/03 20:06:17 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:50:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,38 +131,31 @@ typedef struct s_subshell
 
 t_command		*make_command(t_command_type type, t_node value);
 void			clean_command(t_command *cmd);
-void			print_command(t_command *cmd);
 t_command		*join_command_redir(t_command *cmd, t_redirect *redir);
 
 t_redirect		*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 					int flag);
 void			clean_redirection(t_redirect **redirection);
-void			print_redirection(t_redirect *redirection);
 void			join_redir(t_redirect **redir1, t_redirect *redir2);
 char			*make_filename(t_token	*token);
 
 t_word_list		*make_word(t_token *word);
 int				make_number(t_token *word);
 void			clean_word(t_word_list **word);
-void			print_word(t_word_list *word);
 void			join_word(t_word_list **word1, t_word_list *word2);
 
 t_command		*make_connection(t_command *cmd1, t_command *cmd2, int type);
 void			clean_connection(t_connection *connection);
-void			print_connection(t_connection *connection);
 
 t_command		*make_group(t_command *cmd);
 void			clean_group(t_group *group);
-void			print_group(t_group *group);
 
 t_command		*make_subshell(t_command *cmd);
 void			clean_subshell(t_subshell *subshell);
-void			print_subshell(t_subshell *subshell);
 
 t_command		*make_simple(t_element *prefix, t_word_list *word,
 					t_element *suffix);
 void			clean_simple(t_simple *cmd);
-void			print_simple(t_simple *cmd);
 
 t_element		*join_element(t_element *element1, t_element *element2);
 t_element		*make_element(t_word_list *word, t_redirect *redir);

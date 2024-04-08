@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 16:16:37 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/05 20:01:51 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:03:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void	*ft_malloc(size_t size)
 
 void	ft_free(void *ptr)
 {
+	printf("free -> %p\n", ptr);
 	free(ptr);
 }
 

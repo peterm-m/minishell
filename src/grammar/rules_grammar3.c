@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#undef LOGS 
+#define LOGS 0
 // POSIX RULE 18
-// simple_command : WORD cmd_suff
+// simple_command : WORD cmd_sufix
 
 void	rule_simple4(t_dlst **lex, t_state **state)
 {

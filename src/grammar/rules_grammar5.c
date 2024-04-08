@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#undef LOGS 
+#define LOGS 0
 // TODO push_heredoc
 // TODO : LEAK de redirecciones que no tiene io_number
 
@@ -43,16 +44,19 @@ void	rule_redir1(t_dlst **lex, t_state **state)
 {
 	void		**out;
 	t_token		*word;
+	t_token		*operator;
 	t_unit_io	source;
 	t_unit_io	dest;
 
 	dbg("│\t├─rule_redir1 %s\n", "");
-	word = (*lex)->prev->data;
 	out = &(*lex)->prev->data;
+	word = (*lex)->prev->data;
+	operator = (*lex)->prev->prev->data;
 	source.fd = STDOUT_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_input_direction, &dest, 0);
 	pop_elements(lex, state, 1);
+	free_token(operator);
 }
 
 // POSIX RULE 31
@@ -62,16 +66,19 @@ void	rule_redir2(t_dlst **lex, t_state **state)
 {
 	void		**out;
 	t_token		*word;
+	t_token		*operator;
 	t_unit_io	source;
 	t_unit_io	dest;
 
 	dbg("│\t├─rule_redir2 %s\n", "");
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
+	operator = (*lex)->prev->prev->data;
 	source.fd = STDOUT_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_output_direction, &dest, 0);
 	pop_elements(lex, state, 1);
+	free_token(operator);
 }
 
 // POSIX RULE 32
@@ -81,16 +88,19 @@ void	rule_redir3(t_dlst **lex, t_state **state)
 {
 	void		**out;
 	t_token		*word;
+	t_token		*operator;
 	t_unit_io	source;
 	t_unit_io	dest;
 
 	dbg("│\t├─rule_redir3 %s\n", "");
 	out = &(*lex)->prev->data;
 	word = (*lex)->prev->data;
+	operator = (*lex)->prev->prev->data;
 	source.fd = STDOUT_FILENO;
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_appending_to, &dest, 0);
 	pop_elements(lex, state, 1);
+	free_token(operator);
 }
 
 // POSIX RULE 33
@@ -112,4 +122,5 @@ void	rule_redir4(t_dlst **lex, t_state **state)
 	dest.filename = make_filename(word);
 	*out = make_redirection(&source, r_input_direction, &dest, 0);
 	pop_elements(lex, state, 2);
+	free_token((*lex)->prev->prev->data);
 }

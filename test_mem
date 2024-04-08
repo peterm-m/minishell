@@ -3,6 +3,12 @@ quote_remove quote_removal.c:26 -> ("ls"), "ls" ok
 clean_redirection redirections.c:50 -> ls ("sdfghjk")
 execute_builtin.c:54 -> $VAR_NO_EXISTE
 
+ls
+ls || ls
+ls && ls
+ls | ls
+
+
 lexer
 syntax
 expansion

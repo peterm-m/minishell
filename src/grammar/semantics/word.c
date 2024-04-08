@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:05:30 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/02 21:21:04 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:01:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #undef LOGS
 #define LOGS 0
 
-void	print_word(t_word_list *word)
-{
-	if (word != NULL)
-	{
-		fprintf(stderr, "%s,", word->word);
-		print_word(word->next);
-	}
-	else
-		fprintf(stderr, "\n");
-}
-
 void	clean_word(t_word_list **word)
 {
 	t_word_list	*aux;
@@ -33,6 +22,7 @@ void	clean_word(t_word_list **word)
 	while (*word)
 	{
 		aux = (*word)->next;
+		ft_free((*word)->word);
 		ft_free(*word);
 		*word = aux;
 	}

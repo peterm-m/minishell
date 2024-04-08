@@ -6,13 +6,13 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 12:58:48 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:08:10 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
-#define LOGS 1
+#define LOGS 0
 
 // TODO testeo clean structuras
 // TODO end_parser
@@ -60,7 +60,8 @@ static t_command	*end_parser(t_dlst **lex, t_state **state, int action)
 	cmd = (*lex)->prev->data;
 	ft_free((*lex)->prev);
 	ft_dlstclear(state, ft_free);
-	ft_dlstdelone(*lex, ft_free);
+	ft_dlstdelone((*lex)->next, free_token);
+	ft_dlstdelone(*lex, free_token);
 	if (action == ACCEPT)
 		return (cmd);
 	return (NULL);

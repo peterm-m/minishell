@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:03:41 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/03 19:40:27 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:11:28 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	expander(t_token *input)
 	if (input->flag & (WILDCARD | QUEST))
 	{
 		aux = filename_expansion(input->str);
-		free(input->str);
+		ft_free(input->str);
 		input->str = aux;
 	}
 	quote_remove(input->str);

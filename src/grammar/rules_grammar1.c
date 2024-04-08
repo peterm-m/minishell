@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#undef LOGS 
+#define LOGS 0
 // TODO: dejar solo un nodeo en la lista que sea lo que hay que ejecutar
 
 void	rule_nothing(t_dlst **lst, t_state **state)
@@ -40,14 +41,17 @@ void	rule_and_or1(t_dlst **lex, t_state **state)
 {
 	void		**out;
 	t_command	*pipeline;
+	t_token		*operator;
 	t_command	*and_or;
 
 	dbg("│\t├─rule_and_or1%s\n", "");
 	out = &(*lex)->prev->data;
 	pipeline = (*lex)->prev->data;
+	operator = (*lex)->prev->prev->data;
 	and_or = (*lex)->prev->prev->prev->data;
 	*out = make_connection(and_or, pipeline, tt_and_if);
 	pop_elements(lex, state, 2);
+	ft_free(operator);
 }
 
 // POSIX RULE 5
@@ -57,14 +61,17 @@ void	rule_and_or2(t_dlst **lex, t_state **state)
 {
 	void		**out;
 	t_command	*pipeline;
+	t_token		*operator;
 	t_command	*and_or;
 
 	dbg("│\t├─rule_and_or2%s\n", "");
 	out = &(*lex)->prev->data;
 	pipeline = (*lex)->prev->data;
+	operator = (*lex)->prev->prev->data;
 	and_or = (*lex)->prev->prev->prev->data;
 	*out = make_connection(and_or, pipeline, tt_or_if);
 	pop_elements(lex, state, 2);
+	ft_free(operator);
 }
 
 // POSIX RULE 6
@@ -76,15 +83,18 @@ void	rule_and_or2(t_dlst **lex, t_state **state)
 void	rule_pipeline(t_dlst **lex, t_state **state)
 {
 	void		**out;
+	t_token		*operator;
 	t_command	*command;
 	t_command	*pipeline;
 
 	dbg("│\t├─rule_pipeline%s\n", "");
 	out = &(*lex)->prev->data;
 	command = (*lex)->prev->data;
+	operator = (*lex)->prev->prev->data;
 	pipeline = (*lex)->prev->prev->prev->data;
 	*out = make_connection(pipeline, command, tt_pipe);
 	pop_elements(lex, state, 2);
+	ft_free(operator);
 }
 
 // POSIX RULE 8

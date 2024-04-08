@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#undef LOGS 
+#define LOGS 0
 // POSIX RULE 23
 // cmd_prefix : cmd_prefix ASSIGNMENT_WORD
 

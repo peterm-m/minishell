@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 17:33:03 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:11:49 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*parameter_value(char *str, int start_expan, int end_expan)
 	{
 		name = ft_substr(str, start_expan, end_expan - start_expan);
 		value = ft_getenv(name);
-		free(name);
+		ft_free(name);
 		if (!value)
 			return (NULL);
 		value = ft_strdup(value);
@@ -51,12 +51,12 @@ char	*make_expansion(char *str, int start_expan)
 	aux[2] = ft_substr(str, end_expan, INT_MAX);
 	out = ft_strnjoin((char **)aux, 3);
 	if (aux[0])
-		free(aux[0]);
+		ft_free(aux[0]);
 	if (aux[1])
-		free(aux[1]);
+		ft_free(aux[1]);
 	if (aux[2])
-		free(aux[2]);
-	free(str);
+		ft_free(aux[2]);
+	ft_free(str);
 	return (out);
 }
 

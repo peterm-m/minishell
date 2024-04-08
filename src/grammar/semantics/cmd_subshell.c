@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_subshell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:50:53 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/04 19:43:46 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:01:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #undef LOGS 
 #define LOGS 0
-
-void	print_subshell(t_subshell *subshell)
-{
-	fprintf(stderr, "subshell: flags %d\n", subshell->flags);
-	print_command(subshell->command);
-}
 
 void	clean_subshell(t_subshell *subshell)
 {

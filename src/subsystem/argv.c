@@ -1,16 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array.c                                            :+:      :+:    :+:   */
+/*   argv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 19:23:55 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/08 16:06:56 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**ft_copyarg(char **argv)
+{
+	size_t	size_env;
+	char	**new_env;
+
+	size_env = 0;
+	while (environ[size_env] != NULL)
+		size_env++;
+	new_env = malloc((size_env +1) * sizeof(char **));
+	if (new_env == NULL)
+		return (NULL);
+	new_env[size_env] = environ[size_env];
+	size_env--;
+	while (--size_env > 0)
+	{
+		new_env[size_env] = ft_strdup(environ[size_env]);
+		if (new_env[size_env] == NULL)
+		{
+			while (environ[++size_env] != NULL)
+				ft_free(new_env[size_env]);
+			ft_free(new_env);
+			return (NULL);
+		}
+	}
+	return (new_env);
+}
 
 void	clean_argv(char **arr)
 {
@@ -18,8 +45,8 @@ void	clean_argv(char **arr)
 
 	i = 0;
 	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	ft_free(arr[i++]);
+ft_free(arr);
 }
 
 static size_t	get_size_argv(t_word_list *words)
@@ -56,7 +83,7 @@ static char	**fill_arr(t_word_list *words, char **arr)
 		j = 0;
 		while (arr2[j] != NULL)
 			arr[i++] = arr2[j++];
-		free(arr2);
+	ft_free(arr2);
 		tmp = tmp->next;
 	}
 	return (arr);
