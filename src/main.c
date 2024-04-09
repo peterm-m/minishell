@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 18:04:29 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:51:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,19 @@ static int	interactive_loop(void)
 			continue ;
 		execute_command(cmd, NO_PIPE, NO_PIPE);
 		clean_command(cmd);
+		ft_free(read_line);
 		rl_on_new_line();
 	}
 	rl_clear_history();
 	return (0);
 }
 
+//void lk() {system("leaks minishell");}
+
 int	main(void)
 {
 	g_exit_status = 0;
+//	atexit(lk);
 	setup_term();
 	initial_signals();
 	interactive_loop();

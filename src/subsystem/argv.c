@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 16:06:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:21:50 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ char	**ft_copyarg(char **argv)
 	char	**new_env;
 
 	size_env = 0;
-	while (environ[size_env] != NULL)
+	while (argv[size_env] != NULL)
 		size_env++;
-	new_env = malloc((size_env +1) * sizeof(char **));
+	new_env = ft_malloc((size_env +1) * sizeof(char **));
 	if (new_env == NULL)
 		return (NULL);
-	new_env[size_env] = environ[size_env];
+	new_env[size_env] = argv[size_env];
 	size_env--;
 	while (--size_env > 0)
 	{
-		new_env[size_env] = ft_strdup(environ[size_env]);
+		new_env[size_env] = ft_strdup(argv[size_env]);
 		if (new_env[size_env] == NULL)
 		{
-			while (environ[++size_env] != NULL)
+			while (argv[++size_env] != NULL)
 				ft_free(new_env[size_env]);
 			ft_free(new_env);
 			return (NULL);
@@ -45,8 +45,8 @@ void	clean_argv(char **arr)
 
 	i = 0;
 	while (arr[i])
-	ft_free(arr[i++]);
-ft_free(arr);
+		ft_free(arr[i++]);
+	ft_free(arr);
 }
 
 static size_t	get_size_argv(t_word_list *words)
@@ -83,7 +83,7 @@ static char	**fill_arr(t_word_list *words, char **arr)
 		j = 0;
 		while (arr2[j] != NULL)
 			arr[i++] = arr2[j++];
-	ft_free(arr2);
+		ft_free(arr2);
 		tmp = tmp->next;
 	}
 	return (arr);
