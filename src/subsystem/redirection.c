@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/09 19:52:15 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:48:38 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	open_redir(t_redirect *redirections)
 	int			fd;
 
 	redir = redirections;
-	while (redir != NULL)
+	while (redir != NULL && redirections->option != r_reading_until)
 	{
 		fd = ft_open(redir->dest.filename, redir->mode_bits,
 				(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));

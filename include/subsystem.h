@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 15:57:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:05:35 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ char	**list_to_argv(t_word_list *words);
 void	clean_argv(char **arr);
 char	**ft_copyarg(char **argv);
 
-void	heredoc(t_redirect *redir, char *delimiter);
+char	*heredoc(char *delimiter);
 
 #endif
