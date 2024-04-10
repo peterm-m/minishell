@@ -10,8 +10,12 @@ ls
 ls || ls
 ls && ls
 ls | ls
+ls > out
+< out ls ; SEGF
 
+ls || && && | :leaks
 
+ ls && pwd && || // ; SEGF
 lexer
 syntax
 expansion
