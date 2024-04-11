@@ -6,14 +6,14 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:08:35 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/09 19:49:52 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:20:44 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 #undef LOGS
-#define LOGS 0
+#define LOGS 1
 
 t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	int flag)
@@ -36,7 +36,7 @@ t_redirect	*make_redirection(t_unit_io *source, int type, t_unit_io *dest,
 	else if (type == r_input_direction)
 		redirect->mode_bits = O_RDONLY;
 	else if (type == r_reading_until)
-		redirect->mode_bits = 0;
+		redirect->dest.filename = heredoc(dest->filename);
 	else
 		printf("Error pipeline \n");
 	return (redirect);
