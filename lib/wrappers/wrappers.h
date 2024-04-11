@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/10 19:50:57 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:27:59 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		ft_free(void *ptr);
 # endif
 
 # ifndef LOGS
-#  define LOGS 1
+#  define LOGS 0
 # endif
 
 # define dbg(fmt,...) \
@@ -103,6 +103,10 @@ int			ft_unsetenv(const char *name);
 int			ft_putenv(char *string);
 int			ft_clearenv(void);
 int			ft_dup2(int fd1, int fd2);
+void		ft_initenv(void);
+char		*ft_getvar(const char *name);
+
+
 
 #endif
 

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_initenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 19:50:17 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/11 19:33:56 by adiaz-uf         ###   ########.fr       */
+/*   Created: 2024/04/11 20:11:11 by adiaz-uf          #+#    #+#             */
+/*   Updated: 2024/04/11 20:19:42 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-int	pwd_main(int fd)
+void	ft_initenv(void)
 {
-	char pwd[PATH_MAX];
+	int	i;
 
-	if (getcwd(pwd, PATH_MAX) == NULL)
-	{
-		ft_putendl_fd("pwd: Error\n", fd);
-		return (EXIT_FAILURE);
-	}
-	ft_putendl_fd(pwd, fd);
-	return (EXIT_SUCCESS);
+	i = 0;
+	while (environ[i])
+		ft_putenv(strdup(environ[i++]));
 }
+

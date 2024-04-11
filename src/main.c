@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/09 19:51:54 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:54:08 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,17 @@ static int	interactive_loop(void)
 		rl_on_new_line();
 	}
 	rl_clear_history();
+	ft_clearenv();
 	return (0);
 }
 
-//void lk() {system("leaks minishell");}
+void lk() {system("leaks minishell");}
 
 int	main(void)
 {
+	ft_initenv();
 	g_exit_status = 0;
-//	atexit(lk);
+	atexit(lk);
 	setup_term();
 	initial_signals();
 	interactive_loop();

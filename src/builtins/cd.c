@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/10 19:37:25 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:52:28 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,33 @@
 
 static int	update_pwd(int fd)
 {
+	char	*last_pwd;
 	char	pwd[PATH_MAX];
 	char	new_pwd[PATH_MAX];
-	char	*aux;
 
 	if (getcwd(pwd, PATH_MAX) == NULL)
 	{
 		ft_putendl_fd("Error\n", fd);
 		return (EXIT_FAILURE);
 	}
-	aux = new_pwd;
-	aux += ft_strlcpy(aux, "PWD=", PATH_MAX);
-	aux += ft_strlcpy(aux, getcwd(pwd, PATH_MAX), PATH_MAX);
-	ft_putenv(new_pwd);
+	ft_strlcpy(new_pwd, "PWD=", PATH_MAX);
+	ft_strlcat(new_pwd, getcwd(pwd, PATH_MAX), PATH_MAX);
+	last_pwd = ft_getvar("PWD");
+	ft_free(last_pwd);
+	ft_putenv(ft_strdup(new_pwd));
 	return (EXIT_SUCCESS);
 }
 
 static int	update_oldpwd(int fd)
 {
+	char	*last_old_pwd;
 	char	*old_pwd;
 
 	if (ft_getenv("PWD") == NULL)
 		return (EXIT_FAILURE);
 	old_pwd = ft_strjoin("OLDPWD=", ft_getenv("PWD"));
+	last_old_pwd = ft_getvar("OLDPWD");
+	ft_free(last_old_pwd);
 	ft_putenv(old_pwd);
 	if (update_pwd(fd) == EXIT_FAILURE || !old_pwd)
 		return (EXIT_FAILURE);
