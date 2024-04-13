@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/10 21:14:18 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/13 11:41:38 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +39,17 @@ TESTDIR := .test
 BINDIR := .build
 LOGDIR := .log
 
-CC := clang
+CC := gcc
 
 STD := -std=gnu99
 
 STACK := -fstack-protector-all -Wstack-protector
 
-WARNS := -Wall -Wextra 
+WARNS := -Wall -Wextra -Werror
 
 CFLAGS := $(STD) $(STACK) $(WARNS)
 
-DEBUG := -g3 -fsanitize=address
+DEBUG := -g3 
 
 DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
@@ -76,24 +76,12 @@ NAMES := \
 	lexer/tokenize_utils.c \
 	lexer/lexer_utils.c \
 	\
-	grammar/utils.c \
 	grammar/syntax.c \
-	grammar/tables.c \
-	grammar/rules_grammar1.c \
-	grammar/rules_grammar2.c \
-	grammar/rules_grammar3.c \
-	grammar/rules_grammar4.c \
-	grammar/rules_grammar5.c \
-	grammar/rules_grammar6.c \
-	\
-	grammar/semantics/command.c \
-	grammar/semantics/cmd_group.c \
-	grammar/semantics/cmd_simple.c \
-	grammar/semantics/cmd_subshell.c \
-	grammar/semantics/element.c \
-	grammar/semantics/word.c \
-	grammar/semantics/redirections.c \
-	grammar/semantics/cmd_connection.c \
+	grammar/clean.c \
+	grammar/command.c \
+	grammar/word.c \
+	grammar/token.c \
+	grammar/redirection.c \
 	\
 	expansion/expander.c \
 	expansion/parameter_expansion.c \

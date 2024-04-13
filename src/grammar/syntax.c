@@ -3,107 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 17:08:10 by pedromar         ###   ########.fr       */
+/*   Created: 2024/04/11 14:21:06 by pedromar          #+#    #+#             */
+/*   Updated: 2024/04/13 12:07:40 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#undef LOGS 
-#define LOGS 0
 
-// TODO testeo clean structuras
-// TODO end_parser
-
-/*
-	A Shift step advances in the token list by one symbol.
-*/
-
-static void	shift(t_dlst **lex, t_state **state, int action)
+static t_command	*make_command(t_dlst **lex)
 {
-	t_state	*new;
+	t_command	*command;
 
-	dbg("├SHIFT to %d\n", action);
-	new = ft_dlstnew(ft_malloc(sizeof(int)));
-	*((int *)new->data) = action;
-	ft_dlstaddf(state, new);
-	*lex = (*lex)->next;
-	return ;
+	if (token_type(lex) == tt_lbraket)
+		command = make_subshell(lex);
+		// si error en make subshell
+	else
+		command = make_simple(lex);
+		// si error en simple
+	return (command);
 }
 
-/*
-	Reduce applies a grammar rule to some of the recent parse trees,
-	joining them together as one tree with a new root symbol.
-*/
-
-static void	reduce(t_dlst **lex, t_state **state, int action)
+static t_command	*make_pipeline(t_dlst **lex)
 {
-	int		id_rule;
+	t_token		*tok;
+	t_command	*pipeline;
+	t_command	*first;
+	t_command	*second;
 
-	dbg("├REDUCE to %d\n", action - REDUCE0);
-	id_rule = action - REDUCE0;
-	table_reduce(action - REDUCE0)(lex, state);
-	*((int *)(*state)->data) = table_goto(*((int *)(*state)->next->data),
-			table_nt_generate(id_rule));
-	return ;
-}
-
-// En caso de error implementar la limpieza
-// En caso de error implementar diagnostico
-
-static t_command	*end_parser(t_dlst **lex, t_state **state, int action)
-{
-	t_command	*cmd;
-
-	cmd = (*lex)->prev->data;
-	ft_free((*lex)->prev);
-	ft_dlstclear(state, ft_free);
-	ft_dlstdelone((*lex)->next, free_token);
-	ft_dlstdelone(*lex, free_token);
-	if (action == ACCEPT)
-		return (cmd);
-	return (NULL);
-}
-
-// TODO
-//if (action == ACCEPT)
-//	printf("END PARSER\n");
-//else
-//	printf("Syntax Error.\n");
-//dbg("├CLEAN %s\n", "");
-//ft_dlstdelone((*lex)->prev, print_command);
-//ft_dlstdelone((*lex)->prev, clean_command);
-//ft_dlstclear(state, ft_free);
-//exit(EXIT_SUCCESS);
-
-/*
-	Loop for LR-parser
-	https://en.wikipedia.org/wiki/LR_parser
-*/
-
-t_command	*syntax(t_dlst *lex)
-{
-	int			action;
-	t_state		*state;
-
-	state = ft_dlstnew(ft_malloc(sizeof(int)));
-	*((int *)state->data) = 0;
-	while (1)
+	first = make_command(lex);
+	if (token_type(lex) != tt_pipe)
+		return (first);
+	while (token_type(lex) == tt_pipe)
 	{
-		action = table_action(*((int *)state->data),
-				((t_token *)(lex->data))->flag & TOK_TYPE);
-		if (action >= SHIFT0 && action <= SHIFT54)
-			shift(&lex, &state, action);
-		else if (action >= REDUCE0 && action <= REDUCE37)
-			reduce(&lex, &state, action);
-		if (action == GRAMMAR_ERROR || action == UNDEFINED
-			|| action == ACCEPT)
+		tok = pop_token(lex);
+		pipeline = new_command(cmd_connection);
+		// si error
+		pipeline->value.connection->connector = (tok->flag & TOK_TYPE);
+		free_token(tok);
+		pipeline->value.connection->first = first;
+		second = make_command(lex);
+		// si error;
+		pipeline->value.connection->second = second;
+		first = pipeline;
+	}
+	return (first);
+}
+
+static t_command	*make_and_or(t_dlst **lex)
+{
+	t_token		*tok;
+	t_command	*and_or;
+	t_command	*first;
+	t_command	*second;
+
+	first = make_pipeline(lex);
+	if (token_type(lex) != tt_pipe)
+		return (first);
+	while (token_type(lex) == tt_pipe)
+	{
+		tok = pop_token(lex);
+		and_or = new_command(cmd_connection);
+		// si error
+		and_or->value.connection->connector = (tok->flag & TOK_TYPE);
+		free_token(tok);
+		and_or->value.connection->first = first;
+		second = make_pipeline(lex);
+		// si error;
+		and_or->value.connection->second = second;
+		first = and_or;
+	}
+	return (first);
+}
+
+t_command	*syntax(t_dlst **lex)
+{
+	t_command	*program;
+
+	while (token_type(lex) != tt_end)
+	{
+		program = make_and_or(lex);
+		if (token_type(lex) != tt_end)
 		{
-			dbg("└END to %d\n\n", action - REDUCE0);
+			// error
 			break ;
 		}
 	}
-	return (end_parser(&lex, &state, action));
+	return (program);
 }

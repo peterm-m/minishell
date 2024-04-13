@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 19:26:06 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ typedef struct s_path_name
 	char	path_name[PATH_MAX];
 }	t_path_name;
 
-void	ft_execle(t_word_list *args);
+void	ft_execle(t_word *args);
 
 int		execute_command(t_command *cmd, int fd_in, int fd_out);
 void	execute_simple(t_command *cmd, int fd_in, int fd_out);
-int		execute_builtin(t_word_list *words, int fd_out);
+int		execute_builtin(t_word *words, int fd_out);
 int		execute_connection(t_command *cmd, int fd_in, int fd_out);
 void	execute_subshell(t_subshell *cmd, int fd_in, int fd_out);
 

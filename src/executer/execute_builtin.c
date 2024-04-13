@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 19:25:34 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_builtin(char *str)
 // salida la cambies por
 //			writes que envien la salida al archivo
 
-int	execute_builtin(t_word_list *words, int fd_out)
+int	execute_builtin(t_word *words, int fd_out)
 {
 	char	**argv;
 	int		status;
@@ -68,7 +68,7 @@ int	execute_builtin(t_word_list *words, int fd_out)
 		g_exit_status = status;
 	return (status);
 }
-/* int	execute_builtin(t_word_list *words, int fd_out)
+/* int	execute_builtin(t_word *words, int fd_out)
 {
 	char	**argv;
 

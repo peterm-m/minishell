@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/10 21:13:46 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	sigint_handler(int sig);
 int		num_files_dir(char *name);
 char	**get_file_names(char *name);
 
-char	**list_to_argv(t_word_list *words);
+char	**list_to_argv(t_word *words);
 void	clean_argv(char **arr);
 char	**ft_copyarg(char **argv);
 

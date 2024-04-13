@@ -28,7 +28,6 @@ SRCS = \
 	ft_execve.c\
 	ft_fork.c\
 	ft_lstat.c\
-	ft_initenv.c\
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 
@@ -38,7 +37,7 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 
-CC = clang
+CC = gcc
 DIR_DUP = mkdir -p $(@D)
 CLEANER = rm -rf
 

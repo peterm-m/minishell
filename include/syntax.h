@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 18:15:27 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 12:10:38 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,105 +15,102 @@
 
 # include "minishell.h"
 
-// tokens in grammar
-# define NUM_TOKEN 15
+t_terminals	token_type(t_dlst **lex);
+t_token		*pop_token(t_dlst **lex);
 
-// non terminals in grammar 
-# define NUM_NTERMINALS 13
-
-// states in grammar
-# define NUM_STATES 55
-
-// rule in grammar
-# define NUM_RULES 38
-
-// ID state 0 and ID rule 0
-# define CHR_STATE0 32
-# define CHR_RULE0 87
-
-// shift operation range
-# define SHIFT0 0
-# define SHIFT54 54
-
-// reduce operations range
-# define REDUCE0 55
-# define REDUCE37 92
-
-// accept operation
-# define ACCEPT 93
-
-// grammar error
-# define GRAMMAR_ERROR 94
-# define UNDEFINED -1
-
-// Parser state
-typedef t_dlst	t_state;
-
-// Non terminals
-typedef enum e_non_terminal
+typedef enum e_rtype
 {
-	nt_accept,
-	nt_program,
-	nt_and_or,
-	nt_pipeline,
-	nt_command,
-	nt_simple_command,
-	nt_compound_command,
-	nt_redirect_list,
-	nt_brace_group,
-	nt_subshell,
-	nt_cmd_prefix,
-	nt_cmd_suffix,
-	nt_io_redirect
-}	t_non_terminal;
+	r_output_direction,
+	r_input_direction,
+	r_appending_to,
+	r_reading_until
+}	t_rtype;
 
-void		rule_nothing(t_dlst **lst, t_state **state);
+typedef union u_unit_io
+{
+	int			fd;
+	char		*filename;
+}	t_unit_io;
 
-void		rule_and_or1(t_dlst **lex, t_state **state);
-void		rule_and_or2(t_dlst **lex, t_state **state);
+typedef struct s_redirect
+{
+	t_unit_io			source;
+	t_unit_io			dest;
+	t_rtype				rtype;
+	int					mode_bits;
+	int					flags_bits;
+	char				*here_doc_eof;
+	struct s_redirect	*next;
+}	t_redirect;
 
-void		rule_pipeline(t_dlst **lex, t_state **state);
+t_redirect	*make_redirection(t_dlst **lex);
+void		add_redirection(t_redirect **redir_list, t_redirect *new);
+void		clean_redirection(t_redirect **redirection);
 
-void		rule_command(t_dlst **lex, t_state **state);
+typedef struct s_word
+{
+	char			*word;
+	struct s_word	*next;
+}	t_word;
 
-void		rule_group(t_dlst **lex, t_state **state);
+t_word		*make_word(t_dlst **lex);
+void		add_word(t_word **word_list, t_word *new);
+void		clean_word(t_word **word);
 
-void		rule_subshell(t_dlst **lex, t_state **state);
+typedef enum e_command_type
+{
+	cmd_simple,
+	cmd_connection,
+	cmd_subshell
+}	t_command_type;
 
-void		rule_simple1(t_dlst **lex, t_state **state);
-void		rule_simple2(t_dlst **lex, t_state **state);
-void		rule_simple3(t_dlst **lex, t_state **state);
-void		rule_simple4(t_dlst **lex, t_state **state);
-void		rule_simple5(t_dlst **lex, t_state **state);
+typedef union u_node
+{
+	struct s_connection	*connection;
+	struct s_simple		*simple;
+	struct s_subshell	*subshell;
+}	t_node;
 
-void		rule_prefix1(t_dlst **lex, t_state **state);
-void		rule_prefix2(t_dlst **lex, t_state **state);
-void		rule_prefix3(t_dlst **lex, t_state **state);
-void		rule_prefix4(t_dlst **lex, t_state **state);
+typedef struct s_command
+{
+	t_command_type	type;
+	int				flag;
+	t_node			value;
+	t_redirect		*redirects;
+}	t_command;
 
-void		rule_suffix1(t_dlst **lex, t_state **state);
-void		rule_suffix2(t_dlst **lex, t_state **state);
-void		rule_suffix3(t_dlst **lex, t_state **state);
-void		rule_suffix4(t_dlst **lex, t_state **state);
+typedef struct s_simple
+{
+	int			flags;
+	t_word	*words;
+	t_redirect	*redirects;
+}	t_simple;
 
-void		rule_redir_list(t_dlst **lex, t_state **state);
+t_command	*make_simple(t_dlst **lex);
+void		clean_simple(t_simple *cmd);
 
-void		rule_redir1(t_dlst **lex, t_state **state);
-void		rule_redir2(t_dlst **lex, t_state **state);
-void		rule_redir3(t_dlst **lex, t_state **state);
-void		rule_redir4(t_dlst **lex, t_state **state);
-void		rule_redir5(t_dlst **lex, t_state **state);
-void		rule_redir6(t_dlst **lex, t_state **state);
-void		rule_redir7(t_dlst **lex, t_state **state);
-void		rule_redir8(t_dlst **lex, t_state **state);
+typedef struct s_connection
+{
+	int			ignore;
+	t_command	*first;
+	t_command	*second;
+	int			connector;
+}	t_connection;
 
-int			table_action(int state, int token);
-int			table_goto(int state, int n_terminal);
-void	(*table_reduce(int rule))(t_dlst **, t_state **);
-int			table_nt_generate(int rule_id);
+void	clean_connection(t_connection *connection);
 
-void		pop_elements(t_dlst **lex, t_dlst **state, int n);
+typedef struct s_subshell
+{
+	int			flags;
+	t_command	*command;
+}	t_subshell;
 
-t_command	*syntax(t_dlst *lex);
+t_command	*make_subshell(t_dlst **lex);
+void	clean_subshell(t_subshell *subshell);
+
+t_command	*new_command(t_command_type type);
+void		clean_command(t_command *cmd);
+
+t_command	*syntax(t_dlst **lex);
 
 #endif

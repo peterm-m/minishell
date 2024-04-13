@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/09 19:21:50 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	clean_argv(char **arr)
 	ft_free(arr);
 }
 
-static size_t	get_size_argv(t_word_list *words)
+static size_t	get_size_argv(t_word *words)
 {
-	t_word_list	*tmp;
+	t_word	*tmp;
 	char		*str;
 	size_t		n_word;
 
@@ -68,9 +68,9 @@ static size_t	get_size_argv(t_word_list *words)
 	return (n_word);
 }
 
-static char	**fill_arr(t_word_list *words, char **arr)
+static char	**fill_arr(t_word *words, char **arr)
 {
-	t_word_list	*tmp;
+	t_word	*tmp;
 	char		**arr2;
 	int			j;
 	int			i;
@@ -89,7 +89,7 @@ static char	**fill_arr(t_word_list *words, char **arr)
 	return (arr);
 }
 
-char	**list_to_argv(t_word_list *words)
+char	**list_to_argv(t_word *words)
 {
 	size_t	n_word;
 	char	**arr;
