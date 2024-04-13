@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/08 19:49:41 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:49:08 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	export_args(char **argv)
 	int	i;
 	int	j;
 	int	valid;
+	char new_var[PATH_MAX];
 
 	j = 1;
 	while (argv[j])
@@ -48,7 +49,8 @@ int	export_args(char **argv)
 				return (exit_not_identifier(argv[j]));
 			if (argv[j][i] == '=' && valid == 0)
 			{
-				ft_putenv(ft_strdup(argv[j])); //TODO cambiado a memoria dinámica
+				ft_strlcpy(new_var, argv[j], PATH_MAX);
+				ft_putenv(ft_strdup(new_var)); //TODO cambiado a memoria dinámica
 				valid = 1;
 			}
 			i++;

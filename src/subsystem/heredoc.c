@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/10 20:07:28 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 11:57:05 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,35 @@ char	*ft_expand_heredoc(char *str, int expand)
 	return (str);
 }
 
+void	get_heredoc(int fd, char *del, int expand)
+{
+	char	*line;
+	
+	while (TRUE)
+	{
+		line = readline(BHRED"heredoc> "END);
+		if (!line || ft_strncmp(line, del, ft_strlen(del) + 1) == 0)
+		{
+			ft_free(line);
+			break ;
+		}
+		line = ft_expand_heredoc(line, expand);
+		ft_putstr_fd(line, fd);
+		ft_putstr_fd("\n", fd);
+		ft_free(line);
+	}
+}
+
 char	*heredoc(char *delimiter)
 {
 	char	*line;
 	char	*del;
-	char	*full_heredoc;
 	int		expand;
+	char *a;
+	int fd;
 
 	line = NULL;
 	expand = 1;
-	printf("%s\n", delimiter);
 	if (is_quotes(delimiter[0]) && is_quotes(delimiter[ft_strlen(delimiter) - 1]))
 	{
 		expand = 0;
@@ -52,20 +71,12 @@ char	*heredoc(char *delimiter)
 	}
 	else
 		del = ft_strdup(delimiter);
-	while (TRUE)
-	{
-		line = readline(BHRED"heredoc> "END);
-		if (!line || ft_strncmp(line, del, ft_strlen(del) + 1) == 0)
-			break ;
-		line = ft_expand_heredoc(line, expand);
-		if (full_heredoc == NULL)
-			full_heredoc = ft_strdup(line);
-		else
-			full_heredoc = ft_strjoin(full_heredoc, line);
-		full_heredoc = ft_strjoin(full_heredoc, "\n");
-	}
-	//ft_free(del);
-	//ft_free(delimiter);
-	return (full_heredoc);
-	//ft_free(line);
+	a = ft_temfile();
+	fd = ft_open(a, (O_CREAT | O_APPEND | O_WRONLY),
+		(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
+	get_heredoc(fd, del, expand);
+	close(fd);
+	ft_free(del);
+	ft_free(delimiter);
+	return (a);
 }
