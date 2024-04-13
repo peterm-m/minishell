@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:49 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/07 13:28:52 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:33:43 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	quote_remove(char *str)
 			j++;
 		if (!str[j])
 			break ;
-		else 
+		else
 			str[i++] = str[j++];
 	}
 	while (i < j)

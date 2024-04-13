@@ -6,13 +6,22 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:25:49 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/13 11:31:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 16:13:33 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_terminals	token_type(t_dlst **lex)
+int	redirection_token(t_dlst **lex)
+{
+	t_terminals	type;
+
+	type = type_token(lex);
+	return (type == tt_less || type == tt_dless \
+		|| type == tt_great || type == tt_dgreat);
+}
+
+t_terminals	type_token(t_dlst **lex)
 {
 	t_token	*token;
 

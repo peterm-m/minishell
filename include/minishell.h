@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 11:54:36 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:27:16 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,5 @@ extern int	g_exit_status;
 // Bool
 # define TRUE 1
 # define FALSE 0
-
-# ifdef DEBUG
-#  define ft_malloc(bytes) ft_malloc((t_reserve ){bytes,__LINE__, __FILE__ , __FUNCTION__})
-# endif
 
 #endif

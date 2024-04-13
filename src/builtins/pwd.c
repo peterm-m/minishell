@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:50:17 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/11 19:33:56 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:32:36 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	pwd_main(int fd)
 {
-	char pwd[PATH_MAX];
+	char	pwd[PATH_MAX];
 
 	if (getcwd(pwd, PATH_MAX) == NULL)
 	{

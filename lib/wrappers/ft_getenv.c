@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 02:02:09 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/11 20:29:57 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:29:38 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char	*ft_getvar(const char *name)
 			&& (environ[i])[len_name] == '=')
 			return (environ[i]);
 	}
-	return  (NULL);
+	return (NULL);
 }

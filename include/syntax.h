@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 12:10:38 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 16:32:05 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "minishell.h"
 
-t_terminals	token_type(t_dlst **lex);
+int			redirection_token(t_dlst **lex);
+t_terminals	type_token(t_dlst **lex);
 t_token		*pop_token(t_dlst **lex);
 
 typedef enum e_rtype
@@ -82,12 +83,11 @@ typedef struct s_command
 typedef struct s_simple
 {
 	int			flags;
-	t_word	*words;
+	t_word		*words;
 	t_redirect	*redirects;
 }	t_simple;
 
 t_command	*make_simple(t_dlst **lex);
-void		clean_simple(t_simple *cmd);
 
 typedef struct s_connection
 {
@@ -97,8 +97,6 @@ typedef struct s_connection
 	int			connector;
 }	t_connection;
 
-void	clean_connection(t_connection *connection);
-
 typedef struct s_subshell
 {
 	int			flags;
@@ -106,9 +104,8 @@ typedef struct s_subshell
 }	t_subshell;
 
 t_command	*make_subshell(t_dlst **lex);
-void	clean_subshell(t_subshell *subshell);
 
-t_command	*new_command(t_command_type type);
+int			new_command(t_command_type type, t_command **out);
 void		clean_command(t_command *cmd);
 
 t_command	*syntax(t_dlst **lex);

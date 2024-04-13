@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/13 14:34:38 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	clean_argv(char **arr)
 
 static size_t	get_size_argv(t_word *words)
 {
-	t_word	*tmp;
+	t_word		*tmp;
 	char		*str;
 	size_t		n_word;
 
@@ -70,7 +70,7 @@ static size_t	get_size_argv(t_word *words)
 
 static char	**fill_arr(t_word *words, char **arr)
 {
-	t_word	*tmp;
+	t_word		*tmp;
 	char		**arr2;
 	int			j;
 	int			i;

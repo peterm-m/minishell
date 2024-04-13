@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/12 18:49:08 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:33:10 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	print_sorted_env(int fd)
 
 int	export_args(char **argv)
 {
-	int	i;
-	int	j;
-	int	valid;
-	char new_var[PATH_MAX];
+	int		i;
+	int		j;
+	int		valid;
+	char	new_var[PATH_MAX];
 
 	j = 1;
 	while (argv[j])

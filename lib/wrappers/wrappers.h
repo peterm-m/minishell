@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/11 20:27:59 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:31:40 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,50 +28,10 @@
 
 extern char	**environ;
 
-//# define DEBUG 1
-
-// conditional
-# ifdef DEBUG
-
-typedef struct s_mem_info
-{
-	void				*ptr;
-	const char			*filename;
-	const char			*functionname;
-	size_t				bytes;
-	int					line;
-	struct s_mem_info	*next;
-	struct s_mem_info	*prev;
-}	t_mem_info;
-
-typedef struct s_reserve
-{
-	size_t		bytes;
-	int			line;
-	char		*file;
-	const char	*func;
-}	t_reserve;
-
-void		*ft_malloc(t_reserve reserve);
-void		ft_free(void *ptr);
-void		ft_leaks(void);
-
-# else
-
 void		*ft_malloc(size_t size);
 void		ft_free(void *ptr);
 
-# endif
-
-# ifndef LOGS
-#  define LOGS 0
-# endif
-
-# define dbg(fmt,...) \
-			do { if (LOGS) fprintf(stderr,  "%-60s:%-3d:%-30s" fmt, __FILE__,\
-			__LINE__, __func__, __VA_ARGS__); } while (0)
-
-typedef void	t_handler(int);
+typedef void	t_handler (int);
 
 typedef union u_pipe
 {
@@ -105,8 +65,6 @@ int			ft_clearenv(void);
 int			ft_dup2(int fd1, int fd2);
 void		ft_initenv(void);
 char		*ft_getvar(const char *name);
-
-
 
 #endif
 

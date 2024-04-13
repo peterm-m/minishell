@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/13 14:37:54 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define SUBSYSTEM_H
 
 # include "minishell.h"
-
-# define PROMPT BHMAG "minishell42 " "(" BHCYN
 
 int		search_character(char *str, char c);
 

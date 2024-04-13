@@ -6,13 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 11:30:19 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 11:54:43 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 16:23:35 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_connection(t_connection *connection)
+static void	clean_connection(t_connection *connection)
 {
 	t_command	*cmd1;
 	t_command	*cmd2;
@@ -28,7 +28,7 @@ void	clean_connection(t_connection *connection)
 	ft_free(connection);
 }
 
-void	clean_subshell(t_subshell *subshell)
+static void	clean_subshell(t_subshell *subshell)
 {
 	if (subshell == NULL)
 		return ;
@@ -37,7 +37,7 @@ void	clean_subshell(t_subshell *subshell)
 	ft_free(subshell);
 }
 
-void	clean_simple(t_simple *cmd)
+static void	clean_simple(t_simple *cmd)
 {
 	if (cmd == NULL)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:38:41 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/05 20:01:04 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:30:00 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,3 @@ int	ft_setenv(const char *name, const char *value, int overwrite)
 	ft_free(env_var);
 	return (result);
 }
-
-

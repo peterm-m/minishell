@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/07 15:20:48 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:35:55 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	setup_term(void)
 		exit(EXIT_SUCCESS);
 }
 
-
 char	*get_prompt(void)
 {
 	static char	prompt[PATH_MAX];
@@ -36,7 +35,7 @@ char	*get_prompt(void)
 	getcwd(pwd, PATH_MAX);
 	name_cwd = ft_strrchr(pwd, '/');
 	aux = prompt;
-	aux += ft_strlcpy(aux, BHMAG PROMPT BHCYN, PATH_MAX);
+	aux += ft_strlcpy(aux, BHMAG "minishell42 " "(" BHCYN, PATH_MAX);
 	aux += ft_strlcpy(aux, name_cwd + 1, PATH_MAX);
 	aux += ft_strlcpy(aux, BHMAG") -> "END, PATH_MAX);
 	return (prompt);
