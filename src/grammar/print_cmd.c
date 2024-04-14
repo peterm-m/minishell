@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:14:34 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 19:50:47 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:05:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ static void	print_connection(t_connection *connection, int level)
 {
 	t_command	*cmd1;
 	t_command	*cmd2;
-
 	if (connection == NULL)
 		return ;
 	cmd1 = connection->first;
 	cmd2 = connection->second;
-	printf("CONECTION: type %d", connection->connector);
+	printf("├CONECTION: type %d", connection->connector);
 	if (cmd1 != NULL)
 	{
 		printf("\n");
@@ -38,7 +37,7 @@ static void	print_subshell(t_subshell *subshell, int level)
 {
 	if (subshell == NULL)
 		return ;
-	printf("SUBSHELL: \n");
+	printf("├SUBSHELL: \n");
 	if (subshell->command != NULL)
 		print_command(subshell->command, level +1);
 }
@@ -50,7 +49,7 @@ static void	print_simple(t_simple *cmd)
 	t_redir		*r;
 
 	i = 0;
-	printf("SIMPLE : WORDS-> \t");
+	printf("├SIMPLE : WORDS-> \t");
 	words = cmd->words;
 	while (words != NULL)
 	{
@@ -76,7 +75,6 @@ void	print_command(t_command *cmd, int level)
 	i = 1;
 	while (i++ < level)
 		printf("|\t");
-	printf("├");
 	if (cmd == NULL)
 		return ;
 	if (cmd->type == cmd_simple)
