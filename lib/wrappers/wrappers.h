@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 18:33:08 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:44:48 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,41 +68,3 @@ void		ft_initenv(void);
 char		*ft_getvar(const char *name);
 
 #endif
-
-/**
- * TODO: funciones que aun no tienen wrap
- * 
- *	ioctl
- *
- *	tcsetattr
- *	tcgetattr
- *	tgetent
- *	tgetflag
- *	tgetnum
- *	tgetstr
- *	tgoto
- *	tputs
- *
- *	wait3
- *	wait4
- *	exit
- *	dup
- *	printf
- *	pipe
- *
- *
- *	access
- *	chdir
- *	lstat
- *	unlink,
- *
- *	opendir
- *	readdir
- *	closedir
- *
- *	isatty
- *	ttyname
- *	ttyslot
- *
- * ? Deberian los errores notificarse de esta manera? 
-**/
