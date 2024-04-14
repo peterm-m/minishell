@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 16:20:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 21:11:23 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ static void	read_redirection(t_dlst **lex, t_token **io_number,
 			free_token(*type);
 		if (*word)
 			free_token(*word);
+		*io_number = NULL;
+		*type = NULL;
+		*word = NULL;
 	}
 }
 
@@ -90,21 +93,24 @@ t_redirect	*make_redirection(t_dlst **lex)
 	return (redir);
 }
 
-void	add_redirection(t_redirect **redir_list, t_redirect *new)
+int	add_redirection(t_redirect **redir_list, t_dlst **lex)
 {
+	t_redirect	*new;
 	t_redirect	*tmp;
 
+	new = make_redirection(lex);
 	if (new == NULL)
-		return ;
+		return (EXIT_FAILURE);
 	if (redir_list || *redir_list == NULL)
 	{
 		*redir_list = new;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	tmp = *redir_list;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
+	return (EXIT_SUCCESS);
 }
 
 void	clean_redirection(t_redirect **redirection)

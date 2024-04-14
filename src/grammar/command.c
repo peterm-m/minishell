@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:46:40 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 16:32:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 21:07:41 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,26 @@ int	new_command(t_command_type type, t_command **out)
 
 t_command	*make_simple(t_dlst **lex)
 {
-	t_redirect	*redir;
-	t_word		*word;
 	t_command	*command;
 
 	if (new_command(cmd_simple, &command))
-		return (NULL);
+		return (parser_error(lex, command));
 	while (1)
 	{
 		if (redirection_token(lex) || type_token(lex) == tt_io_number)
 		{
-			redir = make_redirection(lex);
-			add_redirection(&command->value.simple->redirects, redir);
+			if (add_redirection(&command->value.simple->redirects, lex))
+				return (parser_error(lex, command));
 		}
 		else if (type_token(lex) == tt_word)
 		{
-			word = make_word(lex);
-			add_word(&command->value.simple->words, word);
+			if (add_word(&command->value.simple->words, lex))
+				return (parser_error(lex, command));
 		}
 		else
 			break ;
 	}
-//	if (!redir && !word)
-//		TODO: gestionar errores
+	if (!command->value.simple->redirects && !command->value.simple->words)
+		return (parser_error(lex, command));
 	return (command);
 }

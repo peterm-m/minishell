@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 16:16:49 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:26:13 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,9 @@ static int	interactive_loop(void)
 			break ;
 		tokens = lexer(read_line);
 //		ft_dlstiter(tokens, print_lexer);
-		if (tokens == NULL)
-			continue ;
 		cmd = syntax(&tokens);
-		if (cmd == NULL)
-			continue ;
-		execute_command(cmd, NO_PIPE, NO_PIPE);
+		if (cmd != NULL)
+			execute_command(cmd, NO_PIPE, NO_PIPE);
 		clean_command(cmd);
 		ft_free(read_line);
 		rl_on_new_line();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:44:28 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 16:20:52 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 20:33:18 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ t_word	*make_word(t_dlst **lex)
 	return (word_list);
 }
 
-void	add_word(t_word **word_list, t_word *new)
+int	add_word(t_word **word_list, t_dlst **lex)
 {
+	t_word	*new;
 	t_word	*tmp;
 
+	new = make_word(lex);
 	if (new == NULL)
-		return ;
+		return (EXIT_FAILURE);
 	if (word_list == NULL || *word_list == NULL)
 	{
 		*word_list = new;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	tmp = *word_list;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
+	return (EXIT_SUCCESS);
 }
 
 void	clean_word(t_word **word)

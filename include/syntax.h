@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 16:32:05 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 21:02:46 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_redirect
 }	t_redirect;
 
 t_redirect	*make_redirection(t_dlst **lex);
-void		add_redirection(t_redirect **redir_list, t_redirect *new);
+int			add_redirection(t_redirect **redir_list, t_dlst **lex);
 void		clean_redirection(t_redirect **redirection);
 
 typedef struct s_word
@@ -55,7 +55,7 @@ typedef struct s_word
 }	t_word;
 
 t_word		*make_word(t_dlst **lex);
-void		add_word(t_word **word_list, t_word *new);
+int			add_word(t_word **word_list, t_dlst **lex);
 void		clean_word(t_word **word);
 
 typedef enum e_command_type
@@ -109,5 +109,6 @@ int			new_command(t_command_type type, t_command **out);
 void		clean_command(t_command *cmd);
 
 t_command	*syntax(t_dlst **lex);
+t_command	*parser_error(t_dlst **lex, t_command *command);
 
 #endif

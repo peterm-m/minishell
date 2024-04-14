@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/13 14:35:19 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 20:17:08 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ void	get_heredoc(int fd, char *del, int expand)
 
 char	*heredoc(char *delimiter)
 {
-	char	*line;
 	char	*del;
 	int		expand;
 	char *a;
 	int fd;
 
-	line = NULL;
 	expand = 1;
 	if (is_quotes(delimiter[0]) && is_quotes(delimiter[ft_strlen(delimiter) - 1]))
 	{

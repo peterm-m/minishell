@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:25:49 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/13 16:13:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:10:34 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_command	*parser_error(t_dlst **lex, t_command *command)
+{
+	// si lex != NULL print error en token actual. clean lex
+	// si lex == NULL free command 
+	// retornar NULL
+	printf("errror\n");
+	clean_command(command);
+	if (lex == NULL || *lex == NULL)
+		return (NULL);
+	ft_dlstclear(lex, free_token);
+	return (NULL);
+}
 
 int	redirection_token(t_dlst **lex)
 {
