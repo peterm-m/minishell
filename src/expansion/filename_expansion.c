@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   filename_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 20:10:58 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:32:08 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	match_character(char *pattern, char *name);
+static int	match(char *pattern, char *name);
 
-static int	match_wildcard(int c, char *pattern, char *name)
+static int	wildcard(int c, char *pattern, char *name)
 {
 	while (1)
 	{
-		if (match_character(pattern, name))
+		if (match(pattern, name))
 			return (1);
 		if (*name == '\0' || (*name++ == c || c == '?'))
 			break ;
@@ -26,26 +26,14 @@ static int	match_wildcard(int c, char *pattern, char *name)
 	return (0);
 }
 
-static int	match_character(char *pattern, char *name)
+static int	match(char *pattern, char *name)
 {
 	if (pattern[0] == '\0')
 		return (1);
 	if (pattern[0] == '*')
-		return (match_wildcard(pattern[1], pattern + 1, name));
+		return (wildcard(pattern[0], pattern + 1, name));
 	if (*name != '\0' && (pattern[0] == '?' || pattern[0] == *name))
-		return (match_character(pattern + 1, name + 1));
-	return (0);
-}
-
-static int	match(char *pattern, char *name)
-{
-	while (*name)
-	{
-		if (match_character(pattern, name))
-			return (1);
-		if (*name++ == '\0')
-			break ;
-	}
+		return (match(pattern + 1, name + 1));
 	return (0);
 }
 

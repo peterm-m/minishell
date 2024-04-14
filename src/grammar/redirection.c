@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 19:09:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:39:50 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	fill_redirection(t_redir *redir, t_token *type, t_token *word)
 		redir->mode_bits = (O_CREAT | O_RDWR);
 		redir->dest.filename = heredoc(word->str);
 	}
+	if (redir->rtype == r_input_direction)
+		redir->source.fd = STDIN_FILENO;
 	if (redir->rtype != r_reading_until)
 		redir->dest.filename = word->str;
 	ft_free(word);
@@ -81,7 +83,7 @@ static t_redir	*make_redirection(t_dlst **lex)
 	redir = ft_calloc(1, sizeof(t_redir));
 	if (redir == NULL)
 		return (NULL);
-	redir->source.fd = STDIN_FILENO;
+	redir->source.fd = STDOUT_FILENO;
 	if (io_number)
 	{
 		redir->source.fd = ft_atoi(io_number->str);
