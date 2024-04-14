@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 18:26:29 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:51:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	fd_builtin(t_redir *redirs, int fd_out)
 	t_redir		*r;
 	int			fd;
 
-	fd = -1;
+	fd = fd_out;
 	if (redirs == NULL && fd_out == NO_PIPE)
 		return (STDOUT_FILENO);
 	else if (redirs == NULL && fd_out != NO_PIPE)
@@ -54,13 +54,13 @@ static int	fd_builtin(t_redir *redirs, int fd_out)
 			ft_close(fd);
 		else if (r->rtype == r_appending_to || r->rtype == r_output_direction)
 		{
-			if (fd >= 0)
-				ft_close(fd);
-			fd = fd;
+			if (fd_out >= 0)
+				ft_close(fd_out);
+			fd_out = fd;
 		}
 		r = r->next;
 	}
-	return (fd);
+	return (fd_out);
 }
 
 static int	run_builtin(int index, char **argv, int fd_out)

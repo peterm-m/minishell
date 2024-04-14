@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 17:44:16 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:09:35 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	add_redirection(t_redir **redir_list, t_dlst **lex)
 	new = make_redirection(lex);
 	if (new == NULL)
 		return (EXIT_FAILURE);
-	if (redir_list || *redir_list == NULL)
+	if (redir_list == NULL || *redir_list == NULL)
 	{
 		*redir_list = new;
 		return (EXIT_SUCCESS);

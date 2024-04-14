@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 18:30:02 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:31:49 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ void		clean_command(t_command *cmd);
 
 t_command	*syntax(t_dlst **lex);
 t_command	*parser_error(t_dlst **lex, t_command *command);
+
+void		print_command(t_command *cmd, int level);
 
 #endif

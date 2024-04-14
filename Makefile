@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/13 12:51:23 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/14 19:22:08 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ NAMES := \
 	grammar/word.c \
 	grammar/token.c \
 	grammar/redirection.c \
+	grammar/print_cmd.c \
 	\
 	expansion/expander.c \
 	expansion/parameter_expansion.c \
