@@ -45,7 +45,7 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -fsanitize=address -I../libft
+CCFLAGS = -Wall -Werror -Wextra -Werror -fsanitize=address -I../libft
 
 OS := $(shell uname -s)
 

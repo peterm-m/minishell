@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 16:16:37 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:29:44 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:31:52 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	*ft_malloc(size_t size)
 	return (p);
 }
 
+//printf("free -> %p\n", ptr);
 void	ft_free(void *ptr)
 {
-	//printf("free -> %p\n", ptr);
 	free(ptr);
 }

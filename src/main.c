@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 17:46:05 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:34:25 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void print_lexer(t_token *token) // ¡NO BORRAR!
 		%p\n"END,token->str, token->flag, token, token->str);
 }
 */
+//		ft_dlstiter(tokens, print_lexer);
 
 static int	interactive_loop(void)
 {
@@ -35,7 +36,6 @@ static int	interactive_loop(void)
 		if (read_line == NULL)
 			break ;
 		tokens = lexer(read_line);
-//		ft_dlstiter(tokens, print_lexer);
 		cmd = syntax(&tokens);
 		if (cmd != NULL)
 			execute_command(cmd, NO_PIPE, NO_PIPE);
@@ -48,11 +48,11 @@ static int	interactive_loop(void)
 }
 
 //void lk() {system("leaks minishell");}
+//	atexit(lk);
 
 int	main(void)
 {
 	g_exit_status = 0;
-//	atexit(lk);
 	ft_initenv();
 	setup_term();
 	initial_signals();

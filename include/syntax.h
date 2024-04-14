@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 16:40:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:30:02 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ typedef struct s_command
 	t_command_type	type;
 	int				flag;
 	t_node			value;
-	t_redir		*redirs;
+	t_redir			*redirs;
 }	t_command;
 
 typedef struct s_simple
 {
 	int			flags;
 	t_word		*words;
-	t_redir	*redirs;
+	t_redir		*redirs;
 }	t_simple;
 
 t_command	*make_simple(t_dlst **lex);

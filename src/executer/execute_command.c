@@ -6,14 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:32:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 17:27:18 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:54:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO: Si cmd->redirs != NULL
-// hacer redirecciones externas (comprobar como se hacen)
+// TODO: hacer redirecciones externas (comprobar como se hacen)
 
 int	execute_command(t_command *cmd, int fd_in, int fd_out)
 {

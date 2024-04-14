@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 16:24:00 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:28:06 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	make_redir(t_redir *redirections)
 void	open_redir(t_redir *redirections)
 {
 	t_redir	*redir;
-	int			fd;
+	int		fd;
 
 	redir = redirections;
 	while (redir != NULL)

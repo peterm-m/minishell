@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:31:40 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:33:08 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ extern char	**environ;
 void		*ft_malloc(size_t size);
 void		ft_free(void *ptr);
 
-typedef void	t_handler (int);
+typedef void \
+			t_handler(int);
 
 typedef union u_pipe
 {

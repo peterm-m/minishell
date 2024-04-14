@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/14 17:00:16 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:28:40 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	print_sorted_env(int fd)
 		ft_putendl_fd(environ[i], fd);
 }
 
+//TODO: linea 55: cambiado a memoria dinámica
+
 int	export_args(char **argv)
 {
 	int		i;
@@ -50,7 +52,7 @@ int	export_args(char **argv)
 			if (argv[j][i] == '=' && valid == 0)
 			{
 				ft_strlcpy(new_var, argv[j], PATH_MAX);
-				ft_putenv(ft_strdup(new_var)); //TODO cambiado a memoria dinámica
+				ft_putenv(ft_strdup(new_var));
 				valid = 1;
 			}
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/13 20:17:08 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 18:27:45 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_expand_heredoc(char *str, int expand)
 void	get_heredoc(int fd, char *del, int expand)
 {
 	char	*line;
-	
+
 	while (TRUE)
 	{
 		line = readline(BHRED"heredoc> "END);
@@ -58,11 +58,12 @@ char	*heredoc(char *delimiter)
 {
 	char	*del;
 	int		expand;
-	char *a;
-	int fd;
+	char	*a;
+	int		fd;
 
 	expand = 1;
-	if (is_quotes(delimiter[0]) && is_quotes(delimiter[ft_strlen(delimiter) - 1]))
+	if (is_quotes(delimiter[0])
+		&& is_quotes(delimiter[ft_strlen(delimiter) - 1]))
 	{
 		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);
@@ -71,7 +72,7 @@ char	*heredoc(char *delimiter)
 		del = ft_strdup(delimiter);
 	a = ft_temfile();
 	fd = ft_open(a, (O_CREAT | O_APPEND | O_WRONLY),
-		(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
+			(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
 	get_heredoc(fd, del, expand);
 	close(fd);
 	ft_free(del);

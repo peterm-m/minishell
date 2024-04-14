@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 17:27:11 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:26:29 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static int	index_builtin(char *str)
 
 static int	fd_builtin(t_redir *redirs, int fd_out)
 {
-	t_redir		*redir;
-	int			fd_open;
+	t_redir		*r;
 	int			fd;
 
 	fd = -1;
@@ -46,27 +45,28 @@ static int	fd_builtin(t_redir *redirs, int fd_out)
 		return (STDOUT_FILENO);
 	else if (redirs == NULL && fd_out != NO_PIPE)
 		return (fd_out);
-	redir = redirs;
-	while (redir != NULL)
+	r = redirs;
+	while (r != NULL)
 	{
-		fd_open = ft_open(redir->dest.filename, redir->mode_bits, redir->flags_bits);
-		if (redir->rtype == r_input_direction || redir->rtype == r_appending_to)
-			ft_close(fd_open);
-		else if (redir->rtype == r_appending_to || redir->rtype == r_output_direction)
+		fd = ft_open(r->dest.filename, r->mode_bits, r->flags_bits);
+		if (r->rtype == r_input_direction
+			|| r->rtype == r_appending_to)
+			ft_close(fd);
+		else if (r->rtype == r_appending_to || r->rtype == r_output_direction)
 		{
 			if (fd >= 0)
 				ft_close(fd);
-			fd = fd_open;
+			fd = fd;
 		}
-		redir = redir->next;
+		r = r->next;
 	}
 	return (fd);
 }
 
-static int run_builtin(int index, char **argv, int fd_out)
+static int	run_builtin(int index, char **argv, int fd_out)
 {
 	int			status;
-	static int	(*builtin[7])(char **, int) = { \
+	static int	(*builtin[7])(char **, int) = {\
 		cd_main, echo_main, env_main,
 		exit_main, export_main, pwd_main,
 		unset_main};
