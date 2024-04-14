@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   word.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:44:28 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 20:33:18 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 14:45:39 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_word	*make_word(t_dlst **lex)
+static t_word	*make_word(t_dlst **lex)
 {
 	t_word	*word_list;
 	t_token	*word;
 
-	word_list  = ft_calloc(1, sizeof(t_word));
+	word_list = ft_calloc(1, sizeof(t_word));
 	if (word_list == NULL)
 		return (NULL);
 	if (type_token(lex) == tt_word)

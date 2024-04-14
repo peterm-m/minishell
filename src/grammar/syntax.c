@@ -3,65 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:21:06 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 11:30:00 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 14:59:13 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+	Ref: 2. Shell Command Language. 2.9 Shell Commands
+	In minishell command is one of the following:
+		* Simple command: 2.9.1 Simple Commands
+			A simple command is a sequence  words and redirections,
+			terminated by a control operator.
+		* Compound Commands: 2.9.4 Compound Commands
+			The shell has several programming constructs that are
+			compound commands, which provide control flow for commands.
+			In this minishell we implemented "(" and_or ")"
+*/
+static t_command	*make_command(t_dlst **lex);
+
+/*
+	Ref: 2. Shell Command Language. 2.9.2 Pipelines
+	pipeline is a sequence of one or more commands
+		separated by the control operator '|'
+*/
+static t_command	*make_pipeline(t_dlst **lex);
+
+/*
+	Ref: 2. Shell Command Language. 2.9.3 Lists
+	An and_or list is a sequence of one or more pipelines
+		separated by the operators "&&" and "||"
+*/
 static t_command	*make_and_or(t_dlst **lex);
 
-static t_command	*make_command(t_dlst **lex)
+t_command	*syntax(t_dlst **lex)
 {
-	t_token		*tok;
-	t_command	*command;
+	t_command	*program;
 
-	if (type_token(lex) == tt_lbraket)
+	program = NULL;
+	if (lex == NULL || *lex == NULL)
+		return (NULL);
+	while (type_token(lex) != tt_end)
 	{
-		tok = pop_token(lex);
-		free_token(tok);
-		if (new_command(cmd_subshell, &command))
-			return (parser_error(lex, command));
-		command->value.subshell->command = make_and_or(lex);
-		if (command->value.subshell->command == NULL
-			|| type_token(lex) != tt_rbraket)
-			return (parser_error(lex, command));
-		tok = pop_token(lex);
-		free_token(tok);
+		program = make_and_or(lex);
+		if (type_token(lex) != tt_end || program == NULL)
+			return (parser_error(lex, program));
+		else
+			break ;
 	}
-	else
-		command = make_simple(lex);
-	return (command);
-}
-
-static t_command	*make_pipeline(t_dlst **lex)
-{
-	t_token		*tok;
-	t_command	*pipeline;
-	t_command	*first;
-	t_command	*second;
-
-	first = make_command(lex);
-	if (type_token(lex) != tt_pipe || first == NULL)
-		return (first);
-	while (type_token(lex) == tt_pipe)
-	{
-		tok = pop_token(lex);
-		if (new_command(cmd_connection, &pipeline))
-			return (parser_error(lex, first));
-		pipeline->value.connection->connector = (tok->flag & TOK_TYPE);
-		free_token(tok);
-		pipeline->value.connection->first = first;
-		second = make_command(lex);
-		if (second == NULL)
-			return (parser_error(lex, pipeline));
-		pipeline->value.connection->second = second;
-		first = pipeline;
-	}
-	return (first);
+	ft_dlstclear(lex, free_token);
+	return (program);
 }
 
 static t_command	*make_and_or(t_dlst **lex)
@@ -92,20 +86,52 @@ static t_command	*make_and_or(t_dlst **lex)
 	return (first);
 }
 
-t_command	*syntax(t_dlst **lex)
+static t_command	*make_pipeline(t_dlst **lex)
 {
-	t_command	*program;
+	t_token		*tok;
+	t_command	*pipeline;
+	t_command	*first;
+	t_command	*second;
 
-	if (lex == NULL || *lex == NULL)
-		return (NULL);
-	while (type_token(lex) != tt_end)
+	first = make_command(lex);
+	if (type_token(lex) != tt_pipe || first == NULL)
+		return (first);
+	while (type_token(lex) == tt_pipe)
 	{
-		program = make_and_or(lex);
-		if (type_token(lex) != tt_end || program == NULL)
-			return (parser_error(lex, program));
-		else
-			break ;
+		tok = pop_token(lex);
+		if (new_command(cmd_connection, &pipeline))
+			return (parser_error(lex, first));
+		pipeline->value.connection->connector = (tok->flag & TOK_TYPE);
+		free_token(tok);
+		pipeline->value.connection->first = first;
+		second = make_command(lex);
+		if (second == NULL)
+			return (parser_error(lex, pipeline));
+		pipeline->value.connection->second = second;
+		first = pipeline;
 	}
-	ft_dlstclear(lex, free_token);
-	return (program);
+	return (first);
+}
+
+static t_command	*make_command(t_dlst **lex)
+{
+	t_token		*tok;
+	t_command	*command;
+
+	if (type_token(lex) == tt_lbraket)
+	{
+		tok = pop_token(lex);
+		free_token(tok);
+		if (new_command(cmd_subshell, &command))
+			return (parser_error(lex, command));
+		command->value.subshell->command = make_and_or(lex);
+		if (command->value.subshell->command == NULL
+			|| type_token(lex) != tt_rbraket)
+			return (parser_error(lex, command));
+		tok = pop_token(lex);
+		free_token(tok);
+	}
+	else
+		command = make_simple(lex);
+	return (command);
 }

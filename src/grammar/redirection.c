@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 21:11:23 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 14:49:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	read_redirection(t_dlst **lex, t_token **io_number,
 	}
 }
 
-t_redirect	*make_redirection(t_dlst **lex)
+static t_redirect	*make_redirection(t_dlst **lex)
 {
 	t_token		*io_number;
 	t_token		*type;

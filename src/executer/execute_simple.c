@@ -6,31 +6,30 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/06 18:01:47 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:00:19 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Execute a simple command that is hopefully defined in a disk file
-   somewhere.
+	somewhere.
 
-   1) fork
-	child:	
-   		2) change signals
-   		3) connect pipes
-   		4) do redirections
-   		5) execve
-		6) exit
-	father:
-		2) change signals
-		3) wait
-			NO_PIPE block waitpid
-			LAST_IN_PIPE no block waitpit for all child process
-			IN_PIPE no wait
-		4) restore signals
+	1) fork
+		child:
+			2) change signals
+			3) connect pipes
+			4) do redirections
+			5) execve
+			6) exit
+		father:
+			2) change signals
+			3) wait
+				NO_PIPE: block waitpid
+				LAST_IN_PIPE: no block waitpit for all child process
+				IN_PIPE: no wait
+			4) restore signals
 */
-// TODO: gestionar error.
 
 static	void	wait_command(pid_t pid, int type)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 15:01:07 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ int	is_builtin(char *str)
 		return (1);
 	return (0);
 }
-
-// TODO: He leido que las built in no se ejecutan en un proces por separado.
-//	Por tanto no hay que hacer un fork
-//		IMPLEMENTAR:
-//			Las redirecciones no se hacen con dup2 cambiando
-// la salida por el archivo
-//			Creo que lo mas facil es que los print o cualquier
-// salida la cambies por
-//			writes que envien la salida al archivo
 
 int	execute_builtin(t_word *words, int fd_out)
 {
@@ -68,6 +59,7 @@ int	execute_builtin(t_word *words, int fd_out)
 		g_exit_status = status;
 	return (status);
 }
+
 /* int	execute_builtin(t_word *words, int fd_out)
 {
 	char	**argv;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 21:02:46 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 14:47:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redirect;
 
-t_redirect	*make_redirection(t_dlst **lex);
 int			add_redirection(t_redirect **redir_list, t_dlst **lex);
 void		clean_redirection(t_redirect **redirection);
 
@@ -54,7 +53,6 @@ typedef struct s_word
 	struct s_word	*next;
 }	t_word;
 
-t_word		*make_word(t_dlst **lex);
 int			add_word(t_word **word_list, t_dlst **lex);
 void		clean_word(t_word **word);
 

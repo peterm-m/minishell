@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execle.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:23:11 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 15:03:06 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_execle(t_word *args)
 	t_path_name	filename;
 	char		**argv;
 
+	if (args == NULL)
+		exit(EXIT_SUCCESS);
 	argv = list_to_argv(args);
 	if (get_pathname(args->word, &filename) == 0)
 	{
@@ -32,4 +34,5 @@ void	ft_execle(t_word *args)
 	}
 	ft_execve(filename.path_name, argv, environ);
 	clean_argv(argv);
+	exit(EXIT_SUCCESS);
 }

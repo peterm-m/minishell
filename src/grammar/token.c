@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:25:49 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/13 22:10:34 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 14:44:53 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 t_command	*parser_error(t_dlst **lex, t_command *command)
 {
-	// si lex != NULL print error en token actual. clean lex
-	// si lex == NULL free command 
-	// retornar NULL
-	printf("errror\n");
+	static char	*terminals[15] = {"&&", "||", "|", "{", "}", "(", ")",
+		"newline", "newline", "<", ">", ">>", "newline", "<<", "newline"};
+
 	clean_command(command);
 	if (lex == NULL || *lex == NULL)
 		return (NULL);
+	printf("minishell: syntax error near unexpected token `%s' \n",
+		terminals[type_token(lex)]);
 	ft_dlstclear(lex, free_token);
 	return (NULL);
 }
