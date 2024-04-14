@@ -6,13 +6,13 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 14:49:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:44:16 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	fill_redirection(t_redirect *redir, t_token *type, t_token *word)
+static void	fill_redirection(t_redir *redir, t_token *type, t_token *word)
 {
 	if ((type->flag & TOK_TYPE) == tt_great)
 		redir->rtype = r_output_direction;
@@ -65,12 +65,12 @@ static void	read_redirection(t_dlst **lex, t_token **io_number,
 	}
 }
 
-static t_redirect	*make_redirection(t_dlst **lex)
+static t_redir	*make_redirection(t_dlst **lex)
 {
 	t_token		*io_number;
 	t_token		*type;
 	t_token		*word;
-	t_redirect	*redir;
+	t_redir		*redir;
 
 	io_number = NULL;
 	type = NULL;
@@ -78,7 +78,7 @@ static t_redirect	*make_redirection(t_dlst **lex)
 	read_redirection(lex, &io_number, &type, &word);
 	if (!type || !word)
 		return (NULL);
-	redir = ft_calloc(1, sizeof(t_redirect));
+	redir = ft_calloc(1, sizeof(t_redir));
 	if (redir == NULL)
 		return (NULL);
 	redir->source.fd = STDIN_FILENO;
@@ -93,10 +93,10 @@ static t_redirect	*make_redirection(t_dlst **lex)
 	return (redir);
 }
 
-int	add_redirection(t_redirect **redir_list, t_dlst **lex)
+int	add_redirection(t_redir **redir_list, t_dlst **lex)
 {
-	t_redirect	*new;
-	t_redirect	*tmp;
+	t_redir	*new;
+	t_redir	*tmp;
 
 	new = make_redirection(lex);
 	if (new == NULL)
@@ -113,9 +113,9 @@ int	add_redirection(t_redirect **redir_list, t_dlst **lex)
 	return (EXIT_SUCCESS);
 }
 
-void	clean_redirection(t_redirect **redirection)
+void	clean_redirection(t_redir **redirection)
 {
-	t_redirect	*aux;
+	t_redir	*aux;
 
 	while (*redirection)
 	{

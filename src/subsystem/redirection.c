@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:35:14 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:24:00 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	make_pipe(int fd_in, int fd_out)
 		ft_close(fd_out);
 }
 
-void	make_redir(t_redirect *redirections)
+void	make_redir(t_redir *redirections)
 {
-	t_redirect	*redir;
+	t_redir	*redir;
 
 	redir = redirections;
 	open_redir(redirections);
@@ -48,9 +48,9 @@ void	make_redir(t_redirect *redirections)
 	}
 }
 
-void	open_redir(t_redirect *redirections)
+void	open_redir(t_redir *redirections)
 {
-	t_redirect	*redir;
+	t_redir	*redir;
 	int			fd;
 
 	redir = redirections;

@@ -6,81 +6,92 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 15:01:07 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:27:11 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(char *str)
+static int	index_builtin(char *str)
 {
+	int	index;
+
 	if (ft_strncmp(str, "cd", 3) == 0)
-		return (1);
+		index = 0;
 	else if (ft_strncmp(str, "echo", 5) == 0)
-		return (1);
+		index = 1;
 	else if (ft_strncmp(str, "env", 4) == 0)
-		return (1);
+		index = 2;
 	else if (ft_strncmp(str, "exit", 5) == 0)
-		return (1);
+		index = 3;
 	else if (ft_strncmp(str, "export", 7) == 0)
-		return (1);
+		index = 4;
 	else if (ft_strncmp(str, "pwd", 4) == 0)
-		return (1);
+		index = 5;
 	else if (ft_strncmp(str, "unset", 6) == 0)
-		return (1);
-	return (0);
+		index = 6;
+	else
+		index = -1;
+	return (index);
 }
 
-int	execute_builtin(t_word *words, int fd_out)
+static int	fd_builtin(t_redir *redirs, int fd_out)
 {
-	char	**argv;
-	int		status;
+	t_redir		*redir;
+	int			fd_open;
+	int			fd;
 
-	argv = list_to_argv(words);
-	status = -1;
-	if (fd_out == NO_PIPE)
-		fd_out = STDOUT_FILENO;
-	if (argv[0] && ft_strncmp(argv[0], "cd", 3) == 0)
-		status = cd_main(argv, fd_out);
-	else if (argv[0] && ft_strncmp(argv[0], "echo", 5) == 0)
-		status = echo_main(argv, fd_out);
-	else if (argv[0] && ft_strncmp(argv[0], "env", 4) == 0)
-		status = env_main(fd_out);
-	else if (argv[0] && ft_strncmp(argv[0], "exit", 5) == 0)
-		status = exit_main(argv);
-	else if (argv[0] && ft_strncmp(argv[0], "export", 7) == 0)
-		status = export_main(argv, fd_out);
-	else if (argv[0] && ft_strncmp(argv[0], "pwd", 4) == 0)
-		status = pwd_main(fd_out);
-	else if (argv[0] && ft_strncmp(argv[0], "unset", 6) == 0)
-		status = unset_main(argv);
-	clean_argv(argv);
-	if (status != -1)
-		g_exit_status = status;
+	fd = -1;
+	if (redirs == NULL && fd_out == NO_PIPE)
+		return (STDOUT_FILENO);
+	else if (redirs == NULL && fd_out != NO_PIPE)
+		return (fd_out);
+	redir = redirs;
+	while (redir != NULL)
+	{
+		fd_open = ft_open(redir->dest.filename, redir->mode_bits, redir->flags_bits);
+		if (redir->rtype == r_input_direction || redir->rtype == r_appending_to)
+			ft_close(fd_open);
+		else if (redir->rtype == r_appending_to || redir->rtype == r_output_direction)
+		{
+			if (fd >= 0)
+				ft_close(fd);
+			fd = fd_open;
+		}
+		redir = redir->next;
+	}
+	return (fd);
+}
+
+static int run_builtin(int index, char **argv, int fd_out)
+{
+	int			status;
+	static int	(*builtin[7])(char **, int) = { \
+		cd_main, echo_main, env_main,
+		exit_main, export_main, pwd_main,
+		unset_main};
+
+	status = builtin[index](argv, fd_out);
 	return (status);
 }
 
-/* int	execute_builtin(t_word *words, int fd_out)
+int	execute_builtin(t_command *cmd, int fd_out)
 {
-	char	**argv;
+	t_simple	*simple;
+	char		**argv;
+	int			index;
 
-	argv = list_to_argv(words);
-	if (fd_out == NO_PIPE)
-		fd_out = STDOUT_FILENO;
-	if (ft_strncmp(argv[0], "cd", 3) == 0)
-		g_exit_status = cd_main(argv, fd_out);
-	else if (ft_strncmp(argv[0], "echo", 5) == 0)
-		g_exit_status = echo_main(argv, fd_out);
-	else if (ft_strncmp(argv[0], "env", 4) == 0)
-		g_exit_status = env_main(fd_out);
-	else if (ft_strncmp(argv[0], "exit", 5) == 0)
-		g_exit_status = exit_main(argv);
-	else if (ft_strncmp(argv[0], "export", 7) == 0)
-		g_exit_status = export_main(argv, fd_out);
-	else if (ft_strncmp(argv[0], "pwd", 4) == 0)
-		g_exit_status = pwd_main(fd_out);
-	else if (ft_strncmp(argv[0], "unset", 6) == 0)
-		g_exit_status = unset_main(argv);
+	simple = cmd->value.simple;
+	if (simple->words == NULL)
+		return (EXIT_FAILURE);
+	index = index_builtin(simple->words->word);
+	if (index < 0)
+		return (EXIT_FAILURE);
+	argv = list_to_argv(simple->words);
+	if (argv == NULL)
+		return (EXIT_FAILURE);
+	fd_out = fd_builtin(simple->redirs, fd_out);
+	g_exit_status = run_builtin(index, argv, fd_out);
 	clean_argv(argv);
-	return (-1);
-} */
+	return (EXIT_SUCCESS);
+}

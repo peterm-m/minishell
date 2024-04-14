@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:34:38 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:38:34 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ char	**list_to_argv(t_word *words)
 
 	n_word = get_size_argv(words);
 	arr = ft_calloc((n_word + 1), sizeof(char *));
+	if (arr == NULL)
+		return (NULL);
 	arr = fill_arr(words, arr);
 	return (arr);
 }

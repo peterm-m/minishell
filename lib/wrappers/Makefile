@@ -28,6 +28,7 @@ SRCS = \
 	ft_execve.c\
 	ft_fork.c\
 	ft_lstat.c\
+	ft_initenv.c \
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 
@@ -44,7 +45,7 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -I../libft
+CCFLAGS = -Wall -Werror -Wextra -fsanitize=address -I../libft
 
 OS := $(shell uname -s)
 

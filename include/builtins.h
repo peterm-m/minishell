@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 19:48:36 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/04 19:49:02 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:26:57 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 int		cd_main(char **argv, int fd);
 int		echo_main(char **argv, int fd);
-int		env_main(int fd);
-int		exit_main(char **argv);
+int		env_main(char **argv, int fd);
+int		exit_main(char **argv, int fd);
 int		export_main(char **argv, int fd);
-int		pwd_main(int fd);
-int		unset_main(char **argv);
+int		pwd_main(char **argv, int fd);
+int		unset_main(char **argv, int fd);
 
 // UTILS
 int		get_arr_len(char **env);

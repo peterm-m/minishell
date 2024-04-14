@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:37:54 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:24:00 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		get_pathname(char *name, t_path_name *path);
 char	*get_prompt(void);
 void	setup_term(void);
 
-void	make_redir(t_redirect *redirections);
-void	open_redir(t_redirect *redirections);
+void	make_redir(t_redir *redirections);
+void	open_redir(t_redir *redirections);
 
 void	close_pipe(int fd_in, int fd_out);
 void	make_pipe(int fd_in, int fd_out);

@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 15:00:19 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:40:33 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	execute_simple(t_command *cmd, int fd_in, int fd_out)
 	{
 		child_signals();
 		make_pipe(fd_in, fd_out);
-		make_redir(command->redirects);
+		make_redir(command->redirs);
 		ft_execle(command->words);
 		exit (EXIT_SUCCESS);
 	}

@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:50:09 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/07 18:13:36 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:00:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ static void	exit_no_numeric(char *cmd)
 	exit(255);
 }
 
-int	exit_main(char **argv)
+int	exit_main(char **argv, int fd_out)
 {
 	int	argc;
 
+	(void)fd_out;
 	argc = get_arr_len(argv);
 	if (argc == 1)
 	{

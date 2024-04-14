@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:54:26 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/05 19:54:27 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:00:51 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unset_main(char **argv)
+int	unset_main(char **argv, int fd_out)
 {
 	int	argc;
 	int	i;
 
+	(void)fd_out;
 	argc = get_arr_len(argv);
 	if (argc == 1)
 	{

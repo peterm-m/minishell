@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 11:30:19 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 16:23:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:40:33 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	clean_simple(t_simple *cmd)
 		return ;
 	if (cmd->words != NULL)
 		clean_word(&(cmd->words));
-	if (cmd->redirects != NULL)
-		clean_redirection(&(cmd->redirects));
+	if (cmd->redirs != NULL)
+		clean_redirection(&(cmd->redirs));
 	ft_free(cmd);
 }
 
@@ -58,6 +58,6 @@ void	clean_command(t_command *cmd)
 		clean_connection(cmd->value.connection);
 	else if (cmd->type == cmd_subshell)
 		clean_subshell(cmd->value.subshell);
-	clean_redirection(&(cmd->redirects));
+	clean_redirection(&(cmd->redirs));
 	ft_free(cmd);
 }

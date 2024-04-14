@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 14:47:53 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:40:33 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef struct s_redirect
 	int					flags_bits;
 	char				*here_doc_eof;
 	struct s_redirect	*next;
-}	t_redirect;
+}	t_redir;
 
-int			add_redirection(t_redirect **redir_list, t_dlst **lex);
-void		clean_redirection(t_redirect **redirection);
+int			add_redirection(t_redir **redir_list, t_dlst **lex);
+void		clean_redirection(t_redir **redirection);
 
 typedef struct s_word
 {
@@ -75,14 +75,14 @@ typedef struct s_command
 	t_command_type	type;
 	int				flag;
 	t_node			value;
-	t_redirect		*redirects;
+	t_redir		*redirs;
 }	t_command;
 
 typedef struct s_simple
 {
 	int			flags;
 	t_word		*words;
-	t_redirect	*redirects;
+	t_redir	*redirs;
 }	t_simple;
 
 t_command	*make_simple(t_dlst **lex);

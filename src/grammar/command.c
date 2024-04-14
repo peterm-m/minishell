@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:46:40 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 21:07:41 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 16:40:33 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	new_command(t_command_type type, t_command **out)
 }
 
 /*
-	Comando simple: lista de palabras y redirecciones en cualquier orden
-		Primera palabra sera el comando a ejecutar
+	Simple command: 2.9.1 Simple Commands
+		A simple command is a sequence  words and redirections,
+		terminated by a control operator.
 */
 
 t_command	*make_simple(t_dlst **lex)
@@ -48,7 +49,7 @@ t_command	*make_simple(t_dlst **lex)
 	{
 		if (redirection_token(lex) || type_token(lex) == tt_io_number)
 		{
-			if (add_redirection(&command->value.simple->redirects, lex))
+			if (add_redirection(&command->value.simple->redirs, lex))
 				return (parser_error(lex, command));
 		}
 		else if (type_token(lex) == tt_word)
@@ -59,7 +60,7 @@ t_command	*make_simple(t_dlst **lex)
 		else
 			break ;
 	}
-	if (!command->value.simple->redirects && !command->value.simple->words)
+	if (!command->value.simple->redirs && !command->value.simple->words)
 		return (parser_error(lex, command));
 	return (command);
 }

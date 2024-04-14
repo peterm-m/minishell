@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/12 12:40:40 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/14 17:02:57 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ void	ft_execle(t_word *args);
 
 int		execute_command(t_command *cmd, int fd_in, int fd_out);
 void	execute_simple(t_command *cmd, int fd_in, int fd_out);
-int		execute_builtin(t_word *words, int fd_out);
+int		execute_builtin(t_command *cmd, int fd_out);
 int		execute_connection(t_command *cmd, int fd_in, int fd_out);
 void	execute_subshell(t_subshell *cmd, int fd_in, int fd_out);
-
-int		is_builtin(char *str);
 
 #endif
