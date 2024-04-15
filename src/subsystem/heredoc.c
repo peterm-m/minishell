@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/14 18:27:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:57:12 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ char	*heredoc(char *delimiter)
 	int		fd;
 
 	expand = 1;
-	if (is_quotes(delimiter[0])
-		&& is_quotes(delimiter[ft_strlen(delimiter) - 1]))
+	printf("cadena: %s\n", delimiter);
+	if (is_quotes(delimiter[0]) == 1
+		&& is_quotes(delimiter[ft_strlen(delimiter)]) == 1)
 	{
 		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);

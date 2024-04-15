@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/14 18:28:40 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:38:12 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	export_args(char **argv)
 		valid = 0;
 		while (argv[j][i])
 		{
-			if (ft_isdigit(argv[j][0]))
+			if (ft_isdigit(argv[j][0]) || argv[j][0] == '=')
 				return (exit_not_identifier(argv[j]));
 			if (argv[j][i] == '=' && valid == 0)
 			{
