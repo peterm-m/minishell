@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:14:34 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 20:05:30 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:36:06 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,26 @@ static void	print_connection(t_connection *connection, int level)
 	}
 }
 
-static void	print_subshell(t_subshell *subshell, int level)
+static void	print_subshell(t_command *subshell, int level)
 {
+	t_redir	*r;
+	int		i;
+
 	if (subshell == NULL)
 		return ;
-	printf("├SUBSHELL: \n");
-	if (subshell->command != NULL)
-		print_command(subshell->command, level +1);
+	printf("├SUBSHELL: ");
+	printf(" REDIRS-> \t");
+	r = subshell->redirs;
+	i = 0;
+	while (r != NULL)
+	{
+		printf("%d:dest=%s source=%d rtype=%d\t", i++, r->dest.filename,
+			r->source.fd, r->rtype);
+		r = r->next;
+	}
+	printf("\n");
+	if (subshell->value.subshell->command != NULL)
+		print_command(subshell->value.subshell->command, level +1);
 }
 
 static void	print_simple(t_simple *cmd)
@@ -70,8 +83,6 @@ static void	print_simple(t_simple *cmd)
 void	print_command(t_command *cmd, int level)
 {
 	int		i;
-	t_redir	*r;
-
 	i = 1;
 	while (i++ < level)
 		printf("|\t");
@@ -82,14 +93,7 @@ void	print_command(t_command *cmd, int level)
 	else if (cmd->type == cmd_connection)
 		print_connection(cmd->value.connection, level +1);
 	else if (cmd->type == cmd_subshell)
-		print_subshell(cmd->value.subshell, level +1);
-	r = cmd->redirs;
-	while (r != NULL)
-	{
-		printf("%d:dest=%s source=%d rtype=%d\t", i++, r->dest.filename,
-			r->source.fd, r->rtype);
-		r = r->next;
-	}
+		print_subshell(cmd, level +1);
 	if (level == 0)
 		printf("\n");
 }
