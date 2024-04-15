@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_initenv.c                                       :+:      :+:    :+:   */
+/*   enviroment.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 20:11:11 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/13 14:28:54 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:15:26 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrappers.h"
+#include "minishell.h"
 
-void	ft_initenv(void)
+void	initenv(void)
 {
-	int	i;
+	int		i;
+	char	**new_env;
 
-	i = 0;
-	while (environ[i])
-		ft_putenv(strdup(environ[i++]));
+	i = get_arr_len(environ);
+	new_env = ft_calloc(i +1, sizeof(char *));
+	while (environ[--i])
+		new_env[i] = ft_strdup(environ[i]);
+	environ = new_env;
 }

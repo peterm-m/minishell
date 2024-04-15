@@ -3,18 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/03/18 19:58:16 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:50:38 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
 
+static int realloc_env(int len_env, char *string)
+{
+	char	**old_environ;
+	char	**new_environ;
+
+	new_environ = ft_calloc((len_env + 2), sizeof(char *));
+	if (new_environ == NULL)
+		return (EXIT_FAILURE);
+	new_environ[len_env] = (char *) string;
+	while (len_env--)
+		new_environ[len_env] = environ[len_env]; 
+	old_environ = environ;
+	environ = new_environ;
+	free(old_environ);
+	return (EXIT_SUCCESS);
+}
+
 int	ft_putenv(char *string)
 {
-	char	**new_environ;
 	int		num_env;
 	char	*eq;
 	size_t	name_len;
@@ -33,10 +49,5 @@ int	ft_putenv(char *string)
 			return (EXIT_SUCCESS);
 		}
 	}
-	new_environ = ft_memcpy(ft_malloc((num_env + 2) * sizeof(char *)),
-			environ, num_env * sizeof(char *));
-	new_environ[num_env] = (char *) string;
-	new_environ[num_env + 1] = NULL;
-	environ = new_environ;
-	return (EXIT_SUCCESS);
+	return (realloc_env(num_env, string));
 }

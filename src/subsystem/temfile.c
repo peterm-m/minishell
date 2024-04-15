@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   temfile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:55:05 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 11:21:37 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:12:07 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_temfile(void)
 	char	file_name[NAME_MAX];
 
 	i = 0;
-	ft_strlcpy(file_name, ".tmpfile", 9);
+	ft_strlcpy(file_name, "/tmp/.tmpfile", 14);
 	while (access(file_name, F_OK) == 0)
 	{
 		num = ft_itoa(i++);
