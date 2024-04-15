@@ -51,6 +51,7 @@ typedef enum e_terminals
 # define COMMD_SUB 32
 # define EXPAND_Q 256
 # define EXPAND 512
+# define EQUIVAL 1024
 
 # define WILDCARD 64
 # define QUEST 128

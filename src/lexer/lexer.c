@@ -55,9 +55,9 @@ int	states(int i, int j)
 	{13, 4, 2, 7, 1, 9, 5, 15, 16, 17, 18, 14},
 	{12, 4, 2, 7, 1, 9, 5, 15, 16, 17, 18, 14},
 	{13, 11, 2, 11, 1, 11, 11, 15, 16, 17, 18, 14},
-	{13, 4, 2, 11, 1, 11, 5, 15, 16, 17, 18, 14},
+	{13, 4, 2, 7, 1, 9, 5, 15, 16, 17, 18, 14},
 	{13, 11, 2, 11, 1, 11, 11, 15, 16, 17, 18, 14},
-	{13, 4, 2, 11, 1, 11, 5, 15, 16, 17, 18, 14},
+	{13, 4, 2, 7, 1, 9, 5, 15, 16, 17, 18, 14},
 	};
 
 	return (states[i][j]);
@@ -117,7 +117,7 @@ int	evaluate_state(char *str)
 		state = states(state, in_abc(str[i++]));
 		if (state == 11)
 		{
-			printf(BHRED "minishell: parse error near %c\n"END, str[i - 1]);
+			printf("minishell: parse error near `%c'\n", str[i - 1]);
 			return (LEX_ERROR);
 		}
 		b_counter = check_braces(state, b_counter);

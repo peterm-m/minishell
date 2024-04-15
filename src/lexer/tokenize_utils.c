@@ -59,16 +59,12 @@ void	search_w_q(void *t)
 		while (token->str[++i])
 		{
 			if (token->str[i] == '*')
-			{
 				token->flag |= (EXPAND | WILDCARD);
-				break ;
-			}
 			if (token->str[i] == '?' && ((i > 0 && token->str[i - 1] != '$')
 					|| (i == 0)))
-			{
 				token->flag |= (EXPAND | QUEST);
-				break ;
-			}
+			if (token->str[i] == '=')
+				token->flag |= (EXPAND | EQUIVAL);
 		}
 	}
 	else if (token != NULL && token->str == NULL
