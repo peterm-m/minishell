@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 22:39:50 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/15 12:14:59 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	fill_redirection(t_redir *redir, t_token *type, t_token *word)
 		redir->mode_bits = (O_CREAT | O_RDWR);
 		redir->dest.filename = heredoc(word->str);
 	}
-	if (redir->rtype == r_input_direction)
+	if (redir->rtype == r_input_direction || r_reading_until)
 		redir->source.fd = STDIN_FILENO;
 	if (redir->rtype != r_reading_until)
 		redir->dest.filename = word->str;
