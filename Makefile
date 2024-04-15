@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/14 19:22:08 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/15 14:25:33 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ NAMES := \
 	subsystem/pathname.c \
 	subsystem/argv.c \
 	subsystem/temfile.c \
+	subsystem/enviroment.c \
 	\
 	executer/execute_builtin.c \
 	executer/execute_command.c \

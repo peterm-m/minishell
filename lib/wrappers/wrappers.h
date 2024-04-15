@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 18:44:48 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:28:41 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int			ft_unsetenv(const char *name);
 int			ft_putenv(char *string);
 int			ft_clearenv(void);
 int			ft_dup2(int fd1, int fd2);
-void		ft_initenv(void);
 char		*ft_getvar(const char *name);
 
 #endif

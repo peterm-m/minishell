@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:21:06 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 18:52:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:29:02 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,11 @@ static t_command	*make_command(t_dlst **lex)
 		if (command->value.subshell->command == NULL
 			|| type_token(lex) != tt_rbraket)
 			return (parser_error(lex, command));
+		tok = pop_token(lex);
+		free_token(tok);
 		while (redirection_token(lex) || type_token(lex) == tt_io_number)
 			if (add_redirection(&command->redirs, lex))
 				return (parser_error(lex, command));
-		tok = pop_token(lex);
-		free_token(tok);
 	}
 	else
 		command = make_simple(lex);

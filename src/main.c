@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 22:40:30 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/15 18:18:45 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int	interactive_loop(void)
 		ft_free(read_line);
 		rl_on_new_line();
 	}
-	rl_clear_history();
 	return (0);
 }
 
@@ -53,10 +52,12 @@ static int	interactive_loop(void)
 int	main(void)
 {
 	g_exit_status = 0;
-	ft_initenv();
+	initenv();
 	setup_term();
 	initial_signals();
 	interactive_loop();
+	rl_clear_history();
+	clean_argv(environ);
 	ft_putstr_fd("exit\n", 1);
 	return (EXIT_SUCCESS);
 }

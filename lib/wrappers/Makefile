@@ -27,8 +27,7 @@ SRCS = \
 	ft_write.c\
 	ft_execve.c\
 	ft_fork.c\
-	ft_lstat.c\
-	ft_initenv.c \
+	ft_lstat.c
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 
