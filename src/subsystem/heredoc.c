@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/14 18:27:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:44:20 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*heredoc(char *delimiter)
 
 	expand = 1;
 	if (is_quotes(delimiter[0])
-		&& is_quotes(delimiter[ft_strlen(delimiter) - 1]))
+		&& is_quotes(delimiter[ft_strlen(delimiter)]))
 	{
 		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);
