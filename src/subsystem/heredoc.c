@@ -69,16 +69,10 @@ char	*heredoc(t_redir *redir, char *delimiter)
 	int		fd;
 
 	expand = 1;
-<<<<<<< HEAD
 	redir->mode_bits = (O_CREAT | O_RDWR);
 	redir->here_doc_eof = delimiter;
 	if (is_quotes(delimiter[0])
 		&& is_quotes(delimiter[ft_strlen(delimiter) - 1]))
-=======
-	printf("cadena: %s\n", delimiter);
-	if (is_quotes(delimiter[0]) == 1
-		&& is_quotes(delimiter[ft_strlen(delimiter)]) == 1)
->>>>>>> bb9df61c1e5e0402f5d27a17bbb27822da134c27
 	{
 		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);
