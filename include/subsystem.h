@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/16 18:05:37 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:08:48 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**list_to_argv(t_word *words);
 void	clean_argv(char **arr);
 char	**ft_copyarg(char **argv);
 
-char	*heredoc(char *delimiter);
+char	*heredoc(t_redir *redir, char *delimiter);
 char	*ft_temfile(void);
 
 void	ft_initenv(void);

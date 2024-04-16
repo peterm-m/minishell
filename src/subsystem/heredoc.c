@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/15 21:00:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:09:03 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	get_heredoc(int fd, char *del, int expand)
 	}
 }
 
-char	*heredoc(char *delimiter)
+char	*heredoc(t_redir *redir, char *delimiter)
 {
 	char	*del;
 	int		expand;
@@ -72,8 +72,7 @@ char	*heredoc(char *delimiter)
 	else
 		del = ft_strdup(delimiter);
 	a = ft_temfile();
-	fd = ft_open(a, (O_CREAT | O_APPEND | O_WRONLY),
-			(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
+	fd = ft_open(a, redir->mode_bits, redir->flags_bits);
 	get_heredoc(fd, del, expand);
 	close(fd);
 	ft_free(del);
