@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/16 20:49:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:57:14 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,11 @@ int	execute_builtin(t_command *cmd, int fd_out)
 	if (simple->words == NULL)
 		return (EXIT_FAILURE);
 	argv = list_to_argv(simple->words);
-	if (argv == NULL)
-		return (EXIT_FAILURE);
+	if (argv == NULL || argv[0] == NULL)
+	{
+		clean_argv(argv);
+		return (EXIT_SUCCESS);
+	}
 	index = index_builtin(argv[0]);
 	if (index < 0)
 		return (EXIT_FAILURE);
