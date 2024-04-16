@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/16 19:09:03 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:09:58 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ char	*heredoc(t_redir *redir, char *delimiter)
 	int		fd;
 
 	expand = 1;
-	printf("cadena: %s\n", delimiter);
-	if (is_quotes(delimiter[0]) == 1
-		&& is_quotes(delimiter[ft_strlen(delimiter)]) == 1)
+	redir->mode_bits = (O_CREAT | O_RDWR);
+	redir->here_doc_eof = delimiter;
+	if (is_quotes(delimiter[0])
+		&& is_quotes(delimiter[ft_strlen(delimiter) - 1]))
 	{
 		expand = 0;
 		del = ft_substr(delimiter, 1, ft_strlen(delimiter) - 2);
