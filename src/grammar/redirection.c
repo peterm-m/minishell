@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:15:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/15 18:17:33 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/16 12:33:49 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ static void	fill_redirection(t_redir *redir, t_token *type, t_token *word)
 	else if (redir->rtype == r_input_direction)
 		redir->mode_bits = O_RDONLY;
 	else if (redir->rtype == r_reading_until)
-	{
-		redir->mode_bits = (O_CREAT | O_RDWR);
-		redir->dest.filename = heredoc(word->str);
-	}
+		redir->dest.filename = heredoc(redir, word->str);
 	if (redir->rtype == r_input_direction || redir->rtype == r_reading_until)
 		redir->source.fd = STDIN_FILENO;
 	if (redir->rtype != r_reading_until)
@@ -51,7 +48,8 @@ static void	read_redirection(t_dlst **lex, t_token **io_number,
 	if (type_token(lex) == tt_word)
 	{
 		*word = pop_token(lex);
-		expander(*word);
+		if (((*type)->flag & TOK_TYPE) != tt_dless)
+			expander(*word);
 	}
 	if (*type == NULL || *word == NULL)
 	{

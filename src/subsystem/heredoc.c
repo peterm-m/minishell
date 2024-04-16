@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/14 18:27:45 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:38:34 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	get_heredoc(int fd, char *del, int expand)
 	}
 }
 
-char	*heredoc(char *delimiter)
+char	*heredoc(t_redir *redir, char *delimiter)
 {
 	char	*del;
 	int		expand;
@@ -62,6 +62,8 @@ char	*heredoc(char *delimiter)
 	int		fd;
 
 	expand = 1;
+	redir->mode_bits = (O_CREAT | O_RDWR);
+	redir->here_doc_eof = delimiter;
 	if (is_quotes(delimiter[0])
 		&& is_quotes(delimiter[ft_strlen(delimiter) - 1]))
 	{
@@ -71,8 +73,7 @@ char	*heredoc(char *delimiter)
 	else
 		del = ft_strdup(delimiter);
 	a = ft_temfile();
-	fd = ft_open(a, (O_CREAT | O_APPEND | O_WRONLY),
-			(S_IWUSR | S_IRUSR | S_IRGRP | S_IROTH));
+	fd = ft_open(a, redir->mode_bits, redir->flags_bits);
 	get_heredoc(fd, del, expand);
 	close(fd);
 	ft_free(del);
