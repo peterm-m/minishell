@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   enviroment.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 20:11:11 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/15 18:15:26 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/15 21:00:07 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "wrappers.h"
 
-void	initenv(void)
+void	ft_initenv(void)
 {
-	int		i;
-	char	**new_env;
+	int	i;
 
-	i = get_arr_len(environ);
-	new_env = ft_calloc(i +1, sizeof(char *));
-	while (environ[--i])
-		new_env[i] = ft_strdup(environ[i]);
-	environ = new_env;
+	i = 0;
+	while (environ[i])
+		ft_putenv(strdup(environ[i++]));
 }

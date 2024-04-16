@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:26 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/03/25 19:02:52 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:32:48 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int	in_abc(char c)
 int	evaluate_state(char *str)
 {
 	int				state;
-	size_t			len;
 	size_t			i;
 	t_braket_count	b_counter;
 
@@ -111,8 +110,7 @@ int	evaluate_state(char *str)
 	b_counter.state_braket = 0;
 	i = 0;
 	state = 0;
-	len = ft_strlen(str);
-	while (i < len)
+	while (i < ft_strlen(str))
 	{
 		state = states(state, in_abc(str[i++]));
 		if (state == 11)
@@ -121,13 +119,16 @@ int	evaluate_state(char *str)
 			return (LEX_ERROR);
 		}
 		b_counter = check_braces(state, b_counter);
-		if (b_counter.state_brace < 0 || b_counter.state_braket < 0)
-			return (LEX_ERROR);
 	}
 	if (b_counter.state_brace != 0 || b_counter.state_braket != 0)
+	{
+		printf("minishell: parse error near `%c'\n", str[i - 1]);
 		return (LEX_ERROR);
+	}
 	return (state);
 }
+/* 		if (b_counter.state_brace < 0 || b_counter.state_braket < 0)
+			return (LEX_ERROR); */
 
 /**
  * The function "lexer" takes a string as input, evaluates its state, 

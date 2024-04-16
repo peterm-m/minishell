@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:39 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/07 10:57:37 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:14:04 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	get_ionumber(char *str, int i, t_token *token)
 	}
 	else if (!in_word(str[i + j]))
 	{
-		while (!in_word(str[i + j]) && str[i + j])
+		while (!in_word(str[i + j]) && str[i + j] && str[i + j] != ')'
+			&& str[i + j] != '}')
 			j++;
 		set_token(str + i, j, tt_word, token);
 	}
