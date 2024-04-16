@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/15 15:50:38 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/16 18:19:28 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
+int	arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	return (i);
+}
 
 static int realloc_env(int len_env, char *string)
 {
@@ -25,7 +34,7 @@ static int realloc_env(int len_env, char *string)
 		new_environ[len_env] = environ[len_env]; 
 	old_environ = environ;
 	environ = new_environ;
-	free(old_environ);
+	//free(old_environ);
 	return (EXIT_SUCCESS);
 }
 
@@ -36,6 +45,8 @@ int	ft_putenv(char *string)
 	size_t	name_len;
 
 	eq = ft_strchr(string, '=');
+	if (eq == NULL)
+		return (realloc_env(arr_len(environ), string));
 	name_len = eq - string;
 	if (string == NULL || eq == NULL)
 		return (EXIT_FAILURE);
