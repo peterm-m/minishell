@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:54:26 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/14 17:00:51 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:20:28 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ int	unset_main(char **argv, int fd_out)
 		ft_putendl_fd("unset: not enough arguments", 2);
 		return (EXIT_SUCCESS);
 	}
-	if (ft_strncmp(argv[1], "_", 2) == 0)
-		return (EXIT_SUCCESS);
 	i = 1;
+	if (ft_strncmp(argv[1], "_", 2) == 0)
+		i++;
 	while (argv[i])
 	{
-		if (ft_getenv(argv[i]) != NULL)
 			ft_unsetenv(argv[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/16 18:55:46 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:41:22 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	export_args(char **argv)
 
 int	export_main(char **argv, int fd)
 {
-	int	argc;
+	int				argc;
 
 	argc = get_arr_len(argv);
 	if (argc == 1)
