@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/16 18:19:28 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:34:28 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,21 @@ int	arr_len(char **arr)
 	while (arr[i] != NULL)
 		i++;
 	return (i);
+}
+
+int	not_in_export(char *string)
+{
+	int	i;
+	int	size;
+
+	i = -1;
+	size = ft_strlen(string) + 1;
+	while(environ[++i])
+	{
+		if (ft_strncmp(environ[i], string, size) == 0)
+			return (0);
+	}
+	return (1);
 }
 
 static int realloc_env(int len_env, char *string)
@@ -45,11 +60,11 @@ int	ft_putenv(char *string)
 	size_t	name_len;
 
 	eq = ft_strchr(string, '=');
-	if (eq == NULL)
+	if (eq == NULL && not_in_export(string))
 		return (realloc_env(arr_len(environ), string));
-	name_len = eq - string;
 	if (string == NULL || eq == NULL)
 		return (EXIT_FAILURE);
+	name_len = eq - string;
 	num_env = -1;
 	while (environ[++num_env] != NULL)
 	{
