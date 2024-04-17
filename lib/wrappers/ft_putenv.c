@@ -27,7 +27,7 @@ int	not_in_export(char *string)
 	int	size;
 
 	i = -1;
-	size = ft_strlen(string) + 1;
+	size = ft_strlen(string);
 	while(environ[++i])
 	{
 		if (ft_strncmp(environ[i], string, size) == 0)
@@ -38,16 +38,18 @@ int	not_in_export(char *string)
 
 static int realloc_env(int len_env, char *string)
 {
-	char	**old_environ;
+	//char	**old_environ;
 	char	**new_environ;
 
 	new_environ = ft_calloc((len_env + 2), sizeof(char *));
 	if (new_environ == NULL)
 		return (EXIT_FAILURE);
+	if ((ft_strlen(string) - (ft_strchr(string, '=') - string)) == 1)
+		string = ft_strjoin(string, "\"\"");
 	new_environ[len_env] = (char *) string;
 	while (len_env--)
 		new_environ[len_env] = environ[len_env]; 
-	old_environ = environ;
+	//old_environ = environ;
 	environ = new_environ;
 	//free(old_environ);
 	return (EXIT_SUCCESS);
@@ -68,9 +70,10 @@ int	ft_putenv(char *string)
 	num_env = -1;
 	while (environ[++num_env] != NULL)
 	{
-		if (ft_strncmp(environ[num_env], string, name_len + 1) == 0
-			&& (environ[num_env])[name_len] == '=')
+		if (ft_strncmp(environ[num_env], string, name_len) == 0)
 		{
+			if (ft_strlen(string) - name_len == 1)
+				string = ft_strjoin(string, "\"\"");
 			environ[num_env] = (char *) string;
 			return (EXIT_SUCCESS);
 		}

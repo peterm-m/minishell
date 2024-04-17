@@ -16,11 +16,9 @@ int	env_main(char **argv, int fd)
 {
 	int	i;
 	int j;
-	int	is_local;
 
 	(void)argv;
 	i = -1;
-	is_local = 0;
 	while (environ[++i])
 	{
 		j = 0;
