@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_character.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 17:07:11 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/02 19:32:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:14:21 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int	search_character(char *str, char c)
 		double_q = (double_q + (str[i] == '\"' && single_q == 0)) % 2;
 		if (str[i] == c)
 			if ((c == '$' && single_q == 0) || (double_q == 0 && single_q == 0))
-				break ;
+				return (i);
 		i++;
 	}
+	single_q = 0;
+	double_q = 0;
 	return (i);
 }

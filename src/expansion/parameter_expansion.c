@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 18:11:49 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:42:35 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ char	*make_expansion(char *str, int start_expan)
 }
 
 // TODO: FIX si la expansion no existe, hace falta disminuir i en uno
-// TODO: FIX: cuando solo aparece $? no funciona bien
-//                               "$?" si en algun momento
-//                             el puntero queda desplazado 
 
 char	*parameter_expansion(char *str)
 {
@@ -72,7 +69,7 @@ char	*parameter_expansion(char *str)
 
 	i = 0;
 	out = str;
-	while (1)
+	while (out[i])
 	{
 		i += search_character(out + i, '$');
 		while (out[i] == '$')
@@ -83,5 +80,6 @@ char	*parameter_expansion(char *str)
 		if (out[i - 1] == '\0')
 			break ;
 	}
+	search_character("", 0);
 	return (out);
 }
