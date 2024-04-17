@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/15 19:38:12 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:41:22 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ void	print_sorted_env(int fd)
 		ft_putendl_fd(environ[i], fd);
 }
 
+static int	not_in_export2(char *string)
+{
+	int	i;
+	int	size;
+
+	i = -1;
+	size = ft_strlen(string) + 1;
+	while(environ[++i])
+	{
+		if (ft_strncmp(environ[i], string, size) == 0)
+			return (0);
+	}
+	return (1);
+}
+
 //TODO: linea 55: cambiado a memoria dinámica
 
 int	export_args(char **argv)
@@ -49,7 +64,7 @@ int	export_args(char **argv)
 		{
 			if (ft_isdigit(argv[j][0]) || argv[j][0] == '=')
 				return (exit_not_identifier(argv[j]));
-			if (argv[j][i] == '=' && valid == 0)
+			if (valid == 0 && not_in_export2(argv[j]))//argv[j][i] == '=' && valid == 0
 			{
 				ft_strlcpy(new_var, argv[j], PATH_MAX);
 				ft_putenv(ft_strdup(new_var));
@@ -64,7 +79,7 @@ int	export_args(char **argv)
 
 int	export_main(char **argv, int fd)
 {
-	int	argc;
+	int				argc;
 
 	argc = get_arr_len(argv);
 	if (argc == 1)

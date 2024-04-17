@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 16:38:34 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:45:25 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,14 @@ static char	**fill_arr(t_word *words, char **arr)
 	tmp = words;
 	while (tmp)
 	{
-		arr2 = ft_split(tmp->word, 31);
-		j = 0;
-		while (arr2[j] != NULL)
-			arr[i++] = arr2[j++];
-		ft_free(arr2);
+		if (ft_isalnum(tmp->word[0]))
+		{
+			arr2 = ft_split(tmp->word, 31);
+			j = 0;
+			while (arr2[j] != NULL)
+				arr[i++] = arr2[j++];
+			ft_free(arr2);
+		}
 		tmp = tmp->next;
 	}
 	return (arr);

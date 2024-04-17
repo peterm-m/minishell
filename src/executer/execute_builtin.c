@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 19:51:15 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:57:14 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,14 @@ int	execute_builtin(t_command *cmd, int fd_out)
 	simple = cmd->value.simple;
 	if (simple->words == NULL)
 		return (EXIT_FAILURE);
-	index = index_builtin(simple->words->word);
-	if (index < 0)
-		return (EXIT_FAILURE);
 	argv = list_to_argv(simple->words);
-	if (argv == NULL)
+	if (argv == NULL || argv[0] == NULL)
+	{
+		clean_argv(argv);
+		return (EXIT_SUCCESS);
+	}
+	index = index_builtin(argv[0]);
+	if (index < 0)
 		return (EXIT_FAILURE);
 	fd_out = fd_builtin(simple->redirs, fd_out);
 	g_exit_status = run_builtin(index, argv, fd_out);
