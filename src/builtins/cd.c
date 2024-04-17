@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/15 20:22:23 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:18:25 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ static int	update_pwd(int fd)
 	ft_strlcpy(new_pwd, "PWD=", PATH_MAX);
 	ft_strlcat(new_pwd, getcwd(pwd, PATH_MAX), PATH_MAX);
 	last_pwd = ft_getvar("PWD");
-	ft_free(last_pwd);
-	ft_putenv(ft_strdup(new_pwd));
+	//ft_free(last_pwd);
+	//ft_putenv(ft_strdup(new_pwd));
+	ft_environ(ft_strdup(new_pwd), ADD, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -38,10 +39,11 @@ static int	update_oldpwd(int fd)
 
 	if (ft_getenv("PWD") == NULL)
 		return (EXIT_FAILURE);
-	old_pwd = ft_strjoin("OLDPWD=", ft_getenv("PWD"));
+	old_pwd = ft_strjoin("OLDPWD=", ft_environ("PWD", GET, 0));
 	last_old_pwd = ft_getvar("OLDPWD");
-	ft_free(last_old_pwd);
-	ft_putenv(old_pwd);
+	//ft_free(last_old_pwd);
+	//ft_putenv(old_pwd);
+	ft_environ(old_pwd, ADD, 0);
 	if (update_pwd(fd) == EXIT_FAILURE || !old_pwd)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -54,13 +56,13 @@ static char	*get_path(int argc, char *dir, int fd)
 	path = NULL;
 	if (argc == 1 || (dir && ft_strncmp(dir, "~", 2) == 0))
 	{
-		path = ft_getenv("HOME");
+		path = ft_environ("HOME", GET, 0);
 		if (path == NULL)
 			ft_putendl_fd("Home not set", fd);
 	}
 	else if (dir && ft_strncmp(dir, "-", 2) == 0)
 	{
-		path = ft_getenv("OLDPWD");
+		path = ft_environ("OLDPWD", GET, 0);
 		if (path == NULL)
 			ft_putendl_fd("OLDPWD not set", fd);
 	}

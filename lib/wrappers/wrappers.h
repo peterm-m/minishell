@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/15 14:28:41 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/17 19:31:06 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ void		ft_sigaddset(sigset_t *set, int signum);
 void		ft_pipe(t_pipe *pipe);
 char		*ft_getenv(const char *name);
 int			ft_setenv(const char *name, const char *value, int overwrite);
-int			ft_unsetenv(const char *name);
-int			ft_putenv(char *string);
+//int			ft_unsetenv(const char *name, char **my_environ);
+//int			ft_putenv(char *string, char **my_environ);
+char	**ft_unsetenv(const char *name, char **my_environ);
+char	**ft_putenv(char *string, char **my_environ);
 int			ft_clearenv(void);
 int			ft_dup2(int fd1, int fd2);
 char		*ft_getvar(const char *name);

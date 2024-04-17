@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:50:20 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/16 18:07:01 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:23:56 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ int	env_main(char **argv, int fd)
 	int j;
 
 	(void)argv;
-	i = -1;
-	while (environ[++i])
+	i = 0;
+	while (ft_environ("", INDEX, i) != NULL)
 	{
 		j = 0;
-		while (environ[i][j])
+		while (ft_environ("", INDEX, i)[j])
 		{
-			if (environ[i][j] == '=')
+			if (ft_environ("", INDEX, i)[j] == '=')
 			{
-				ft_putendl_fd(environ[i], fd);
+				ft_putendl_fd(ft_environ("", INDEX, i), fd);
 				break;
 			}
 			j++;
 		}
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

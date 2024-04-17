@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/16 19:41:22 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:37:28 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	print_sorted_env(int fd)
 
 	sort_env();
 	i = -1;
-	while (environ[++i])
-		ft_putendl_fd(environ[i], fd);
+	while (ft_environ("", INDEX, ++i))
+		ft_putendl_fd(ft_environ("", INDEX, i), fd);
 }
 
 static int	not_in_export2(char *string)
@@ -38,9 +38,9 @@ static int	not_in_export2(char *string)
 
 	i = -1;
 	size = ft_strlen(string) + 1;
-	while(environ[++i])
+	while(ft_environ("", INDEX, ++i))
 	{
-		if (ft_strncmp(environ[i], string, size) == 0)
+		if (ft_strncmp(ft_environ("", INDEX, i), string, size) == 0)
 			return (0);
 	}
 	return (1);
@@ -67,7 +67,7 @@ int	export_args(char **argv)
 			if (valid == 0 && not_in_export2(argv[j]))//argv[j][i] == '=' && valid == 0
 			{
 				ft_strlcpy(new_var, argv[j], PATH_MAX);
-				ft_putenv(ft_strdup(new_var));
+				ft_environ(ft_strdup(new_var), ADD, 0);
 				valid = 1;
 			}
 			i++;

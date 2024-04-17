@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:54:26 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/16 20:20:28 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:08:23 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	unset_main(char **argv, int fd_out)
 		i++;
 	while (argv[i])
 	{
-			ft_unsetenv(argv[i]);
+		ft_environ(argv[i], UNSET, 0);
 		i++;
 	}
 	return (EXIT_SUCCESS);

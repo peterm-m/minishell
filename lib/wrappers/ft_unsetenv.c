@@ -6,60 +6,61 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:41:23 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/16 20:27:20 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:34:53 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
 
-int unset_local(const char *name)
+char	**unset_local(const char *name,  char **my_environ)
 {
 	int	i;
 	int	j;
 
 	i = 0; 
 	if (name == NULL || ft_strlen(name) == 0)
-		return (EXIT_FAILURE);
-	while (environ[i] != NULL)
+		return (my_environ);
+	while (my_environ[i] != NULL)
 	{
-			if (ft_strncmp(environ[i], (char *)name, ft_strlen(name) + 1) == 0)
+			if (ft_strncmp(my_environ[i], (char *)name, ft_strlen(name) + 1) == 0)
 			{
 				j = i - 1;
-				ft_free(environ[i]);
-				while (environ[++j] != NULL)
-					environ[j] = environ[j + 1];
-				return (EXIT_SUCCESS);
+				ft_free(my_environ[i]);
+				while (my_environ[++j] != NULL)
+					my_environ[j] = my_environ[j + 1];
+				return (my_environ);
 			}
 		i++;
 	}
-	return (EXIT_FAILURE);
+	return (my_environ);
 }
 
-int	ft_unsetenv(const char *name)
+char	**ft_unsetenv(const char *name, char **my_environ)
 {
 	int		i;
 	int		j;
 	char	*eq;
 
 	if (name == NULL || ft_strlen(name) == 0 || ft_getenv(name) == NULL)
-		return (unset_local(name));
+		return (unset_local(name, my_environ));
 	i = 0;
-	while (environ[i] != NULL)
+	while (my_environ[i] != NULL)
 	{
-		eq = ft_strchr(environ[i], '=');
+		eq = ft_strchr(my_environ[i], '=');
 		if (eq != NULL)
 		{
-			if (ft_strncmp(environ[i], (char *)name,
-					(size_t)(eq - environ[i])) == 0
-					&& (size_t)(eq - environ[i]) == ft_strlen(name))
+			if (ft_strncmp(my_environ[i], (char *)name,
+					(size_t)(eq - my_environ[i])) == 0
+					&& (size_t)(eq - my_environ[i]) == ft_strlen(name))
 			{
+				ft_free(my_environ[i]);
 				j = i - 1;
-				while (environ[++j] != NULL)
-					environ[j] = environ[j + 1];
-				return (EXIT_SUCCESS);
+				while (my_environ[++j] != NULL)
+					my_environ[j] = my_environ[j + 1];
+				return (my_environ);
 			}
 		}
 		i++;
 	}
-	return (EXIT_FAILURE);
+	return (my_environ);
 }

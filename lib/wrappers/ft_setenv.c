@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:38:41 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/13 14:30:00 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:52:56 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	ft_setenv(const char *name, const char *value, int overwrite)
 {
-	size_t	len;
+	(void)name;
+	(void)value;
+	return (overwrite);
+/* 	size_t	len;
 	int		result;
 	char	*env_var;
 
@@ -28,6 +31,6 @@ int	ft_setenv(const char *name, const char *value, int overwrite)
 	ft_strlcat(env_var, "=", len);
 	ft_strlcat(env_var, value, len);
 	result = ft_putenv(env_var);
-	ft_free(env_var);
-	return (result);
+	ft_free(env_var); */
+	return (23);
 }
