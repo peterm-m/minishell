@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/17 18:24:01 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 19:42:37 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void	parent_heredoc(pid_t pid)
 {
 	wait_signals();
 	ft_waitpid(pid, 0, WUNTRACED);
-	initial_signals();}
+	initial_signals();
+}
 
 static char	*ft_expand_heredoc(char *str, int expand)
 {
@@ -59,7 +60,6 @@ static void	child_heredoc(int fd, char *del, int expand)
 		ft_putstr_fd("\n", fd);
 		ft_free(line);
 	}
-	
 }
 
 char	*heredoc(t_redir *redir, char *delimiter)

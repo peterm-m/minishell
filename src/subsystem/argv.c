@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/16 20:45:25 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:47:15 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char	**fill_arr(t_word *words, char **arr)
 	tmp = words;
 	while (tmp)
 	{
-		if (ft_isalnum(tmp->word[0]))
+		if (tmp->word[0] != '\0')
 		{
 			arr2 = ft_split(tmp->word, 31);
 			j = 0;

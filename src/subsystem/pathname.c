@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathname.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 13:22:40 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 18:13:18 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:51:19 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	search_path(char *name, t_path_name *path)
 
 	i = 0;
 	find = 0;
-	directorys = ft_split(ft_getenv("PATH"), ':');
+	directorys = ft_split(ft_environ("PATH", GET, 0), ':');
 	while (directorys && directorys[i])
 	{
 		if (find == 0)

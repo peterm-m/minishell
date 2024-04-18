@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/17 17:42:35 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 18:49:46 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*parameter_value(char *str, int start_expan, int end_expan)
 	else
 	{
 		name = ft_substr(str, start_expan, end_expan - start_expan);
-		value = ft_getenv(name);
+		value = ft_environ(name, GET, 0);
 		ft_free(name);
 		if (!value)
 			return (NULL);

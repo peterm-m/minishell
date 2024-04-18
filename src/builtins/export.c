@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:08:32 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/17 19:37:28 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:38:22 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	not_in_export2(char *string)
 
 	i = -1;
 	size = ft_strlen(string) + 1;
-	while(ft_environ("", INDEX, ++i))
+	while (ft_environ("", INDEX, ++i))
 	{
 		if (ft_strncmp(ft_environ("", INDEX, i), string, size) == 0)
 			return (0);
@@ -46,14 +46,11 @@ static int	not_in_export2(char *string)
 	return (1);
 }
 
-//TODO: linea 55: cambiado a memoria dinámica
-
 int	export_args(char **argv)
 {
 	int		i;
 	int		j;
 	int		valid;
-	char	new_var[PATH_MAX];
 
 	j = 1;
 	while (argv[j])
@@ -64,10 +61,9 @@ int	export_args(char **argv)
 		{
 			if (ft_isdigit(argv[j][0]) || argv[j][0] == '=')
 				return (exit_not_identifier(argv[j]));
-			if (valid == 0 && not_in_export2(argv[j]))//argv[j][i] == '=' && valid == 0
+			if (valid == 0 && not_in_export2(argv[j]))
 			{
-				ft_strlcpy(new_var, argv[j], PATH_MAX);
-				ft_environ(ft_strdup(new_var), ADD, 0);
+				ft_environ(ft_strdup(argv[j]), ADD, 0);
 				valid = 1;
 			}
 			i++;

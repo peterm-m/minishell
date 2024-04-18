@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/17 19:42:15 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:50:20 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	g_exit_status;
 
 
-/* void print_lexer(t_token *token) // ¡NO BORRAR!
+/* void print_lexer(void *token) // ¡NO BORRAR!
 {
 	printf(BHYEL"token: %s\t FLAG: %i puntero token: %p\t puntero string: \
-		%p\n"END,token->str, token->flag, token, token->str);
+		%p\n"END,((t_token *)token)->str, ((t_token *)token)->flag, token, ((t_token *)token)->str);
 } */
 
 //		ft_dlstiter(tokens, print_lexer);
@@ -47,7 +47,7 @@ static int	interactive_loop(void)
 	return (0);
 }
 
-//void lk() {system("leaks minishell");}
+void lk() {system("leaks minishell");}
 //	atexit(lk);
 
 int	main(void)
@@ -58,8 +58,7 @@ int	main(void)
 	interactive_loop();
 	rl_clear_history();
 	ft_environ("", CLEAN, 0);
-	//clean_argv(environ);
 	ft_putstr_fd("exit\n", 1);
-	//atexit(lk);
+	atexit(lk);
 	return (EXIT_SUCCESS);
 }

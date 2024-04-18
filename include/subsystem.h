@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/17 18:59:44 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:53:18 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ char	*ft_temfile(void);
 
 char	**ft_initenv(void);
 char	*ft_environ(char *parameter, int action, int index);
+
+char	**ft_unsetenv(char *name, char **my_environ);
+char	*ft_getenv(char *name, char **my_environ);
+char	**ft_putenv(char *string, char **my_environ);
 
 #endif

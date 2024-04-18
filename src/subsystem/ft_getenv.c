@@ -3,18 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 02:02:09 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/13 14:29:38 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:40:27 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrappers.h"
+#include "minishell.h"
 
-char	*ft_getenv(const char *name)
+char	*ft_getenv(char *name, char **my_environ)
 {
-	return (getenv(name));
+	int		i;
+	int		size;
+
+	i = -1;
+	size = ft_strlen(name);
+	while (my_environ[++i])
+	{
+		if (ft_strncmp(my_environ[i], name, size) == 0)
+			return (ft_strchr(my_environ[i], '=') + 1);
+	}
+	return (NULL);
 }
 
 char	*ft_getvar(const char *name)

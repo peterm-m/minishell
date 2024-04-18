@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilde_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:45:13 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/08 18:11:56 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:50:05 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*tilde_expansion(char *str)
 
 	if (str[1] != '\0' && str[1] != '/')
 		return (str);
-	arr[0] = ft_getenv("HOME");
+	arr[0] = ft_environ("HOME", GET, 0);
 	arr[1] = str +1;
 	out = ft_strnjoin(arr, 2);
 	ft_free(str);
