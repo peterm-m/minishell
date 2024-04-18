@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/17 19:18:25 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:52:54 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	update_pwd(int fd)
 	}
 	ft_strlcpy(new_pwd, "PWD=", PATH_MAX);
 	ft_strlcat(new_pwd, getcwd(pwd, PATH_MAX), PATH_MAX);
-	last_pwd = ft_getvar("PWD");
+	last_pwd = ft_getvar("PWD");(void)last_pwd;
 	//ft_free(last_pwd);
 	//ft_putenv(ft_strdup(new_pwd));
 	ft_environ(ft_strdup(new_pwd), ADD, 0);
@@ -40,7 +40,7 @@ static int	update_oldpwd(int fd)
 	if (ft_getenv("PWD") == NULL)
 		return (EXIT_FAILURE);
 	old_pwd = ft_strjoin("OLDPWD=", ft_environ("PWD", GET, 0));
-	last_old_pwd = ft_getvar("OLDPWD");
+	last_old_pwd = ft_getvar("OLDPWD");(void)last_old_pwd;
 	//ft_free(last_old_pwd);
 	//ft_putenv(old_pwd);
 	ft_environ(old_pwd, ADD, 0);

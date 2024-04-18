@@ -16,7 +16,6 @@ SRCS = \
 	ft_malloc.c\
 	ft_open.c\
 	ft_read.c\
-	ft_pipe.c\
 	ft_sigaddset.c\
 	ft_sigemptyset.c\
 	ft_signal.c\

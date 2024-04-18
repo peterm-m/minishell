@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 16:40:33 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:55:53 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,13 @@
 		father:
 			2) change signals
 			3) wait
-				NO_PIPE: block waitpid
-				LAST_IN_PIPE: no block waitpit for all child process
-				IN_PIPE: no wait
+				if simple command: wait_command
+				else if: last in pipe no block waitpit for all child process
+				else: in pipe no wait
 			4) restore signals
 */
 
-static	void	wait_command(pid_t pid, int type)
-{
-	int		status;
-	pid_t	tmp;
-
-	if (type == NO_PIPE)
-	{
-		ft_waitpid(pid, &status, WUNTRACED);
-		if (WIFEXITED(status))
-			g_exit_status = WEXITSTATUS(status);
-	}
-	else if (type == LAST_IN_PIPE)
-	{
-		while (1)
-		{
-			tmp = waitpid(-1, &status, WUNTRACED | WNOHANG);
-			if (tmp < 0)
-				break ;
-			else if (tmp == pid && WIFEXITED(status))
-				g_exit_status = WEXITSTATUS(status);
-		}
-	}
-}
-
-void	execute_simple(t_command *cmd, int fd_in, int fd_out)
+void	execute_simple(t_command *cmd, t_pipe *p, int index_cmd)
 {
 	pid_t		pid;
 	t_simple	*command;
@@ -65,18 +41,19 @@ void	execute_simple(t_command *cmd, int fd_in, int fd_out)
 	if (pid == 0)
 	{
 		child_signals();
-		make_pipe(fd_in, fd_out);
-		make_redir(command->redirs);
+		if (connect_pipe(p, index_cmd))
+			exit(EXIT_FAILURE);
+		open_redir(command->redirs);
 		ft_execle(command->words);
 		exit (EXIT_SUCCESS);
 	}
 	else
 	{
 		wait_signals();
-		if (fd_in == NO_PIPE && fd_out == NO_PIPE)
-			wait_command(pid, NO_PIPE);
-		else if (fd_in != NO_PIPE && fd_out == NO_PIPE)
-			wait_command(pid, LAST_IN_PIPE);
+		if (p == NULL)
+			wait_command(pid);
+		else if (index_cmd == p->len_pipe)
+			wait_pipe(pid);
 		initial_signals();
 	}
 	return ;

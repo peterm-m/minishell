@@ -6,7 +6,7 @@
 #    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/15 14:25:33 by pedro            ###   ########.fr        #
+#    Updated: 2024/04/18 19:10:56 by pedro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,13 +100,14 @@ NAMES := \
 	subsystem/argv.c \
 	subsystem/temfile.c \
 	subsystem/enviroment.c \
+	subsystem/pipeline.c \
 	\
-	executer/execute_builtin.c \
+	\
 	executer/execute_command.c \
-	executer/execute_connection.c \
 	executer/execute_simple.c \
 	executer/execute_subshell.c \
 	executer/ft_execle.c \
+	executer/wait.c \
 	\
 	builtins/cd.c \
 	builtins/echo.c \
