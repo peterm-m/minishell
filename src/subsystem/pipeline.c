@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:33:33 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/18 19:55:41 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 20:21:41 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	connect_pipe(t_pipe *pipe, int index_cmd)
 {
 	if (pipe == NULL)
 		return (EXIT_SUCCESS);
-	printf("::::::::::::::::::::::%d \n", index_cmd);
+
 	if (index_cmd != 0)
 	{
 		if (dup2(pipe->fds[(index_cmd -1) * 2], STDIN_FILENO) < 0)
@@ -70,6 +70,7 @@ int	make_pipe(t_pipe **p, int num_pipes)
 	if (*p == NULL)
 		return (EXIT_FAILURE);
 	(*p)->fds = ft_calloc(num_pipes * 2, sizeof(int));
+	(*p)->len_pipe = num_pipes;
 	if ((*p)->fds == NULL)
 	{
 		free(NULL);
