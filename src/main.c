@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:50:20 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:28:59 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	interactive_loop(void)
 		//ft_dlstiter(tokens, print_lexer);
 		cmd = syntax(&tokens);
 		if (cmd != NULL)
-			execute_command(cmd, NO_PIPE, NO_PIPE);
+			execute(cmd);
 		clean_command(cmd);
 		ft_free(read_line);
 		rl_on_new_line();

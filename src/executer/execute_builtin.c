@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:48:34 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:27:27 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int	fd_builtin(t_redir *redirs, int fd_out)
 	int			fd;
 
 	fd = fd_out;
-	if (redirs == NULL && fd_out == NO_PIPE)
+	if (redirs == NULL && fd_out == STDOUT_FILENO)
 		return (STDOUT_FILENO);
-	else if (redirs == NULL && fd_out != NO_PIPE)
+	else if (redirs == NULL && fd_out != STDOUT_FILENO)
 		return (fd_out);
 	r = redirs;
 	while (r != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 18:48:00 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:28:46 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ void		ft_free(void *ptr);
 typedef void \
 			t_handler(int);
 
-typedef union u_pipe
-{
-	int	pipe[2];
-}	t_pipe;
 
 void		unix_error(char *msg);
 

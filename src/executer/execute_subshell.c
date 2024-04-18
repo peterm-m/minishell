@@ -6,7 +6,7 @@
 /*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:53:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/15 18:18:34 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 19:02:08 by pedro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // TODO: investigar si subshell se hace esto
 
-void	execute_subshell(t_command *cmd, int fd_in, int fd_out)
+void	execute_subshell(t_command *cmd, t_pipe *p, int index_cmd)
 {
 	pid_t		pid;
 	t_subshell	*subshell;
@@ -23,9 +23,9 @@ void	execute_subshell(t_command *cmd, int fd_in, int fd_out)
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		make_pipe(fd_in, fd_out);
-		make_redir(cmd->redirs);
-		execute_command(subshell->command, NO_PIPE, NO_PIPE);
+		connect_pipe(p, index_cmd);
+		open_redir(cmd->redirs);
+		execute(subshell->command);
 		exit (EXIT_SUCCESS);
 	}
 	else

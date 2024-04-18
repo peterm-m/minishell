@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 18:53:18 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:28:27 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int		get_pathname(char *name, t_path_name *path);
 char	*get_prompt(void);
 void	setup_term(void);
 
-void	make_redir(t_redir *redirections);
-void	open_redir(t_redir *redirections);
+int		open_redir(t_redir *redirections);
 
-void	close_pipe(int fd_in, int fd_out);
-void	make_pipe(int fd_in, int fd_out);
+int		connect_pipe(t_pipe *pipe, int index_cmd);
+void	close_pipe(t_pipe *pipe);
+int		len_pipe(t_command *cmd);
+int		make_pipe(t_pipe **p, int num_pipes);
 
 void	initial_signals(void);
 void	wait_signals(void);
