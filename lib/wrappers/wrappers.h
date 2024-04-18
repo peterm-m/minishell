@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 20:28:46 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:11:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ pid_t		ft_fork(void);
 t_handler	*ft_signal(int signum, t_handler *handler);
 void		ft_sigemptyset(sigset_t *set);
 void		ft_sigaddset(sigset_t *set, int signum);
-void		ft_pipe(t_pipe *pipe);
-int			ft_clearenv(void);
 int			ft_dup2(int fd1, int fd2);
 char		*ft_getvar(const char *name);
 

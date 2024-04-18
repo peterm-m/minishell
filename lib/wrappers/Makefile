@@ -3,11 +3,6 @@ NAME := libwrappers.a
 SRC_DIR := .
 
 SRCS = \
-	ft_setenv.c\
-	ft_unsetenv.c\
-	ft_clearenv.c\
-	ft_getenv.c\
-	ft_putenv.c\
 	ft_close.c\
 	ft_dup2.c\
 	ft_error.c\
@@ -43,7 +38,7 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -Werror -fsanitize=address -I../libft
+CCFLAGS = -Wall -Werror -Wextra -Werror  -I../libft
 
 OS := $(shell uname -s)
 

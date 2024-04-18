@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:03:26 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 21:27:02 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ typedef struct s_path_name
 
 void	ft_execle(t_word *args);
 
-void	wait_pipe(pid_t pid);
+void	wait_pipe(pid_t pid, t_pipe *p);
 void	wait_command(pid_t pid);
+
 int		execute(t_command *cmd);
-//int		execute_command(t_command *cmd, t_pipe *p, int index_cmd);
+int		execute_builtin(t_command *cmd, t_pipe *p, int index_cmd);
 void	execute_simple(t_command *cmd, t_pipe *p, int index_cmd);
-//int		execute_builtin(t_command *cmd,t_pipe *p, int index_cmd);
-//int		execute_connection(t_command *cmd, t_pipe *p, int index_cmd);
 void	execute_subshell(t_command *cmd, t_pipe *p, int index_cmd);
 
 #endif

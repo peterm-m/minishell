@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 18:04:07 by adiaz-uf          #+#    #+#              #
-#    Updated: 2024/04/15 18:40:06 by adiaz-uf         ###   ########.fr        #
+#    Updated: 2024/04/18 21:29:26 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CCFLAGS = -Wall -Werror -Wextra 
 
 OS := $(shell uname -s)
 

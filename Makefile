@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedro <pedro@student.42.fr>                +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/18 19:10:56 by pedro            ###   ########.fr        #
+#    Updated: 2024/04/18 21:29:26 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ WARNS := -Wall -Wextra -Werror
 
 CFLAGS := $(STD) $(STACK) $(WARNS)
 
-DEBUG := -g3 -fsanitize=address
+DEBUG := -g3 
 
 DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
@@ -101,8 +101,11 @@ NAMES := \
 	subsystem/temfile.c \
 	subsystem/enviroment.c \
 	subsystem/pipeline.c \
+	subsystem/ft_getenv.c \
+	subsystem/ft_unsetenv.c \
+	subsystem/ft_putenv.c \
 	\
-	\
+	executer/execute_builtin.c \
 	executer/execute_command.c \
 	executer/execute_simple.c \
 	executer/execute_subshell.c \

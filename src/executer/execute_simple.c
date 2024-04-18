@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:55:53 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 20:20:35 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	execute_simple(t_command *cmd, t_pipe *p, int index_cmd)
 		wait_signals();
 		if (p == NULL)
 			wait_command(pid);
-		else if (index_cmd == p->len_pipe)
-			wait_pipe(pid);
+		else if (p != NULL && index_cmd == p->len_pipe)
+			wait_pipe(pid, p);
 		initial_signals();
 	}
 	return ;

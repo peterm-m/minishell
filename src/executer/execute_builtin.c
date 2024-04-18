@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 20:27:27 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:28:24 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,15 @@ static int	index_builtin(char *str)
 	return (index);
 }
 
-static int	fd_builtin(t_redir *redirs, int fd_out)
+static int	fd_builtin(t_redir *redirs, t_pipe *p, int index_cmd)
 {
+	int			fd_out;
 	t_redir		*r;
 	int			fd;
 
-	fd = fd_out;
-	if (redirs == NULL && fd_out == STDOUT_FILENO)
-		return (STDOUT_FILENO);
-	else if (redirs == NULL && fd_out != STDOUT_FILENO)
-		return (fd_out);
+	fd_out = STDOUT_FILENO;
+	if (p != NULL && (index_cmd != p->len_pipe))
+		fd_out = p->fds[(2 * index_cmd) +1];
 	r = redirs;
 	while (r != NULL)
 	{
@@ -75,10 +74,11 @@ static int	run_builtin(int index, char **argv, int fd_out)
 	return (status);
 }
 
-int	execute_builtin(t_command *cmd, int fd_out)
+int	execute_builtin(t_command *cmd, t_pipe *p, int index_cmd)
 {
 	t_simple	*simple;
 	char		**argv;
+	int			fd_out;
 	int			index;
 
 	simple = cmd->value.simple;
@@ -96,7 +96,7 @@ int	execute_builtin(t_command *cmd, int fd_out)
 		clean_argv(argv);
 		return (EXIT_FAILURE);
 	}
-	fd_out = fd_builtin(simple->redirs, fd_out);
+	fd_out = fd_builtin(simple->redirs, p, index_cmd);
 	g_exit_status = run_builtin(index, argv, fd_out);
 	clean_argv(argv);
 	return (EXIT_SUCCESS);

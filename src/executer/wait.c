@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:52:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/18 18:53:06 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/18 20:48:32 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	wait_pipe(pid_t pid)
+void	wait_pipe(pid_t pid, t_pipe *p)
 {
 	int		status;
 	pid_t	tmp;
 
+	close_pipe(p);
 	while (1)
 	{
 		tmp = waitpid(-1, &status, WUNTRACED | WNOHANG);

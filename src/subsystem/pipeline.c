@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:33:33 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/18 20:27:28 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:21:41 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	make_pipe(t_pipe **p, int num_pipes)
 	if (*p == NULL)
 		return (EXIT_FAILURE);
 	(*p)->fds = ft_calloc(num_pipes * 2, sizeof(int));
+	(*p)->len_pipe = num_pipes;
 	if ((*p)->fds == NULL)
 	{
 		free(NULL);
