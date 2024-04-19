@@ -6,7 +6,7 @@
 /*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 18:49:46 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:49:00 by adiaz-uf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char	*make_expansion(char *str, int start_expan)
 	return (out);
 }
 
-// TODO: FIX si la expansion no existe, hace falta disminuir i en uno
 
 char	*parameter_expansion(char *str)
 {
@@ -79,6 +78,8 @@ char	*parameter_expansion(char *str)
 		out = make_expansion(out, i);
 		if (out[i - 1] == '\0')
 			break ;
+		if (out[i - 1] == '$')
+			i--;
 	}
 	search_character("", 0);
 	return (out);
