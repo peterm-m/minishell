@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:55:18 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/18 19:42:37 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:27:20 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	parent_heredoc(pid_t pid)
 {
+	if (pid < 0)
+		return ;
 	wait_signals();
-	ft_waitpid(pid, 0, WUNTRACED);
+	waitpid(pid, 0, WUNTRACED);
 	initial_signals();
 }
 
@@ -75,11 +77,15 @@ char	*heredoc(t_redir *redir, char *delimiter)
 		&& is_quotes(delimiter[ft_strlen(delimiter) - 1])));
 	quote_remove(delimiter);
 	a = ft_temfile();
-	fd = ft_open(a, redir->mode_bits, redir->flags_bits);
-	pid = ft_fork();
+	if (a == NULL)
+		return (NULL);
+	fd = minish_open(a, redir->mode_bits, redir->flags_bits);
+	if (fd < 0)
+		return (NULL);
+	pid = minish_fork();
 	if (pid == 0)
 		child_heredoc(fd, delimiter, expand);
-	else
+	else if (pid > 0)
 		parent_heredoc(pid);
 	close(fd);
 	ft_free(delimiter);

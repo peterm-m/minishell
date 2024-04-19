@@ -3,32 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:33:33 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/18 20:21:41 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:24:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-int	connect_pipe(t_pipe *pipe, int index_cmd)
+void	connect_pipe(t_pipe *pipe, int index_cmd)
 {
 	if (pipe == NULL)
-		return (EXIT_SUCCESS);
-
+		return ;
 	if (index_cmd != 0)
-	{
-		if (dup2(pipe->fds[(index_cmd -1) * 2], STDIN_FILENO) < 0)
-			return (EXIT_FAILURE);
-	}
+		ft_dup2(pipe->fds[(index_cmd -1) * 2], STDIN_FILENO);
 	if (index_cmd != pipe->len_pipe)
-	{
-		if (dup2(pipe->fds[(2 * index_cmd) +1], STDOUT_FILENO) < 0)
-			return (EXIT_FAILURE);
-	}
+		ft_dup2(pipe->fds[(2 * index_cmd) + 1], STDOUT_FILENO);
 	close_pipe(pipe);
-	return (EXIT_SUCCESS);
 }
 
 void	close_pipe(t_pipe *pipe)
@@ -79,7 +71,7 @@ int	make_pipe(t_pipe **p, int num_pipes)
 	i = -1;
 	while (++i < num_pipes)
 	{
-		if (pipe((*p)->fds + i * 2) < 0)
+		if (minish_pipe((*p)->fds + i * 2) < 0)
 		{
 			while (i > 0)
 				close((*p)->fds[i--]);

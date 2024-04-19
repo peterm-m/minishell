@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 16:16:37 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:49:39 by adiaz-uf         ###   ########.fr       */
+/*   Created: 2024/04/19 14:52:05 by pedromar          #+#    #+#             */
+/*   Updated: 2024/04/19 15:28:22 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
 
-void	*ft_malloc(size_t size)
+int	minish_pipe(int pipefd[2])
 {
-	void	*p;
+	int	rc;
 
-	p = malloc(size);
-	if (p == NULL)
-		unix_error("Malloc error");
-	return (p);
-}
-
-void	ft_free(void *ptr)
-{
-	free(ptr);
+	rc = pipe(pipefd);
+	if (rc < 0)
+		minish_error("pipe error");
+	return (rc);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 20:28:59 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:25:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	g_exit_status;
 
-
 /* void print_lexer(void *token) // ¡NO BORRAR!
 {
 	printf(BHYEL"token: %s\t FLAG: %i puntero token: %p\t puntero string: \
-		%p\n"END,((t_token *)token)->str, ((t_token *)token)->flag, token, ((t_token *)token)->str);
+		%p\n"END,((t_token *)token)->str, ((t_token *)token)->flag, token,
+			((t_token *)token)->str);
 } */
-
 //		ft_dlstiter(tokens, print_lexer);
 
 static int	interactive_loop(void)
@@ -36,7 +35,6 @@ static int	interactive_loop(void)
 		if (read_line == NULL)
 			break ;
 		tokens = lexer(read_line);
-		//ft_dlstiter(tokens, print_lexer);
 		cmd = syntax(&tokens);
 		if (cmd != NULL)
 			execute(cmd);
@@ -47,7 +45,12 @@ static int	interactive_loop(void)
 	return (0);
 }
 
-void lk() {system("leaks minishell");}
+// TODO: change ft_free
+void	lk(void)
+{
+	system("leaks minishell");
+}
+
 //	atexit(lk);
 
 int	main(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 20:20:35 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:50:12 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,16 @@ void	execute_simple(t_command *cmd, t_pipe *p, int index_cmd)
 	t_simple	*command;
 
 	command = cmd->value.simple;
-	pid = ft_fork();
+	pid = minish_fork();
 	if (pid == 0)
 	{
 		child_signals();
-		if (connect_pipe(p, index_cmd))
-			exit(EXIT_FAILURE);
+		connect_pipe(p, index_cmd);
 		open_redir(command->redirs);
 		ft_execle(command->words);
 		exit (EXIT_SUCCESS);
 	}
-	else
+	else if (pid > 0)
 	{
 		wait_signals();
 		if (p == NULL)

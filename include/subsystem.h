@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subsystem.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 20:28:27 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:08:56 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,8 @@
 
 int		search_character(char *str, char c);
 
-int		get_pathname(char *name, t_path_name *path);
-
 char	*get_prompt(void);
 void	setup_term(void);
-
-int		open_redir(t_redir *redirections);
-
-int		connect_pipe(t_pipe *pipe, int index_cmd);
-void	close_pipe(t_pipe *pipe);
-int		len_pipe(t_command *cmd);
-int		make_pipe(t_pipe **p, int num_pipes);
 
 void	initial_signals(void);
 void	wait_signals(void);
@@ -39,9 +30,7 @@ char	**get_file_names(char *name);
 
 char	**list_to_argv(t_word *words);
 void	clean_argv(char **arr);
-char	**ft_copyarg(char **argv);
 
-char	*heredoc(t_redir *redir, char *delimiter);
 char	*ft_temfile(void);
 
 char	**ft_initenv(void);

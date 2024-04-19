@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
+#    By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/18 21:29:26 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/19 15:28:14 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ DIR_DUP     = mkdir -p $(@D)
 CLEANER     = rm -rvf
 
 # Dependency libraries
-INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/wrappers -I$(LIBDIR)/readline/8.2.7/include 
+INCLUDE := -I$(INCDIR) -I$(LIBDIR)/dlst -I$(LIBDIR)/libft -I$(LIBDIR)/readline/8.2.7/include 
 
 LIBS := -lreadline  -L$(LIBDIR)/readline/8.2.7/lib \
 	-ldlst     -L$(LIBDIR)/dlst \
@@ -69,6 +69,15 @@ TEST_BINARY := $(BINARY)_test_runner
 
 # %.o file names
 NAMES := \
+	wrappers/ft_dup2.c \
+	wrappers/ft_error.c \
+	wrappers/ft_execve.c \
+	wrappers/ft_open.c \
+	wrappers/ft_fork.c \
+	wrappers/ft_malloc.c \
+	wrappers/ft_signal.c \
+	wrappers/ft_pipe.c \
+	\
 	lexer/lexer.c \
 	lexer/tokenize.c \
 	lexer/get_tokens1.c \
@@ -83,6 +92,7 @@ NAMES := \
 	grammar/token.c \
 	grammar/redirection.c \
 	grammar/print_cmd.c \
+	grammar/heredoc.c\
 	\
 	expansion/expander.c \
 	expansion/parameter_expansion.c \
@@ -91,16 +101,12 @@ NAMES := \
 	expansion/filename_expansion.c \
 	\
 	subsystem/signals.c \
-	subsystem/redirection.c \
-	subsystem/heredoc.c\
 	subsystem/prompt.c \
 	subsystem/directory.c \
 	subsystem/search_character.c\
-	subsystem/pathname.c \
 	subsystem/argv.c \
 	subsystem/temfile.c \
 	subsystem/enviroment.c \
-	subsystem/pipeline.c \
 	subsystem/ft_getenv.c \
 	subsystem/ft_unsetenv.c \
 	subsystem/ft_putenv.c \
@@ -111,6 +117,8 @@ NAMES := \
 	executer/execute_subshell.c \
 	executer/ft_execle.c \
 	executer/wait.c \
+	executer/redirection.c \
+	executer/pipeline.c \
 	\
 	builtins/cd.c \
 	builtins/echo.c \
@@ -119,8 +127,7 @@ NAMES := \
 	builtins/export.c \
 	builtins/pwd.c \
 	builtins/unset.c \
-	builtins/builtins_utils.c \
-	\
+	builtins/builtins_utils.c 
 
 NAMES := $(NAMES:%=$(SRCDIR)/%)
 
@@ -197,14 +204,11 @@ tests: make_libs $(OBJECTS)
 make_libs:
 	@make -C $(LIBDIR)/dlst
 	@make -C $(LIBDIR)/libft
-	@make -C $(LIBDIR)/wrappers
 
 clean_libs:
 	@make -C $(LIBDIR)/dlst clean
 	@make -C $(LIBDIR)/libft clean
-	@make -C $(LIBDIR)/wrappers clean
 
 fclean_libs:
 	@make -C $(LIBDIR)/dlst fclean
 	@make -C $(LIBDIR)/libft fclean
-	@make -C $(LIBDIR)/wrappers fclean

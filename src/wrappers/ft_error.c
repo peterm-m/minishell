@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sigaddset.c                                     :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 16:34:50 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/02 16:35:15 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 15:31:30 by pedromar          #+#    #+#             */
+/*   Updated: 2024/04/19 14:53:24 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
 
-void	ft_sigaddset(sigset_t *set, int signum)
+void	unix_error(char *msg)
 {
-	if (sigaddset(set, signum) < 0)
-		unix_error("Sigaddset error");
-	return ;
+	ft_putstr_fd("minishell", STDERR_FILENO);
+	perror(msg);
+	exit(EXIT_FAILURE);
+}
+
+int	minish_error(char *msg)
+{
+	ft_putstr_fd("minishell", STDERR_FILENO);
+	perror(msg);
+	return (EXIT_FAILURE);
 }

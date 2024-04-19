@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   argv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:56:44 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:47:15 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:05:18 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**ft_copyarg(char **argv)
-{
-	size_t	size_env;
-	char	**new_env;
-
-	size_env = 0;
-	while (argv[size_env] != NULL)
-		size_env++;
-	new_env = ft_malloc((size_env +1) * sizeof(char **));
-	if (new_env == NULL)
-		return (NULL);
-	new_env[size_env] = argv[size_env];
-	size_env--;
-	while (--size_env > 0)
-	{
-		new_env[size_env] = ft_strdup(argv[size_env]);
-		if (new_env[size_env] == NULL)
-		{
-			while (argv[++size_env] != NULL)
-				ft_free(new_env[size_env]);
-			ft_free(new_env);
-			return (NULL);
-		}
-	}
-	return (new_env);
-}
 
 void	clean_argv(char **arr)
 {

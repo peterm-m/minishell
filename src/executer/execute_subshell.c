@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_subshell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:53:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:02:08 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/19 15:27:36 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_subshell(t_command *cmd, t_pipe *p, int index_cmd)
 	t_subshell	*subshell;
 
 	subshell = cmd->value.subshell;
-	pid = ft_fork();
+	pid = minish_fork();
 	if (pid == 0)
 	{
 		connect_pipe(p, index_cmd);
@@ -28,10 +28,10 @@ void	execute_subshell(t_command *cmd, t_pipe *p, int index_cmd)
 		execute(subshell->command);
 		exit (EXIT_SUCCESS);
 	}
-	else
+	else if (pid > 0)
 	{
 		wait_signals();
-		ft_waitpid(pid, &g_exit_status, WUNTRACED);
+		waitpid(pid, &g_exit_status, WUNTRACED);
 		if (WEXITSTATUS(g_exit_status))
 			g_exit_status = WEXITSTATUS(g_exit_status);
 		initial_signals();

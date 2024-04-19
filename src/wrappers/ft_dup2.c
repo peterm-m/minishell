@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_waitpid.c                                       :+:      :+:    :+:   */
+/*   ft_dup2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 16:28:33 by pedromar          #+#    #+#             */
-/*   Updated: 2023/12/03 20:14:30 by pedromar         ###   ########.fr       */
+/*   Created: 2023/12/02 16:22:17 by pedromar          #+#    #+#             */
+/*   Updated: 2024/04/19 14:26:59 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wrappers.h"
 
-pid_t	ft_waitpid(pid_t pid, int *iptr, int options)
+int	ft_dup2(int fd1, int fd2)
 {
-	pid_t	retpid;
+	int	rc;
 
-	retpid = waitpid(pid, iptr, options);
-	if (retpid < 0)
-		unix_error("Waitpid error");
-	return (retpid);
+	rc = dup2(fd1, fd2);
+	if (rc < 0)
+		unix_error("dup2 error");
+	return (rc);
 }
-
-/*
-	waitpidx
-*/

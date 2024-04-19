@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 19:31:49 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:03:01 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redir;
 
+char		*heredoc(t_redir *redir, char *delimiter);
 int			add_redirection(t_redir **redir_list, t_dlst **lex);
 void		clean_redirection(t_redir **redirection);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:52:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/18 20:48:32 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:00:37 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	wait_command(pid_t pid)
 {
 	int		status;
 
-	ft_waitpid(pid, &status, WUNTRACED);
+	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
 		g_exit_status = WEXITSTATUS(status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:14:34 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/15 12:36:06 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/19 15:22:39 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	print_connection(t_connection *connection, int level)
 {
 	t_command	*cmd1;
 	t_command	*cmd2;
+
 	if (connection == NULL)
 		return ;
 	cmd1 = connection->first;
@@ -83,6 +84,7 @@ static void	print_simple(t_simple *cmd)
 void	print_command(t_command *cmd, int level)
 {
 	int		i;
+
 	i = 1;
 	while (i++ < level)
 		printf("|\t");
