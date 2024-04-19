@@ -5,21 +5,14 @@ SRC_DIR := .
 SRCS = \
 	ft_dup2.c\
 	ft_error.c\
-	ft_fstat.c\
-	ft_kill.c\
 	ft_malloc.c\
 	ft_open.c\
-	ft_read.c\
 	ft_sigaddset.c\
 	ft_sigemptyset.c\
 	ft_signal.c\
-	ft_stat.c\
-	ft_wait.c\
 	ft_waitpid.c\
-	ft_write.c\
 	ft_execve.c\
-	ft_fork.c\
-	ft_lstat.c
+	ft_fork.c
 
 SRCS := $(SRCS:%=$(SRC_DIR)/%)
 

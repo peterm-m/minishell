@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 13:08:51 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:15:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,13 @@ typedef void \
 void		unix_error(char *msg);
 
 int			ft_open(const char *pathname, int flags, mode_t mode);
-ssize_t		ft_read(int fd, void *buf, size_t count);
-ssize_t		ft_write(int fd, const void *buf, size_t count);
-void		ft_stat(const char *filename, struct stat *buf);
-void		ft_lstat(const char *filename, struct stat *buf);
 void		ft_execve(const char *filename, char *const argv[],
 				char *const envp[]);
-void		ft_fstat(int fd, struct stat *buf);
-pid_t		ft_wait(int *status);
 pid_t		ft_waitpid(pid_t pid, int *iptr, int options);
-void		ft_kill(pid_t pid, int signum);
 pid_t		ft_fork(void);
 t_handler	*ft_signal(int signum, t_handler *handler);
 void		ft_sigemptyset(sigset_t *set);
 void		ft_sigaddset(sigset_t *set, int signum);
 int			ft_dup2(int fd1, int fd2);
-char		*ft_getvar(const char *name);
 
 #endif
