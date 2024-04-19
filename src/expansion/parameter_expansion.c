@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parameter_expansion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:47:08 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 17:49:00 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:09 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO: testear hay fallos
 
 static char	*parameter_value(char *str, int start_expan, int end_expan)
 {
@@ -59,7 +57,6 @@ char	*make_expansion(char *str, int start_expan)
 	ft_free(str);
 	return (out);
 }
-
 
 char	*parameter_expansion(char *str)
 {

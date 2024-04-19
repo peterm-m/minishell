@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:10:16 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:18:43 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:18 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ int	num_files_dir(char *name)
 	}
 	return (n_files);
 }
-
-// TODO: funcion que de lista de elementos
-// en un directorio ordenados alphanumericamente
-// falta el llenado del array despues del break
 
 char	**get_file_names(char *name)
 {

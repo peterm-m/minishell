@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_subshell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:53:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:27:36 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:06 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO: investigar si subshell se hace esto
 
 void	execute_subshell(t_command *cmd, t_pipe *p, int index_cmd)
 {

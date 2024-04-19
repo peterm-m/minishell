@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pathname.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 13:22:40 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 18:51:19 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:24 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO: testear que pasa si NULL en input
-//		 testear PATH no existe
-//		 testear que pasa si no se encuentra dir
-//		 testear que pasa si existe pero sin permisos de ejecucion
-//TODO gestion error, name or path to long
 
 static int	search_path(char *name, t_path_name *path)
 {

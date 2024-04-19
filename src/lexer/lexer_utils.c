@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:36:35 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/07 13:13:47 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:55 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	is_operator(int c)
 	return (c == '|' || c == '<' || c == '>'
 		|| c == '&');
 }
-// || c == '(' || c == ')' || 
-	//	c == '{' || c == '}'
 
 /**
  * The function checks if a character is a blank space or a whitespace character.

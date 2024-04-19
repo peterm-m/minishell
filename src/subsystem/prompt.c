@@ -6,13 +6,11 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:43:44 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/13 14:35:55 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:27 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO checkear
 
 void	setup_term(void)
 {

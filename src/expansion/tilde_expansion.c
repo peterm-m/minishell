@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tilde_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 20:45:13 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 18:50:05 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO gestion de no env. No hay HOME, es necesario gestionar usuario
 
 char	*tilde_expansion(char *str)
 {
