@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:52:27 by pedro             #+#    #+#             */
-/*   Updated: 2024/04/19 15:00:37 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:07:52 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	wait_pipe(pid_t pid, t_pipe *p)
 		tmp = waitpid(-1, &status, WUNTRACED | WNOHANG);
 		if (tmp < 0)
 			break ;
-		else if (tmp == pid && WIFEXITED(status))
+		else if (pid != PID_BUILTIN && tmp == pid && WIFEXITED(status))
 			g_exit_status = WEXITSTATUS(status);
 	}
 }

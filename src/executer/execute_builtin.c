@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:23:50 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:23:04 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,13 @@ static int	index_builtin(char *str)
 	return (index);
 }
 
-static int	fd_builtin(t_redir *redirs, t_pipe *p, int index_cmd)
+static int	redirection_builtibn(t_redir *redirs, int fd_out)
 {
-	int			fd_out;
-	t_redir		*r;
-	int			fd;
+	t_redir	*r;
+	int		fd;
 
-	fd_out = STDOUT_FILENO;
-	if (p != NULL && (index_cmd != p->len_pipe))
-		fd_out = p->fds[(2 * index_cmd) + 1];
+	if (fd_out != STDOUT_FILENO && redirs != NULL)
+		close(fd_out);
 	r = redirs;
 	while (r != NULL)
 	{
@@ -61,6 +59,22 @@ static int	fd_builtin(t_redir *redirs, t_pipe *p, int index_cmd)
 		}
 		r = r->next;
 	}
+	return (fd_out);
+}
+
+static int	fd_builtin(t_redir *redirs, t_pipe *p, int index_cmd)
+{
+	int			fd_out;
+
+	fd_out = STDOUT_FILENO;
+	if (p != NULL && (index_cmd != p->len_pipe))
+	{
+		if (index_cmd != 0)
+			fd_out = p->fds[(index_cmd -1) * 2];
+		if (index_cmd != p->len_pipe)
+			close(p->fds[(2 * index_cmd) + 1]);
+	}
+	fd_out = redirection_builtibn(redirs, fd_out);
 	return (fd_out);
 }
 
@@ -100,5 +114,7 @@ int	execute_builtin(t_command *cmd, t_pipe *p, int index_cmd)
 	if (fd_out > 0)
 		g_exit_status = run_builtin(index, argv, fd_out);
 	clean_argv(argv);
+	if (p != NULL && index_cmd == p->len_pipe)
+		wait_pipe(PID_BUILTIN, p);
 	return (EXIT_SUCCESS);
 }

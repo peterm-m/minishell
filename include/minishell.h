@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:25:41 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:06:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,5 @@
 # include "colors.h"
 
 extern int	g_exit_status;
-
-// Bool
-# define TRUE 1
-# define FALSE 0
-
-typedef enum e_env
-{
-	GET,
-	ADD,
-	UNSET,
-	CLEAN,
-	INDEX
-}	t_env;
 
 #endif

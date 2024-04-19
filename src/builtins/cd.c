@@ -6,7 +6,7 @@
 /*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 19:09:57 by adiaz-uf          #+#    #+#             */
-/*   Updated: 2024/04/18 20:28:21 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:25:03 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	cd_main(char **argv, int fd)
 	int		argc;
 
 	argc = get_arr_len(argv);
-	printf("Num argumentos: %d\n", argc);
 	dir = get_path(argc, argv[1], fd);
 	if (dir == NULL)
 		return (EXIT_FAILURE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:03:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:06:15 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "minishell.h"
 
-int			redirection_token(t_dlst **lex);
-t_terminals	type_token(t_dlst **lex);
-t_token		*pop_token(t_dlst **lex);
+/*
+	redirections
+*/
 
 typedef enum e_rtype
 {
@@ -44,9 +44,17 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redir;
 
+int			redirection_token(t_dlst **lex);
+t_terminals	type_token(t_dlst **lex);
+t_token		*pop_token(t_dlst **lex);
+
 char		*heredoc(t_redir *redir, char *delimiter);
 int			add_redirection(t_redir **redir_list, t_dlst **lex);
 void		clean_redirection(t_redir **redirection);
+
+/*
+	words
+*/
 
 typedef struct s_word
 {
@@ -56,6 +64,10 @@ typedef struct s_word
 
 int			add_word(t_word **word_list, t_dlst **lex);
 void		clean_word(t_word **word);
+
+/*
+	command
+*/
 
 typedef enum e_command_type
 {
@@ -106,6 +118,10 @@ t_command	*make_subshell(t_dlst **lex);
 
 int			new_command(t_command_type type, t_command **out);
 void		clean_command(t_command *cmd);
+
+/*
+	syntax
+*/
 
 t_command	*syntax(t_dlst **lex);
 t_command	*parser_error(t_dlst **lex, t_command *command);

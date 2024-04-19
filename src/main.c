@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:42:25 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:25:01 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:02:11 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	main(void)
 	rl_clear_history();
 	ft_environ("", CLEAN, 0);
 	ft_putstr_fd("exit\n", 1);
-	atexit(lk);
+	//atexit(lk);
 	return (EXIT_SUCCESS);
 }

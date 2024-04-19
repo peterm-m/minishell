@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 18:04:07 by adiaz-uf          #+#    #+#              #
-#    Updated: 2024/04/18 21:29:26 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/19 16:40:57 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra 
+CCFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
 OS := $(shell uname -s)
 

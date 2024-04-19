@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:56:58 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/19 15:25:24 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:07:30 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 # define STATUS_CMD_NOT_FOUND 127
 # define STATUS_CMD_NOT_EXEC 126
 
-# define FIRST_IN_PIPE -1
-# define LAST_IN_PIPE -2
-# define NO_PIPE -3
+# define PID_BUILTIN -1
 
 typedef struct s_pipe
 {
