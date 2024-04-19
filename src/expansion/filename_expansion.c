@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filename_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 21:04:04 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/14 23:32:08 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/19 17:46:42 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ static int	match(char *pattern, char *name)
 		return (match(pattern + 1, name + 1));
 	return (0);
 }
-
-// TODO: esta garantizado que la salida esta ordenada alphanumericamente
-// TODO: implementar el comportamiento cuando empieza por "./"
 
 static void	select_files(DIR *d, char *file_name, char *str)
 {

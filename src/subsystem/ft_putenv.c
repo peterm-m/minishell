@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adiaz-uf <adiaz-uf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:39:24 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 19:41:13 by adiaz-uf         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:43:14 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	arr_len(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		i++;
-	return (i);
-}
-
-int	not_in_export(char *string)
+static int	not_in_export(char *string)
 {
 	int	i;
 	int	size;
@@ -37,17 +27,19 @@ int	not_in_export(char *string)
 	return (1);
 }
 
-char	**realloc_env(int len_env, char *string, char **my_environ)
+static char	**realloc_env(int len_env, char *string, char **my_environ)
 {
 	char	**new_environ;
+	char	*aux;
 
 	new_environ = ft_calloc((len_env + 2), sizeof(char *));
 	if (new_environ == NULL)
 		return (my_environ);
 	if ((ft_strlen(string) - (ft_strchr(string, '=') - string)) == 1)
 	{
+		aux = ft_strjoin(string, "\"\"");
 		ft_free(string);
-		string = ft_strjoin(string, "\"\"");
+		string = aux;
 	}
 	new_environ[len_env] = (char *) string;
 	while (len_env--)
@@ -59,6 +51,21 @@ char	**realloc_env(int len_env, char *string, char **my_environ)
 	return (new_environ);
 }
 
+static void	change_cariable(char **my_environ, char *string, char *eq, int num_env)
+{
+	char	*aux;
+
+	if ((ft_strlen(string) - (eq - string)) == 1)
+	{
+		
+		aux = ft_strjoin(string, "\"\"");
+		ft_free(string);
+		string = aux;
+	}
+	ft_free(my_environ[num_env]);
+	my_environ[num_env] = string;
+}
+
 char	**ft_putenv(char *string, char **my_environ)
 {
 	int		num_env;
@@ -66,7 +73,7 @@ char	**ft_putenv(char *string, char **my_environ)
 
 	eq = ft_strchr(string, '=');
 	if (eq == NULL && not_in_export(string))
-		return (realloc_env(arr_len(my_environ), string, my_environ));
+		return (realloc_env(get_arr_len(my_environ), string, my_environ));
 	if (string == NULL || eq == NULL)
 		return (my_environ);
 	num_env = -1;
@@ -74,13 +81,7 @@ char	**ft_putenv(char *string, char **my_environ)
 	{
 		if (ft_strncmp(my_environ[num_env], string, eq - string) == 0)
 		{
-			if (ft_strlen(string) - (eq - string) == 1)
-			{
-				ft_free(string);
-				string = ft_strjoin(string, "\"\"");
-			}
-			ft_free(my_environ[num_env]);
-			my_environ[num_env] = string;
+			change_cariable(my_environ, string, eq, num_env);
 			return (my_environ);
 		}
 	}

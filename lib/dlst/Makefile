@@ -26,7 +26,7 @@ CLEANER = rm -rf
 AR := ar
 ARFLAGS  := -r -c -s
 
-CCFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CCFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -fsanitize=undefined
 
 OS := $(shell uname -s)
 

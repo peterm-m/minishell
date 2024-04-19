@@ -6,7 +6,7 @@
 #    By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 21:06:36 by pedromar          #+#    #+#              #
-#    Updated: 2024/04/19 16:40:48 by pedromar         ###   ########.fr        #
+#    Updated: 2024/04/19 17:31:03 by pedromar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ STD := -std=gnu99
 
 STACK := -fstack-protector-all -Wstack-protector
 
-WARNS := -Wall -Wextra -Werror -g3 -fsanitize=address
+WARNS := -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=undefined
 
 CFLAGS := $(STD) $(STACK) $(WARNS)
 
