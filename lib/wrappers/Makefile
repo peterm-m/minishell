@@ -3,7 +3,6 @@ NAME := libwrappers.a
 SRC_DIR := .
 
 SRCS = \
-	ft_close.c\
 	ft_dup2.c\
 	ft_error.c\
 	ft_fstat.c\
@@ -15,7 +14,6 @@ SRCS = \
 	ft_sigemptyset.c\
 	ft_signal.c\
 	ft_stat.c\
-	ft_unistd.c\
 	ft_wait.c\
 	ft_waitpid.c\
 	ft_write.c\

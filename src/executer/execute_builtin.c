@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 20:26:54 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 21:28:24 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:08:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static int	fd_builtin(t_redir *redirs, t_pipe *p, int index_cmd)
 		fd = ft_open(r->dest.filename, r->mode_bits, r->flags_bits);
 		if (r->rtype == r_input_direction
 			|| r->rtype == r_appending_to)
-			ft_close(fd);
+			close(fd);
 		else if (r->rtype == r_appending_to || r->rtype == r_output_direction)
 		{
 			if (fd_out >= 0)
-				ft_close(fd_out);
+				close(fd_out);
 			fd_out = fd;
 		}
 		r = r->next;

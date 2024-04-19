@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:39:10 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 17:40:34 by pedro            ###   ########.fr       */
+/*   Updated: 2024/04/19 13:08:58 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	open_redir(t_redir *redirections)
 	{
 		if (ft_dup2(redir->dest.fd, redir->source.fd) < 0)
 			return (EXIT_FAILURE);
-		ft_close(redir->dest.fd);
+		close(redir->dest.fd);
 		redir = redir->next;
 	}
 	return (EXIT_SUCCESS);

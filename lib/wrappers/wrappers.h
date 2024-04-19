@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrappers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pedromar <pedromar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pedromar <pedromar@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:50:50 by pedromar          #+#    #+#             */
-/*   Updated: 2024/04/18 21:11:58 by pedromar         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:08:51 by pedromar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void		unix_error(char *msg);
 int			ft_open(const char *pathname, int flags, mode_t mode);
 ssize_t		ft_read(int fd, void *buf, size_t count);
 ssize_t		ft_write(int fd, const void *buf, size_t count);
-void		ft_close(int fd);
 void		ft_stat(const char *filename, struct stat *buf);
 void		ft_lstat(const char *filename, struct stat *buf);
 void		ft_execve(const char *filename, char *const argv[],
